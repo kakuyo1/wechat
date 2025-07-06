@@ -1,8 +1,14 @@
 #include <iostream>
 #include <boost/asio.hpp>
 #include "CServer.h"
+#include "ConfigIniManager.h"
 int main() {
     try{
+        // Load configuration
+        auto& config_manager = ConfigIniManager::Instance();
+        std::string port_str = config_manager["GateServer"]["Port"]; //调用的是const std::string& operator[](const std::string& key) const;
+        unsigned short port = static_cast<unsigned short>(std::atoi(port_str.c_str()));
+
         boost::asio::io_context ioc; //only for acceptor
 
         // handle signals to stop the server gracefully
@@ -17,7 +23,6 @@ int main() {
         });
 
         // Create and start the server
-        unsigned short port = 8080;
         auto server = std::make_shared<CServer>(ioc, port);
         server->Start();
         std::cout << "GateServer started on port " << port << std::endl;

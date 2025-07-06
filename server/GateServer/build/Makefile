@@ -153,6 +153,30 @@ resource/CServer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/GateServer.dir/build.make CMakeFiles/GateServer.dir/resource/CServer.cpp.s
 .PHONY : resource/CServer.cpp.s
 
+resource/ConfigIniManager.o: resource/ConfigIniManager.cpp.o
+.PHONY : resource/ConfigIniManager.o
+
+# target to build an object file
+resource/ConfigIniManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/GateServer.dir/build.make CMakeFiles/GateServer.dir/resource/ConfigIniManager.cpp.o
+.PHONY : resource/ConfigIniManager.cpp.o
+
+resource/ConfigIniManager.i: resource/ConfigIniManager.cpp.i
+.PHONY : resource/ConfigIniManager.i
+
+# target to preprocess a source file
+resource/ConfigIniManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/GateServer.dir/build.make CMakeFiles/GateServer.dir/resource/ConfigIniManager.cpp.i
+.PHONY : resource/ConfigIniManager.cpp.i
+
+resource/ConfigIniManager.s: resource/ConfigIniManager.cpp.s
+.PHONY : resource/ConfigIniManager.s
+
+# target to generate assembly for a file
+resource/ConfigIniManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/GateServer.dir/build.make CMakeFiles/GateServer.dir/resource/ConfigIniManager.cpp.s
+.PHONY : resource/ConfigIniManager.cpp.s
+
 resource/GateServer.o: resource/GateServer.cpp.o
 .PHONY : resource/GateServer.o
 
@@ -237,6 +261,9 @@ help:
 	@echo "... resource/CServer.o"
 	@echo "... resource/CServer.i"
 	@echo "... resource/CServer.s"
+	@echo "... resource/ConfigIniManager.o"
+	@echo "... resource/ConfigIniManager.i"
+	@echo "... resource/ConfigIniManager.s"
 	@echo "... resource/GateServer.o"
 	@echo "... resource/GateServer.i"
 	@echo "... resource/GateServer.s"

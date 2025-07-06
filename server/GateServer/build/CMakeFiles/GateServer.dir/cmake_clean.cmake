@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/GateServer.dir/resource/CServer.cpp.o"
   "CMakeFiles/GateServer.dir/resource/CServer.cpp.o.d"
+  "CMakeFiles/GateServer.dir/resource/ConfigIniManager.cpp.o"
+  "CMakeFiles/GateServer.dir/resource/ConfigIniManager.cpp.o.d"
   "CMakeFiles/GateServer.dir/resource/GateServer.cpp.o"
   "CMakeFiles/GateServer.dir/resource/GateServer.cpp.o.d"
   "CMakeFiles/GateServer.dir/resource/HttpConnection.cpp.o"

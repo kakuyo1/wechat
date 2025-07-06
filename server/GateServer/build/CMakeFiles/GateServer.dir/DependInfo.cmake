@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/kakuyo/wechat/server/GateServer/resource/CServer.cpp" "CMakeFiles/GateServer.dir/resource/CServer.cpp.o" "gcc" "CMakeFiles/GateServer.dir/resource/CServer.cpp.o.d"
+  "/home/kakuyo/wechat/server/GateServer/resource/ConfigIniManager.cpp" "CMakeFiles/GateServer.dir/resource/ConfigIniManager.cpp.o" "gcc" "CMakeFiles/GateServer.dir/resource/ConfigIniManager.cpp.o.d"
   "/home/kakuyo/wechat/server/GateServer/resource/GateServer.cpp" "CMakeFiles/GateServer.dir/resource/GateServer.cpp.o" "gcc" "CMakeFiles/GateServer.dir/resource/GateServer.cpp.o.d"
   "/home/kakuyo/wechat/server/GateServer/resource/HttpConnection.cpp" "CMakeFiles/GateServer.dir/resource/HttpConnection.cpp.o" "gcc" "CMakeFiles/GateServer.dir/resource/HttpConnection.cpp.o.d"
   "/home/kakuyo/wechat/server/GateServer/resource/LogicSystem.cpp" "CMakeFiles/GateServer.dir/resource/LogicSystem.cpp.o" "gcc" "CMakeFiles/GateServer.dir/resource/LogicSystem.cpp.o.d"

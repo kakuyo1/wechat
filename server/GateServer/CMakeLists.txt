@@ -19,6 +19,9 @@ find_package(gRPC CONFIG REQUIRED)
 # 自动收集源文件
 file(GLOB SOURCES "resource/*.cpp")
 
+#config.ini 复制到 build 目录
+configure_file(${CMAKE_SOURCE_DIR}/config.ini ${CMAKE_BINARY_DIR}/config.ini COPYONLY)
+
 # 添加可执行文件
 add_executable(GateServer ${SOURCES})
 

@@ -11,6 +11,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/3.28.3/CMakeCCompiler.cmake"
   "CMakeFiles/3.28.3/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.28.3/CMakeSystem.cmake"
+  "/home/kakuyo/wechat/server/GateServer/config.ini"
   "/usr/local/lib/cmake/Boost-1.88.0/BoostConfig.cmake"
   "/usr/local/lib/cmake/Boost-1.88.0/BoostConfigVersion.cmake"
   "/usr/local/lib/cmake/BoostDetectToolset-1.88.0.cmake"
@@ -153,6 +154,7 @@ set(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/3.28.3/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.28.3/CMakeCCompiler.cmake"
   "CMakeFiles/3.28.3/CMakeCXXCompiler.cmake"
+  "config.ini"
   "CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
