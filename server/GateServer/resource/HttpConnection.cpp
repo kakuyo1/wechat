@@ -1,5 +1,5 @@
 #include "HttpConnection.h"
-
+#include "LogicSystem.h"
 HttpConnection::HttpConnection(tcp::socket socket) :
     _socket(std::move(socket)),
     _deadline(_socket.get_executor(), std::chrono::seconds(60))
@@ -21,24 +21,45 @@ void HttpConnection::Start() {
     });
 }
 
+void HttpConnection::PreParseUrlToGetParams()
+{
+    // use boost::urls to parse the URL and extract query parameters
+    _query_params.clear();
+    _target_route.clear();
+    // _request.target() 形如 /get_test?q=boost&lang=en
+    auto target_str = std::string(_request.target());
+    // 解析相对路径和查询，parse_relative_ref 适合这个格式
+    boost::system::result<boost::urls::url_view> result = boost::urls::parse_relative_ref(target_str);
+    if (result.has_error()) {
+        std::cerr << "Error parsing URL: " << result.error().message() << std::endl;
+        return;
+    }
+    auto url = result.value();
+    // get the encoded path as the target route
+    _target_route = std::string(url.encoded_path());
+    // get the query parameters
+    for (const auto& param : url.params()) {
+        _query_params.emplace(std::string(param.key), std::string(param.value));
+    }
+}
+
 void HttpConnection::HandleRequest() {
     _response.version(_request.version());
     _response.keep_alive(false); // short connection
-
+    _response.set(http::field::server, "GateServer");
+    PreParseUrlToGetParams(); // parse the URL to get target route and query parameters
     // for get method
     if (_request.method() == http::verb::get) {
-        bool success = LogicSystem::GetInstance().HandleGet(_request.target(), shared_from_this());
+        bool success = LogicSystem::GetInstance()->HandleGet(_target_route, shared_from_this()); //LogicSystem to get the body
         if (!success) {
             _response.result(http::status::not_found);
             _response.set(http::field::content_type, "text/plain");
-            _response.set(http::field::server, "GateServer");
-            _response.body() = "Not Found";
+            beast::ostream(_response.body()) << "Not Found";
             SendResponse();
             return;
         }
         _response.result(http::status::ok);
         _response.set(http::field::content_type, "application/json");
-        _response.set(http::field::server, "GateServer");
         SendResponse();
         return;
     }
@@ -48,7 +69,7 @@ void HttpConnection::HandleRequest() {
     _response.result(http::status::method_not_allowed);
     _response.set(http::field::content_type, "text/plain");
     _response.set(http::field::server, "GateServer");
-    _response.body() = "Method Not Allowed";
+    beast::ostream(_response.body()) << "Method Not Allowed";
     SendResponse();
     return;
 }
@@ -71,14 +92,14 @@ void HttpConnection::SendResponse() {
         if (close_ec) {
             std::cerr << "Error closing socket: " << close_ec.message() << std::endl;
         }
-        self->_deadline.cancel();
+        self->_deadline.cancel(); // cause Deadline check error
     });
 }
 
 void HttpConnection::CheckDeadline() {
     auto self = shared_from_this();
     _deadline.async_wait([self](beast::error_code ec){
-        if (ec) {
+        if (ec) { //timer being cancelled or error
             std::cerr << "Deadline check error: " << ec.message() << std::endl;
             return;
         }

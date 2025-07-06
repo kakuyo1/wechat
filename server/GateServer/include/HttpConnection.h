@@ -6,17 +6,21 @@
 #include <iostream>
 #include <chrono>
 #include <boost/url.hpp>
+#include <unordered_map>
 
 namespace beast = boost::beast;
 namespace http = beast::http;
 namespace net = boost::asio;
 using tcp = net::ip::tcp;
 
+class LogicSystem;
 class HttpConnection : public std::enable_shared_from_this<HttpConnection>
 {
+    friend class LogicSystem; // Allow LogicSystem to access private members
 public:
     HttpConnection(tcp::socket socket);
     void Start();
+    void PreParseUrlToGetParams();
 private:
     void CheckDeadline();
     void HandleRequest();
@@ -26,4 +30,6 @@ private:
     http::request<http::dynamic_body> _request; // HTTP request object
     http::response<http::dynamic_body> _response; // HTTP response object
     net::steady_timer _deadline; // Timer for handling timeouts
+    std::string _target_route; // Store the target route for the request
+    std::unordered_map<std::string, std::string> _query_params; // Store query parameters
 };

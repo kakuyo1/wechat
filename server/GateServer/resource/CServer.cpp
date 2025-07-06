@@ -8,7 +8,7 @@ CServer::CServer(net::io_context& ioc, unsigned short port) :
 
 }
 
-CServer::Start() {
+void CServer::Start() {
     auto self = shared_from_this();
     _acceptor.async_accept(_socket, [self](boost::system::error_code ec){
         try{

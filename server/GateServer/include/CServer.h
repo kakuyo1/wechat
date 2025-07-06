@@ -19,6 +19,6 @@ public:
     ~CServer() = default;
 private:
     net::io_context& _ioc; // only for acceptor
-    tcp::acceptor _acceptor;  
+    tcp::acceptor _acceptor;
     tcp::socket _socket;
 };

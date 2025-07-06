@@ -1,13 +1,18 @@
 #pragma once
-#include "singleton.h"
+#include "Singleton.h"
 #include "config.h"
 #include <map>
 #include <functional>
 
+/***********************************
+ *  @To offer response.body/() for HttpConnection
+ *************************************/
+
 class HttpConnection;
-using HttpHandler = std::functional<void(std::shared_ptr<HttpConnection>)>;
+using HttpHandler = std::function<void(std::shared_ptr<HttpConnection>)>;
 class LogicSystem : public Singleton<LogicSystem>
 {
+    friend class Singleton<LogicSystem>; // Allow Singleton to create LogicSystem instance
 public:
     ~LogicSystem() = default;
     bool HandleGet(const std::string& target_route, std::shared_ptr<HttpConnection> connection);
