@@ -2,6 +2,11 @@
 #define SINGLETON_H
 #include <memory>
 
+/**************************************************************
+ * version 1.0 : 暂时不支持参数构造
+ *************************************************************/
+
+
 template <typename T>
 class Singleton {
 protected:
@@ -10,9 +15,8 @@ protected:
     Singleton& operator=(const Singleton&) = delete;
 public:
     ~Singleton() = default;
-    template <typename... Args>
-    static std::shared_ptr<T> GetInstance(Args&&... args) {
-        static std::shared_ptr<T> instance(new T(std::forward<Args>(args)...));
+    static std::shared_ptr<T> GetInstance() {
+        static std::shared_ptr<T> instance = std::shared_ptr<T>(new T()); // 无参构造
         return instance;
     }
 };

@@ -1762,4 +1762,7 @@ CMakeFiles/GateServer.dir/resource/CServer.cpp.o: \
  /usr/local/include/boost/url/rfc/relative_ref_rule.hpp \
  /usr/local/include/boost/url/rfc/reserved_chars.hpp \
  /usr/local/include/boost/url/rfc/uri_rule.hpp \
- /usr/local/include/boost/url/rfc/uri_reference_rule.hpp
+ /usr/local/include/boost/url/rfc/uri_reference_rule.hpp \
+ /home/kakuyo/wechat/server/GateServer/include/AsioIOContextPool.h \
+ /usr/include/c++/13/thread /usr/include/c++/13/bits/this_thread_sleep.h \
+ /home/kakuyo/wechat/server/GateServer/include/Singleton.h

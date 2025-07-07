@@ -18,9 +18,10 @@ class HttpConnection : public std::enable_shared_from_this<HttpConnection>
 {
     friend class LogicSystem; // Allow LogicSystem to access private members
 public:
-    HttpConnection(tcp::socket socket);
+    HttpConnection(net::io_context& ioc);
     void Start();
     void PreParseUrlToGetParams();
+    tcp::socket& GetSocket();
 private:
     void CheckDeadline();
     void HandleRequest();

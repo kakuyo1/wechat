@@ -1,7 +1,7 @@
 #include "HttpConnection.h"
 #include "LogicSystem.h"
-HttpConnection::HttpConnection(tcp::socket socket) :
-    _socket(std::move(socket)),
+HttpConnection::HttpConnection(net::io_context& ioc) :
+    _socket(ioc),
     _deadline(_socket.get_executor(), std::chrono::seconds(60))
 {
 
@@ -41,6 +41,11 @@ void HttpConnection::PreParseUrlToGetParams()
     for (const auto& param : url.params()) {
         _query_params.emplace(std::string(param.key), std::string(param.value));
     }
+}
+
+tcp::socket &HttpConnection::GetSocket()
+{
+    return _socket;
 }
 
 void HttpConnection::HandleRequest() {

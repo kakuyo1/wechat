@@ -177,6 +177,30 @@ proto/message.pb.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/GateServer.dir/build.make CMakeFiles/GateServer.dir/proto/message.pb.cc.s
 .PHONY : proto/message.pb.cc.s
 
+resource/AsioIOContextPool.o: resource/AsioIOContextPool.cpp.o
+.PHONY : resource/AsioIOContextPool.o
+
+# target to build an object file
+resource/AsioIOContextPool.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/GateServer.dir/build.make CMakeFiles/GateServer.dir/resource/AsioIOContextPool.cpp.o
+.PHONY : resource/AsioIOContextPool.cpp.o
+
+resource/AsioIOContextPool.i: resource/AsioIOContextPool.cpp.i
+.PHONY : resource/AsioIOContextPool.i
+
+# target to preprocess a source file
+resource/AsioIOContextPool.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/GateServer.dir/build.make CMakeFiles/GateServer.dir/resource/AsioIOContextPool.cpp.i
+.PHONY : resource/AsioIOContextPool.cpp.i
+
+resource/AsioIOContextPool.s: resource/AsioIOContextPool.cpp.s
+.PHONY : resource/AsioIOContextPool.s
+
+# target to generate assembly for a file
+resource/AsioIOContextPool.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/GateServer.dir/build.make CMakeFiles/GateServer.dir/resource/AsioIOContextPool.cpp.s
+.PHONY : resource/AsioIOContextPool.cpp.s
+
 resource/CServer.o: resource/CServer.cpp.o
 .PHONY : resource/CServer.o
 
@@ -336,6 +360,9 @@ help:
 	@echo "... proto/message.pb.o"
 	@echo "... proto/message.pb.i"
 	@echo "... proto/message.pb.s"
+	@echo "... resource/AsioIOContextPool.o"
+	@echo "... resource/AsioIOContextPool.i"
+	@echo "... resource/AsioIOContextPool.s"
 	@echo "... resource/CServer.o"
 	@echo "... resource/CServer.i"
 	@echo "... resource/CServer.s"

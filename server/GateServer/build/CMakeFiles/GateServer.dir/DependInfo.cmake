@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/kakuyo/wechat/server/GateServer/proto/message.grpc.pb.cc" "CMakeFiles/GateServer.dir/proto/message.grpc.pb.cc.o" "gcc" "CMakeFiles/GateServer.dir/proto/message.grpc.pb.cc.o.d"
   "/home/kakuyo/wechat/server/GateServer/proto/message.pb.cc" "CMakeFiles/GateServer.dir/proto/message.pb.cc.o" "gcc" "CMakeFiles/GateServer.dir/proto/message.pb.cc.o.d"
+  "/home/kakuyo/wechat/server/GateServer/resource/AsioIOContextPool.cpp" "CMakeFiles/GateServer.dir/resource/AsioIOContextPool.cpp.o" "gcc" "CMakeFiles/GateServer.dir/resource/AsioIOContextPool.cpp.o.d"
   "/home/kakuyo/wechat/server/GateServer/resource/CServer.cpp" "CMakeFiles/GateServer.dir/resource/CServer.cpp.o" "gcc" "CMakeFiles/GateServer.dir/resource/CServer.cpp.o.d"
   "/home/kakuyo/wechat/server/GateServer/resource/ConfigIniManager.cpp" "CMakeFiles/GateServer.dir/resource/ConfigIniManager.cpp.o" "gcc" "CMakeFiles/GateServer.dir/resource/ConfigIniManager.cpp.o.d"
   "/home/kakuyo/wechat/server/GateServer/resource/GateServer.cpp" "CMakeFiles/GateServer.dir/resource/GateServer.cpp.o" "gcc" "CMakeFiles/GateServer.dir/resource/GateServer.cpp.o.d"
