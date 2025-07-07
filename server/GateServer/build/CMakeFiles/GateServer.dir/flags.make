@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = -DBOOST_SYSTEM_DYN_LINK -DBOOST_SYSTEM_NO_LIB -DBOOST_URL_DYN_LINK -DBOOST_URL_NO_LIB -DCARES_STATICLIB
 
-CXX_INCLUDES = -I/home/kakuyo/wechat/server/GateServer/include -I/home/kakuyo/wechat/server/GateServer/resource
+CXX_INCLUDES = -I/home/kakuyo/wechat/server/GateServer/include -I/home/kakuyo/wechat/server/GateServer/proto -I/home/kakuyo/wechat/server/GateServer/resource -isystem /usr/include/jsoncpp
 
 CXX_FLAGS = -std=gnu++17
 

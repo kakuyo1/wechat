@@ -129,6 +129,54 @@ GateServer/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/GateServer.dir/build.make CMakeFiles/GateServer.dir/build
 .PHONY : GateServer/fast
 
+proto/message.grpc.pb.o: proto/message.grpc.pb.cc.o
+.PHONY : proto/message.grpc.pb.o
+
+# target to build an object file
+proto/message.grpc.pb.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/GateServer.dir/build.make CMakeFiles/GateServer.dir/proto/message.grpc.pb.cc.o
+.PHONY : proto/message.grpc.pb.cc.o
+
+proto/message.grpc.pb.i: proto/message.grpc.pb.cc.i
+.PHONY : proto/message.grpc.pb.i
+
+# target to preprocess a source file
+proto/message.grpc.pb.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/GateServer.dir/build.make CMakeFiles/GateServer.dir/proto/message.grpc.pb.cc.i
+.PHONY : proto/message.grpc.pb.cc.i
+
+proto/message.grpc.pb.s: proto/message.grpc.pb.cc.s
+.PHONY : proto/message.grpc.pb.s
+
+# target to generate assembly for a file
+proto/message.grpc.pb.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/GateServer.dir/build.make CMakeFiles/GateServer.dir/proto/message.grpc.pb.cc.s
+.PHONY : proto/message.grpc.pb.cc.s
+
+proto/message.pb.o: proto/message.pb.cc.o
+.PHONY : proto/message.pb.o
+
+# target to build an object file
+proto/message.pb.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/GateServer.dir/build.make CMakeFiles/GateServer.dir/proto/message.pb.cc.o
+.PHONY : proto/message.pb.cc.o
+
+proto/message.pb.i: proto/message.pb.cc.i
+.PHONY : proto/message.pb.i
+
+# target to preprocess a source file
+proto/message.pb.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/GateServer.dir/build.make CMakeFiles/GateServer.dir/proto/message.pb.cc.i
+.PHONY : proto/message.pb.cc.i
+
+proto/message.pb.s: proto/message.pb.cc.s
+.PHONY : proto/message.pb.s
+
+# target to generate assembly for a file
+proto/message.pb.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/GateServer.dir/build.make CMakeFiles/GateServer.dir/proto/message.pb.cc.s
+.PHONY : proto/message.pb.cc.s
+
 resource/CServer.o: resource/CServer.cpp.o
 .PHONY : resource/CServer.o
 
@@ -249,6 +297,30 @@ resource/LogicSystem.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/GateServer.dir/build.make CMakeFiles/GateServer.dir/resource/LogicSystem.cpp.s
 .PHONY : resource/LogicSystem.cpp.s
 
+resource/VerifygRPCClient.o: resource/VerifygRPCClient.cpp.o
+.PHONY : resource/VerifygRPCClient.o
+
+# target to build an object file
+resource/VerifygRPCClient.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/GateServer.dir/build.make CMakeFiles/GateServer.dir/resource/VerifygRPCClient.cpp.o
+.PHONY : resource/VerifygRPCClient.cpp.o
+
+resource/VerifygRPCClient.i: resource/VerifygRPCClient.cpp.i
+.PHONY : resource/VerifygRPCClient.i
+
+# target to preprocess a source file
+resource/VerifygRPCClient.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/GateServer.dir/build.make CMakeFiles/GateServer.dir/resource/VerifygRPCClient.cpp.i
+.PHONY : resource/VerifygRPCClient.cpp.i
+
+resource/VerifygRPCClient.s: resource/VerifygRPCClient.cpp.s
+.PHONY : resource/VerifygRPCClient.s
+
+# target to generate assembly for a file
+resource/VerifygRPCClient.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/GateServer.dir/build.make CMakeFiles/GateServer.dir/resource/VerifygRPCClient.cpp.s
+.PHONY : resource/VerifygRPCClient.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -258,6 +330,12 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... GateServer"
+	@echo "... proto/message.grpc.pb.o"
+	@echo "... proto/message.grpc.pb.i"
+	@echo "... proto/message.grpc.pb.s"
+	@echo "... proto/message.pb.o"
+	@echo "... proto/message.pb.i"
+	@echo "... proto/message.pb.s"
 	@echo "... resource/CServer.o"
 	@echo "... resource/CServer.i"
 	@echo "... resource/CServer.s"
@@ -273,6 +351,9 @@ help:
 	@echo "... resource/LogicSystem.o"
 	@echo "... resource/LogicSystem.i"
 	@echo "... resource/LogicSystem.s"
+	@echo "... resource/VerifygRPCClient.o"
+	@echo "... resource/VerifygRPCClient.i"
+	@echo "... resource/VerifygRPCClient.s"
 .PHONY : help
 
 

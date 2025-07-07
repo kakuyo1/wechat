@@ -1,4 +1,8 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/GateServer.dir/proto/message.grpc.pb.cc.o"
+  "CMakeFiles/GateServer.dir/proto/message.grpc.pb.cc.o.d"
+  "CMakeFiles/GateServer.dir/proto/message.pb.cc.o"
+  "CMakeFiles/GateServer.dir/proto/message.pb.cc.o.d"
   "CMakeFiles/GateServer.dir/resource/CServer.cpp.o"
   "CMakeFiles/GateServer.dir/resource/CServer.cpp.o.d"
   "CMakeFiles/GateServer.dir/resource/ConfigIniManager.cpp.o"
@@ -9,6 +13,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/GateServer.dir/resource/HttpConnection.cpp.o.d"
   "CMakeFiles/GateServer.dir/resource/LogicSystem.cpp.o"
   "CMakeFiles/GateServer.dir/resource/LogicSystem.cpp.o.d"
+  "CMakeFiles/GateServer.dir/resource/VerifygRPCClient.cpp.o"
+  "CMakeFiles/GateServer.dir/resource/VerifygRPCClient.cpp.o.d"
   "GateServer"
   "GateServer.pdb"
 )

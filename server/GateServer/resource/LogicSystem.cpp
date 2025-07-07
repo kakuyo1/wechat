@@ -1,5 +1,6 @@
 #include "LogicSystem.h"
 #include "HttpConnection.h"
+#include "VerifygRPCClient.h"
 
 LogicSystem::LogicSystem()
 {
@@ -14,6 +15,50 @@ LogicSystem::LogicSystem()
         }
     });
     // register post handler
+    RegisterPostHandler("/get_verifycode", [](std::shared_ptr<HttpConnection> con){
+        auto body_str = beast::buffers_to_string(con->_request.body().data());
+        if (body_str.empty()) {
+            beast::ostream(con->_response.body()) << "Bad Request: Empty body";
+            return;
+        }
+        std::cout << "Received POST body: " << body_str << std::endl;// DEBUG: Print the body content
+        con->_response.set(http::field::content_type, "application/json");
+        // Parse the JSON body
+        Json::Value source;
+        Json::Reader reader;
+        Json::Value response;
+        if (!reader.parse(body_str, source)) {
+            response["error"] = static_cast<int>(ErrorCodes::ERROR_JSON_PARSE);
+            response["message"] = "Bad Request: Invalid JSON format";
+            std::string error_str = response.toStyledString();
+            beast::ostream(con->_response.body()) << error_str;
+            return;
+        }
+        // Check if the required fields are present
+        if (!source.isMember("email")) {
+            response["error"] = static_cast<int>(ErrorCodes::ERROR_JSON_PARSE);
+            response["message"] = "Bad Request: Missing 'email' field";
+            beast::ostream(con->_response.body()) << response.toStyledString();
+            return;
+        }
+        // send to verifyService to get verify code
+        std::string email = source["email"].asString();
+        GetVerifyResponse verify_response = VerifygRPCClient::GetInstance()->GetVerifyCode(email);
+        if (verify_response.error() != static_cast<int>(ErrorCodes::SUCCESS)) {
+            response["error"] = verify_response.error();
+            response["message"] = "Failed to get verify code";
+            beast::ostream(con->_response.body()) << response.toStyledString();
+            return;
+        }
+        // If successful, return the verify code
+        response["email"] = verify_response.email();
+        response["error"] = static_cast<int>(verify_response.error());
+        response["code"] = verify_response.code();
+        response["message"] = "Verify code retrieved successfully";
+        std::string response_str = response.toStyledString();
+        beast::ostream(con->_response.body()) << response_str;
+        return;
+    });
 }
 
 bool LogicSystem::HandleGet(const std::string &target_route, std::shared_ptr<HttpConnection> connection)

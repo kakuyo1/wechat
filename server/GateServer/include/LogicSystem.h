@@ -3,12 +3,19 @@
 #include "config.h"
 #include <map>
 #include <functional>
+#include <jsoncpp/json/json.h>
+#include <jsoncpp/json/value.h>
+#include <jsoncpp/json/reader.h>
+#include <jsoncpp/json/writer.h>
 
 /***********************************
  *  @To offer response.body/() for HttpConnection
+ *  @此类处理request的body部分
  *************************************/
 
 class HttpConnection;
+class VerifygRPCClient; // Forward declaration to avoid circular dependency
+
 using HttpHandler = std::function<void(std::shared_ptr<HttpConnection>)>;
 class LogicSystem : public Singleton<LogicSystem>
 {

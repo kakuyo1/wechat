@@ -273,6 +273,9 @@ boost_url_DIR:PATH=/usr/local/lib/cmake/boost_url-1.88.0
 //The directory containing a CMake configuration file for gRPC.
 gRPC_DIR:PATH=/usr/local/lib/cmake/grpc
 
+//The directory containing a CMake configuration file for jsoncpp.
+jsoncpp_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/jsoncpp
+
 
 ########################
 # INTERNAL cache entries

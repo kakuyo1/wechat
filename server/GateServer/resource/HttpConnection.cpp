@@ -10,7 +10,7 @@ HttpConnection::HttpConnection(tcp::socket socket) :
 void HttpConnection::Start() {
     auto self = shared_from_this();
     self->CheckDeadline();// start deadline check for 60 seconds
-    http::async_read(_socket, _buffer, _request, [self](beast::error_code ec, std::size_t bytes_transferred){
+    http::async_read(_socket, _buffer, _request, [self](beast::error_code ec, std::size_t bytes_transferred){ // raw _buffer data to construct _request
         if (ec) {
             std::cerr << "Error reading request: " << ec.message() << std::endl;
             return;
@@ -64,6 +64,20 @@ void HttpConnection::HandleRequest() {
         return;
     }
     // for post method
+    if (_request.method() == http::verb::post) {
+        bool success = LogicSystem::GetInstance()->HandlePost(_target_route, shared_from_this()); //LogicSystem to get the body
+        if (!success) {
+            _response.result(http::status::not_found);
+            _response.set(http::field::content_type, "text/plain");
+            beast::ostream(_response.body()) << "Not Found";
+            SendResponse();
+            return;
+        }
+        _response.result(http::status::ok);
+        _response.set(http::field::content_type, "application/json");
+        SendResponse();
+        return;
+    }
 
     // for other methods
     _response.result(http::status::method_not_allowed);
