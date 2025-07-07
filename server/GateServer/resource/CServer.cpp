@@ -18,7 +18,6 @@ void CServer::Start() {
     // create a new HttpConnection for each accept
     auto& new_ioc = AsioIOContextPool::GetInstance()->GetNextIOContext();
     auto new_connection = std::make_shared<HttpConnection>(new_ioc);
-    std::cout << "io_context size: " << AsioIOContextPool::GetInstance()->GetPoolSize() << std::endl; //! Debug
     _acceptor.async_accept(new_connection->GetSocket(), [self, new_connection](boost::system::error_code ec){
         try{
             if (ec) {

@@ -66,5 +66,6 @@ AsioIOContextPool::AsioIOContextPool(size_t pool_size) : // （Singleton<T>::Get
             _io_contexts[i].run();
         });
     }
+    std::cout << "asio pool size: " << _io_contexts.size() << std::endl; //! debug
 }
 

@@ -111,15 +111,19 @@ void HttpConnection::SendResponse() {
         if (close_ec) {
             std::cerr << "Error closing socket: " << close_ec.message() << std::endl;
         }
-        self->_deadline.cancel(); // cause Deadline check error
+        self->_deadline.cancel(); // cause net::error::operation_aborted
     });
 }
 
 void HttpConnection::CheckDeadline() {
     auto self = shared_from_this();
     _deadline.async_wait([self](beast::error_code ec){
-        if (ec) { //timer being cancelled or error
-            std::cerr << "Deadline check error: " << ec.message() << std::endl;
+        if (ec) {
+            if (ec == net::error::operation_aborted) {
+                std::cout << "[normal]Deadline timer cancelled" << std::endl;
+            } else {
+                std::cerr << "Deadline check error: " << ec.message() << std::endl;
+            }
             return;
         }
         // If deadline is reached, close the socket

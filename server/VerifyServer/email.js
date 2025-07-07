@@ -23,10 +23,8 @@ function SendEmail(mailOptions_) {
     return new Promise(function(resolve, reject) {
         transporter.sendMail(mailOptions_, function(error, info) { // info contains response from the server
             if (error) {
-                console.error('Error sending email:', error);
                 reject(error); // Reject the promise with the error, equivalent to throwing an error and returning
             } else {
-                console.log('Email sent successfully:', info.response);
                 resolve(info.response); // Resolve the promise with the response, equivalent to returning a value
             }
         });
