@@ -321,6 +321,30 @@ resource/LogicSystem.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/GateServer.dir/build.make CMakeFiles/GateServer.dir/resource/LogicSystem.cpp.s
 .PHONY : resource/LogicSystem.cpp.s
 
+resource/RedisManager.o: resource/RedisManager.cpp.o
+.PHONY : resource/RedisManager.o
+
+# target to build an object file
+resource/RedisManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/GateServer.dir/build.make CMakeFiles/GateServer.dir/resource/RedisManager.cpp.o
+.PHONY : resource/RedisManager.cpp.o
+
+resource/RedisManager.i: resource/RedisManager.cpp.i
+.PHONY : resource/RedisManager.i
+
+# target to preprocess a source file
+resource/RedisManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/GateServer.dir/build.make CMakeFiles/GateServer.dir/resource/RedisManager.cpp.i
+.PHONY : resource/RedisManager.cpp.i
+
+resource/RedisManager.s: resource/RedisManager.cpp.s
+.PHONY : resource/RedisManager.s
+
+# target to generate assembly for a file
+resource/RedisManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/GateServer.dir/build.make CMakeFiles/GateServer.dir/resource/RedisManager.cpp.s
+.PHONY : resource/RedisManager.cpp.s
+
 resource/VerifygRPCClient.o: resource/VerifygRPCClient.cpp.o
 .PHONY : resource/VerifygRPCClient.o
 
@@ -378,6 +402,9 @@ help:
 	@echo "... resource/LogicSystem.o"
 	@echo "... resource/LogicSystem.i"
 	@echo "... resource/LogicSystem.s"
+	@echo "... resource/RedisManager.o"
+	@echo "... resource/RedisManager.i"
+	@echo "... resource/RedisManager.s"
 	@echo "... resource/VerifygRPCClient.o"
 	@echo "... resource/VerifygRPCClient.i"
 	@echo "... resource/VerifygRPCClient.s"

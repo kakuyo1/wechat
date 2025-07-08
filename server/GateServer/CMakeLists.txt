@@ -52,6 +52,7 @@ target_link_libraries(GateServer PRIVATE
     gRPC::grpc++
     protobuf::libprotobuf
     jsoncpp_lib
+    hiredis
 )
 
 # 链接 pthread

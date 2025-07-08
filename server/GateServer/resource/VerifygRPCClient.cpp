@@ -1,4 +1,5 @@
 #include "VerifygRPCClient.h"
+#include "RedisManager.h"
 
 GetVerifyResponse VerifygRPCClient::GetVerifyCode(std::string email)
 {

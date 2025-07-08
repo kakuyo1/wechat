@@ -1946,4 +1946,11 @@ CMakeFiles/GateServer.dir/resource/GateServer.cpp.o: \
  /usr/include/c++/13/bits/fs_fwd.h /usr/include/c++/13/bits/fs_path.h \
  /usr/include/c++/13/iomanip /usr/include/c++/13/bits/quoted_string.h \
  /usr/include/c++/13/codecvt /usr/include/c++/13/bits/fs_dir.h \
- /usr/include/c++/13/bits/fs_ops.h
+ /usr/include/c++/13/bits/fs_ops.h /usr/include/hiredis/hiredis.h \
+ /usr/include/hiredis/read.h /usr/include/hiredis/sds.h \
+ /usr/include/hiredis/alloc.h \
+ /home/kakuyo/wechat/server/GateServer/include/RedisManager.h \
+ /home/kakuyo/wechat/server/GateServer/include/Singleton.h \
+ /usr/include/c++/13/queue /usr/include/c++/13/deque \
+ /usr/include/c++/13/bits/stl_deque.h /usr/include/c++/13/bits/deque.tcc \
+ /usr/include/c++/13/bits/stl_queue.h
