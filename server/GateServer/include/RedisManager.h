@@ -10,6 +10,10 @@
 #include <atomic>
 #include "ConfigIniManager.h"
 
+/*
+    暂时未使用
+*/
+
 /***************************************************
  * RedisContextPool 用于管理 Redis 连接池
  * 支持多线程安全获取和归还 Redis 上下文

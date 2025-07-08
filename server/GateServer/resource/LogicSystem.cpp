@@ -1,6 +1,7 @@
 #include "LogicSystem.h"
 #include "HttpConnection.h"
 #include "VerifygRPCClient.h"
+#include "RedisManager.h"
 
 LogicSystem::LogicSystem()
 {
@@ -14,7 +15,7 @@ LogicSystem::LogicSystem()
             beast::ostream(con->_response.body()) << "Query Param " << i << ": " << KV.first << " = " << KV.second << "\n";
         }
     });
-    // register post handler
+    // get verifycode handler
     RegisterPostHandler("/get_verifycode", [](std::shared_ptr<HttpConnection> con){
         auto body_str = beast::buffers_to_string(con->_request.body().data());
         if (body_str.empty()) {
@@ -55,6 +56,92 @@ LogicSystem::LogicSystem()
         response["error"] = static_cast<int>(verify_response.error());
         response["code"] = verify_response.code();
         response["message"] = "Verify code retrieved successfully";
+        std::string response_str = response.toStyledString();
+        beast::ostream(con->_response.body()) << response_str;
+        return;
+    });
+
+    // user register handler
+    RegisterPostHandler("/user_register", [](std::shared_ptr<HttpConnection> con){
+        auto body_str = beast::buffers_to_string(con->_request.body().data());
+        if (body_str.empty()) {
+            beast::ostream(con->_response.body()) << "Bad Request: Empty body";
+            return;
+        }
+        con->_response.set(http::field::content_type, "application/json");
+        // Parse the JSON body
+        Json::Value source;
+        Json::Reader reader;
+        Json::Value response;
+        if (!reader.parse(body_str, source)) {
+            response["error"] = static_cast<int>(ErrorCodes::ERROR_JSON_PARSE);
+            response["message"] = "Bad Request: Invalid JSON format";
+            std::string error_str = response.toStyledString();
+            beast::ostream(con->_response.body()) << error_str;
+            return;
+        }
+        // Check if the required fields are present
+        if (!source.isMember("user") || !source.isMember("email") || !source.isMember("confirm")
+                || !source.isMember("password") || !source.isMember("verifycode")) {
+            response["error"] = static_cast<int>(ErrorCodes::ERROR_JSON_PARSE);
+            response["message"] = "Bad Request: Missing required fields";
+            std::string error_str = response.toStyledString();
+            beast::ostream(con->_response.body()) << error_str;
+            return;
+        }
+        // Extract the fields
+        std::string user = source["user"].asString();
+        std::string email = source["email"].asString();
+        std::string confirm = source["confirm"].asString();
+        std::string password = source["password"].asString();
+        std::string verifycode = source["verifycode"].asString();
+
+        // check if the verifycode still cached in redis
+        auto redis_manager = RedisManager::GetInstance();
+        std::string cached_code;
+        std::string key = code_prefix + email;
+        if (!redis_manager->Get(key, cached_code)) {
+            response["error"] = static_cast<int>(ErrorCodes::ERROR_REDIS);
+            response["message"] = "Failed to retrieve verify code from Redis(expired or not found)";
+            beast::ostream(con->_response.body()) << response.toStyledString();
+            return;
+        }
+        // compare the verify code
+        if (cached_code != verifycode) {
+            response["error"] = static_cast<int>(ErrorCodes::ERROR_JSON_PARSE);
+            response["message"] = "Bad Request: Verify code does not match"; // wrong verify code from client
+            beast::ostream(con->_response.body()) << response.toStyledString();
+            return;
+        }
+        // (temperary) check if the user already exists by redis
+        if (redis_manager->Exists(user)) {
+            response["error"] = static_cast<int>(ErrorCodes::ERROR_EXISTING_USER);
+            response["message"] = "User already exists";
+            beast::ostream(con->_response.body()) << response.toStyledString();
+            return;
+        }
+
+        // TODO check if the user already exists by mysql
+
+        // If all checks pass, register the user
+        // (temperary) store the user in redis
+        if (!redis_manager->Set(user, password)) {
+            response["error"] = static_cast<int>(ErrorCodes::ERROR_REDIS);
+            response["message"] = "Failed to register user in Redis";
+            beast::ostream(con->_response.body()) << response.toStyledString();
+            return;
+        }
+
+        // clear the verify code in redis if the user is registered successfully
+        if (!redis_manager->Delete(key)) {
+            response["error"] = static_cast<int>(ErrorCodes::ERROR_REDIS);
+            response["message"] = "Failed to delete verify code from Redis";
+            beast::ostream(con->_response.body()) << response.toStyledString();
+            return;
+        }
+        // If successful, return success message
+        response["error"] = static_cast<int>(ErrorCodes::SUCCESS);
+        response["message"] = "User registered successfully";
         std::string response_str = response.toStyledString();
         beast::ostream(con->_response.body()) << response_str;
         return;

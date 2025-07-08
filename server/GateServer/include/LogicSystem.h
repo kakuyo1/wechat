@@ -13,6 +13,7 @@
  *  @此类处理request的body部分
  *************************************/
 
+class RedisManager;
 class HttpConnection;
 class VerifygRPCClient; // Forward declaration to avoid circular dependency
 
