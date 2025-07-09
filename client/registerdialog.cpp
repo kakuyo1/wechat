@@ -89,7 +89,74 @@ void RegisterDialog::initialHttpHandlers()
             return;
         }
         auto email = jsonObj.value("email").toString(); // from server response
-        showTip("验证码已发送至 " + email + "注意查收", false);
+        //  debug
+        // qDebug() << email;
+        // qDebug() << jsonObj.value("message").toString();
+        // qDebug() << jsonObj.value("code").toString();
+        // qDebug() << error;
+        showTip("验证码已发送,注意查收", false);
     };
+
+    // register handler
+    _handlers[RequestType::TYPE_REGISTER] = [this](QJsonObject &jsonObj) {
+        int error = jsonObj.value("error").toInt();
+        if (error == static_cast<int>(ErrorCode::ERROR_EXISTING_USER)) {
+            showTip("用户已存在", true);
+            // qDebug() << jsonObj.value("message").toString();
+            // qDebug() << error;
+            return;
+        }
+        if (error != static_cast<int>(ErrorCode::SUCCESS)) {
+            showTip("注册失败, 请稍后重试", true);
+            // qDebug() << jsonObj.value("message").toString();
+            // qDebug() << error;
+            return;
+        }
+        showTip("注册成功", false);
+    };
+}
+
+
+void RegisterDialog::on_confirm_btn_clicked()
+{
+    // check inputs
+    if (ui->user_lineEdit->text().isEmpty()) {
+        showTip("用户名不能为空", true);
+        return;
+    }
+
+    if (ui->email_lineEdit->text().isEmpty()) {
+        showTip("邮箱不能为空", true);
+        return;
+    }
+
+    if (ui->password_lineEdit->text().isEmpty()) {
+        showTip("密码不能为空", true);
+        return;
+    }
+
+    if (ui->confirm_lineEdit->text().isEmpty()) {
+        showTip("请确认密码", true);
+        return;
+    }
+
+    if (ui->password_lineEdit->text() != ui->confirm_lineEdit->text()) {
+        showTip("两次输入密码不一致", true);
+        return;
+    }
+
+    if (ui->verifyCode_lineEdit->text().isEmpty()) {
+        showTip("验证码不能为空", true);
+        return;
+    }
+    // all inputs are valid, create a json object and send http request to register
+    QJsonObject jsonObj;
+    jsonObj["user"] = ui->user_lineEdit->text();
+    jsonObj["email"] = ui->email_lineEdit->text();
+    jsonObj["password"] = ui->password_lineEdit->text();
+    jsonObj["confirm"] = ui->confirm_lineEdit->text();
+    jsonObj["verifycode"] = ui->verifyCode_lineEdit->text();
+    HttpManager::GetInstance()->PostHttpRequest(QUrl(gate_url_prefix + "/user_register"), jsonObj,
+                                                RequestType::TYPE_REGISTER, Module::MODULE_REGISTER);
 }
 

@@ -10,10 +10,8 @@ protected:
     Singleton& operator=(const Singleton&) = delete;
 public:
     ~Singleton() = default;
-    template <typename... Args>
-    // support for perfect forwarding
-    static std::shared_ptr<T> GetInstance(Args&&... args) {
-        static std::shared_ptr<T> instance(new T(std::forward(args)...));
+    static std::shared_ptr<T> GetInstance() {
+        static std::shared_ptr<T> instance = std::shared_ptr<T>(new T()); // 无参构造
         return instance;
     }
 };

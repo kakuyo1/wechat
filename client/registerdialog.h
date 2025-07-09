@@ -20,6 +20,8 @@ public:
 private slots:
     void on_getVerifyCode_btn_clicked();
     void slot_register_module_handle(RequestType type, QString response, ErrorCode error);
+    void on_confirm_btn_clicked();
+
 private:
     Ui::RegisterDialog *ui;
     QMap<RequestType, std::function<void (QJsonObject&)>> _handlers;
