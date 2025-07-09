@@ -153,28 +153,27 @@ CMakeFiles/GateServer.dir/resource/LogicSystem.cpp.o: \
  /usr/include/c++/13/bits/charconv.h \
  /usr/include/c++/13/bits/basic_string.tcc \
  /usr/include/c++/13/bits/memory_resource.h /usr/include/c++/13/cstddef \
- /usr/include/c++/13/bits/uses_allocator_args.h /usr/include/c++/13/map \
- /usr/include/c++/13/bits/stl_tree.h \
- /usr/include/c++/13/bits/node_handle.h \
- /usr/include/c++/13/bits/stl_map.h \
- /usr/include/c++/13/bits/stl_multimap.h \
- /usr/include/c++/13/bits/erase_if.h /usr/include/c++/13/functional \
- /usr/include/c++/13/bits/std_function.h \
+ /usr/include/c++/13/bits/uses_allocator_args.h \
+ /usr/include/c++/13/functional /usr/include/c++/13/bits/std_function.h \
  /usr/include/c++/13/unordered_map \
  /usr/include/c++/13/bits/unordered_map.h \
  /usr/include/c++/13/bits/hashtable.h \
  /usr/include/c++/13/bits/hashtable_policy.h \
  /usr/include/c++/13/bits/enable_special_members.h \
- /usr/include/c++/13/vector /usr/include/c++/13/bits/stl_vector.h \
+ /usr/include/c++/13/bits/node_handle.h \
+ /usr/include/c++/13/bits/erase_if.h /usr/include/c++/13/vector \
+ /usr/include/c++/13/bits/stl_vector.h \
  /usr/include/c++/13/bits/stl_bvector.h \
  /usr/include/c++/13/bits/vector.tcc /usr/include/c++/13/array \
  /usr/include/c++/13/compare /usr/include/c++/13/bits/stl_algo.h \
  /usr/include/c++/13/bits/algorithmfwd.h \
  /usr/include/c++/13/bits/stl_heap.h \
- /usr/include/c++/13/bits/uniform_int_dist.h \
- /usr/include/jsoncpp/json/json.h /usr/include/jsoncpp/json/config.h \
- /usr/include/c++/13/cstdint /usr/include/c++/13/istream \
- /usr/include/c++/13/ios /usr/include/c++/13/bits/ios_base.h \
+ /usr/include/c++/13/bits/uniform_int_dist.h /usr/include/c++/13/map \
+ /usr/include/c++/13/bits/stl_tree.h /usr/include/c++/13/bits/stl_map.h \
+ /usr/include/c++/13/bits/stl_multimap.h /usr/include/jsoncpp/json/json.h \
+ /usr/include/jsoncpp/json/config.h /usr/include/c++/13/cstdint \
+ /usr/include/c++/13/istream /usr/include/c++/13/ios \
+ /usr/include/c++/13/bits/ios_base.h \
  /usr/include/c++/13/bits/locale_classes.h \
  /usr/include/c++/13/bits/locale_classes.tcc \
  /usr/include/c++/13/system_error \
@@ -2310,4 +2309,20 @@ CMakeFiles/GateServer.dir/resource/LogicSystem.cpp.o: \
  /usr/include/c++/13/bits/fs_ops.h \
  /home/kakuyo/wechat/server/GateServer/include/RedisManager.h \
  /usr/include/hiredis/hiredis.h /usr/include/hiredis/read.h \
- /usr/include/hiredis/sds.h /usr/include/hiredis/alloc.h
+ /usr/include/hiredis/sds.h /usr/include/hiredis/alloc.h \
+ /home/kakuyo/wechat/server/GateServer/include/MysqlManager.h \
+ /home/kakuyo/wechat/server/GateServer/include/MysqlDAO.h \
+ /usr/include/c++/13/thread /usr/include/c++/13/bits/this_thread_sleep.h \
+ /usr/include/mysql_connection.h /usr/include/cppconn/connection.h \
+ /usr/include/cppconn/build_config.h /usr/include/cppconn/warning.h \
+ /usr/include/cppconn/sqlstring.h /usr/include/cppconn/variant.h \
+ /usr/include/cppconn/exception.h /usr/local/include/boost/scoped_ptr.hpp \
+ /usr/local/include/boost/smart_ptr/scoped_ptr.hpp \
+ /usr/include/mysql_driver.h /usr/include/cppconn/driver.h \
+ /usr/include/cppconn/connection.h /usr/include/cppconn/statement.h \
+ /usr/include/cppconn/config.h /usr/include/cppconn/resultset.h \
+ /usr/include/cppconn/resultset_metadata.h \
+ /usr/include/cppconn/datatype.h \
+ /usr/include/cppconn/prepared_statement.h \
+ /usr/include/cppconn/statement.h /usr/include/cppconn/resultset.h \
+ /usr/include/cppconn/exception.h

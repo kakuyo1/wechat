@@ -321,6 +321,54 @@ resource/LogicSystem.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/GateServer.dir/build.make CMakeFiles/GateServer.dir/resource/LogicSystem.cpp.s
 .PHONY : resource/LogicSystem.cpp.s
 
+resource/MysqlDAO.o: resource/MysqlDAO.cpp.o
+.PHONY : resource/MysqlDAO.o
+
+# target to build an object file
+resource/MysqlDAO.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/GateServer.dir/build.make CMakeFiles/GateServer.dir/resource/MysqlDAO.cpp.o
+.PHONY : resource/MysqlDAO.cpp.o
+
+resource/MysqlDAO.i: resource/MysqlDAO.cpp.i
+.PHONY : resource/MysqlDAO.i
+
+# target to preprocess a source file
+resource/MysqlDAO.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/GateServer.dir/build.make CMakeFiles/GateServer.dir/resource/MysqlDAO.cpp.i
+.PHONY : resource/MysqlDAO.cpp.i
+
+resource/MysqlDAO.s: resource/MysqlDAO.cpp.s
+.PHONY : resource/MysqlDAO.s
+
+# target to generate assembly for a file
+resource/MysqlDAO.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/GateServer.dir/build.make CMakeFiles/GateServer.dir/resource/MysqlDAO.cpp.s
+.PHONY : resource/MysqlDAO.cpp.s
+
+resource/MysqlManager.o: resource/MysqlManager.cpp.o
+.PHONY : resource/MysqlManager.o
+
+# target to build an object file
+resource/MysqlManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/GateServer.dir/build.make CMakeFiles/GateServer.dir/resource/MysqlManager.cpp.o
+.PHONY : resource/MysqlManager.cpp.o
+
+resource/MysqlManager.i: resource/MysqlManager.cpp.i
+.PHONY : resource/MysqlManager.i
+
+# target to preprocess a source file
+resource/MysqlManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/GateServer.dir/build.make CMakeFiles/GateServer.dir/resource/MysqlManager.cpp.i
+.PHONY : resource/MysqlManager.cpp.i
+
+resource/MysqlManager.s: resource/MysqlManager.cpp.s
+.PHONY : resource/MysqlManager.s
+
+# target to generate assembly for a file
+resource/MysqlManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/GateServer.dir/build.make CMakeFiles/GateServer.dir/resource/MysqlManager.cpp.s
+.PHONY : resource/MysqlManager.cpp.s
+
 resource/RedisManager.o: resource/RedisManager.cpp.o
 .PHONY : resource/RedisManager.o
 
@@ -402,6 +450,12 @@ help:
 	@echo "... resource/LogicSystem.o"
 	@echo "... resource/LogicSystem.i"
 	@echo "... resource/LogicSystem.s"
+	@echo "... resource/MysqlDAO.o"
+	@echo "... resource/MysqlDAO.i"
+	@echo "... resource/MysqlDAO.s"
+	@echo "... resource/MysqlManager.o"
+	@echo "... resource/MysqlManager.i"
+	@echo "... resource/MysqlManager.s"
 	@echo "... resource/RedisManager.o"
 	@echo "... resource/RedisManager.i"
 	@echo "... resource/RedisManager.s"

@@ -2,6 +2,7 @@
 #include "HttpConnection.h"
 #include "VerifygRPCClient.h"
 #include "RedisManager.h"
+#include "MysqlManager.h"
 
 LogicSystem::LogicSystem()
 {
@@ -113,24 +114,34 @@ LogicSystem::LogicSystem()
             beast::ostream(con->_response.body()) << response.toStyledString();
             return;
         }
-        // (temperary) check if the user already exists by redis
-        if (redis_manager->Exists(user)) {
+
+        // check if the user already exists by mysql
+        int uid = MysqlManager::GetInstance()->RegisterUser(user, email, password);
+        if (uid == -3 || uid == -4 || uid == -5) {
+            std::cerr << "Failed to register user: " << uid << std::endl;
+            std::cerr << "con is nullptr || stored procedure did't execute sucessfully || sqlException happened" << std::endl;
+            response["error"] = static_cast<int>(ErrorCodes::ERROR_MYSQL);
+            response["message"] = "Failed to register user in MySQL";
+            beast::ostream(con->_response.body()) << response.toStyledString();
+            return;
+        }
+        if (uid == -1) {
+            std::cerr << "Failed to register user: " << uid << std::endl;
+            std::cerr << "User already exists" << std::endl;
             response["error"] = static_cast<int>(ErrorCodes::ERROR_EXISTING_USER);
             response["message"] = "User already exists";
             beast::ostream(con->_response.body()) << response.toStyledString();
             return;
         }
-
-        // TODO check if the user already exists by mysql
-
-        // If all checks pass, register the user
-        // (temperary) store the user in redis
-        if (!redis_manager->Set(user, password)) {
-            response["error"] = static_cast<int>(ErrorCodes::ERROR_REDIS);
-            response["message"] = "Failed to register user in Redis";
+        if (uid == -2) {
+            std::cerr << "Failed to register user: " << uid << std::endl;
+            std::cerr << "Email already exists" << std::endl;
+            response["error"] = static_cast<int>(ErrorCodes::ERROR_EXISTING_EMAIL);
+            response["message"] = "Email already exists";
             beast::ostream(con->_response.body()) << response.toStyledString();
             return;
         }
+        // all checks passed, registerrd the user successfully
 
         // clear the verify code in redis if the user is registered successfully
         if (!redis_manager->Delete(key)) {
@@ -144,6 +155,7 @@ LogicSystem::LogicSystem()
         response["message"] = "User registered successfully";
         std::string response_str = response.toStyledString();
         beast::ostream(con->_response.body()) << response_str;
+        std::cout << "register user successed" << std::endl; //!debug
         return;
     });
 }

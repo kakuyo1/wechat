@@ -38,6 +38,7 @@ target_include_directories(GateServer PRIVATE
     ${PROJECT_SOURCE_DIR}/proto
     ${PROJECT_SOURCE_DIR}/resource
     ${Boost_INCLUDE_DIRS}
+    /usr/include
 )
 
 # 链接 Boost 库
@@ -53,6 +54,7 @@ target_link_libraries(GateServer PRIVATE
     protobuf::libprotobuf
     jsoncpp_lib
     hiredis
+    mysqlcppconn # 如果使用 MySQL Connector/C++
 )
 
 # 链接 pthread
