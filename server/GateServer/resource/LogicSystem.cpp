@@ -94,8 +94,20 @@ LogicSystem::LogicSystem()
         std::string user = source["user"].asString();
         std::string email = source["email"].asString();
         std::string confirm = source["confirm"].asString();
-        std::string password = source["password"].asString();
+        std::string raw_password = source["password"].asString(); // need to be encrypted
         std::string verifycode = source["verifycode"].asString();
+
+        // encrypt the password using bcrypt
+        // generate a salt, BCRYPT_HASHSIZE is 64 representing the length of the salt and hash
+        char salt[BCRYPT_HASHSIZE]; // for storing the salt
+        char hash[BCRYPT_HASHSIZE]; // for storing the hashed password
+        if (bcrypt_gensalt(12, salt) != 0 || bcrypt_hashpw(raw_password.c_str(), salt, hash) != 0) { // 12 is the work factor, the higher the more secure, the longer it takes to hash
+            response["error"] = static_cast<int>(ErrorCodes::ERROR_ENCRPTION);
+            response["message"] = "Bad Request: Failed to hash password";
+            beast::ostream(con->_response.body()) << response.toStyledString();
+            return;
+        }
+        std::string encrpted_password(hash);
 
         // check if the verifycode still cached in redis
         auto redis_manager = RedisManager::GetInstance();
@@ -116,7 +128,7 @@ LogicSystem::LogicSystem()
         }
 
         // check if the user already exists by mysql
-        int uid = MysqlManager::GetInstance()->RegisterUser(user, email, password);
+        int uid = MysqlManager::GetInstance()->RegisterUser(user, email, encrpted_password);
         if (uid == -3 || uid == -4 || uid == -5) {
             std::cerr << "Failed to register user: " << uid << std::endl;
             std::cerr << "con is nullptr || stored procedure did't execute sucessfully || sqlException happened" << std::endl;

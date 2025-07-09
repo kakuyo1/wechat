@@ -8,7 +8,8 @@ enum class ErrorCodes {
     ERROR_REDIS = 3,
     ERROR_MYSQL = 4,
     ERROR_EXISTING_USER = 5,
-    ERROR_EXISTING_EMAIL = 6
+    ERROR_EXISTING_EMAIL = 6,
+    ERROR_ENCRPTION = 7
 };
 
 const std::string code_prefix = "code_"; // Prefix for verify code keys in Redis

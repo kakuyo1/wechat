@@ -7,6 +7,7 @@
 #include <jsoncpp/json/value.h>
 #include <jsoncpp/json/reader.h>
 #include <jsoncpp/json/writer.h>
+#include <bcrypt/bcrypt.h>
 
 /***********************************
  *  @To offer response.body/() for HttpConnection

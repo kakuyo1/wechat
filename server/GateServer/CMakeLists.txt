@@ -39,6 +39,7 @@ target_include_directories(GateServer PRIVATE
     ${PROJECT_SOURCE_DIR}/resource
     ${Boost_INCLUDE_DIRS}
     /usr/include
+    /home/kakuyo/libbcrypt/include  # ← 这里加上 bcrypt 头文件目录
 )
 
 # 链接 Boost 库
@@ -55,6 +56,7 @@ target_link_libraries(GateServer PRIVATE
     jsoncpp_lib
     hiredis
     mysqlcppconn # 如果使用 MySQL Connector/C++
+    bcrypt  # ← 这里加上 bcrypt 库
 )
 
 # 链接 pthread
