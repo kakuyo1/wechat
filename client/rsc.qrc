@@ -2,5 +2,9 @@
     <qresource prefix="/">
         <file>images/wechat.png</file>
         <file>style/style.qss</file>
+        <file>images/hidePassword_hover.png</file>
+        <file>images/hidePassword_normal.png</file>
+        <file>images/showPassword_hover.png</file>
+        <file>images/showPassword_normal.png</file>
     </qresource>
 </RCC>

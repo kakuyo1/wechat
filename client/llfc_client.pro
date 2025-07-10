@@ -9,20 +9,24 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    clickablelabel.cpp \
     global.cpp \
     httpmanager.cpp \
     logindialog.cpp \
     main.cpp \
     mainwindow.cpp \
-    registerdialog.cpp
+    registerdialog.cpp \
+    timerbutton.cpp
 
 HEADERS += \
+    clickablelabel.h \
     global.h \
     httpmanager.h \
     logindialog.h \
     mainwindow.h \
     registerdialog.h \
-    singleton.h
+    singleton.h \
+    timerbutton.h
 
 FORMS += \
     logindialog.ui \
@@ -38,7 +42,11 @@ RESOURCES += \
     rsc.qrc
 
 DISTFILES += \
-    config.ini
+    config.ini \
+    images/hidePassword_hover.png \
+    images/hidePassword_normal.png \
+    images/showPassword_hover.png \
+    images/showPassword_normal.png
 
 # copy config.ini to build directory
 win32::CONFIG(debug, debug | release)

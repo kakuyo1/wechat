@@ -33,5 +33,6 @@ private:
 
 private slots:
     void showRegisterDialog();
+    void showLoginDialog();
 };
 #endif // MAINWINDOW_H

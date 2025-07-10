@@ -21,7 +21,8 @@ enum class ErrorCode {
     SUCCESS = 0,
     ERROR_JSON_PARSE = 1,
     ERROR_NETWORK = 2,
-    ERROR_EXISTING_USER = 5
+    ERROR_EXISTING_USER = 5,
+    ERROR_EXISTING_EMAIL = 6
 };
 
 // Modules
