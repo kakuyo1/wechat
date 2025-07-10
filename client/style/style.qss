@@ -3,10 +3,18 @@ QDialog#LoginDialog {
 }
 
 
-#error_tip[state = 'normal'] {
+RegisterDialog QLabel#error_tip[state = 'normal'] {
     color: green
 }
 
-#error_tip[state = 'error'] {
+RegisterDialog QLabel#error_tip[state = 'error'] {
     color: red
+}
+
+ResetPasswordDialog QLabel#error_tip[state="normal"] {
+    color: green;
+}
+
+ResetPasswordDialog QLabel#error_tip[state="error"] {
+    color: red;
 }

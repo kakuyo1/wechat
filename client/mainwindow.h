@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "logindialog.h"
 #include "registerdialog.h"
+#include "resetpassworddialog.h"
 
 /************************************************************
  *  @file   mainwindow.h
@@ -30,9 +31,11 @@ private:
     Ui::MainWindow *ui;
     LoginDialog *loginDialog;
     RegisterDialog *registerDialog;
+    ResetPasswordDialog *resetPasswordDialog;
 
 private slots:
     void showRegisterDialog();
     void showLoginDialog();
+    void showResetPasswordDialog();
 };
 #endif // MAINWINDOW_H

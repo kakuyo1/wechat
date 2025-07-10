@@ -13,7 +13,8 @@ extern QString gate_url_prefix;
 // Request Types
 enum class RequestType {
     TYPE_GET_VERIFY_CODE = 1001,
-    TYPE_REGISTER = 1002
+    TYPE_REGISTER = 1002,
+    TYPE_RESETPASSWORD = 1003
 };
 
 // Error Codes
@@ -21,14 +22,20 @@ enum class ErrorCode {
     SUCCESS = 0,
     ERROR_JSON_PARSE = 1,
     ERROR_NETWORK = 2,
+    ERROR_REDIS = 3,
+    ERROR_MYSQL = 4,
     ERROR_EXISTING_USER = 5,
-    ERROR_EXISTING_EMAIL = 6
+    ERROR_EXISTING_EMAIL = 6,
+    ERROR_ENCRPTION = 7,
+    ERROR_USER_EMAIL_MISMATCH = 8,
+    ERROR_INVALID_VERIFY_CODE = 9
 };
 
 // Modules
 enum class Module {
     MODULE_LOGIN = 1,
-    MODULE_REGISTER = 2
+    MODULE_REGISTER = 2,
+    MODULE_RESETPASSWORD = 3
 };
 
 #endif // GLOBAL_H

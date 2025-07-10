@@ -10,28 +10,33 @@ CONFIG += c++17
 
 SOURCES += \
     clickablelabel.cpp \
+    forgetlabel.cpp \
     global.cpp \
     httpmanager.cpp \
     logindialog.cpp \
     main.cpp \
     mainwindow.cpp \
     registerdialog.cpp \
+    resetpassworddialog.cpp \
     timerbutton.cpp
 
 HEADERS += \
     clickablelabel.h \
+    forgetlabel.h \
     global.h \
     httpmanager.h \
     logindialog.h \
     mainwindow.h \
     registerdialog.h \
+    resetpassworddialog.h \
     singleton.h \
     timerbutton.h
 
 FORMS += \
     logindialog.ui \
     mainwindow.ui \
-    registerdialog.ui
+    registerdialog.ui \
+    resetpassworddialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

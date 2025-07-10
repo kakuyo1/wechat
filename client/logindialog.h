@@ -19,9 +19,10 @@ private:
     Ui::LoginDialog *ui;
 
 private slots:
-
+    void slot_forget_password();
 signals:
     void switchToRegister();
+    void switchToResetPassword();
 };
 
 #endif // LOGINDIALOG_H

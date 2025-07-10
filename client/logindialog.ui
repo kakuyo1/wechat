@@ -107,6 +107,18 @@
       <layout class="QHBoxLayout" name="horizontalLayout_5">
        <item>
         <widget class="QLabel" name="user_label">
+         <property name="minimumSize">
+          <size>
+           <width>50</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>50</width>
+           <height>30</height>
+          </size>
+         </property>
          <property name="text">
           <string>用户：</string>
          </property>
@@ -121,6 +133,18 @@
       <layout class="QHBoxLayout" name="horizontalLayout_4">
        <item>
         <widget class="QLabel" name="password_label">
+         <property name="minimumSize">
+          <size>
+           <width>50</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>50</width>
+           <height>30</height>
+          </size>
+         </property>
          <property name="text">
           <string>密码：</string>
          </property>
@@ -147,7 +171,19 @@
         </spacer>
        </item>
        <item>
-        <widget class="QLabel" name="forget_label">
+        <widget class="ForgetLabel" name="forget_label">
+         <property name="minimumSize">
+          <size>
+           <width>70</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>70</width>
+           <height>30</height>
+          </size>
+         </property>
          <property name="text">
           <string>忘记密码</string>
          </property>
@@ -246,6 +282,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ForgetLabel</class>
+   <extends>QLabel</extends>
+   <header>forgetlabel.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="rsc.qrc"/>
  </resources>

@@ -142,6 +142,10 @@ void RegisterDialog::initialHttpHandlers()
     // register handler
     _handlers[RequestType::TYPE_REGISTER] = [this](QJsonObject &jsonObj) {
         int error = jsonObj.value("error").toInt();
+        if (error == static_cast<int>(ErrorCode::ERROR_INVALID_VERIFY_CODE)) {
+            showTip("验证码不正确", true);
+            return;
+        }
         if (error == static_cast<int>(ErrorCode::ERROR_EXISTING_USER)) {
             showTip("用户已存在", true);
             // qDebug() << jsonObj.value("message").toString();
@@ -267,6 +271,12 @@ void RegisterDialog::validateConfirm(const QString &text)
 void RegisterDialog::on_return_pushButton_clicked()
 {
     countDownTimer->stop();
+    emit signal_switchto_login();
+}
+
+
+void RegisterDialog::on_cancel_btn_clicked()
+{
     emit signal_switchto_login();
 }
 
