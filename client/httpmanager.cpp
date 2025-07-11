@@ -43,4 +43,7 @@ void HttpManager::slot_http_request_finished(RequestType type, QString response,
     if (module == Module::MODULE_RESETPASSWORD) {
         emit signal_reset_module_finished(type, response, error);
     }
+    if (module == Module::MODULE_LOGIN) {
+        emit signal_login_module_finished(type, response, error);
+    }
 }

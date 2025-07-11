@@ -32,6 +32,7 @@ signals:
     void signal_http_request_finished(RequestType type,QString response, ErrorCode error, Module module);
     void signal_register_module_finished(RequestType type, QString response, ErrorCode error);
     void signal_reset_module_finished(RequestType type, QString response, ErrorCode error);
+    void signal_login_module_finished(RequestType type, QString response, ErrorCode error);
 };
 
 #endif // HTTPMANAGER_H

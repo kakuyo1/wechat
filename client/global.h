@@ -14,7 +14,8 @@ extern QString gate_url_prefix;
 enum class RequestType {
     TYPE_GET_VERIFY_CODE = 1001,
     TYPE_REGISTER = 1002,
-    TYPE_RESETPASSWORD = 1003
+    TYPE_RESETPASSWORD = 1003,
+    TYPE_LOGIN = 1004
 };
 
 // Error Codes
@@ -28,7 +29,9 @@ enum class ErrorCode {
     ERROR_EXISTING_EMAIL = 6,
     ERROR_ENCRPTION = 7,
     ERROR_USER_EMAIL_MISMATCH = 8,
-    ERROR_INVALID_VERIFY_CODE = 9
+    ERROR_INVALID_VERIFY_CODE = 9,
+    ERROR_MISSING_FIELDS = 10,
+    ERROR_PASSWORD_EMAIL_MISMATCH = 11
 };
 
 // Modules
@@ -36,6 +39,13 @@ enum class Module {
     MODULE_LOGIN = 1,
     MODULE_REGISTER = 2,
     MODULE_RESETPASSWORD = 3
+};
+
+struct serverInfo {
+    QString Host;
+    QString Port;
+    QString Token;
+    int Uid;
 };
 
 #endif // GLOBAL_H

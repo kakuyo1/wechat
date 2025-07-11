@@ -176,10 +176,10 @@ void RegisterDialog::initialHttpHandlers()
 void RegisterDialog::on_confirm_btn_clicked()
 {
     // check inputs
-    validateUserName(ui->user_lineEdit->text());
-    validatePassword(ui->password_lineEdit->text());
-    validateConfirm(ui->confirm_lineEdit->text());
-    validateEmail(ui->email_lineEdit->text());
+    if (!validateUserName(ui->user_lineEdit->text()) || !validateEmail(ui->email_lineEdit->text()) ||
+        !validatePassword(ui->password_lineEdit->text()) || !validateConfirm(ui->confirm_lineEdit->text())) {
+        return;
+    }
 
     if (ui->verifyCode_lineEdit->text().isEmpty()) {
         showTip("验证码不能为空", true);
@@ -196,11 +196,11 @@ void RegisterDialog::on_confirm_btn_clicked()
                                                 RequestType::TYPE_REGISTER, Module::MODULE_REGISTER);
 }
 
-void RegisterDialog::validateUserName(const QString &text)
+bool RegisterDialog::validateUserName(const QString &text)
 {
     if (text.isEmpty()) {
         showTip("用户名不能为空", true);
-        return;
+        return false;
     }
 
     showTip("", false); // Clear the tip if the username is valid
@@ -208,32 +208,36 @@ void RegisterDialog::validateUserName(const QString &text)
     bool match = userRegex.match(text).hasMatch();
     if (!match) {
         showTip("用户名格式不正确", true);
+        return false;
     } else {
         showTip("", false);
+        return true;
     }
 }
 
-void RegisterDialog::validateEmail(const QString &text)
+bool RegisterDialog::validateEmail(const QString &text)
 {
     if (text.isEmpty()) {
         showTip("邮箱不能为空", true);
-        return;
+        return false;
     }
 
     static QRegularExpression emailRegex(R"(^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$)");
     bool match = emailRegex.match(text).hasMatch();
     if (!match) {
         showTip("请输入正确的邮箱格式", true);
+        return false;
     } else {
         showTip("", false); // Clear the tip if the email is valid
+        return true;
     }
 }
 
-void RegisterDialog::validatePassword(const QString &text)
+bool RegisterDialog::validatePassword(const QString &text)
 {
     if (text.isEmpty()) {
         showTip("密码不能为空", true);
-        return;
+        return false;
     }
 
     // 1. 先检查密码格式
@@ -241,29 +245,33 @@ void RegisterDialog::validatePassword(const QString &text)
     bool match = passwordRegex.match(text).hasMatch();
     if (!match) {
         showTip("密码格式不正确", true);
-        return; // 格式错误时直接返回，不再检查一致性
+        return false; // 格式错误时直接返回，不再检查一致性
     }
 
     // 2. 格式正确后，再检查确认密码是否匹配（如果 confirm 非空）
     QString confirmText = ui->confirm_lineEdit->text();
     if (!confirmText.isEmpty() && text != confirmText) {
         showTip("两次输入密码不一致", true);
+        return false;
     } else {
         showTip("", false);
+        return true;
     }
 }
 
-void RegisterDialog::validateConfirm(const QString &text)
+bool RegisterDialog::validateConfirm(const QString &text)
 {
     if (text.isEmpty()) {
         showTip("请确认密码", true);
-        return;
+        return false;
     }
 
     if (text != ui->password_lineEdit->text()) {
         showTip("两次输入密码不一致", true);
+        return false;
     } else {
         showTip("", false); // Clear the tip if the confirmation is valid
+        return true;
     }
 }
 

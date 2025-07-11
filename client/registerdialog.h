@@ -23,10 +23,10 @@ private slots:
     void slot_register_module_handle(RequestType type, QString response, ErrorCode error);
     void on_confirm_btn_clicked();
 
-    void validateUserName(const QString& text);
-    void validateEmail(const QString& text);
-    void validatePassword(const QString& text);
-    void validateConfirm(const QString& text);
+    bool validateUserName(const QString& text);
+    bool validateEmail(const QString& text);
+    bool validatePassword(const QString& text);
+    bool validateConfirm(const QString& text);
 
     void on_return_pushButton_clicked();
 

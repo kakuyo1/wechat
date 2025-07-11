@@ -18,3 +18,11 @@ ResetPasswordDialog QLabel#error_tip[state="normal"] {
 ResetPasswordDialog QLabel#error_tip[state="error"] {
     color: red;
 }
+
+LoginDialog QLabel#error_tip[state="normal"] {
+    color: green;
+}
+
+LoginDialog QLabel#error_tip[state="error"] {
+    color: red;
+}
