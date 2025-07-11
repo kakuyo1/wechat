@@ -1,6 +1,6 @@
 #include "MysqlDAO.h"
 #include "MysqlManager.h"
-
+#include <spdlog/spdlog.h>
 MysqlConnection::MysqlConnection(sql::Connection *con, int64_t last_used_time) :
     con_(std::unique_ptr<sql::Connection>(con)), last_used_time_(last_used_time)
 {
@@ -52,7 +52,7 @@ MysqlConnectionPool::MysqlConnectionPool(size_t pool_size, const std::string& ho
             });
         }
     } catch (sql::SQLException& e) {
-        std::cerr << "Error initializing MySQL connection pool: " << e.what() << std::endl;
+        spdlog::error("Mysql Connection Pool initialization failed: {}", e.what());
         while (!_connections.empty()) _connections.pop();
         throw;
     }
@@ -116,7 +116,7 @@ void MysqlConnectionPool::CheckConnections() {
                 conn->last_used_time_ = now_from_epoch_seconds;
             }
         } catch (sql::SQLException& e) {
-            std::cerr << "Error checking MySQL connection: " << e.what() << std::endl;
+            spdlog::error("Error checking MySQL connection: {}", e.what());
         }
     }
 }
@@ -138,14 +138,14 @@ bool MysqlConnectionPool::CheckConnectionValid(const MysqlConnection& conn) cons
     // use select 1(heart beat) to check if the connection is valid
     try {
         std::unique_ptr<sql::Statement> stmt(conn.con_->createStatement());
-        auto result = stmt->execute("SELECT 1");
-        if (result) {
-            return true;
-        } else {
+        std::unique_ptr<sql::ResultSet> result(stmt->executeQuery("SELECT 1"));
+            if (result && result->next()) {
+                return true;
+            } else {
             return false;
-        }
+}
     } catch (sql::SQLException& e) {
-        std::cerr << "MySQL connection error: " << e.what() << std::endl;
+        spdlog::error("MySQL connection error: {}", e.what());
         return false; // If any exception occurs, the connection is not valid
     }
 }
@@ -169,7 +169,7 @@ std::unique_ptr<MysqlConnection> MysqlConnectionPool::GetConnection() {
 void MysqlConnectionPool::ReturnConnection(std::unique_ptr<MysqlConnection> conn) {
     std::lock_guard<std::mutex> lock(_mutex);
     if (_connections.size() >= _pool_size) {
-        std::cerr << "Connection pool is full, returning connection will be ignored." << std::endl;
+        spdlog::warn("Connection pool is full, returning connection will be ignored.");
         return;
     }
     if (_stopped.load()) {
@@ -212,6 +212,7 @@ int MysqlDAO::RegisterUser(const std::string &name, const std::string &email, co
         stmt->setString(3, password);
         // excute Stored Procedure
         stmt->execute();
+        while (stmt->getMoreResults()) { } // Clear any remaining results
         // using "select @result as result" to get stored procedure result(session variable)
         std::unique_ptr<sql::Statement> get_result(con->con_->createStatement());
         std::unique_ptr<sql::ResultSet> result(get_result->executeQuery("select @result as result"));
@@ -225,11 +226,107 @@ int MysqlDAO::RegisterUser(const std::string &name, const std::string &email, co
         return -5;
     } catch(sql::SQLException& e) {
         _pool->ReturnConnection(std::move(con));
-        std::cerr << "SQLException: " << e.what();
-        std::cerr << "(MYSQL error code: " << e.getErrorCode();
-        std::cerr << ", SQLState: " << e.getSQLState() << ")" << std::endl;
+        spdlog::error("SQLException: {}", e.what());
+        spdlog::error("(MYSQL error code: {}, SQLState: {})", e.getErrorCode(), e.getSQLState());
         return -3;
     }
 }
 
+bool MysqlDAO::CheckEmailAndUserMatch(const std::string &name, const std::string &email)
+{
+    auto con = _pool->GetConnection();
+    try {
+        if (con == nullptr) {
+            return false;
+        }
+        std::unique_ptr<sql::PreparedStatement> stmt(con->con_->prepareStatement("select count(*) from user where name = ? and email = ?"));
+        stmt->setString(1, name);
+        stmt->setString(2, email);
+        std::unique_ptr<sql::ResultSet> result(stmt->executeQuery());
+        if (result->next()) {
+            int count = result->getInt(1);
+            if (count > 0) {
+                _pool->ReturnConnection(std::move(con));
+                return true; // Email exists for the user
+            } else {
+                _pool->ReturnConnection(std::move(con));
+                return false; // Email does not exist for the user
+            }
+        }
+        // If no result is returned, assume email does not exist
+        _pool->ReturnConnection(std::move(con));
+        return false;
+    } catch(sql::SQLException& e) {
+        _pool->ReturnConnection(std::move(con));
+        spdlog::error("SQLException: {}", e.what());
+        spdlog::error("(MYSQL error code: {}, SQLState: {})", e.getErrorCode(), e.getSQLState());
+        return false;
+    }
+}
 
+bool MysqlDAO::CheckEmailAndPasswordMatch(const std::string& email, const std::string& password, UserInfo& user_info) {
+    auto con = _pool->GetConnection();
+    try {
+        if (con == nullptr) {
+            return false;
+        }
+
+        Defer defer([this, &con](){
+            _pool->ReturnConnection(std::move(con));
+        });
+
+        // Prepare the SQL statement to get the encrypted password
+        std::unique_ptr<sql::PreparedStatement> stmt0(con->con_->prepareStatement("select * from user where email = ?"));
+        stmt0->setString(1, email);
+        std::unique_ptr<sql::ResultSet> result0(stmt0->executeQuery());
+        if (!result0->next()) {
+            // If no result is returned, assume email does not exist
+            result0.reset(); // Reset the result set to release resources
+            return false;
+        }
+        std::string stored_password = result0->getString("password");
+
+        if (bcrypt_checkpw(password.c_str(), stored_password.c_str()) != 0) {
+            // Password does not match
+            return false;
+        }
+        // If the password matches, retrieve user info
+        user_info.uid = result0->getInt("uid");
+        user_info.name = result0->getString("name");
+        user_info.email = result0->getString("email");
+        user_info.password = stored_password; // Store the encrypted password
+        return true; // Email and password match
+
+    } catch (sql::SQLException& e) {
+        spdlog::error("SQLException: {}", e.what());
+        spdlog::error("(MYSQL error code: {}, SQLState: {})", e.getErrorCode(), e.getSQLState());
+        return false; // Error occurred while checking email and password
+    }
+}
+
+
+bool MysqlDAO::ResetPassword(const std::string &name, const std::string &new_password)
+{
+    auto con = _pool->GetConnection();
+    try {
+        if (con == nullptr) {
+            return false;
+        }
+        std::unique_ptr<sql::PreparedStatement> stmt(con->con_->prepareStatement("UPDATE user SET password = ? WHERE name = ?"));
+        stmt->setString(1, new_password);
+        stmt->setString(2, name);
+        auto result = stmt->executeUpdate();
+        if (result == 0) {
+            // No rows updated, which means the user does not exist
+            _pool->ReturnConnection(std::move(con));
+            return false;
+        }
+        _pool->ReturnConnection(std::move(con));
+        return true;
+    } catch(sql::SQLException& e) {
+        _pool->ReturnConnection(std::move(con));
+        spdlog::error("SQLException: {}", e.what());
+        spdlog::error("(MYSQL error code: {}, SQLState: {})", e.getErrorCode(), e.getSQLState());
+        return false; // Password reset failed
+    }
+}

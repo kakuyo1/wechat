@@ -12,7 +12,7 @@ void HttpConnection::Start() {
     self->CheckDeadline();// start deadline check for 60 seconds
     http::async_read(_socket, _buffer, _request, [self](beast::error_code ec, std::size_t bytes_transferred){ // raw _buffer data to construct _request
         if (ec) {
-            std::cerr << "Error reading request: " << ec.message() << std::endl;
+            spdlog::error("Error reading request: {}", ec.message());
             return;
         }
         boost::ignore_unused(bytes_transferred);
@@ -31,7 +31,7 @@ void HttpConnection::PreParseUrlToGetParams()
     // 解析相对路径和查询，parse_relative_ref 适合这个格式
     boost::system::result<boost::urls::url_view> result = boost::urls::parse_relative_ref(target_str);
     if (result.has_error()) {
-        std::cerr << "Error parsing URL: " << result.error().message() << std::endl;
+        spdlog::error("Failed to parse URL: {}", result.error().message());
         return;
     }
     auto url = result.value();
@@ -97,7 +97,7 @@ void HttpConnection::SendResponse() {
     auto self = shared_from_this();
     http::async_write(_socket, _response, [self](beast::error_code ec, std::size_t bytes_transferred){
         if (ec) {
-            std::cerr << "Error sending response: " << ec.message() << std::endl;
+            spdlog::error("Error sending response: {}", ec.message());
             return;
         }
         boost::ignore_unused(bytes_transferred);
@@ -105,11 +105,11 @@ void HttpConnection::SendResponse() {
         beast::error_code close_ec;
         self->_socket.shutdown(tcp::socket::shutdown_send, close_ec);
         if (close_ec && close_ec != beast::errc::not_connected) {
-            std::cerr << "Error shutting down socket: " << close_ec.message() << std::endl;
+            spdlog::error("Error shutting down socket: {}", close_ec.message());
         }
         self->_socket.close(close_ec);
         if (close_ec) {
-            std::cerr << "Error closing socket: " << close_ec.message() << std::endl;
+            spdlog::error("Error closing socket: {}", close_ec.message());
         }
         self->_deadline.cancel(); // cause net::error::operation_aborted
     });
@@ -120,9 +120,9 @@ void HttpConnection::CheckDeadline() {
     _deadline.async_wait([self](beast::error_code ec){
         if (ec) {
             if (ec == net::error::operation_aborted) {
-                std::cout << "[normal]Deadline timer cancelled" << std::endl;
+                spdlog::info("Deadline check cancelled, connection is still active.");
             } else {
-                std::cerr << "Deadline check error: " << ec.message() << std::endl;
+                spdlog::error("Deadline check error: {}", ec.message());
             }
             return;
         }
@@ -131,11 +131,11 @@ void HttpConnection::CheckDeadline() {
             beast::error_code ec;
             self->_socket.shutdown(tcp::socket::shutdown_both, ec);
             if (ec && ec != beast::errc::not_connected) {
-                std::cerr << "Error shutting down socket: " << ec.message() << std::endl;
+                spdlog::error("Error shutting down socket: {}", ec.message());
             }
             self->_socket.close(ec);
             if (ec) {
-                std::cerr << "Error closing socket: " << ec.message() << std::endl;
+                spdlog::error("Error closing socket: {}", ec.message());
             }
             return;
         }

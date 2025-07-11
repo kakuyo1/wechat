@@ -7,6 +7,7 @@
 #include <chrono>
 #include <boost/url.hpp>
 #include <unordered_map>
+#include <spdlog/spdlog.h>
 
 namespace beast = boost::beast;
 namespace http = beast::http;

@@ -195,10 +195,24 @@ CMakeFiles/GateServer.dir/resource/RedisManager.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/GateServer.dir/resource/RedisManager.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kakuyo/wechat/server/GateServer/resource/RedisManager.cpp -o CMakeFiles/GateServer.dir/resource/RedisManager.cpp.s
 
+CMakeFiles/GateServer.dir/resource/StatusGrpcClient.cpp.o: CMakeFiles/GateServer.dir/flags.make
+CMakeFiles/GateServer.dir/resource/StatusGrpcClient.cpp.o: /home/kakuyo/wechat/server/GateServer/resource/StatusGrpcClient.cpp
+CMakeFiles/GateServer.dir/resource/StatusGrpcClient.cpp.o: CMakeFiles/GateServer.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kakuyo/wechat/server/GateServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/GateServer.dir/resource/StatusGrpcClient.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/GateServer.dir/resource/StatusGrpcClient.cpp.o -MF CMakeFiles/GateServer.dir/resource/StatusGrpcClient.cpp.o.d -o CMakeFiles/GateServer.dir/resource/StatusGrpcClient.cpp.o -c /home/kakuyo/wechat/server/GateServer/resource/StatusGrpcClient.cpp
+
+CMakeFiles/GateServer.dir/resource/StatusGrpcClient.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/GateServer.dir/resource/StatusGrpcClient.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kakuyo/wechat/server/GateServer/resource/StatusGrpcClient.cpp > CMakeFiles/GateServer.dir/resource/StatusGrpcClient.cpp.i
+
+CMakeFiles/GateServer.dir/resource/StatusGrpcClient.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/GateServer.dir/resource/StatusGrpcClient.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kakuyo/wechat/server/GateServer/resource/StatusGrpcClient.cpp -o CMakeFiles/GateServer.dir/resource/StatusGrpcClient.cpp.s
+
 CMakeFiles/GateServer.dir/resource/VerifygRPCClient.cpp.o: CMakeFiles/GateServer.dir/flags.make
 CMakeFiles/GateServer.dir/resource/VerifygRPCClient.cpp.o: /home/kakuyo/wechat/server/GateServer/resource/VerifygRPCClient.cpp
 CMakeFiles/GateServer.dir/resource/VerifygRPCClient.cpp.o: CMakeFiles/GateServer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kakuyo/wechat/server/GateServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/GateServer.dir/resource/VerifygRPCClient.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kakuyo/wechat/server/GateServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/GateServer.dir/resource/VerifygRPCClient.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/GateServer.dir/resource/VerifygRPCClient.cpp.o -MF CMakeFiles/GateServer.dir/resource/VerifygRPCClient.cpp.o.d -o CMakeFiles/GateServer.dir/resource/VerifygRPCClient.cpp.o -c /home/kakuyo/wechat/server/GateServer/resource/VerifygRPCClient.cpp
 
 CMakeFiles/GateServer.dir/resource/VerifygRPCClient.cpp.i: cmake_force
@@ -212,7 +226,7 @@ CMakeFiles/GateServer.dir/resource/VerifygRPCClient.cpp.s: cmake_force
 CMakeFiles/GateServer.dir/proto/message.pb.cc.o: CMakeFiles/GateServer.dir/flags.make
 CMakeFiles/GateServer.dir/proto/message.pb.cc.o: /home/kakuyo/wechat/server/GateServer/proto/message.pb.cc
 CMakeFiles/GateServer.dir/proto/message.pb.cc.o: CMakeFiles/GateServer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kakuyo/wechat/server/GateServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/GateServer.dir/proto/message.pb.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kakuyo/wechat/server/GateServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/GateServer.dir/proto/message.pb.cc.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/GateServer.dir/proto/message.pb.cc.o -MF CMakeFiles/GateServer.dir/proto/message.pb.cc.o.d -o CMakeFiles/GateServer.dir/proto/message.pb.cc.o -c /home/kakuyo/wechat/server/GateServer/proto/message.pb.cc
 
 CMakeFiles/GateServer.dir/proto/message.pb.cc.i: cmake_force
@@ -226,7 +240,7 @@ CMakeFiles/GateServer.dir/proto/message.pb.cc.s: cmake_force
 CMakeFiles/GateServer.dir/proto/message.grpc.pb.cc.o: CMakeFiles/GateServer.dir/flags.make
 CMakeFiles/GateServer.dir/proto/message.grpc.pb.cc.o: /home/kakuyo/wechat/server/GateServer/proto/message.grpc.pb.cc
 CMakeFiles/GateServer.dir/proto/message.grpc.pb.cc.o: CMakeFiles/GateServer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kakuyo/wechat/server/GateServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/GateServer.dir/proto/message.grpc.pb.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kakuyo/wechat/server/GateServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/GateServer.dir/proto/message.grpc.pb.cc.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/GateServer.dir/proto/message.grpc.pb.cc.o -MF CMakeFiles/GateServer.dir/proto/message.grpc.pb.cc.o.d -o CMakeFiles/GateServer.dir/proto/message.grpc.pb.cc.o -c /home/kakuyo/wechat/server/GateServer/proto/message.grpc.pb.cc
 
 CMakeFiles/GateServer.dir/proto/message.grpc.pb.cc.i: cmake_force
@@ -248,6 +262,7 @@ GateServer_OBJECTS = \
 "CMakeFiles/GateServer.dir/resource/MysqlDAO.cpp.o" \
 "CMakeFiles/GateServer.dir/resource/MysqlManager.cpp.o" \
 "CMakeFiles/GateServer.dir/resource/RedisManager.cpp.o" \
+"CMakeFiles/GateServer.dir/resource/StatusGrpcClient.cpp.o" \
 "CMakeFiles/GateServer.dir/resource/VerifygRPCClient.cpp.o" \
 "CMakeFiles/GateServer.dir/proto/message.pb.cc.o" \
 "CMakeFiles/GateServer.dir/proto/message.grpc.pb.cc.o"
@@ -264,6 +279,7 @@ GateServer: CMakeFiles/GateServer.dir/resource/LogicSystem.cpp.o
 GateServer: CMakeFiles/GateServer.dir/resource/MysqlDAO.cpp.o
 GateServer: CMakeFiles/GateServer.dir/resource/MysqlManager.cpp.o
 GateServer: CMakeFiles/GateServer.dir/resource/RedisManager.cpp.o
+GateServer: CMakeFiles/GateServer.dir/resource/StatusGrpcClient.cpp.o
 GateServer: CMakeFiles/GateServer.dir/resource/VerifygRPCClient.cpp.o
 GateServer: CMakeFiles/GateServer.dir/proto/message.pb.cc.o
 GateServer: CMakeFiles/GateServer.dir/proto/message.grpc.pb.cc.o
@@ -273,6 +289,7 @@ GateServer: /usr/local/lib/libgrpc++_reflection.a
 GateServer: /usr/local/lib/libgrpc++.a
 GateServer: /usr/local/lib/libprotobuf.a
 GateServer: /usr/lib/x86_64-linux-gnu/libjsoncpp.so.1.9.5
+GateServer: /usr/lib/x86_64-linux-gnu/libspdlog.so.1.12.0
 GateServer: /usr/local/lib/libboost_system.so.1.88.0
 GateServer: /usr/local/lib/libgrpc.a
 GateServer: /usr/local/lib/libz.a
@@ -328,8 +345,9 @@ GateServer: /usr/local/lib/libabsl_civil_time.a
 GateServer: /usr/local/lib/libabsl_time_zone.a
 GateServer: /usr/local/lib/libssl.a
 GateServer: /usr/local/lib/libcrypto.a
+GateServer: /usr/lib/x86_64-linux-gnu/libfmt.so.9.1.0
 GateServer: CMakeFiles/GateServer.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/kakuyo/wechat/server/GateServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Linking CXX executable GateServer"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/kakuyo/wechat/server/GateServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking CXX executable GateServer"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/GateServer.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

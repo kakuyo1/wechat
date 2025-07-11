@@ -202,6 +202,50 @@ CMakeFiles/GateServer.dir/resource/LogicSystem.cpp.o: \
  /usr/include/jsoncpp/json/writer.h /usr/include/jsoncpp/json/value.h \
  /usr/include/jsoncpp/json/reader.h /usr/include/jsoncpp/json/writer.h \
  /home/kakuyo/libbcrypt/include/bcrypt/bcrypt.h \
+ /usr/include/spdlog/spdlog.h /usr/include/spdlog/common.h \
+ /usr/include/spdlog/tweakme.h /usr/include/spdlog/details/null_mutex.h \
+ /usr/include/c++/13/atomic /usr/include/c++/13/utility \
+ /usr/include/c++/13/bits/stl_relops.h /usr/include/c++/13/chrono \
+ /usr/include/c++/13/bits/chrono.h /usr/include/c++/13/ratio \
+ /usr/include/c++/13/limits /usr/include/c++/13/ctime \
+ /usr/include/c++/13/bits/parse_numbers.h /usr/include/spdlog/fmt/fmt.h \
+ /usr/include/fmt/core.h /usr/include/c++/13/iterator \
+ /usr/include/c++/13/bits/stream_iterator.h /usr/include/fmt/format.h \
+ /usr/include/c++/13/cmath /usr/include/math.h \
+ /usr/include/x86_64-linux-gnu/bits/math-vector.h \
+ /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
+ /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
+ /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
+ /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
+ /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
+ /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
+ /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h \
+ /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
+ /usr/include/c++/13/bits/specfun.h /usr/include/c++/13/tr1/gamma.tcc \
+ /usr/include/c++/13/tr1/special_function_util.h \
+ /usr/include/c++/13/tr1/bessel_function.tcc \
+ /usr/include/c++/13/tr1/beta_function.tcc \
+ /usr/include/c++/13/tr1/ell_integral.tcc \
+ /usr/include/c++/13/tr1/exp_integral.tcc \
+ /usr/include/c++/13/tr1/hypergeometric.tcc \
+ /usr/include/c++/13/tr1/legendre_function.tcc \
+ /usr/include/c++/13/tr1/modified_bessel_func.tcc \
+ /usr/include/c++/13/tr1/poly_hermite.tcc \
+ /usr/include/c++/13/tr1/poly_laguerre.tcc \
+ /usr/include/c++/13/tr1/riemann_zeta.tcc /usr/include/fmt/core.h \
+ /usr/include/spdlog/details/registry.h \
+ /usr/include/spdlog/details/periodic_worker.h \
+ /usr/include/c++/13/condition_variable \
+ /usr/include/c++/13/bits/std_mutex.h \
+ /usr/include/c++/13/bits/unique_lock.h /usr/include/c++/13/mutex \
+ /usr/include/c++/13/thread /usr/include/c++/13/bits/std_thread.h \
+ /usr/include/c++/13/bits/this_thread_sleep.h \
+ /usr/include/spdlog/logger.h /usr/include/spdlog/details/log_msg.h \
+ /usr/include/spdlog/details/backtracer.h \
+ /usr/include/spdlog/details/log_msg_buffer.h \
+ /usr/include/spdlog/details/circular_q.h /usr/include/c++/13/cassert \
+ /usr/include/assert.h /usr/include/spdlog/version.h \
+ /usr/include/spdlog/details/synchronous_factory.h \
  /home/kakuyo/wechat/server/GateServer/include/HttpConnection.h \
  /usr/local/include/boost/beast/http.hpp \
  /usr/local/include/boost/beast/core/detail/config.hpp \
@@ -238,7 +282,7 @@ CMakeFiles/GateServer.dir/resource/LogicSystem.cpp.o: \
  /usr/local/include/boost/beast/core/detail/buffer_traits.hpp \
  /usr/local/include/boost/asio/buffer.hpp \
  /usr/local/include/boost/asio/detail/config.hpp \
- /usr/include/linux/version.h /usr/include/c++/13/limits \
+ /usr/include/linux/version.h \
  /usr/local/include/boost/asio/detail/array_fwd.hpp \
  /usr/local/include/boost/asio/detail/memory.hpp \
  /usr/local/include/boost/asio/detail/cstdint.hpp \
@@ -246,12 +290,10 @@ CMakeFiles/GateServer.dir/resource/LogicSystem.cpp.o: \
  /usr/local/include/boost/throw_exception.hpp \
  /usr/local/include/boost/exception/exception.hpp \
  /usr/local/include/boost/assert/source_location.hpp \
- /usr/local/include/boost/cstdint.hpp /usr/include/c++/13/utility \
- /usr/include/c++/13/bits/stl_relops.h \
+ /usr/local/include/boost/cstdint.hpp \
  /usr/local/include/boost/asio/detail/string_view.hpp \
  /usr/local/include/boost/asio/detail/type_traits.hpp \
  /usr/local/include/boost/asio/is_contiguous_iterator.hpp \
- /usr/include/c++/13/iterator /usr/include/c++/13/bits/stream_iterator.h \
  /usr/local/include/boost/asio/detail/push_options.hpp \
  /usr/local/include/boost/asio/detail/pop_options.hpp \
  /usr/local/include/boost/asio/detail/is_buffer_sequence.hpp \
@@ -284,7 +326,6 @@ CMakeFiles/GateServer.dir/resource/LogicSystem.cpp.o: \
  /usr/local/include/boost/system/is_error_code_enum.hpp \
  /usr/local/include/boost/system/detail/error_category.hpp \
  /usr/local/include/boost/system/detail/config.hpp \
- /usr/include/c++/13/atomic \
  /usr/local/include/boost/system/detail/error_condition.hpp \
  /usr/local/include/boost/system/detail/generic_category.hpp \
  /usr/local/include/boost/system/detail/generic_category_message.hpp \
@@ -305,18 +346,12 @@ CMakeFiles/GateServer.dir/resource/LogicSystem.cpp.o: \
  /usr/local/include/boost/system/detail/error_category_impl.hpp \
  /usr/local/include/boost/system/detail/std_category_impl.hpp \
  /usr/local/include/boost/system/detail/mutex.hpp \
- /usr/include/c++/13/mutex /usr/include/c++/13/bits/chrono.h \
- /usr/include/c++/13/ratio /usr/include/c++/13/ctime \
- /usr/include/c++/13/bits/parse_numbers.h \
- /usr/include/c++/13/bits/std_mutex.h \
- /usr/include/c++/13/bits/unique_lock.h \
  /usr/local/include/boost/system/error_condition.hpp \
  /usr/local/include/boost/system/errc.hpp \
  /usr/local/include/boost/system/generic_category.hpp \
  /usr/local/include/boost/system/system_category.hpp \
  /usr/local/include/boost/system/detail/throws.hpp \
  /usr/local/include/boost/system/system_error.hpp \
- /usr/include/c++/13/cassert /usr/include/assert.h \
  /usr/local/include/boost/beast/core/impl/error.hpp \
  /usr/local/include/boost/beast/core/impl/error.ipp \
  /usr/local/include/boost/optional.hpp \
@@ -545,28 +580,7 @@ CMakeFiles/GateServer.dir/resource/LogicSystem.cpp.o: \
  /usr/local/include/boost/container_hash/is_tuple_like.hpp \
  /usr/local/include/boost/container_hash/detail/hash_range.hpp \
  /usr/local/include/boost/container_hash/detail/mulx.hpp \
- /usr/include/c++/13/complex /usr/include/c++/13/cmath \
- /usr/include/math.h /usr/include/x86_64-linux-gnu/bits/math-vector.h \
- /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
- /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
- /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
- /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h \
- /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
- /usr/include/c++/13/bits/specfun.h /usr/include/c++/13/tr1/gamma.tcc \
- /usr/include/c++/13/tr1/special_function_util.h \
- /usr/include/c++/13/tr1/bessel_function.tcc \
- /usr/include/c++/13/tr1/beta_function.tcc \
- /usr/include/c++/13/tr1/ell_integral.tcc \
- /usr/include/c++/13/tr1/exp_integral.tcc \
- /usr/include/c++/13/tr1/hypergeometric.tcc \
- /usr/include/c++/13/tr1/legendre_function.tcc \
- /usr/include/c++/13/tr1/modified_bessel_func.tcc \
- /usr/include/c++/13/tr1/poly_hermite.tcc \
- /usr/include/c++/13/tr1/poly_laguerre.tcc \
- /usr/include/c++/13/tr1/riemann_zeta.tcc /usr/include/c++/13/typeindex \
+ /usr/include/c++/13/complex /usr/include/c++/13/typeindex \
  /usr/include/c++/13/optional /usr/include/c++/13/variant \
  /usr/local/include/boost/utility/string_view.hpp \
  /usr/local/include/boost/io/ostream_put.hpp \
@@ -848,7 +862,6 @@ CMakeFiles/GateServer.dir/resource/LogicSystem.cpp.o: \
  /usr/local/include/boost/asio/detail/io_object_impl.hpp \
  /usr/local/include/boost/asio/io_context.hpp \
  /usr/local/include/boost/asio/detail/chrono.hpp \
- /usr/include/c++/13/chrono \
  /usr/local/include/boost/asio/detail/concurrency_hint.hpp \
  /usr/local/include/boost/asio/detail/wrapped_handler.hpp \
  /usr/local/include/boost/asio/detail/bind_handler.hpp \
@@ -1454,9 +1467,7 @@ CMakeFiles/GateServer.dir/resource/LogicSystem.cpp.o: \
  /usr/local/include/boost/asio/local/stream_protocol.hpp \
  /usr/local/include/boost/asio/packaged_task.hpp \
  /usr/local/include/boost/asio/detail/future.hpp \
- /usr/include/c++/13/future /usr/include/c++/13/condition_variable \
- /usr/include/c++/13/bits/atomic_futex.h \
- /usr/include/c++/13/bits/std_thread.h \
+ /usr/include/c++/13/future /usr/include/c++/13/bits/atomic_futex.h \
  /usr/local/include/boost/asio/placeholders.hpp \
  /usr/local/include/boost/asio/posix/basic_descriptor.hpp \
  /usr/local/include/boost/asio/posix/basic_stream_descriptor.hpp \
@@ -2313,7 +2324,6 @@ CMakeFiles/GateServer.dir/resource/LogicSystem.cpp.o: \
  /usr/include/hiredis/sds.h /usr/include/hiredis/alloc.h \
  /home/kakuyo/wechat/server/GateServer/include/MysqlManager.h \
  /home/kakuyo/wechat/server/GateServer/include/MysqlDAO.h \
- /usr/include/c++/13/thread /usr/include/c++/13/bits/this_thread_sleep.h \
  /usr/include/mysql_connection.h /usr/include/cppconn/connection.h \
  /usr/include/cppconn/build_config.h /usr/include/cppconn/warning.h \
  /usr/include/cppconn/sqlstring.h /usr/include/cppconn/variant.h \
@@ -2326,4 +2336,5 @@ CMakeFiles/GateServer.dir/resource/LogicSystem.cpp.o: \
  /usr/include/cppconn/datatype.h \
  /usr/include/cppconn/prepared_statement.h \
  /usr/include/cppconn/statement.h /usr/include/cppconn/resultset.h \
- /usr/include/cppconn/exception.h
+ /usr/include/cppconn/exception.h \
+ /home/kakuyo/wechat/server/GateServer/include/StatusGrpcClient.h

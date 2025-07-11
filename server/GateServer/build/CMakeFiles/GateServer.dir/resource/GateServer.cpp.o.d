@@ -1619,7 +1619,18 @@ CMakeFiles/GateServer.dir/resource/GateServer.cpp.o: \
  /usr/local/include/boost/beast/websocket/impl/read.hpp \
  /usr/local/include/boost/beast/websocket/impl/stream.hpp \
  /usr/local/include/boost/beast/websocket/impl/write.hpp \
- /usr/local/include/boost/beast/zlib.hpp \
+ /usr/local/include/boost/beast/zlib.hpp /usr/include/spdlog/spdlog.h \
+ /usr/include/spdlog/common.h /usr/include/spdlog/tweakme.h \
+ /usr/include/spdlog/details/null_mutex.h /usr/include/spdlog/fmt/fmt.h \
+ /usr/include/fmt/core.h /usr/include/fmt/format.h \
+ /usr/include/fmt/core.h /usr/include/spdlog/details/registry.h \
+ /usr/include/spdlog/details/periodic_worker.h /usr/include/c++/13/thread \
+ /usr/include/c++/13/bits/this_thread_sleep.h \
+ /usr/include/spdlog/logger.h /usr/include/spdlog/details/log_msg.h \
+ /usr/include/spdlog/details/backtracer.h \
+ /usr/include/spdlog/details/log_msg_buffer.h \
+ /usr/include/spdlog/details/circular_q.h /usr/include/spdlog/version.h \
+ /usr/include/spdlog/details/synchronous_factory.h \
  /home/kakuyo/wechat/server/GateServer/include/ConfigIniManager.h \
  /usr/local/include/boost/property_tree/ptree.hpp \
  /usr/local/include/boost/property_tree/ptree_fwd.hpp \

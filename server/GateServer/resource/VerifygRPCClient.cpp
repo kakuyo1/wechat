@@ -1,6 +1,6 @@
 #include "VerifygRPCClient.h"
 #include "RedisManager.h"
-
+#include <spdlog/spdlog.h>
 GetVerifyResponse VerifygRPCClient::GetVerifyCode(std::string email)
 {
     ClientContext context; // enable client-side context for RPC calls
@@ -9,9 +9,9 @@ GetVerifyResponse VerifygRPCClient::GetVerifyCode(std::string email)
     request.set_email(email); // Set the email in the request
     // Get a stub from the pool
     auto stub = _stub_pool->GetStub();
-    std::cout << "Get a new stub" << std::endl; //! debug
+    spdlog::info("stub obtained from pool, current pool size: {}", _stub_pool->GetPoolSize());
     if (!stub) {
-        std::cerr << "Failed to get a stub from the pool." << std::endl;
+        spdlog::error("Failed to get a stub from the pool.");
         response.set_error(static_cast<int>(ErrorCodes::ERROR_RPC));
         response.set_code("");
         return response;
@@ -19,13 +19,13 @@ GetVerifyResponse VerifygRPCClient::GetVerifyCode(std::string email)
     // Call the GetVerifyCode method on the stub
     Status status = stub->GetVerifyCode(&context, request, &response);
     if (!status.ok()) {
-        std::cerr << "gRPC call failed: " << status.error_message() << std::endl;
+        spdlog::error("gRPC call failed: {}", status.error_message());
         // 只有在网络层失败时本地填 error
         response.set_error(static_cast<int>(ErrorCodes::ERROR_RPC));
         response.set_code(""); // 默认设置为无效验证码
     }
     _stub_pool->ReturnStub(std::move(stub));
-    std::cout << "Stub returned" << std::endl; // !debug
+    spdlog::info("stub returned to pool, current pool size: {}", _stub_pool->GetPoolSize());
     return response; // fields filled by the server
 }
 
@@ -37,13 +37,17 @@ VerifygRPCClient::VerifygRPCClient()
     std::string host = verify_server_section["Host"];
     std::string port = verify_server_section["Port"];
     if (host.empty() || port.empty()) {
-        std::cerr << "Verify server host or port is not configured." << std::endl;
+        spdlog::error("Verify server configuration is missing or incomplete in config.ini.");
         throw std::runtime_error("Verify server configuration error.");
     }
 
     // initialize the RPC stub pool with a size of 4 and default server address and port
     _stub_pool = std::make_unique<RPCStubPool>(5, host, port); // Create a stub pool
-    std::cout << "stub pool size: " << _stub_pool->GetPoolSize() << std::endl; //! debug
+    if (!_stub_pool) {
+        spdlog::error("Failed to create RPCStubPool.");
+        throw std::runtime_error("Failed to create RPCStubPool.");
+    }
+    spdlog::info("VerifygRPCClient initialized with stub pool size: {}", _stub_pool->GetPoolSize());
 }
 
 RPCStubPool::RPCStubPool(size_t pool_size, std::string RPCserver_address, std::string RPCserver_port) :
@@ -104,5 +108,5 @@ void RPCStubPool::ReturnStub(std::unique_ptr<VerifyService::Stub> stub)
 
 size_t RPCStubPool::GetPoolSize()
 {
-    return _pool_size;
+    return _stubs.size();
 }

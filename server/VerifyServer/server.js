@@ -61,7 +61,7 @@ async function GetVerifyCode(call, callback) {
 function main() {
     let server = new grpc.Server();
     server.addService(message_proto.VerifyService.service, {
-        GetVerifyCode: GetVerifyCode
+        GetVerifyCode: GetVerifyCode  // protobuf定义的服务方法: local fake GetVerifyCode
     });
     server.bindAsync('localhost:50051', grpc.ServerCredentials.createInsecure(), (error) => {
         if (error) {

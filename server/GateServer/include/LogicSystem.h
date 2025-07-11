@@ -8,6 +8,7 @@
 #include <jsoncpp/json/reader.h>
 #include <jsoncpp/json/writer.h>
 #include <bcrypt/bcrypt.h>
+#include <spdlog/spdlog.h>
 
 /***********************************
  *  @To offer response.body/() for HttpConnection

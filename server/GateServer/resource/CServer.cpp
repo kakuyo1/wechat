@@ -12,7 +12,7 @@ CServer::CServer(net::io_context& ioc, unsigned short port) :
 void CServer::Start() {
     auto self = shared_from_this();
     if (!_acceptor.is_open()) {
-        std::cerr << "Acceptor is not open, cannot accept connections." << std::endl;
+        spdlog::error("Acceptor is not open, cannot accept connections.");
         return;
     }
     // create a new HttpConnection for each accept
@@ -21,7 +21,7 @@ void CServer::Start() {
     _acceptor.async_accept(new_connection->GetSocket(), [self, new_connection](boost::system::error_code ec){
         try{
             if (ec) {
-                std::cerr << "Error accepting connection: " << ec.message() << std::endl;
+                spdlog::error("Error accepting connection: {}", ec.message());
                 self->Start(); // Restart accepting
                 return;
             }
@@ -30,7 +30,8 @@ void CServer::Start() {
             //continue accepting new connections
             self->Start();
         } catch (const std::exception& e) {
-            std::cerr << "Exception in CServer::Start: " << e.what() << std::endl;
+            spdlog::error("Exception in CServer::Start: {}", e.what());
+            self->Start(); // Restart accepting
         }
     });
 }

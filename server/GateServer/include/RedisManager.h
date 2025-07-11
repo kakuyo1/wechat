@@ -9,6 +9,7 @@
 #include <queue>
 #include <atomic>
 #include "ConfigIniManager.h"
+#include <spdlog/spdlog.h>
 
 /*
     暂时未使用

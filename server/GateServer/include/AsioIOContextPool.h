@@ -6,6 +6,7 @@
 #include <thread>
 #include <atomic>
 #include "Singleton.h"
+#include <spdlog/spdlog.h>
 
 /*******************************************************
  * 暂时不支持传递参数

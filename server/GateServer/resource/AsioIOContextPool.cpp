@@ -1,5 +1,5 @@
 #include "AsioIOContextPool.h"
-
+#include <spdlog/spdlog.h>
 AsioIOContextPool::~AsioIOContextPool()
 {
     Stop();
@@ -66,6 +66,6 @@ AsioIOContextPool::AsioIOContextPool(size_t pool_size) : // （Singleton<T>::Get
             _io_contexts[i].run();
         });
     }
-    std::cout << "asio pool size: " << _io_contexts.size() << std::endl; //! debug
+    spdlog::info("AsioIOContextPool initialized with {} IOContexts.", _io_contexts.size());
 }
 

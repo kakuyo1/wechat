@@ -15,6 +15,7 @@ find_package(Boost 1.81 REQUIRED COMPONENTS system url)
 find_package(Protobuf REQUIRED)
 find_package(gRPC CONFIG REQUIRED)
 find_package(jsoncpp REQUIRED)
+find_package(spdlog REQUIRED)
 
 # 自动收集源文件
 file(GLOB SOURCES "resource/*.cpp")
@@ -57,6 +58,7 @@ target_link_libraries(GateServer PRIVATE
     hiredis
     mysqlcppconn # 如果使用 MySQL Connector/C++
     bcrypt  # ← 这里加上 bcrypt 库
+    spdlog::spdlog
 )
 
 # 链接 pthread
@@ -67,3 +69,4 @@ target_link_libraries(GateServer PRIVATE Threads::Threads)
 # set_target_properties(GateServer PROPERTIES
 #     RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin
 # )
+

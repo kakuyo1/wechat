@@ -1,5 +1,5 @@
 #include "ConfigIniManager.h"
-
+#include <spdlog/spdlog.h>
 SectionPairs::SectionPairs(const SectionPairs &other)
 {
     pairs = other.pairs;
@@ -87,7 +87,7 @@ void ConfigIniManager::LoadConfig(const std::string &file_path)
             _config[section.first] = section_pairs;
         }
     } catch (const std::exception &e) {
-        std::cerr << "Error loading config file: " << e.what() << std::endl;
+        spdlog::error("Failed to load config file {}: {}", file_path, e.what());
     }
 }
 

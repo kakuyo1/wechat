@@ -5,6 +5,7 @@
 #include <map>
 #include <iostream>
 #include <filesystem>
+#include <spdlog/spdlog.h>
 
 /***************************************************************
  * Boost.PropertyTree is used to parse INI files.

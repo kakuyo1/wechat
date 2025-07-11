@@ -4,6 +4,7 @@
 #include <boost/beast.hpp>
 #include <memory>
 #include <iostream>
+#include <spdlog/spdlog.h>
 
 namespace beast = boost::beast;
 namespace http = beast::http;

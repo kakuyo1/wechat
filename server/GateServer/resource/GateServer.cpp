@@ -8,6 +8,7 @@
 #include <cstdio>
 #include <cassert>
 #include "RedisManager.h"
+#include <spdlog/spdlog.h>
 
 // void TestRedis() {
 // 	//连接redis 需要启动才可以进行连接
@@ -145,21 +146,21 @@ int main() {
         boost::asio::signal_set signals(ioc, SIGINT, SIGTERM);
         signals.async_wait([&ioc](const boost::system::error_code& ec, int signo) {
             if (ec) {
-                std::cerr << "Error handling signal: " << ec.message() << std::endl;
+                spdlog::error("Error handling signal: {}", ec.message());
                 return;
             }
-            std::cout << "Stopping GateServer..." << std::endl;
+            spdlog::info("Received signal {}, stopping GateServer...", signo);
             ioc.stop(); // Stop the io_context to exit the event loop
         });
 
         // Create and start the server
         auto server = std::make_shared<CServer>(ioc, port);
         server->Start();
-        std::cout << "GateServer started on port " << port << std::endl;
+        spdlog::info("GateServer started on port {}", port);
 
         ioc.run(); // Run the io_context to start processing events
     } catch (const std::exception& e) {
-        std::cerr << "Exception in main: " << e.what() << std::endl;
+        spdlog::error("GateServer failed to start: {}", e.what());
         return EXIT_FAILURE;
     }
 }

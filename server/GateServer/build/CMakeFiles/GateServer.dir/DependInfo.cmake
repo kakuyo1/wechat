@@ -19,6 +19,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/kakuyo/wechat/server/GateServer/resource/MysqlDAO.cpp" "CMakeFiles/GateServer.dir/resource/MysqlDAO.cpp.o" "gcc" "CMakeFiles/GateServer.dir/resource/MysqlDAO.cpp.o.d"
   "/home/kakuyo/wechat/server/GateServer/resource/MysqlManager.cpp" "CMakeFiles/GateServer.dir/resource/MysqlManager.cpp.o" "gcc" "CMakeFiles/GateServer.dir/resource/MysqlManager.cpp.o.d"
   "/home/kakuyo/wechat/server/GateServer/resource/RedisManager.cpp" "CMakeFiles/GateServer.dir/resource/RedisManager.cpp.o" "gcc" "CMakeFiles/GateServer.dir/resource/RedisManager.cpp.o.d"
+  "/home/kakuyo/wechat/server/GateServer/resource/StatusGrpcClient.cpp" "CMakeFiles/GateServer.dir/resource/StatusGrpcClient.cpp.o" "gcc" "CMakeFiles/GateServer.dir/resource/StatusGrpcClient.cpp.o.d"
   "/home/kakuyo/wechat/server/GateServer/resource/VerifygRPCClient.cpp" "CMakeFiles/GateServer.dir/resource/VerifygRPCClient.cpp.o" "gcc" "CMakeFiles/GateServer.dir/resource/VerifygRPCClient.cpp.o.d"
   )
 

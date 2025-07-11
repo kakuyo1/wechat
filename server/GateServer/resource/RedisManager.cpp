@@ -1,5 +1,5 @@
 #include "RedisManager.h"
-
+#include <spdlog/spdlog.h>
 RedisManager::RedisManager() {
     auto& config = ConfigIniManager::Instance();
     auto& redis_section = config["Redis"];
@@ -17,7 +17,7 @@ RedisManager::~RedisManager() {
 bool RedisManager::CheckContextValid(redisContext* context) const
 {
     if (context == nullptr || context->err != 0) {
-        std::cerr << "Redis context error: " << (context ? context->errstr : "null context") << std::endl;
+        spdlog::error("Redis context error: {}", (context ? context->errstr : "null context"));
         return false;
     }
     return true;
@@ -26,17 +26,15 @@ bool RedisManager::CheckContextValid(redisContext* context) const
 bool RedisManager::CheckReplyValid(redisReply* reply, int expectedType, const std::string& command, std::string& outValue)
 {
     if (reply == nullptr) {
-        std::cerr << "[RedisManager::CheckReply] Command failed: Redis connection lost or error occurred\n";
+        spdlog::error("[RedisManager::CheckReply] Command failed: Redis connection lost or error occurred");
         return false; // 调用者不要再归还这个 context，应直接丢弃
     }
 
     if (reply->type != expectedType) {
         if (reply->type == REDIS_REPLY_NIL) {
-            std::cerr << "[RedisManager::CheckReply] Key not found for command: " << command << "\n";
+            spdlog::warn("[RedisManager::CheckReply] Key not found for command: {}", command);
         } else {
-            std::cerr << "[RedisManager::CheckReply] Unexpected reply type: " << reply->type
-                    << " for command: " << command
-                    << ", message: " << (reply->str ? reply->str : "null") << "\n";
+            spdlog::warn("[RedisManager::CheckReply] Unexpected reply type: {} for command: {}, message: {}", reply->type, command, (reply->str ? reply->str : "null"));
         }
         freeReplyObject(reply);
         return false;
@@ -141,7 +139,7 @@ bool RedisManager::LPush(const std::string &key, const std::string &value)
         _context_pool->returnContext(context);
         return len > 0;
     } catch (const std::exception &e) {
-        std::cerr << "Failed to parse LPUSH reply: " << e.what() << std::endl;
+        spdlog::error("Failed to parse LPUSH reply: {}", e.what());
         _context_pool->returnContext(context);
         return false;
     }
@@ -169,7 +167,7 @@ bool RedisManager::RPush(const std::string &key, const std::string &value)
         return len > 0;
     } catch (const std::exception &e) {
         _context_pool->returnContext(context);
-        std::cerr << "Failed to parse RPUSH reply: " << e.what() << std::endl;
+        spdlog::error("Failed to parse RPUSH reply: {}", e.what());
         return false;
     }
 }
@@ -299,7 +297,7 @@ RedisContextPool::RedisContextPool(size_t pool_size, const std::string &host, in
 
         auto reply = (redisReply*)redisCommand(context, "AUTH %s", password.c_str());
         if (!reply || reply->type == REDIS_REPLY_ERROR) {
-            std::cerr << "认证失败" << std::endl;
+            spdlog::error("认证失败");
             if (reply) freeReplyObject(reply);
             continue;
         }
@@ -308,8 +306,8 @@ RedisContextPool::RedisContextPool(size_t pool_size, const std::string &host, in
         created++;
     }
     if (created < pool_size) {
-    std::cerr << "Redis连接池初始化不足!期望: " << pool_size << "，实际: " << created << std::endl;
-}
+        spdlog::error("Redis连接池初始化不足!期望: {}, 实际: {}", pool_size, created);
+    }
 }
 
 RedisContextPool::~RedisContextPool()

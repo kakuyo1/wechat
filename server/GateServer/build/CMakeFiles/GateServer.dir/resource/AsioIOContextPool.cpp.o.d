@@ -1072,4 +1072,15 @@ CMakeFiles/GateServer.dir/resource/AsioIOContextPool.cpp.o: \
  /usr/local/include/boost/asio/impl/write_at.hpp \
  /usr/include/c++/13/iostream /usr/include/c++/13/thread \
  /usr/include/c++/13/bits/this_thread_sleep.h \
- /home/kakuyo/wechat/server/GateServer/include/Singleton.h
+ /home/kakuyo/wechat/server/GateServer/include/Singleton.h \
+ /usr/include/spdlog/spdlog.h /usr/include/spdlog/common.h \
+ /usr/include/spdlog/tweakme.h /usr/include/spdlog/details/null_mutex.h \
+ /usr/include/spdlog/fmt/fmt.h /usr/include/fmt/core.h \
+ /usr/include/fmt/format.h /usr/include/fmt/core.h \
+ /usr/include/spdlog/details/registry.h \
+ /usr/include/spdlog/details/periodic_worker.h \
+ /usr/include/spdlog/logger.h /usr/include/spdlog/details/log_msg.h \
+ /usr/include/spdlog/details/backtracer.h \
+ /usr/include/spdlog/details/log_msg_buffer.h \
+ /usr/include/spdlog/details/circular_q.h /usr/include/spdlog/version.h \
+ /usr/include/spdlog/details/synchronous_factory.h
