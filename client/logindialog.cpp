@@ -2,8 +2,9 @@
 #include "ui_logindialog.h"
 
 LoginDialog::LoginDialog(QWidget *parent)
-    : QDialog(parent)
-    , ui(new Ui::LoginDialog)
+    : QDialog(parent),
+      ui(new Ui::LoginDialog),
+      _hasSentAuthenticationRequest(false)
 {
     ui->setupUi(this);
     InitPixmap();
@@ -25,6 +26,17 @@ LoginDialog::LoginDialog(QWidget *parent)
     // connect the signal from HttpManager to the handler
     connect(HttpManager::GetInstance().get(), &HttpManager::signal_login_module_finished,
             this, &LoginDialog::slot_login_module_handle);
+
+    // connect the signal(connect_to_chatserver) to the slot in TcpManager
+    connect(this, &LoginDialog::signal_connect_to_chatserver, TcpManager::GetInstance().get(), &TcpManager::slot_connect_to_chatserver);
+
+    // connect the signas(connect to chatserver success or failed) to the slots
+    connect(TcpManager::GetInstance().get(), &TcpManager::signal_connect_to_chatserver_success,
+            this, &LoginDialog::slot_connect_to_chatserver_success);
+
+    // connect the signal from TcpManager(login failed authentication from chatserver) to the slot
+    connect(TcpManager::GetInstance().get(), &TcpManager::signal_login_failed,
+            this, &LoginDialog::slot_login_failed);
 
     // set the password mode and placeholders for input fields
     ui->password_lineEdit->setEchoMode(QLineEdit::Password);
@@ -147,8 +159,12 @@ void LoginDialog::initHttpHandlers()
         info.Port = port;
         info.Token = token;
         info.Uid = uid;
-        showTip("登录成功...", false);
-        emit signal_connect_to_tcpserver(info);
+
+        _uid = QString::number(uid);
+        _token = token;
+
+        showTip("正在尝试连接聊天服务器...", false);
+        emit signal_connect_to_chatserver(info);
     };
 }
 
@@ -208,5 +224,36 @@ void LoginDialog::slot_login_module_handle(RequestType type, QString response, E
     // handle the jsonObj
     _handlers[type](jsonObj);
     return;
+}
+
+void LoginDialog::slot_connect_to_chatserver_success(bool success)
+{
+    if (_hasSentAuthenticationRequest) {
+        // If an authentication request has already been sent, do not send another one(防止用户频繁点击)
+        qDebug() << "Authentication request already sent. Skipping duplicate.";
+        return;
+    }
+    if (success) {
+        _hasSentAuthenticationRequest = true;
+        setWidgetsEnable(false);
+        QJsonObject jsonObj;
+        jsonObj.insert("uid", _uid);
+        jsonObj.insert("token", _token);
+        QString jsonData = QJsonDocument(jsonObj).toJson(QJsonDocument::Compact);
+        // Send the authentication request to the chat server
+        qDebug() << "Authentication request sent to chat server with UID:" << _uid << "and Token:" << _token;
+        emit TcpManager::GetInstance()->signal_send_data(RequestType::TYPE_LOGIN_CHAT, jsonData);
+    } else {
+        showTip("连接聊天服务器失败，请重试", true);
+        _hasSentAuthenticationRequest = false;
+        setWidgetsEnable(true);
+    }
+}
+
+void LoginDialog::slot_login_failed()
+{
+    showTip("登录失败，请检查邮箱和密码", true);
+    _hasSentAuthenticationRequest = false;
+    setWidgetsEnable(true);
 }
 

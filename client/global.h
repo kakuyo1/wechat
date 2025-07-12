@@ -15,7 +15,8 @@ enum class RequestType {
     TYPE_GET_VERIFY_CODE = 1001,
     TYPE_REGISTER = 1002,
     TYPE_RESETPASSWORD = 1003,
-    TYPE_LOGIN = 1004
+    TYPE_LOGIN = 1004,
+    TYPE_LOGIN_CHAT = 1005
 };
 
 // Error Codes

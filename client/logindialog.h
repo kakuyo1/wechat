@@ -10,6 +10,7 @@
 #include <QJsonObject>
 #include <QJsonDocument>
 #include "httpmanager.h"
+#include "tcpmanager.h"
 
 /******************************************************************************************
  *  1.initHttpHandlers
@@ -35,6 +36,9 @@ public:
 private:
     Ui::LoginDialog *ui;
     QMap<RequestType, std::function<void (const QJsonObject&)>> _handlers;
+    QString _uid;
+    QString _token;
+    bool _hasSentAuthenticationRequest; // to prevent multiple authentication requests
 private:
     void InitPixmap(); // 将资源图片裁剪成圆角图标，并显示在界面上某个标签控件中
     bool checkEmailValidation();
@@ -46,10 +50,12 @@ private slots:
     void slot_forget_password();
     void on_login_btn_clicked();
     void slot_login_module_handle(RequestType type, QString response, ErrorCode error);
+    void slot_connect_to_chatserver_success(bool success); // using token to authenticate
+    void slot_login_failed();
 signals:
     void switchToRegister();
     void switchToResetPassword();
-    void signal_connect_to_tcpserver(serverInfo);
+    void signal_connect_to_chatserver(serverInfo);
 };
 
 #endif // LOGINDIALOG_H
