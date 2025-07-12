@@ -16,10 +16,10 @@ void CServer::Start() {
         return;
     }
     // create a new HttpConnection for each accept
-    auto& new_ioc = AsioIOContextPool::GetInstance()->GetNextIOContext();
+    auto& new_ioc = AsioIOContextPool::GetInstance()->GetNextIOContext(); //监听（accept）和数据读写分离
     auto new_connection = std::make_shared<HttpConnection>(new_ioc);
     _acceptor.async_accept(new_connection->GetSocket(), [self, new_connection](boost::system::error_code ec){
-        try{
+        try{//告诉 acceptor 新的客户端连接对应的 socket(GetSocket()),当连接建立时，acceptor 会把客户端的连接关联到这个 socket。
             if (ec) {
                 spdlog::error("Error accepting connection: {}", ec.message());
                 self->Start(); // Restart accepting
