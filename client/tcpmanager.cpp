@@ -87,7 +87,7 @@ TcpManager::TcpManager() :
 void TcpManager::initHandlers()
 {
     // handler for login authentication
-    _handlers[RequestType::TYPE_LOGIN_CHAT] = [this](RequestType type, int len, QByteArray data) {
+    _handlers[RequestType::TYPE_LOGIN_CHAT_SERVER_RESPONSE] = [this](RequestType type, int len, QByteArray data) {
         Q_UNUSED(len);
         Q_UNUSED(type);
         QJsonDocument doc = QJsonDocument::fromJson(data);
@@ -109,12 +109,29 @@ void TcpManager::initHandlers()
         }
         int errorCode = jsonObj.value("error").toInt();
         if (errorCode != static_cast<int>(ErrorCode::SUCCESS)) {
-            qDebug() << "Login authentication failed with error code:" << errorCode;
-            emit signal_login_failed();
+            if (errorCode == static_cast<int>(ErrorCode::ERROR_INVALID_AUTH_PARAMETERS)) {
+                qDebug() << "Invalid authentication parameters";
+                emit signal_login_failed();
+            } else if (errorCode == static_cast<int>(ErrorCode::ERROR_UID_NOT_FOUND)) {
+                qDebug() << "UID not found in the chat server";
+                emit signal_login_failed();
+            } else if (errorCode == static_cast<int>(ErrorCode::ERROR_TOKEN_MISMATCH)) {
+                qDebug() << "Token mismatch error";
+                emit signal_login_failed();
+            } else if (errorCode == static_cast<int>(ErrorCode::ERROR_USER_ALREADY_ONLINE)) {
+                qDebug() << "User is already online";
+                emit signal_login_failed_online_already();
+            } else {
+                qDebug() << "Authentication failed with error code:" << errorCode;
+            }
             return;
         }
         // Authentication successful
         qDebug() << "Login authentication successful";
+        qDebug() << "Response message: " << jsonObj.value("message").toString();
+        qDebug() << "Response error: " << errorCode;
+        qDebug() << "Response uid: " << jsonObj.value("uid").toInt();
+        qDebug() << "Response token: " << jsonObj.value("token").toString();
         emit signal_switchto_chatdialog();
     };
 }
@@ -146,7 +163,14 @@ void TcpManager::slot_send_data(RequestType type, const QString &jsondata)
     QByteArray message;
     QDataStream stream(&message, QIODevice::WriteOnly);
     stream.setByteOrder(QDataStream::BigEndian);
-    stream << _messageType << _messageLength << jsonData;
+    // stream << _messageType << _messageLength << jsonData; //❗ 不要通过 QDataStream 写入 jsonData,会多写内容！！
+    /*实际上会把 jsonData 作为 QByteArray 整体对象写入，而不是按原始字节附加，它会多写**自己的长度信息（一个 int32）**进去。*/
+    stream << _messageType << _messageLength;
+    message.append(jsonData); // ✅ 正确添加原始 JSON 字节流
+    qDebug() << "Send message Type: " << _messageType;
+    qDebug() << "Send message Length: " << _messageLength;
+    qDebug() << "Send message Data: " << jsonData;
+
     if (_socket->state() != QTcpSocket::ConnectedState) {
         qDebug() << "Socket is not connected";
         emit signal_connect_to_chatserver_success(false);

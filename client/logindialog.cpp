@@ -38,6 +38,20 @@ LoginDialog::LoginDialog(QWidget *parent)
     connect(TcpManager::GetInstance().get(), &TcpManager::signal_login_failed,
             this, &LoginDialog::slot_login_failed);
 
+    // connect the signal swtichto Chatdialog to the slot
+    connect(TcpManager::GetInstance().get(), &TcpManager::signal_switchto_chatdialog,
+            this, [this](){
+        this->showTip("验证成功，正在切换到聊天页面...", false);
+    });
+
+    // connect the signal signal_login_failed_online_already to the slot
+    connect(TcpManager::GetInstance().get(), &TcpManager::signal_login_failed_online_already,
+            this, [this](){
+        showTip("用户已经在线，请勿重复登录", true);
+        _hasSentAuthenticationRequest = false;
+        setWidgetsEnable(true);
+    });
+
     // set the password mode and placeholders for input fields
     ui->password_lineEdit->setEchoMode(QLineEdit::Password);
     ui->email_lineEdit->setPlaceholderText("请输入邮箱");
@@ -124,6 +138,7 @@ void LoginDialog::showTip(const QString& text, bool isError)
 
 void LoginDialog::initHttpHandlers()
 {
+    // get the chat server address and token from the state server
     _handlers[RequestType::TYPE_LOGIN] = [this](const QJsonObject& jsonObject) {
         int error = jsonObject["error"].toInt();
         if (error != static_cast<int>(ErrorCode::SUCCESS)) {
@@ -147,7 +162,7 @@ void LoginDialog::initHttpHandlers()
         QString port = jsonObject["port"].toString();
         int uid = jsonObject["uid"].toInt();
 
-        qDebug() << "Login successful, message:" << message;
+        qDebug() << "Get ChatServer address successful, message:" << message;
         qDebug() << "Error code:" << error;
         qDebug() << "Token:" << token;
         qDebug() << "Host:" << host;
@@ -237,7 +252,7 @@ void LoginDialog::slot_connect_to_chatserver_success(bool success)
         _hasSentAuthenticationRequest = true;
         setWidgetsEnable(false);
         QJsonObject jsonObj;
-        jsonObj.insert("uid", _uid);
+        jsonObj.insert("uid", _uid.toInt());
         jsonObj.insert("token", _token);
         QString jsonData = QJsonDocument(jsonObj).toJson(QJsonDocument::Compact);
         // Send the authentication request to the chat server
