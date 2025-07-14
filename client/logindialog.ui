@@ -199,6 +199,25 @@
        <item>
         <widget class="QLineEdit" name="password_lineEdit"/>
        </item>
+       <item>
+        <widget class="ClickableLabel" name="password_visable_label">
+         <property name="minimumSize">
+          <size>
+           <width>30</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>30</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
       </layout>
      </item>
      <item>
@@ -333,6 +352,11 @@
    <class>ForgetLabel</class>
    <extends>QLabel</extends>
    <header>forgetlabel.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ClickableLabel</class>
+   <extends>QLabel</extends>
+   <header>clickablelabel.h</header>
   </customwidget>
  </customwidgets>
  <resources>

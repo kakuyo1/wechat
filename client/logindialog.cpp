@@ -19,6 +19,12 @@ LoginDialog::LoginDialog(QWidget *parent)
     // Connect the signal to the slot for showing the reset dialog
     connect(ui->forget_label, &ForgetLabel::clicked, this, &LoginDialog::slot_forget_password);
 
+    // connect the signal pwd_visable_label clicked to the slot to toggle password visibility
+    connect(ui->password_visable_label, &ClickableLabel::clicked, this, [this](){
+        bool isPasswordVisible = ui->password_lineEdit->echoMode() == QLineEdit::Normal;
+        ui->password_lineEdit->setEchoMode(isPasswordVisible ? QLineEdit::Password : QLineEdit::Normal);
+    });
+
     // Connect the signal to the slot for check inputs in time
     connect(ui->email_lineEdit, &QLineEdit::textChanged, this, &LoginDialog::checkEmailValidation);
     connect(ui->password_lineEdit, &QLineEdit::textChanged, this, &LoginDialog::checkPasswordValidation);
@@ -142,6 +148,17 @@ void LoginDialog::initHttpHandlers()
     _handlers[RequestType::TYPE_LOGIN] = [this](const QJsonObject& jsonObject) {
         int error = jsonObject["error"].toInt();
         if (error != static_cast<int>(ErrorCode::SUCCESS)) {
+            if (error == static_cast<int>(ErrorCode::ERROR_EMAIL_DOES_NOT_EXIST)) {
+                showTip("邮箱不存在，请先注册", true);
+                qDebug() << "Error code:" << error;
+                qDebug() << "Message:" << jsonObject["message"].toString();
+                return;
+            } else if (error == static_cast<int>(ErrorCode::ERROR_PASSWORD_EMAIL_MISMATCH)) {
+                showTip("密码和邮箱不匹配", true);
+                qDebug() << "Error code:" << error;
+                qDebug() << "Message:" << jsonObject["message"].toString();
+                return;
+            }
             showTip("无法获取聊天服务器地址", true);
             qDebug() << "Error code:" << error;
             qDebug() << "Message:" << jsonObject["message"].toString();
