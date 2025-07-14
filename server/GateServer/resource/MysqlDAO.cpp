@@ -330,3 +330,55 @@ bool MysqlDAO::ResetPassword(const std::string &name, const std::string &new_pas
         return false; // Password reset failed
     }
 }
+
+UserInfo MysqlDAO::GetUserInfo(int uid) {
+    auto con = _pool->GetConnection();
+    try {
+        if (con == nullptr) {
+            return UserInfo(); // Return empty UserInfo on failure
+        }
+        std::unique_ptr<sql::PreparedStatement> stmt(con->con_->prepareStatement("SELECT * FROM user WHERE uid = ?"));
+        stmt->setInt(1, uid);
+        std::unique_ptr<sql::ResultSet> result(stmt->executeQuery());
+        if (result->next()) {
+            UserInfo user_info;
+            user_info.uid = result->getInt("uid");
+            user_info.name = result->getString("name");
+            user_info.email = result->getString("email");
+            user_info.password = result->getString("password"); // Store the encrypted password
+            _pool->ReturnConnection(std::move(con));
+            return user_info; // Return the retrieved user info
+        }
+        _pool->ReturnConnection(std::move(con));
+        return UserInfo(); // Return empty UserInfo if no record found
+    } catch (sql::SQLException& e) {
+        _pool->ReturnConnection(std::move(con));
+        spdlog::error("SQLException: {}", e.what());
+        spdlog::error("(MYSQL error code: {}, SQLState: {})", e.getErrorCode(), e.getSQLState());
+        return UserInfo(); // Return empty UserInfo on error
+    }
+}
+
+bool MysqlDAO::CheckEmailExists(const std::string& email) {
+    auto con = _pool->GetConnection();
+    try {
+        if (con == nullptr) {
+            return false; // Connection failed
+        }
+        std::unique_ptr<sql::PreparedStatement> stmt(con->con_->prepareStatement("SELECT COUNT(*) FROM user WHERE email = ?"));
+        stmt->setString(1, email);
+        std::unique_ptr<sql::ResultSet> result(stmt->executeQuery());
+        if (result->next()) {
+            int count = result->getInt(1);
+            _pool->ReturnConnection(std::move(con));
+            return count > 0; // Return true if email exists, false otherwise
+        }
+        _pool->ReturnConnection(std::move(con));
+        return false; // Email does not exist
+    } catch (sql::SQLException& e) {
+        _pool->ReturnConnection(std::move(con));
+        spdlog::error("SQLException: {}", e.what());
+        spdlog::error("(MYSQL error code: {}, SQLState: {})", e.getErrorCode(), e.getSQLState());
+        return false; // Error occurred while checking email existence
+    }
+}

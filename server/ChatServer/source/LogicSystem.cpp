@@ -93,6 +93,7 @@ void LogicSystem::InitializeHandlers()
                 session->Send(response.toStyledString(), static_cast<short>(MessageType::MESSAGE_CHATSERVER_LOGIN_AUTH_RESPONSE));
                 return;
             }
+            // check if email exists
             _users[uid] = std::make_shared<UserInfo>(user_info);
         }
         spdlog::info("[LogicSystem]User with UID {} authenticated successfully, sending response.", uid);

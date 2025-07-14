@@ -19,13 +19,6 @@
 #include <bcrypt/bcrypt.h>
 #include <spdlog/spdlog.h>
 
-struct UserInfo {
-    int uid;
-    std::string name;
-    std::string email;
-    std::string password; // Encrypted password
-};
-
 class MysqlConnection {
 public:
     MysqlConnection(sql::Connection* con, int64_t last_used_time);
@@ -70,6 +63,8 @@ public:
     bool CheckEmailAndUserMatch(const std::string& name, const std::string& email);
     bool CheckEmailAndPasswordMatch(const std::string& email, const std::string& password, UserInfo& user_info);
     bool ResetPassword(const std::string& name, const std::string& new_password);
+    UserInfo GetUserInfo(int uid);
+    bool CheckEmailExists(const std::string& email);
 private:
     std::unique_ptr<MysqlConnectionPool> _pool;
 };

@@ -358,3 +358,27 @@ UserInfo MysqlDAO::GetUserInfo(int uid) {
         return UserInfo(); // Return empty UserInfo on error
     }
 }
+
+bool MysqlDAO::CheckEmailExists(const std::string& email) {
+    auto con = _pool->GetConnection();
+    try {
+        if (con == nullptr) {
+            return false; // Connection failed
+        }
+        std::unique_ptr<sql::PreparedStatement> stmt(con->con_->prepareStatement("SELECT COUNT(*) FROM user WHERE email = ?"));
+        stmt->setString(1, email);
+        std::unique_ptr<sql::ResultSet> result(stmt->executeQuery());
+        if (result->next()) {
+            int count = result->getInt(1);
+            _pool->ReturnConnection(std::move(con));
+            return count > 0; // Return true if email exists, false otherwise
+        }
+        _pool->ReturnConnection(std::move(con));
+        return false; // Email does not exist
+    } catch (sql::SQLException& e) {
+        _pool->ReturnConnection(std::move(con));
+        spdlog::error("SQLException: {}", e.what());
+        spdlog::error("(MYSQL error code: {}, SQLState: {})", e.getErrorCode(), e.getSQLState());
+        return false; // Error occurred while checking email existence
+    }
+}

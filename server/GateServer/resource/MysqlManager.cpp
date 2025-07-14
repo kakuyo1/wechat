@@ -22,3 +22,12 @@ bool MysqlManager::CheckEmailAndPasswordMatch(const std::string &email, const st
 bool MysqlManager::ResetPassword(const std::string& name, const std::string& new_password) {
     return _dao->ResetPassword(name, new_password);
 }
+
+UserInfo MysqlManager::GetUserInfo(int uid) {
+    return _dao->GetUserInfo(uid);
+}
+
+bool MysqlManager::CheckEmailExists(const std::string &email)
+{
+    return _dao->CheckEmailExists(email);
+}

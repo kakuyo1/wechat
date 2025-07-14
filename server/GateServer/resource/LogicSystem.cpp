@@ -299,9 +299,18 @@ LogicSystem::LogicSystem()
             beast::ostream(con->_response.body()) << response.toStyledString();
             return;
         }
-        // check if the email and password match by mysql
+
         std::string email = source["email"].asString();
         std::string password = source["password"].asString();
+        // check if email exists
+        if (!MysqlManager::GetInstance()->CheckEmailExists(email)) {
+            spdlog::warn("Email does not exist: {}", email);
+            response["error"] = static_cast<int>(ErrorCodes::ERROR_EMAIL_DOES_NOT_EXIST);
+            response["message"] = "Bad Request: Email does not exist";
+            beast::ostream(con->_response.body()) << response.toStyledString();
+            return;
+        }
+        // check if the email and password match by mysql
         UserInfo user_info{};
         if (!MysqlManager::GetInstance()->CheckEmailAndPasswordMatch(email, password, user_info)) {
             spdlog::warn("Email and password do not match for email: {}", email);

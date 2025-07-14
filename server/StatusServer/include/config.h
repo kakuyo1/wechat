@@ -17,7 +17,8 @@ enum class ErrorCodes {
     ERROR_UID_NOT_FOUND = 12,
     ERROR_TOKEN_MISMATCH = 13,
     ERROR_INVALID_AUTH_PARAMETERS = 14,
-    ERROR_USER_ALREADY_ONLINE = 15
+    ERROR_USER_ALREADY_ONLINE = 15,
+    ERROR_EMAIL_DOES_NOT_EXIST = 16
 };
 
 const std::string code_prefix = "code_"; // Prefix for verify code keys in Redis
