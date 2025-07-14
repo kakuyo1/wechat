@@ -805,6 +805,45 @@ CMakeFiles/ChatServer.dir/source/ChatServer.cpp.o: \
  /usr/include/c++/13/bits/fs_path.h /usr/include/c++/13/iomanip \
  /usr/include/c++/13/bits/quoted_string.h /usr/include/c++/13/codecvt \
  /usr/include/c++/13/bits/fs_dir.h /usr/include/c++/13/bits/fs_ops.h \
+ /usr/include/spdlog/spdlog.h /usr/include/spdlog/common.h \
+ /usr/include/spdlog/tweakme.h /usr/include/spdlog/details/null_mutex.h \
+ /usr/include/c++/13/atomic /usr/include/c++/13/chrono \
+ /usr/include/spdlog/fmt/fmt.h /usr/include/fmt/core.h \
+ /usr/include/fmt/format.h /usr/include/c++/13/cmath /usr/include/math.h \
+ /usr/include/x86_64-linux-gnu/bits/math-vector.h \
+ /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
+ /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
+ /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
+ /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
+ /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
+ /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
+ /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h \
+ /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
+ /usr/include/c++/13/bits/specfun.h /usr/include/c++/13/tr1/gamma.tcc \
+ /usr/include/c++/13/tr1/special_function_util.h \
+ /usr/include/c++/13/tr1/bessel_function.tcc \
+ /usr/include/c++/13/tr1/beta_function.tcc \
+ /usr/include/c++/13/tr1/ell_integral.tcc \
+ /usr/include/c++/13/tr1/exp_integral.tcc \
+ /usr/include/c++/13/tr1/hypergeometric.tcc \
+ /usr/include/c++/13/tr1/legendre_function.tcc \
+ /usr/include/c++/13/tr1/modified_bessel_func.tcc \
+ /usr/include/c++/13/tr1/poly_hermite.tcc \
+ /usr/include/c++/13/tr1/poly_laguerre.tcc \
+ /usr/include/c++/13/tr1/riemann_zeta.tcc /usr/include/fmt/core.h \
+ /usr/include/spdlog/details/registry.h \
+ /usr/include/spdlog/details/periodic_worker.h \
+ /usr/include/c++/13/condition_variable \
+ /usr/include/c++/13/bits/std_mutex.h \
+ /usr/include/c++/13/bits/unique_lock.h /usr/include/c++/13/mutex \
+ /usr/include/c++/13/thread /usr/include/c++/13/bits/std_thread.h \
+ /usr/include/c++/13/bits/this_thread_sleep.h \
+ /usr/include/spdlog/logger.h /usr/include/spdlog/details/log_msg.h \
+ /usr/include/spdlog/details/backtracer.h \
+ /usr/include/spdlog/details/log_msg_buffer.h \
+ /usr/include/spdlog/details/circular_q.h /usr/include/c++/13/cassert \
+ /usr/include/spdlog/version.h \
+ /usr/include/spdlog/details/synchronous_factory.h \
  /home/kakuyo/wechat/server/ChatServer/include/CServer.h \
  /usr/local/include/boost/asio.hpp \
  /usr/local/include/boost/asio/any_completion_executor.hpp \
@@ -824,7 +863,6 @@ CMakeFiles/ChatServer.dir/source/ChatServer.cpp.o: \
  /usr/local/include/boost/asio/execution/any_executor.hpp \
  /usr/local/include/boost/asio/detail/assert.hpp \
  /usr/local/include/boost/asio/detail/atomic_count.hpp \
- /usr/include/c++/13/atomic \
  /usr/local/include/boost/asio/detail/cstddef.hpp \
  /usr/local/include/boost/asio/detail/executor_function.hpp \
  /usr/local/include/boost/asio/detail/handler_alloc_helpers.hpp \
@@ -898,8 +936,6 @@ CMakeFiles/ChatServer.dir/source/ChatServer.cpp.o: \
  /usr/local/include/boost/system/detail/error_category_impl.hpp \
  /usr/local/include/boost/system/detail/std_category_impl.hpp \
  /usr/local/include/boost/system/detail/mutex.hpp \
- /usr/include/c++/13/mutex /usr/include/c++/13/bits/std_mutex.h \
- /usr/include/c++/13/bits/unique_lock.h \
  /usr/local/include/boost/system/error_condition.hpp \
  /usr/local/include/boost/system/errc.hpp \
  /usr/local/include/boost/system/generic_category.hpp \
@@ -907,7 +943,7 @@ CMakeFiles/ChatServer.dir/source/ChatServer.cpp.o: \
  /usr/local/include/boost/system/detail/throws.hpp \
  /usr/local/include/boost/asio/detail/impl/throw_error.ipp \
  /usr/local/include/boost/system/system_error.hpp \
- /usr/include/c++/13/cassert /usr/local/include/boost/asio/error.hpp \
+ /usr/local/include/boost/asio/error.hpp \
  /usr/local/include/boost/cerrno.hpp /usr/include/netdb.h \
  /usr/include/netinet/in.h /usr/include/x86_64-linux-gnu/sys/socket.h \
  /usr/include/x86_64-linux-gnu/bits/types/struct_iovec.h \
@@ -1080,7 +1116,6 @@ CMakeFiles/ChatServer.dir/source/ChatServer.cpp.o: \
  /usr/local/include/boost/asio/detail/io_object_impl.hpp \
  /usr/local/include/boost/asio/io_context.hpp \
  /usr/local/include/boost/asio/detail/chrono.hpp \
- /usr/include/c++/13/chrono \
  /usr/local/include/boost/asio/detail/wrapped_handler.hpp \
  /usr/local/include/boost/asio/detail/bind_handler.hpp \
  /usr/local/include/boost/asio/detail/initiate_dispatch.hpp \
@@ -1160,28 +1195,6 @@ CMakeFiles/ChatServer.dir/source/ChatServer.cpp.o: \
  /usr/local/include/boost/date_time/posix_time/posix_time_system.hpp \
  /usr/local/include/boost/date_time/posix_time/posix_time_config.hpp \
  /usr/local/include/boost/config/no_tr1/cmath.hpp \
- /usr/include/c++/13/cmath /usr/include/math.h \
- /usr/include/x86_64-linux-gnu/bits/math-vector.h \
- /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
- /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
- /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
- /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h \
- /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
- /usr/include/c++/13/bits/specfun.h /usr/include/c++/13/tr1/gamma.tcc \
- /usr/include/c++/13/tr1/special_function_util.h \
- /usr/include/c++/13/tr1/bessel_function.tcc \
- /usr/include/c++/13/tr1/beta_function.tcc \
- /usr/include/c++/13/tr1/ell_integral.tcc \
- /usr/include/c++/13/tr1/exp_integral.tcc \
- /usr/include/c++/13/tr1/hypergeometric.tcc \
- /usr/include/c++/13/tr1/legendre_function.tcc \
- /usr/include/c++/13/tr1/modified_bessel_func.tcc \
- /usr/include/c++/13/tr1/poly_hermite.tcc \
- /usr/include/c++/13/tr1/poly_laguerre.tcc \
- /usr/include/c++/13/tr1/riemann_zeta.tcc \
  /usr/local/include/boost/date_time/time_duration.hpp \
  /usr/local/include/boost/date_time/special_defs.hpp \
  /usr/local/include/boost/date_time/time_defs.hpp \
@@ -1427,9 +1440,7 @@ CMakeFiles/ChatServer.dir/source/ChatServer.cpp.o: \
  /usr/local/include/boost/asio/local/stream_protocol.hpp \
  /usr/local/include/boost/asio/packaged_task.hpp \
  /usr/local/include/boost/asio/detail/future.hpp \
- /usr/include/c++/13/future /usr/include/c++/13/condition_variable \
- /usr/include/c++/13/bits/atomic_futex.h \
- /usr/include/c++/13/bits/std_thread.h \
+ /usr/include/c++/13/future /usr/include/c++/13/bits/atomic_futex.h \
  /usr/local/include/boost/asio/placeholders.hpp \
  /usr/local/include/boost/asio/posix/basic_descriptor.hpp \
  /usr/local/include/boost/asio/posix/basic_stream_descriptor.hpp \
@@ -1483,17 +1494,5 @@ CMakeFiles/ChatServer.dir/source/ChatServer.cpp.o: \
  /usr/local/include/boost/asio/writable_pipe.hpp \
  /usr/local/include/boost/asio/write_at.hpp \
  /usr/local/include/boost/asio/impl/write_at.hpp \
- /usr/include/spdlog/spdlog.h /usr/include/spdlog/common.h \
- /usr/include/spdlog/tweakme.h /usr/include/spdlog/details/null_mutex.h \
- /usr/include/spdlog/fmt/fmt.h /usr/include/fmt/core.h \
- /usr/include/fmt/format.h /usr/include/fmt/core.h \
- /usr/include/spdlog/details/registry.h \
- /usr/include/spdlog/details/periodic_worker.h /usr/include/c++/13/thread \
- /usr/include/c++/13/bits/this_thread_sleep.h \
- /usr/include/spdlog/logger.h /usr/include/spdlog/details/log_msg.h \
- /usr/include/spdlog/details/backtracer.h \
- /usr/include/spdlog/details/log_msg_buffer.h \
- /usr/include/spdlog/details/circular_q.h /usr/include/spdlog/version.h \
- /usr/include/spdlog/details/synchronous_factory.h \
  /home/kakuyo/wechat/server/ChatServer/include/AsioIOContextPool.h \
  /home/kakuyo/wechat/server/ChatServer/include/Singleton.h

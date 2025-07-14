@@ -52,6 +52,42 @@ Status StatusServiceImpl::GetChatServer(ServerContext *context, const GetChatSer
     }
 }
 
+Status StatusServiceImpl::Login(ServerContext *context, const message::LoginRequest *request, message::LoginResponse *response)
+{
+    try {
+        auto uid = request->uid();
+        auto token = request->token();
+        auto it = _tokens.find(uid);
+        if (uid <= 0 || token.empty()) {
+            spdlog::error("Login failed: Invalid UID {}", uid);
+            response->set_error(static_cast<int>(ErrorCodes::ERROR_INVALID_AUTH_PARAMETERS));
+            return Status::CANCELLED;
+        }
+
+        if (it == _tokens.end()) {
+            spdlog::error("Login failed: UID {} not found", uid);
+            response->set_error(static_cast<int>(ErrorCodes::ERROR_UID_NOT_FOUND));
+            return Status::CANCELLED;
+        }
+
+        if (it->second != token) {
+            spdlog::error("Login failed: Token mismatch for UID {}", uid);
+            response->set_error(static_cast<int>(ErrorCodes::ERROR_TOKEN_MISMATCH));
+            return Status::CANCELLED;
+        }
+
+        response->set_uid(uid);
+        response->set_token(token);
+        response->set_error(static_cast<int>(ErrorCodes::SUCCESS));
+        spdlog::info("Login successful for UID: {}, Token: {}", uid, token);
+        return Status::OK;
+    } catch (const std::exception& ex) {
+        spdlog::error("Login failed: {}", ex.what());
+        response->set_error(static_cast<int>(ErrorCodes::ERROR_RPC));
+        return Status::CANCELLED;
+    }
+}
+
 ChatServer &StatusServiceImpl::getChatServer()
 {
     std::lock_guard<std::mutex> lk(_server_mtx);

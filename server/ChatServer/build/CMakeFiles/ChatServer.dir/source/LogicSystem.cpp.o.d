@@ -1069,50 +1069,76 @@ CMakeFiles/ChatServer.dir/source/LogicSystem.cpp.o: \
  /usr/local/include/boost/asio/windows/stream_handle.hpp \
  /usr/local/include/boost/asio/writable_pipe.hpp \
  /usr/local/include/boost/asio/write_at.hpp \
- /usr/local/include/boost/asio/impl/write_at.hpp /usr/include/c++/13/map \
- /usr/include/c++/13/bits/stl_tree.h /usr/include/c++/13/bits/stl_map.h \
- /usr/include/c++/13/bits/stl_multimap.h /usr/include/spdlog/spdlog.h \
- /usr/include/spdlog/common.h /usr/include/spdlog/tweakme.h \
- /usr/include/spdlog/details/null_mutex.h /usr/include/spdlog/fmt/fmt.h \
- /usr/include/fmt/core.h /usr/include/fmt/format.h \
- /usr/include/fmt/core.h /usr/include/spdlog/details/registry.h \
- /usr/include/spdlog/details/periodic_worker.h /usr/include/c++/13/thread \
- /usr/include/c++/13/bits/this_thread_sleep.h \
+ /usr/local/include/boost/asio/impl/write_at.hpp \
+ /usr/include/c++/13/thread /usr/include/c++/13/bits/this_thread_sleep.h \
+ /usr/include/c++/13/queue /usr/include/c++/13/deque \
+ /usr/include/c++/13/bits/stl_deque.h /usr/include/c++/13/bits/deque.tcc \
+ /usr/include/c++/13/bits/stl_queue.h \
+ /home/kakuyo/wechat/server/ChatServer/include/Singleton.h \
+ /home/kakuyo/wechat/server/ChatServer/include/MessageNode.h \
+ /home/kakuyo/wechat/server/ChatServer/include/CSession.h \
+ /usr/include/c++/13/map /usr/include/c++/13/bits/stl_tree.h \
+ /usr/include/c++/13/bits/stl_map.h \
+ /usr/include/c++/13/bits/stl_multimap.h \
+ /usr/local/include/boost/uuid.hpp /usr/local/include/boost/uuid/uuid.hpp \
+ /usr/local/include/boost/uuid/uuid_clock.hpp \
+ /usr/local/include/boost/uuid/detail/endian.hpp \
+ /usr/local/include/boost/uuid/detail/hash_mix.hpp \
+ /usr/local/include/boost/uuid/detail/config.hpp \
+ /usr/include/c++/13/typeindex \
+ /usr/local/include/boost/uuid/detail/uuid_x86.ipp \
+ /usr/lib/gcc/x86_64-linux-gnu/13/include/emmintrin.h \
+ /usr/lib/gcc/x86_64-linux-gnu/13/include/xmmintrin.h \
+ /usr/lib/gcc/x86_64-linux-gnu/13/include/mmintrin.h \
+ /usr/lib/gcc/x86_64-linux-gnu/13/include/mm_malloc.h \
+ /usr/include/c++/13/stdlib.h /usr/local/include/boost/uuid/uuid_io.hpp \
+ /usr/local/include/boost/uuid/detail/to_chars.hpp \
+ /usr/local/include/boost/uuid/detail/static_assert.hpp \
+ /usr/include/c++/13/locale \
+ /usr/include/c++/13/bits/locale_facets_nonio.h \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h \
+ /usr/include/libintl.h /usr/include/c++/13/bits/codecvt.h \
+ /usr/include/c++/13/bits/locale_facets_nonio.tcc \
+ /usr/include/c++/13/bits/locale_conv.h \
+ /usr/local/include/boost/uuid/uuid_generators.hpp \
+ /usr/local/include/boost/uuid/nil_generator.hpp \
+ /usr/local/include/boost/uuid/string_generator.hpp \
+ /usr/local/include/boost/uuid/name_generator.hpp \
+ /usr/local/include/boost/uuid/name_generator_md5.hpp \
+ /usr/local/include/boost/uuid/detail/basic_name_generator.hpp \
+ /usr/local/include/boost/uuid/namespaces.hpp \
+ /usr/local/include/boost/uuid/detail/md5.hpp \
+ /usr/local/include/boost/uuid/detail/numeric_cast.hpp \
+ /usr/local/include/boost/uuid/name_generator_sha1.hpp \
+ /usr/local/include/boost/uuid/detail/sha1.hpp \
+ /usr/local/include/boost/uuid/random_generator.hpp \
+ /usr/local/include/boost/uuid/basic_random_generator.hpp \
+ /usr/local/include/boost/uuid/detail/random_provider.hpp \
+ /usr/local/include/boost/uuid/detail/random_device.hpp \
+ /usr/include/c++/13/random /usr/include/c++/13/bits/random.h \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/opt_random.h \
+ /usr/include/c++/13/bits/random.tcc /usr/include/c++/13/numeric \
+ /usr/include/c++/13/bits/stl_numeric.h \
+ /usr/include/c++/13/pstl/glue_numeric_defs.h \
+ /usr/local/include/boost/uuid/detail/chacha20.hpp \
+ /usr/local/include/boost/uuid/time_generator.hpp \
+ /usr/local/include/boost/uuid/time_generator_v1.hpp \
+ /usr/local/include/boost/uuid/time_generator_v6.hpp \
+ /usr/local/include/boost/uuid/time_generator_v7.hpp \
+ /home/kakuyo/wechat/server/ChatServer/include/config.h \
+ /usr/include/spdlog/spdlog.h /usr/include/spdlog/common.h \
+ /usr/include/spdlog/tweakme.h /usr/include/spdlog/details/null_mutex.h \
+ /usr/include/spdlog/fmt/fmt.h /usr/include/fmt/core.h \
+ /usr/include/fmt/format.h /usr/include/fmt/core.h \
+ /usr/include/spdlog/details/registry.h \
+ /usr/include/spdlog/details/periodic_worker.h \
  /usr/include/spdlog/logger.h /usr/include/spdlog/details/log_msg.h \
  /usr/include/spdlog/details/backtracer.h \
  /usr/include/spdlog/details/log_msg_buffer.h \
  /usr/include/spdlog/details/circular_q.h /usr/include/spdlog/version.h \
  /usr/include/spdlog/details/synchronous_factory.h \
- /home/kakuyo/wechat/server/ChatServer/include/Singleton.h \
- /usr/include/c++/13/queue /usr/include/c++/13/deque \
- /usr/include/c++/13/bits/stl_deque.h /usr/include/c++/13/bits/deque.tcc \
- /usr/include/c++/13/bits/stl_queue.h /usr/include/jsoncpp/json/reader.h \
- /usr/include/jsoncpp/json/json_features.h \
- /usr/include/jsoncpp/json/forwards.h /usr/include/jsoncpp/json/config.h \
- /usr/include/jsoncpp/json/allocator.h \
- /usr/include/jsoncpp/json/version.h /usr/include/jsoncpp/json/value.h \
- /usr/include/c++/13/stack /usr/include/c++/13/bits/stl_stack.h \
- /usr/include/jsoncpp/json/json.h /usr/include/jsoncpp/json/reader.h \
- /usr/include/jsoncpp/json/writer.h /usr/include/jsoncpp/json/value.h \
- /home/kakuyo/wechat/server/ChatServer/include/MysqlManager.h \
- /home/kakuyo/wechat/server/ChatServer/include/MysqlDAO.h \
- /usr/include/mysql_connection.h /usr/include/cppconn/connection.h \
- /usr/include/cppconn/build_config.h /usr/include/cppconn/warning.h \
- /usr/include/cppconn/sqlstring.h /usr/include/c++/13/iostream \
- /usr/include/cppconn/variant.h /usr/include/c++/13/list \
- /usr/include/c++/13/bits/stl_list.h /usr/include/c++/13/bits/list.tcc \
- /usr/include/cppconn/exception.h /usr/local/include/boost/scoped_ptr.hpp \
- /usr/local/include/boost/smart_ptr/scoped_ptr.hpp \
- /usr/include/mysql_driver.h /usr/include/cppconn/driver.h \
- /usr/include/cppconn/connection.h /usr/include/cppconn/statement.h \
- /usr/include/cppconn/config.h /usr/include/inttypes.h \
- /usr/include/cppconn/resultset.h \
- /usr/include/cppconn/resultset_metadata.h \
- /usr/include/cppconn/datatype.h \
- /usr/include/cppconn/prepared_statement.h \
- /usr/include/cppconn/statement.h /usr/include/cppconn/resultset.h \
- /usr/include/cppconn/exception.h \
- /home/kakuyo/wechat/server/ChatServer/include/config.h \
+ /home/kakuyo/wechat/server/ChatServer/include/StatusGrpcClient.h \
  /home/kakuyo/wechat/server/ChatServer/include/ConfigIniManager.h \
  /usr/local/include/boost/property_tree/ptree.hpp \
  /usr/local/include/boost/property_tree/ptree_fwd.hpp \
@@ -1190,13 +1216,6 @@ CMakeFiles/ChatServer.dir/source/LogicSystem.cpp.o: \
  /usr/include/x86_64-linux-gnu/c++/13/bits/cxxabi_tweaks.h \
  /usr/local/include/boost/property_tree/detail/exception_implementation.hpp \
  /usr/local/include/boost/property_tree/detail/ptree_utils.hpp \
- /usr/include/c++/13/locale \
- /usr/include/c++/13/bits/locale_facets_nonio.h \
- /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h \
- /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h \
- /usr/include/libintl.h /usr/include/c++/13/bits/codecvt.h \
- /usr/include/c++/13/bits/locale_facets_nonio.tcc \
- /usr/include/c++/13/bits/locale_conv.h \
  /usr/local/include/boost/property_tree/stream_translator.hpp \
  /usr/local/include/boost/optional/optional_io.hpp \
  /usr/local/include/boost/multi_index_container.hpp \
@@ -1524,13 +1543,11 @@ CMakeFiles/ChatServer.dir/source/LogicSystem.cpp.o: \
  /usr/include/c++/13/fstream \
  /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
- /usr/include/c++/13/bits/fstream.tcc /usr/include/c++/13/filesystem \
- /usr/include/c++/13/bits/fs_fwd.h /usr/include/c++/13/bits/fs_path.h \
- /usr/include/c++/13/iomanip /usr/include/c++/13/bits/quoted_string.h \
- /usr/include/c++/13/codecvt /usr/include/c++/13/bits/fs_dir.h \
- /usr/include/c++/13/bits/fs_ops.h \
- /home/kakuyo/libbcrypt/include/bcrypt/bcrypt.h \
- /home/kakuyo/wechat/server/ChatServer/include/StatusGrpcClient.h \
+ /usr/include/c++/13/bits/fstream.tcc /usr/include/c++/13/iostream \
+ /usr/include/c++/13/filesystem /usr/include/c++/13/bits/fs_fwd.h \
+ /usr/include/c++/13/bits/fs_path.h /usr/include/c++/13/iomanip \
+ /usr/include/c++/13/bits/quoted_string.h /usr/include/c++/13/codecvt \
+ /usr/include/c++/13/bits/fs_dir.h /usr/include/c++/13/bits/fs_ops.h \
  /usr/local/include/grpcpp/grpcpp.h /usr/local/include/grpc/grpc.h \
  /usr/local/include/grpc/support/port_platform.h \
  /usr/local/include/grpc/impl/codegen/port_platform.h \
@@ -1561,12 +1578,14 @@ CMakeFiles/ChatServer.dir/source/LogicSystem.cpp.o: \
  /usr/local/include/grpcpp/impl/codegen/status_code_enum.h \
  /usr/local/include/grpcpp/impl/codegen/time.h \
  /usr/local/include/grpcpp/impl/codegen/completion_queue.h \
+ /usr/include/c++/13/list /usr/include/c++/13/bits/stl_list.h \
+ /usr/include/c++/13/bits/list.tcc \
  /usr/local/include/grpcpp/impl/codegen/completion_queue_tag.h \
  /usr/local/include/grpcpp/impl/codegen/core_codegen_interface.h \
  /usr/local/include/grpc/impl/codegen/byte_buffer_reader.h \
  /usr/local/include/grpcpp/impl/codegen/grpc_library.h \
  /usr/local/include/grpcpp/impl/codegen/rpc_service_method.h \
- /usr/local/include/grpc/impl/codegen/log.h /usr/include/c++/13/stdlib.h \
+ /usr/local/include/grpc/impl/codegen/log.h \
  /usr/local/include/grpcpp/impl/codegen/rpc_method.h \
  /usr/local/include/grpcpp/support/byte_buffer.h \
  /usr/local/include/grpc/support/log.h \
@@ -1736,44 +1755,28 @@ CMakeFiles/ChatServer.dir/source/LogicSystem.cpp.o: \
  /usr/local/include/grpcpp/impl/codegen/proto_buffer_reader.h \
  /usr/local/include/grpcpp/impl/codegen/proto_buffer_writer.h \
  /usr/local/include/grpcpp/impl/codegen/stub_options.h \
- /home/kakuyo/wechat/server/ChatServer/include/MessageNode.h \
- /home/kakuyo/wechat/server/ChatServer/include/CSession.h \
- /usr/local/include/boost/uuid.hpp /usr/local/include/boost/uuid/uuid.hpp \
- /usr/local/include/boost/uuid/uuid_clock.hpp \
- /usr/local/include/boost/uuid/detail/endian.hpp \
- /usr/local/include/boost/uuid/detail/hash_mix.hpp \
- /usr/local/include/boost/uuid/detail/config.hpp \
- /usr/include/c++/13/typeindex \
- /usr/local/include/boost/uuid/detail/uuid_x86.ipp \
- /usr/lib/gcc/x86_64-linux-gnu/13/include/emmintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/13/include/xmmintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/13/include/mmintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/13/include/mm_malloc.h \
- /usr/local/include/boost/uuid/uuid_io.hpp \
- /usr/local/include/boost/uuid/detail/to_chars.hpp \
- /usr/local/include/boost/uuid/detail/static_assert.hpp \
- /usr/local/include/boost/uuid/uuid_generators.hpp \
- /usr/local/include/boost/uuid/nil_generator.hpp \
- /usr/local/include/boost/uuid/string_generator.hpp \
- /usr/local/include/boost/uuid/name_generator.hpp \
- /usr/local/include/boost/uuid/name_generator_md5.hpp \
- /usr/local/include/boost/uuid/detail/basic_name_generator.hpp \
- /usr/local/include/boost/uuid/namespaces.hpp \
- /usr/local/include/boost/uuid/detail/md5.hpp \
- /usr/local/include/boost/uuid/detail/numeric_cast.hpp \
- /usr/local/include/boost/uuid/name_generator_sha1.hpp \
- /usr/local/include/boost/uuid/detail/sha1.hpp \
- /usr/local/include/boost/uuid/random_generator.hpp \
- /usr/local/include/boost/uuid/basic_random_generator.hpp \
- /usr/local/include/boost/uuid/detail/random_provider.hpp \
- /usr/local/include/boost/uuid/detail/random_device.hpp \
- /usr/include/c++/13/random /usr/include/c++/13/bits/random.h \
- /usr/include/x86_64-linux-gnu/c++/13/bits/opt_random.h \
- /usr/include/c++/13/bits/random.tcc /usr/include/c++/13/numeric \
- /usr/include/c++/13/bits/stl_numeric.h \
- /usr/include/c++/13/pstl/glue_numeric_defs.h \
- /usr/local/include/boost/uuid/detail/chacha20.hpp \
- /usr/local/include/boost/uuid/time_generator.hpp \
- /usr/local/include/boost/uuid/time_generator_v1.hpp \
- /usr/local/include/boost/uuid/time_generator_v6.hpp \
- /usr/local/include/boost/uuid/time_generator_v7.hpp
+ /usr/include/jsoncpp/json/json.h /usr/include/jsoncpp/json/config.h \
+ /usr/include/jsoncpp/json/allocator.h \
+ /usr/include/jsoncpp/json/version.h \
+ /usr/include/jsoncpp/json/json_features.h \
+ /usr/include/jsoncpp/json/forwards.h /usr/include/jsoncpp/json/reader.h \
+ /usr/include/jsoncpp/json/value.h /usr/include/c++/13/stack \
+ /usr/include/c++/13/bits/stl_stack.h /usr/include/jsoncpp/json/writer.h \
+ /usr/include/jsoncpp/json/reader.h /usr/include/jsoncpp/json/value.h \
+ /home/kakuyo/wechat/server/ChatServer/include/MysqlManager.h \
+ /home/kakuyo/wechat/server/ChatServer/include/MysqlDAO.h \
+ /usr/include/mysql_connection.h /usr/include/cppconn/connection.h \
+ /usr/include/cppconn/build_config.h /usr/include/cppconn/warning.h \
+ /usr/include/cppconn/sqlstring.h /usr/include/cppconn/variant.h \
+ /usr/include/cppconn/exception.h /usr/local/include/boost/scoped_ptr.hpp \
+ /usr/local/include/boost/smart_ptr/scoped_ptr.hpp \
+ /usr/include/mysql_driver.h /usr/include/cppconn/driver.h \
+ /usr/include/cppconn/connection.h /usr/include/cppconn/statement.h \
+ /usr/include/cppconn/config.h /usr/include/inttypes.h \
+ /usr/include/cppconn/resultset.h \
+ /usr/include/cppconn/resultset_metadata.h \
+ /usr/include/cppconn/datatype.h \
+ /usr/include/cppconn/prepared_statement.h \
+ /usr/include/cppconn/statement.h /usr/include/cppconn/resultset.h \
+ /usr/include/cppconn/exception.h \
+ /home/kakuyo/libbcrypt/include/bcrypt/bcrypt.h

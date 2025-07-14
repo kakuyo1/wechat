@@ -8,6 +8,7 @@
 #include <mutex>
 #include "ConfigIniManager.h"
 #include "config.h"
+#include <spdlog/spdlog.h>
 
 struct ChatServer {
     std::string host;
@@ -27,6 +28,7 @@ class StatusServiceImpl final : public StatusService::Service {
 public:
     StatusServiceImpl();
     Status GetChatServer(ServerContext* context, const GetChatServerRequest* request, GetChatServerResponse* response) override;
+    Status Login(ServerContext* context, const message::LoginRequest* request, message::LoginResponse* response) override;
 private:
     ChatServer& getChatServer();
     std::string generateTokenByUUID();
