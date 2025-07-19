@@ -17,8 +17,14 @@ MainWindow::MainWindow(QWidget *parent)
      // Connect the signal from the login dialog to switch to the reset dialog
     connect(loginDialog, &LoginDialog::switchToResetPassword, this, &MainWindow::showResetPasswordDialog);
 
+    // after login authentication, connect the signal(switch to chatdialog) from the tcpManager to the slot
+    connect(TcpManager::GetInstance().get(), &TcpManager::signal_switchto_chatdialog, this, &MainWindow::showChatDialog);
+
     // set windows flags
     loginDialog->setWindowFlags(Qt::CustomizeWindowHint|Qt::FramelessWindowHint);
+
+    // !Test: emit the signal_switchto_chatdialog
+    emit TcpManager::GetInstance()->signal_switchto_chatdialog();
 }
 
 MainWindow::~MainWindow()
@@ -61,4 +67,16 @@ void MainWindow::showResetPasswordDialog()
     resetPasswordDialog->show();
     // Connect the signal from the reset password dialog to switch to the login dialog
     connect(resetPasswordDialog, &ResetPasswordDialog::signal_switchto_login, this, &MainWindow::showLoginDialog);
+}
+
+void MainWindow::showChatDialog()
+{
+    chatDialog = new ChatDialog(this);
+    chatDialog->setWindowFlags(Qt::CustomizeWindowHint|Qt::FramelessWindowHint);
+    setCentralWidget(chatDialog); // will destroy the login widget
+    chatDialog->show();
+    this->resize(QSize(800, 600));
+    this->setMinimumSize(QSize(400, 300));
+    this->setMaximumSize(QWIDGETSIZE_MAX, QWIDGETSIZE_MAX);
+    qDebug() << "Chat dialog shown.";
 }

@@ -55,4 +55,56 @@ struct serverInfo {
     int Uid;
 };
 
+struct messageInfo {
+    QString messageType;
+    QString messageContent; // passage, url
+    QPixmap image;
+};
+
+// interface modules
+enum class ChatUIMode {
+    SearchMode, // 搜索页面
+    ChatMode, // 聊天页面
+    ContactMode // 联系人页面
+};
+
+// QListWidget customizied item types
+enum class ListItemType {
+    ChatItem, // 聊天列表项
+    SearchItem, // 搜索列表项
+    ContactItem, // 联系人列表项
+    NonClickableItem // 非点击项
+};
+
+// roles for message
+enum class MessageRole {
+    OTHER, // 其他人发来的消息
+    SELF // 自己发出的消息
+};
+
+// 测试用例
+const std::vector<QString>  strs ={"hello world !",
+                                   "nice to meet u",
+                                   "New year，new life",
+                                   "You have to love yourself",
+                                   "My love is written in the wind ever since the whole world is you"};
+
+const std::vector<QString> heads = {
+    ":/images/head_1.jpg",
+    ":/images/head_2.jpg",
+    ":/images/head_3.jpg",
+    ":/images/head_4.jpg",
+    ":/images/head_5.jpg"
+};
+
+const std::vector<QString> names = {
+    "HanMeiMei",
+    "Lily",
+    "Ben",
+    "Androw",
+    "Max",
+    "Summer",
+    "Candy",
+    "Hunter"
+};
 #endif // GLOBAL_H

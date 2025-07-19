@@ -5,6 +5,7 @@
 #include "logindialog.h"
 #include "registerdialog.h"
 #include "resetpassworddialog.h"
+#include "chatdialog.h"
 
 /************************************************************
  *  @file   mainwindow.h
@@ -32,10 +33,12 @@ private:
     LoginDialog *loginDialog;
     RegisterDialog *registerDialog;
     ResetPasswordDialog *resetPasswordDialog;
+    ChatDialog *chatDialog;
 
 private slots:
     void showRegisterDialog();
     void showLoginDialog();
     void showResetPasswordDialog();
+    void showChatDialog();
 };
 #endif // MAINWINDOW_H
