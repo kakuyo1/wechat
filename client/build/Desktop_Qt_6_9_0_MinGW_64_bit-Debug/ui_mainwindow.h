@@ -27,8 +27,8 @@ public:
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
         MainWindow->resize(300, 500);
-        MainWindow->setMinimumSize(QSize(300, 500));
-        MainWindow->setMaximumSize(QSize(300, 500));
+        MainWindow->setMinimumSize(QSize(0, 0));
+        MainWindow->setMaximumSize(QSize(16777215, 16777215));
         QIcon icon;
         icon.addFile(QString::fromUtf8(":/images/wechat.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
         MainWindow->setWindowIcon(icon);

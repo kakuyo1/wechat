@@ -150,28 +150,20 @@ DISTFILES += \
     static/head_1.jpg
 
 # copy config.ini to build directory
-# win32::CONFIG(debug, debug | release)
-# {
-#                 #------------------ 原有 config.ini 拷贝 ------------------
-#     TargetConfig = $${_PRO_FILE_PWD_}/config.ini
-#     TargetConfig = $$replace(TargetConfig, /, \\) # TO ensure Windows compatibility
+win32::CONFIG(debug, debug | release)
+{
+                #------------------ 原有 config.ini 拷贝 ------------------
+    TargetConfig = $${_PRO_FILE_PWD_}/config.ini
+    TargetConfig = $$replace(TargetConfig, /, \\) # TO ensure Windows compatibility
 
-#     OutputDir = $${OUT_PWD}/debug #DESTDIR is the directory where the executable will be placed
-#     OutputDir = $$replace(OutputDir, /, \\)
+    OutputDir = $${OUT_PWD}/debug #DESTDIR is the directory where the executable will be placed
+    OutputDir = $$replace(OutputDir, /, \\)
 
-#     system(copy /Y \"$$TargetConfig\" \"$$OutputDir\\config.ini\") # copy config.ini to build directory
-#                  #------------------ 新增 static 文件夹拷贝 ------------------
-#     SourceStatic = $${_PRO_FILE_PWD_}/static
-#     SourceStatic = $$replace(SourceStatic, /, \\)
-#     DestStatic = $$OutputDir\\static
-#     system(xcopy /E /I /Y \"$$SourceStatic\" \"$$DestStatic\")
-# }
-message(PWD=$$PWD)
-message(OUT_PWD=$$OUT_PWD)
-win32 {
-    # 拷贝 config.ini
-    QMAKE_POST_LINK += $$QMAKE_COPY \"$$PWD/config.ini\" \"$$OUT_PWD/debug/config.ini\"
-
-    # 拷贝 static 整个目录
-    QMAKE_POST_LINK += $$QMAKE_COPY_DIR \"$$PWD/static\" \"$$OUT_PWD/debug/static\"
+    system(copy /Y \"$$TargetConfig\" \"$$OutputDir\\config.ini\") # copy config.ini to build directory
+                 #------------------ 新增 static 文件夹拷贝 ------------------
+    SourceStatic = $${_PRO_FILE_PWD_}/static
+    SourceStatic = $$replace(SourceStatic, /, \\)
+    DestStatic = $$OutputDir\\static
+    system(xcopy /E /I /Y \"$$SourceStatic\" \"$$DestStatic\")
 }
+

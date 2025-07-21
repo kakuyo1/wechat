@@ -44,6 +44,6 @@ void searchContactSuccessedDialog::on_add_contact_btn_clicked()
 
 void searchContactSuccessedDialog::on_cancel_btn_clicked()
 {
-
+    this->close(); // 关闭对话框
 }
 

@@ -314,3 +314,67 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
   font-family: "Microsoft YaHei";
   font-size: 12pt;
 }
+
+/*搜索用户成功*/
+#searchContactSuccessedDialog{
+   background-color: #ffffff;
+}
+
+#name_label{
+    font-size: 20px;
+    font-family: "Microsoft YaHei";
+}
+
+searchContactSuccessedDialog #add_contact_btn[state='normal']{
+    background: #07c160;
+    color: #ffffff;
+    font-size: 14px; /* 设置字体大小 */
+    font-family: "Microsoft YaHei"; /* 设置字体 */
+    border: 1px solid transparent;
+    border-radius: 20px; /* 设置圆角 */
+}
+
+searchContactSuccessedDialog #add_contact_btn[state='hover']{
+    background: #3bbb4b;
+    color: #ffffff;
+    font-size: 14px; /* 设置字体大小 */
+    font-family: "Microsoft YaHei"; /* 设置字体 */
+    border: 1px solid transparent;
+    border-radius: 20px; /* 设置圆角 */
+}
+
+searchContactSuccessedDialog #add_contact_btn[state='pressed']{
+   background: #05944a;
+   color: #ffffff;
+   font-size: 14px; /* 设置字体大小 */
+   font-family: "Microsoft YaHei"; /* 设置字体 */
+   border: 1px solid transparent;
+   border-radius: 20px; /* 设置圆角 */
+}
+
+searchContactSuccessedDialog #cancel_btn[state='normal']{
+    background: #07c160;
+    color: #ffffff;
+    font-size: 14px; /* 设置字体大小 */
+    font-family: "Microsoft YaHei"; /* 设置字体 */
+    border: 1px solid transparent;
+    border-radius: 20px; /* 设置圆角 */
+}
+
+searchContactSuccessedDialog #cancel_btn[state='hover']{
+    background: #3bbb4b;
+    color: #ffffff;
+    font-size: 14px; /* 设置字体大小 */
+    font-family: "Microsoft YaHei"; /* 设置字体 */
+    border: 1px solid transparent;
+    border-radius: 20px; /* 设置圆角 */
+}
+
+searchContactSuccessedDialog #cancel_btn[state='pressed']{
+   background: #05944a;
+   color: #ffffff;
+   font-size: 14px; /* 设置字体大小 */
+   font-family: "Microsoft YaHei"; /* 设置字体 */
+   border: 1px solid transparent;
+   border-radius: 20px; /* 设置圆角 */
+}

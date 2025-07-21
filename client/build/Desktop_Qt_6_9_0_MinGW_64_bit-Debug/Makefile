@@ -70,434 +70,434 @@ release-install: FORCE
 release-uninstall: FORCE
 	$(MAKE) -f $(MAKEFILE).Release uninstall
 
-Makefile: ../../llfc_client.pro ../../../../qtt/6.9.0/mingw_64/mkspecs/win32-g++/qmake.conf ../../../../qtt/6.9.0/mingw_64/mkspecs/features/spec_pre.prf \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/features/device_config.prf \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/common/sanitize.conf \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/common/gcc-base.conf \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/common/g++-base.conf \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/features/win32/windows_vulkan_sdk.prf \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/common/windows-vulkan.conf \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/common/g++-win32.conf \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/common/windows-desktop.conf \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/qconfig.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_ext_freetype.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_ext_libjpeg.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_ext_libpng.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_concurrent.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_concurrent_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_core.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_core_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_dbus.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_dbus_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_designer.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_designer_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_designercomponents_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_devicediscovery_support_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_entrypoint_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_example_icons_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_examples_asset_downloader_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_fb_support_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_ffmpegmediapluginimpl_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_freetype_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_gui.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_gui_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_harfbuzz_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_help.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_help_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_httpserver.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_httpserver_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_jpeg_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labsanimation.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labsanimation_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labsfolderlistmodel.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labsfolderlistmodel_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labsplatform.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labsplatform_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labsqmlmodels.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labsqmlmodels_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labssettings.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labssettings_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labssharedimage.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labssharedimage_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labswavefrontmesh.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labswavefrontmesh_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_linguist.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_multimedia.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_multimedia_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_multimediaquick_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_multimediatestlibprivate_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_multimediawidgets.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_multimediawidgets_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_network.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_network_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_opengl.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_opengl_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_openglwidgets.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_openglwidgets_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_packetprotocol_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_png_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_printsupport.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_printsupport_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qdoccatch_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qdoccatchconversions_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qdoccatchgenerators_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qml.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qml_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlassetdownloader.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlassetdownloader_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlcompiler.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlcompiler_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlcore.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlcore_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmldebug_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmldom_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlformat_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlintegration.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlintegration_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmllocalstorage.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmllocalstorage_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlls_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlmeta.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlmeta_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlmodels.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlmodels_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlnetwork.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlnetwork_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmltest.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmltest_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmltoolingsettings_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmltyperegistrar_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlworkerscript.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlworkerscript_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlxmllistmodel.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlxmllistmodel_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quick.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quick3dspatialaudio_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quick_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2basic.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2basic_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2basicstyleimpl.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2basicstyleimpl_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2fluentwinui3styleimpl.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2fluentwinui3styleimpl_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2fusion.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2fusion_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2fusionstyleimpl.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2fusionstyleimpl_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2imagine.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2imagine_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2imaginestyleimpl.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2imaginestyleimpl_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2impl.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2impl_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2material.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2material_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2materialstyleimpl.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2materialstyleimpl_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2universal.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2universal_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2universalstyleimpl.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2universalstyleimpl_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2windowsstyleimpl.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2windowsstyleimpl_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrolstestutilsprivate_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickdialogs2.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickdialogs2_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickdialogs2quickimpl.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickdialogs2quickimpl_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickdialogs2utils.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickdialogs2utils_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickeffects.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickeffects_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quicklayouts.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quicklayouts_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickparticles_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickshapes_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quicktemplates2.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quicktemplates2_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quicktestutilsprivate_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickvectorimage.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickvectorimage_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickvectorimagegenerator_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickwidgets.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickwidgets_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_serialport.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_serialport_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_spatialaudio.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_spatialaudio_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_sql.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_sql_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_svg.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_svg_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_svgwidgets.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_svgwidgets_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_testinternals_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_testlib.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_testlib_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_tools_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_uiplugin.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_uitools.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_uitools_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_websockets.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_websockets_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_widgets.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_widgets_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_xml.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_xml_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_zlib_private.pri \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/features/qt_functions.prf \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/features/qt_config.prf \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/win32-g++/qmake.conf \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/features/spec_post.prf \
+Makefile: ../../llfc_client.pro B:/qtt/6.9.0/mingw_64/mkspecs/win32-g++/qmake.conf B:/qtt/6.9.0/mingw_64/mkspecs/features/spec_pre.prf \
+		B:/qtt/6.9.0/mingw_64/mkspecs/features/device_config.prf \
+		B:/qtt/6.9.0/mingw_64/mkspecs/common/sanitize.conf \
+		B:/qtt/6.9.0/mingw_64/mkspecs/common/gcc-base.conf \
+		B:/qtt/6.9.0/mingw_64/mkspecs/common/g++-base.conf \
+		B:/qtt/6.9.0/mingw_64/mkspecs/features/win32/windows_vulkan_sdk.prf \
+		B:/qtt/6.9.0/mingw_64/mkspecs/common/windows-vulkan.conf \
+		B:/qtt/6.9.0/mingw_64/mkspecs/common/g++-win32.conf \
+		B:/qtt/6.9.0/mingw_64/mkspecs/common/windows-desktop.conf \
+		B:/qtt/6.9.0/mingw_64/mkspecs/qconfig.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_ext_freetype.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_ext_libjpeg.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_ext_libpng.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_concurrent.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_concurrent_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_core.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_core_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_dbus.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_dbus_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_designer.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_designer_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_designercomponents_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_devicediscovery_support_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_entrypoint_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_example_icons_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_examples_asset_downloader_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_fb_support_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_ffmpegmediapluginimpl_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_freetype_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_gui.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_gui_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_harfbuzz_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_help.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_help_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_httpserver.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_httpserver_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_jpeg_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labsanimation.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labsanimation_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labsfolderlistmodel.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labsfolderlistmodel_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labsplatform.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labsplatform_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labsqmlmodels.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labsqmlmodels_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labssettings.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labssettings_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labssharedimage.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labssharedimage_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labswavefrontmesh.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labswavefrontmesh_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_linguist.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_multimedia.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_multimedia_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_multimediaquick_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_multimediatestlibprivate_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_multimediawidgets.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_multimediawidgets_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_network.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_network_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_opengl.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_opengl_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_openglwidgets.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_openglwidgets_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_packetprotocol_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_png_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_printsupport.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_printsupport_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qdoccatch_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qdoccatchconversions_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qdoccatchgenerators_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qml.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qml_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlassetdownloader.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlassetdownloader_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlcompiler.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlcompiler_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlcore.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlcore_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmldebug_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmldom_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlformat_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlintegration.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlintegration_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmllocalstorage.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmllocalstorage_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlls_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlmeta.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlmeta_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlmodels.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlmodels_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlnetwork.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlnetwork_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmltest.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmltest_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmltoolingsettings_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmltyperegistrar_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlworkerscript.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlworkerscript_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlxmllistmodel.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlxmllistmodel_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quick.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quick3dspatialaudio_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quick_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2basic.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2basic_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2basicstyleimpl.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2basicstyleimpl_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2fluentwinui3styleimpl.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2fluentwinui3styleimpl_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2fusion.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2fusion_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2fusionstyleimpl.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2fusionstyleimpl_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2imagine.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2imagine_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2imaginestyleimpl.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2imaginestyleimpl_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2impl.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2impl_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2material.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2material_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2materialstyleimpl.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2materialstyleimpl_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2universal.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2universal_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2universalstyleimpl.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2universalstyleimpl_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2windowsstyleimpl.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2windowsstyleimpl_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrolstestutilsprivate_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickdialogs2.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickdialogs2_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickdialogs2quickimpl.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickdialogs2quickimpl_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickdialogs2utils.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickdialogs2utils_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickeffects.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickeffects_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quicklayouts.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quicklayouts_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickparticles_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickshapes_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quicktemplates2.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quicktemplates2_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quicktestutilsprivate_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickvectorimage.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickvectorimage_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickvectorimagegenerator_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickwidgets.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickwidgets_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_serialport.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_serialport_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_spatialaudio.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_spatialaudio_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_sql.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_sql_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_svg.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_svg_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_svgwidgets.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_svgwidgets_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_testinternals_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_testlib.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_testlib_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_tools_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_uiplugin.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_uitools.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_uitools_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_websockets.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_websockets_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_widgets.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_widgets_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_xml.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_xml_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_zlib_private.pri \
+		B:/qtt/6.9.0/mingw_64/mkspecs/features/qt_functions.prf \
+		B:/qtt/6.9.0/mingw_64/mkspecs/features/qt_config.prf \
+		B:/qtt/6.9.0/mingw_64/mkspecs/win32-g++/qmake.conf \
+		B:/qtt/6.9.0/mingw_64/mkspecs/features/spec_post.prf \
 		.qmake.stash \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/features/exclusive_builds.prf \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/features/toolchain.prf \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/features/default_pre.prf \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/features/win32/default_pre.prf \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/features/resolve_config.prf \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/features/exclusive_builds_post.prf \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/features/default_post.prf \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/features/qml_debug.prf \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/features/precompile_header.prf \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/features/warn_on.prf \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/features/permissions.prf \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/features/qt.prf \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/features/resources_functions.prf \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/features/resources.prf \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/features/moc.prf \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/features/win32/opengl.prf \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/features/uic.prf \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/features/qmake_use.prf \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/features/file_copies.prf \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/features/win32/windows.prf \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/features/testcase_targets.prf \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/features/exceptions.prf \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/features/yacc.prf \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/features/lex.prf \
+		B:/qtt/6.9.0/mingw_64/mkspecs/features/exclusive_builds.prf \
+		B:/qtt/6.9.0/mingw_64/mkspecs/features/toolchain.prf \
+		B:/qtt/6.9.0/mingw_64/mkspecs/features/default_pre.prf \
+		B:/qtt/6.9.0/mingw_64/mkspecs/features/win32/default_pre.prf \
+		B:/qtt/6.9.0/mingw_64/mkspecs/features/resolve_config.prf \
+		B:/qtt/6.9.0/mingw_64/mkspecs/features/exclusive_builds_post.prf \
+		B:/qtt/6.9.0/mingw_64/mkspecs/features/default_post.prf \
+		B:/qtt/6.9.0/mingw_64/mkspecs/features/qml_debug.prf \
+		B:/qtt/6.9.0/mingw_64/mkspecs/features/precompile_header.prf \
+		B:/qtt/6.9.0/mingw_64/mkspecs/features/warn_on.prf \
+		B:/qtt/6.9.0/mingw_64/mkspecs/features/permissions.prf \
+		B:/qtt/6.9.0/mingw_64/mkspecs/features/qt.prf \
+		B:/qtt/6.9.0/mingw_64/mkspecs/features/resources_functions.prf \
+		B:/qtt/6.9.0/mingw_64/mkspecs/features/resources.prf \
+		B:/qtt/6.9.0/mingw_64/mkspecs/features/moc.prf \
+		B:/qtt/6.9.0/mingw_64/mkspecs/features/win32/opengl.prf \
+		B:/qtt/6.9.0/mingw_64/mkspecs/features/uic.prf \
+		B:/qtt/6.9.0/mingw_64/mkspecs/features/qmake_use.prf \
+		B:/qtt/6.9.0/mingw_64/mkspecs/features/file_copies.prf \
+		B:/qtt/6.9.0/mingw_64/mkspecs/features/win32/windows.prf \
+		B:/qtt/6.9.0/mingw_64/mkspecs/features/testcase_targets.prf \
+		B:/qtt/6.9.0/mingw_64/mkspecs/features/exceptions.prf \
+		B:/qtt/6.9.0/mingw_64/mkspecs/features/yacc.prf \
+		B:/qtt/6.9.0/mingw_64/mkspecs/features/lex.prf \
 		../../llfc_client.pro \
-		../../../../qtt/6.9.0/mingw_64/lib/Qt6Widgets.prl \
-		../../../../qtt/6.9.0/mingw_64/lib/Qt6Gui.prl \
-		../../../../qtt/6.9.0/mingw_64/lib/Qt6Network.prl \
-		../../../../qtt/6.9.0/mingw_64/lib/Qt6Core.prl \
-		../../../../qtt/6.9.0/mingw_64/lib/Qt6EntryPoint.prl \
-		../../../../qtt/6.9.0/mingw_64/mkspecs/features/build_pass.prf \
+		B:/qtt/6.9.0/mingw_64/lib/Qt6Widgets.prl \
+		B:/qtt/6.9.0/mingw_64/lib/Qt6Gui.prl \
+		B:/qtt/6.9.0/mingw_64/lib/Qt6Network.prl \
+		B:/qtt/6.9.0/mingw_64/lib/Qt6Core.prl \
+		B:/qtt/6.9.0/mingw_64/lib/Qt6EntryPoint.prl \
+		B:/qtt/6.9.0/mingw_64/mkspecs/features/build_pass.prf \
 		../../rsc.qrc
 	$(QMAKE) -o Makefile ..\..\llfc_client.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
-../../../../qtt/6.9.0/mingw_64/mkspecs/features/spec_pre.prf:
-../../../../qtt/6.9.0/mingw_64/mkspecs/features/device_config.prf:
-../../../../qtt/6.9.0/mingw_64/mkspecs/common/sanitize.conf:
-../../../../qtt/6.9.0/mingw_64/mkspecs/common/gcc-base.conf:
-../../../../qtt/6.9.0/mingw_64/mkspecs/common/g++-base.conf:
-../../../../qtt/6.9.0/mingw_64/mkspecs/features/win32/windows_vulkan_sdk.prf:
-../../../../qtt/6.9.0/mingw_64/mkspecs/common/windows-vulkan.conf:
-../../../../qtt/6.9.0/mingw_64/mkspecs/common/g++-win32.conf:
-../../../../qtt/6.9.0/mingw_64/mkspecs/common/windows-desktop.conf:
-../../../../qtt/6.9.0/mingw_64/mkspecs/qconfig.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_ext_freetype.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_ext_libjpeg.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_ext_libpng.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_concurrent.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_concurrent_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_core.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_core_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_dbus.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_dbus_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_designer.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_designer_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_designercomponents_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_devicediscovery_support_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_entrypoint_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_example_icons_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_examples_asset_downloader_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_fb_support_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_ffmpegmediapluginimpl_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_freetype_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_gui.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_gui_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_harfbuzz_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_help.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_help_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_httpserver.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_httpserver_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_jpeg_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labsanimation.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labsanimation_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labsfolderlistmodel.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labsfolderlistmodel_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labsplatform.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labsplatform_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labsqmlmodels.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labsqmlmodels_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labssettings.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labssettings_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labssharedimage.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labssharedimage_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labswavefrontmesh.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labswavefrontmesh_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_linguist.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_multimedia.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_multimedia_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_multimediaquick_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_multimediatestlibprivate_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_multimediawidgets.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_multimediawidgets_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_network.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_network_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_opengl.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_opengl_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_openglwidgets.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_openglwidgets_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_packetprotocol_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_png_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_printsupport.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_printsupport_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qdoccatch_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qdoccatchconversions_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qdoccatchgenerators_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qml.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qml_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlassetdownloader.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlassetdownloader_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlcompiler.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlcompiler_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlcore.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlcore_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmldebug_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmldom_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlformat_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlintegration.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlintegration_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmllocalstorage.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmllocalstorage_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlls_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlmeta.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlmeta_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlmodels.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlmodels_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlnetwork.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlnetwork_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmltest.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmltest_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmltoolingsettings_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmltyperegistrar_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlworkerscript.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlworkerscript_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlxmllistmodel.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlxmllistmodel_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quick.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quick3dspatialaudio_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quick_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2basic.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2basic_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2basicstyleimpl.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2basicstyleimpl_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2fluentwinui3styleimpl.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2fluentwinui3styleimpl_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2fusion.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2fusion_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2fusionstyleimpl.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2fusionstyleimpl_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2imagine.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2imagine_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2imaginestyleimpl.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2imaginestyleimpl_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2impl.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2impl_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2material.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2material_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2materialstyleimpl.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2materialstyleimpl_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2universal.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2universal_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2universalstyleimpl.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2universalstyleimpl_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2windowsstyleimpl.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2windowsstyleimpl_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrolstestutilsprivate_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickdialogs2.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickdialogs2_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickdialogs2quickimpl.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickdialogs2quickimpl_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickdialogs2utils.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickdialogs2utils_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickeffects.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickeffects_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quicklayouts.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quicklayouts_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickparticles_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickshapes_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quicktemplates2.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quicktemplates2_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quicktestutilsprivate_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickvectorimage.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickvectorimage_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickvectorimagegenerator_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickwidgets.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickwidgets_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_serialport.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_serialport_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_spatialaudio.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_spatialaudio_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_sql.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_sql_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_svg.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_svg_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_svgwidgets.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_svgwidgets_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_testinternals_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_testlib.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_testlib_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_tools_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_uiplugin.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_uitools.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_uitools_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_websockets.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_websockets_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_widgets.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_widgets_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_xml.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_xml_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_zlib_private.pri:
-../../../../qtt/6.9.0/mingw_64/mkspecs/features/qt_functions.prf:
-../../../../qtt/6.9.0/mingw_64/mkspecs/features/qt_config.prf:
-../../../../qtt/6.9.0/mingw_64/mkspecs/win32-g++/qmake.conf:
-../../../../qtt/6.9.0/mingw_64/mkspecs/features/spec_post.prf:
+B:/qtt/6.9.0/mingw_64/mkspecs/features/spec_pre.prf:
+B:/qtt/6.9.0/mingw_64/mkspecs/features/device_config.prf:
+B:/qtt/6.9.0/mingw_64/mkspecs/common/sanitize.conf:
+B:/qtt/6.9.0/mingw_64/mkspecs/common/gcc-base.conf:
+B:/qtt/6.9.0/mingw_64/mkspecs/common/g++-base.conf:
+B:/qtt/6.9.0/mingw_64/mkspecs/features/win32/windows_vulkan_sdk.prf:
+B:/qtt/6.9.0/mingw_64/mkspecs/common/windows-vulkan.conf:
+B:/qtt/6.9.0/mingw_64/mkspecs/common/g++-win32.conf:
+B:/qtt/6.9.0/mingw_64/mkspecs/common/windows-desktop.conf:
+B:/qtt/6.9.0/mingw_64/mkspecs/qconfig.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_ext_freetype.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_ext_libjpeg.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_ext_libpng.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_concurrent.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_concurrent_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_core.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_core_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_dbus.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_dbus_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_designer.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_designer_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_designercomponents_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_devicediscovery_support_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_entrypoint_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_example_icons_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_examples_asset_downloader_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_fb_support_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_ffmpegmediapluginimpl_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_freetype_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_gui.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_gui_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_harfbuzz_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_help.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_help_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_httpserver.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_httpserver_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_jpeg_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labsanimation.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labsanimation_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labsfolderlistmodel.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labsfolderlistmodel_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labsplatform.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labsplatform_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labsqmlmodels.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labsqmlmodels_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labssettings.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labssettings_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labssharedimage.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labssharedimage_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labswavefrontmesh.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_labswavefrontmesh_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_linguist.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_multimedia.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_multimedia_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_multimediaquick_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_multimediatestlibprivate_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_multimediawidgets.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_multimediawidgets_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_network.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_network_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_opengl.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_opengl_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_openglwidgets.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_openglwidgets_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_packetprotocol_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_png_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_printsupport.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_printsupport_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qdoccatch_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qdoccatchconversions_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qdoccatchgenerators_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qml.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qml_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlassetdownloader.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlassetdownloader_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlcompiler.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlcompiler_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlcore.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlcore_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmldebug_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmldom_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlformat_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlintegration.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlintegration_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmllocalstorage.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmllocalstorage_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlls_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlmeta.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlmeta_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlmodels.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlmodels_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlnetwork.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlnetwork_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmltest.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmltest_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmltoolingsettings_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmltyperegistrar_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlworkerscript.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlworkerscript_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlxmllistmodel.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_qmlxmllistmodel_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quick.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quick3dspatialaudio_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quick_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2basic.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2basic_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2basicstyleimpl.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2basicstyleimpl_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2fluentwinui3styleimpl.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2fluentwinui3styleimpl_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2fusion.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2fusion_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2fusionstyleimpl.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2fusionstyleimpl_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2imagine.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2imagine_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2imaginestyleimpl.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2imaginestyleimpl_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2impl.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2impl_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2material.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2material_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2materialstyleimpl.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2materialstyleimpl_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2universal.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2universal_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2universalstyleimpl.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2universalstyleimpl_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2windowsstyleimpl.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrols2windowsstyleimpl_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickcontrolstestutilsprivate_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickdialogs2.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickdialogs2_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickdialogs2quickimpl.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickdialogs2quickimpl_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickdialogs2utils.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickdialogs2utils_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickeffects.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickeffects_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quicklayouts.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quicklayouts_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickparticles_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickshapes_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quicktemplates2.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quicktemplates2_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quicktestutilsprivate_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickvectorimage.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickvectorimage_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickvectorimagegenerator_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickwidgets.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_quickwidgets_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_serialport.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_serialport_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_spatialaudio.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_spatialaudio_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_sql.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_sql_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_svg.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_svg_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_svgwidgets.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_svgwidgets_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_testinternals_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_testlib.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_testlib_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_tools_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_uiplugin.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_uitools.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_uitools_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_websockets.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_websockets_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_widgets.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_widgets_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_xml.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_xml_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/modules/qt_lib_zlib_private.pri:
+B:/qtt/6.9.0/mingw_64/mkspecs/features/qt_functions.prf:
+B:/qtt/6.9.0/mingw_64/mkspecs/features/qt_config.prf:
+B:/qtt/6.9.0/mingw_64/mkspecs/win32-g++/qmake.conf:
+B:/qtt/6.9.0/mingw_64/mkspecs/features/spec_post.prf:
 .qmake.stash:
-../../../../qtt/6.9.0/mingw_64/mkspecs/features/exclusive_builds.prf:
-../../../../qtt/6.9.0/mingw_64/mkspecs/features/toolchain.prf:
-../../../../qtt/6.9.0/mingw_64/mkspecs/features/default_pre.prf:
-../../../../qtt/6.9.0/mingw_64/mkspecs/features/win32/default_pre.prf:
-../../../../qtt/6.9.0/mingw_64/mkspecs/features/resolve_config.prf:
-../../../../qtt/6.9.0/mingw_64/mkspecs/features/exclusive_builds_post.prf:
-../../../../qtt/6.9.0/mingw_64/mkspecs/features/default_post.prf:
-../../../../qtt/6.9.0/mingw_64/mkspecs/features/qml_debug.prf:
-../../../../qtt/6.9.0/mingw_64/mkspecs/features/precompile_header.prf:
-../../../../qtt/6.9.0/mingw_64/mkspecs/features/warn_on.prf:
-../../../../qtt/6.9.0/mingw_64/mkspecs/features/permissions.prf:
-../../../../qtt/6.9.0/mingw_64/mkspecs/features/qt.prf:
-../../../../qtt/6.9.0/mingw_64/mkspecs/features/resources_functions.prf:
-../../../../qtt/6.9.0/mingw_64/mkspecs/features/resources.prf:
-../../../../qtt/6.9.0/mingw_64/mkspecs/features/moc.prf:
-../../../../qtt/6.9.0/mingw_64/mkspecs/features/win32/opengl.prf:
-../../../../qtt/6.9.0/mingw_64/mkspecs/features/uic.prf:
-../../../../qtt/6.9.0/mingw_64/mkspecs/features/qmake_use.prf:
-../../../../qtt/6.9.0/mingw_64/mkspecs/features/file_copies.prf:
-../../../../qtt/6.9.0/mingw_64/mkspecs/features/win32/windows.prf:
-../../../../qtt/6.9.0/mingw_64/mkspecs/features/testcase_targets.prf:
-../../../../qtt/6.9.0/mingw_64/mkspecs/features/exceptions.prf:
-../../../../qtt/6.9.0/mingw_64/mkspecs/features/yacc.prf:
-../../../../qtt/6.9.0/mingw_64/mkspecs/features/lex.prf:
+B:/qtt/6.9.0/mingw_64/mkspecs/features/exclusive_builds.prf:
+B:/qtt/6.9.0/mingw_64/mkspecs/features/toolchain.prf:
+B:/qtt/6.9.0/mingw_64/mkspecs/features/default_pre.prf:
+B:/qtt/6.9.0/mingw_64/mkspecs/features/win32/default_pre.prf:
+B:/qtt/6.9.0/mingw_64/mkspecs/features/resolve_config.prf:
+B:/qtt/6.9.0/mingw_64/mkspecs/features/exclusive_builds_post.prf:
+B:/qtt/6.9.0/mingw_64/mkspecs/features/default_post.prf:
+B:/qtt/6.9.0/mingw_64/mkspecs/features/qml_debug.prf:
+B:/qtt/6.9.0/mingw_64/mkspecs/features/precompile_header.prf:
+B:/qtt/6.9.0/mingw_64/mkspecs/features/warn_on.prf:
+B:/qtt/6.9.0/mingw_64/mkspecs/features/permissions.prf:
+B:/qtt/6.9.0/mingw_64/mkspecs/features/qt.prf:
+B:/qtt/6.9.0/mingw_64/mkspecs/features/resources_functions.prf:
+B:/qtt/6.9.0/mingw_64/mkspecs/features/resources.prf:
+B:/qtt/6.9.0/mingw_64/mkspecs/features/moc.prf:
+B:/qtt/6.9.0/mingw_64/mkspecs/features/win32/opengl.prf:
+B:/qtt/6.9.0/mingw_64/mkspecs/features/uic.prf:
+B:/qtt/6.9.0/mingw_64/mkspecs/features/qmake_use.prf:
+B:/qtt/6.9.0/mingw_64/mkspecs/features/file_copies.prf:
+B:/qtt/6.9.0/mingw_64/mkspecs/features/win32/windows.prf:
+B:/qtt/6.9.0/mingw_64/mkspecs/features/testcase_targets.prf:
+B:/qtt/6.9.0/mingw_64/mkspecs/features/exceptions.prf:
+B:/qtt/6.9.0/mingw_64/mkspecs/features/yacc.prf:
+B:/qtt/6.9.0/mingw_64/mkspecs/features/lex.prf:
 ../../llfc_client.pro:
-../../../../qtt/6.9.0/mingw_64/lib/Qt6Widgets.prl:
-../../../../qtt/6.9.0/mingw_64/lib/Qt6Gui.prl:
-../../../../qtt/6.9.0/mingw_64/lib/Qt6Network.prl:
-../../../../qtt/6.9.0/mingw_64/lib/Qt6Core.prl:
-../../../../qtt/6.9.0/mingw_64/lib/Qt6EntryPoint.prl:
-../../../../qtt/6.9.0/mingw_64/mkspecs/features/build_pass.prf:
+B:/qtt/6.9.0/mingw_64/lib/Qt6Widgets.prl:
+B:/qtt/6.9.0/mingw_64/lib/Qt6Gui.prl:
+B:/qtt/6.9.0/mingw_64/lib/Qt6Network.prl:
+B:/qtt/6.9.0/mingw_64/lib/Qt6Core.prl:
+B:/qtt/6.9.0/mingw_64/lib/Qt6EntryPoint.prl:
+B:/qtt/6.9.0/mingw_64/mkspecs/features/build_pass.prf:
 ../../rsc.qrc:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ..\..\llfc_client.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"

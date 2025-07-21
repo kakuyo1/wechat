@@ -2,7 +2,7 @@
 
 SearchList::SearchList(QWidget *parent) :
     QListWidget(parent),
-    _searchContactSuccessedDialog(std::make_shared<QDialog>(this))
+    _searchContactSuccessedDialog(std::make_shared<searchContactSuccessedDialog>(this))
 {
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -71,9 +71,13 @@ void SearchList::slot_itemClicked(QListWidgetItem *item)
     }
     ListItemType itemType = baseItem->getListItemType();
     if (itemType == ListItemType::AddContactTipItem) {
-        SearchInfo contactInfo(0, "张三", "小张", "这是一个测试用户", 1);
-        std::dynamic_pointer_cast<searchContactSuccessedDialog>
-            (_searchContactSuccessedDialog)->setContactInfo(std::make_shared<SearchInfo>(contactInfo)); // 用于智能指针的基类安全转派生
+        if (!_searchContactSuccessedDialog) {
+            qDebug() << "Dialog pointer is null";
+            return;
+        }
+
+        std::shared_ptr<SearchInfo> contactInfoPtr = std::make_shared<SearchInfo>(0, "张三", "小张", "这是一个测试用户", 1);
+        _searchContactSuccessedDialog->setContactInfo(contactInfoPtr);
         _searchContactSuccessedDialog->show();
     }
 }

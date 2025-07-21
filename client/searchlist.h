@@ -23,7 +23,7 @@ protected:
 private:
     void intialAddContactTipItem();
 private:
-    std::shared_ptr<QDialog> _searchContactSuccessedDialog; // 搜索联系人成功的对话框
+    std::shared_ptr<searchContactSuccessedDialog> _searchContactSuccessedDialog; // 搜索联系人成功的对话框
 private slots:
     void slot_itemClicked(QListWidgetItem* item);
 signals:

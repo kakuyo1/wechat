@@ -50,6 +50,8 @@ template <> constexpr inline auto HttpManager::qt_create_metaobjectdata<qt_meta_
         "Module",
         "module",
         "signal_register_module_finished",
+        "signal_reset_module_finished",
+        "signal_login_module_finished",
         "slot_http_request_finished"
     };
 
@@ -62,8 +64,16 @@ template <> constexpr inline auto HttpManager::qt_create_metaobjectdata<qt_meta_
         QtMocHelpers::SignalData<void(RequestType, QString, ErrorCode)>(10, 2, QMC::AccessPublic, QMetaType::Void, {{
             { 0x80000000 | 3, 4 }, { QMetaType::QString, 5 }, { 0x80000000 | 6, 7 },
         }}),
+        // Signal 'signal_reset_module_finished'
+        QtMocHelpers::SignalData<void(RequestType, QString, ErrorCode)>(11, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 3, 4 }, { QMetaType::QString, 5 }, { 0x80000000 | 6, 7 },
+        }}),
+        // Signal 'signal_login_module_finished'
+        QtMocHelpers::SignalData<void(RequestType, QString, ErrorCode)>(12, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 3, 4 }, { QMetaType::QString, 5 }, { 0x80000000 | 6, 7 },
+        }}),
         // Slot 'slot_http_request_finished'
-        QtMocHelpers::SlotData<void(RequestType, QString, ErrorCode, Module)>(11, 2, QMC::AccessPrivate, QMetaType::Void, {{
+        QtMocHelpers::SlotData<void(RequestType, QString, ErrorCode, Module)>(13, 2, QMC::AccessPrivate, QMetaType::Void, {{
             { 0x80000000 | 3, 4 }, { QMetaType::QString, 5 }, { 0x80000000 | 6, 7 }, { 0x80000000 | 8, 9 },
         }}),
     };
@@ -91,7 +101,9 @@ void HttpManager::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         switch (_id) {
         case 0: _t->signal_http_request_finished((*reinterpret_cast< std::add_pointer_t<RequestType>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<ErrorCode>>(_a[3])),(*reinterpret_cast< std::add_pointer_t<Module>>(_a[4]))); break;
         case 1: _t->signal_register_module_finished((*reinterpret_cast< std::add_pointer_t<RequestType>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<ErrorCode>>(_a[3]))); break;
-        case 2: _t->slot_http_request_finished((*reinterpret_cast< std::add_pointer_t<RequestType>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<ErrorCode>>(_a[3])),(*reinterpret_cast< std::add_pointer_t<Module>>(_a[4]))); break;
+        case 2: _t->signal_reset_module_finished((*reinterpret_cast< std::add_pointer_t<RequestType>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<ErrorCode>>(_a[3]))); break;
+        case 3: _t->signal_login_module_finished((*reinterpret_cast< std::add_pointer_t<RequestType>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<ErrorCode>>(_a[3]))); break;
+        case 4: _t->slot_http_request_finished((*reinterpret_cast< std::add_pointer_t<RequestType>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<ErrorCode>>(_a[3])),(*reinterpret_cast< std::add_pointer_t<Module>>(_a[4]))); break;
         default: ;
         }
     }
@@ -99,6 +111,10 @@ void HttpManager::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         if (QtMocHelpers::indexOfMethod<void (HttpManager::*)(RequestType , QString , ErrorCode , Module )>(_a, &HttpManager::signal_http_request_finished, 0))
             return;
         if (QtMocHelpers::indexOfMethod<void (HttpManager::*)(RequestType , QString , ErrorCode )>(_a, &HttpManager::signal_register_module_finished, 1))
+            return;
+        if (QtMocHelpers::indexOfMethod<void (HttpManager::*)(RequestType , QString , ErrorCode )>(_a, &HttpManager::signal_reset_module_finished, 2))
+            return;
+        if (QtMocHelpers::indexOfMethod<void (HttpManager::*)(RequestType , QString , ErrorCode )>(_a, &HttpManager::signal_login_module_finished, 3))
             return;
     }
 }
@@ -126,14 +142,14 @@ int HttpManager::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 3)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 3;
+        _id -= 5;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 3)
+        if (_id < 5)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 3;
+        _id -= 5;
     }
     return _id;
 }
@@ -148,5 +164,17 @@ void HttpManager::signal_http_request_finished(RequestType _t1, QString _t2, Err
 void HttpManager::signal_register_module_finished(RequestType _t1, QString _t2, ErrorCode _t3)
 {
     QMetaObject::activate<void>(this, &staticMetaObject, 1, nullptr, _t1, _t2, _t3);
+}
+
+// SIGNAL 2
+void HttpManager::signal_reset_module_finished(RequestType _t1, QString _t2, ErrorCode _t3)
+{
+    QMetaObject::activate<void>(this, &staticMetaObject, 2, nullptr, _t1, _t2, _t3);
+}
+
+// SIGNAL 3
+void HttpManager::signal_login_module_finished(RequestType _t1, QString _t2, ErrorCode _t3)
+{
+    QMetaObject::activate<void>(this, &staticMetaObject, 3, nullptr, _t1, _t2, _t3);
 }
 QT_WARNING_POP
