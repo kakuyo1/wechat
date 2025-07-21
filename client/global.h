@@ -72,6 +72,7 @@ enum class ChatUIMode {
 enum class ListItemType {
     ChatItem, // 聊天列表项
     SearchItem, // 搜索列表项
+    AddContactTipItem, // 添加联系人提示项
     ContactItem, // 联系人列表项
     NonClickableItem // 非点击项
 };

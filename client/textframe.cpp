@@ -4,7 +4,6 @@ TextFrame::TextFrame(MessageRole role, const QString &text, QWidget *parent) :
     BubbleFrame(role, parent),
     _textEdit(new QTextEdit(this))
 {
-    // _textEdit->setLineWrapMode(QTextEdit::NoWrap); // 设置不自动换行
     _textEdit->setReadOnly(true);
     _textEdit->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     _textEdit->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -30,7 +29,6 @@ void TextFrame::initStyleSheet()
         "QTextEdit {"
         " background:transparent;"
         " border:none;"
-        " padding-right:8px;"
         "}"
         );
 }
@@ -41,9 +39,7 @@ void TextFrame::setMaximumBubbleWidth(const QString &text)
     //最大气泡宽度 = 文本内容宽度 + TextEdit的左右边距 + 父类BubbleFrame的左右margin
 
     // 1. 父类BubbleFrame的margin
-    int fatherBubbleMarginLeft = this->layout()->contentsMargins().left();
-    int fatherBubbleMarginRight = this->layout()->contentsMargins().right();
-    int fatherMargin = fatherBubbleMarginLeft + fatherBubbleMarginRight;
+    int fatherMargin = this->layout()->contentsMargins().left() + this->layout()->contentsMargins().right();
 
     // 2. TextEdit的边距
     qreal documentMarginLeftAndRight = (_textEdit->document()->documentMargin()) * 2;
@@ -60,7 +56,7 @@ void TextFrame::setMaximumBubbleWidth(const QString &text)
             max_content_width = width; // 更新最大宽度
         }
     }
-    const int maxBubbleWidth = 300;
+    const int maxBubbleWidth = 540;
     const int minBubbleWidth = 80;
     int targetWidth = max_content_width + documentMarginLeftAndRight + fatherMargin;
     if (targetWidth > maxBubbleWidth) {
@@ -70,7 +66,10 @@ void TextFrame::setMaximumBubbleWidth(const QString &text)
         targetWidth = minBubbleWidth;
     }
     setMaximumWidth(targetWidth);// 根据文本内容设置最大气泡宽度
-    _textEdit->setFixedWidth(targetWidth); // 这里固定TextEdit宽度，使其换行在maxBubbleWidth处发生
+    // _textEdit->setFixedWidth(targetWidth); // 这里固定TextEdit宽度，使其换行在maxBubbleWidth处发生
+    _textEdit->setMinimumWidth(minBubbleWidth);
+    _textEdit->setMaximumWidth(maxBubbleWidth);
+    _textEdit->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
 }
 
 void TextFrame::adjustTextHeight()

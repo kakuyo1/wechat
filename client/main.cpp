@@ -17,7 +17,6 @@ int main(int argc, char *argv[])
 
     // load the config.ini
     loadConfig();
-
     MainWindow w;
     w.show();
     return a.exec();

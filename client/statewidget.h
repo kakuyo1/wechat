@@ -3,10 +3,18 @@
 #include <QWidget>
 #include <QStyleOption>
 #include <QPainter>
+#include <QLabel>
+#include <QVBoxLayout>
 /*
     注意：这个类是一个用于侧边栏状态显示的widget，比如三态normal，hover和pressed状态下的图片的切换。
     右上角红点的显示...
 */
+
+enum class StateType {
+    Normal,
+    Hover,
+    Pressed
+};
 
 class StateWidget : public QWidget
 {
@@ -15,8 +23,12 @@ public:
     StateWidget(QWidget* parent = nullptr);
     ~StateWidget() = default;
     void setState(const QString& normal, const QString& hover, const QString& pressed);
+    void clearState();
+    void addRedPoint();
+    void showRedPoint(bool show = true);
+    StateType currentState() const;
 protected:
-    void paintEvent(QPaintEvent* event); // 重写绘制事件
+    void paintEvent(QPaintEvent* event) override; // 重写绘制事件
     virtual void mousePressEvent(QMouseEvent *event) override;
     virtual void mouseReleaseEvent(QMouseEvent *event) override;
     virtual void enterEvent(QEnterEvent *event) override; // normal to hover
@@ -25,6 +37,8 @@ private:
     QString _normalState;
     QString _hoverState;
     QString _pressedState;
+    QLabel* _redPointLabel;
+    StateType _currentState;
 signals:
     void clicked();
 };

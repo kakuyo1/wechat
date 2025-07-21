@@ -5,9 +5,12 @@ StateWidget::StateWidget(QWidget *parent) :
     QWidget(parent),
     _normalState(""),
     _hoverState(""),
-    _pressedState("")
+    _pressedState(""),
+    _redPointLabel(new QLabel(this)),
+    _currentState(StateType::Normal)
 {
-
+    setCursor(Qt::PointingHandCursor);
+    addRedPoint();
 }
 
 void StateWidget::setState(const QString& normal, const QString& hover, const QString& pressed)
@@ -20,8 +23,51 @@ void StateWidget::setState(const QString& normal, const QString& hover, const QS
     update();
 }
 
+void StateWidget::clearState()
+{
+    showRedPoint(false);
+    _currentState = StateType::Normal;
+    setProperty("state", _normalState);
+    repolish(this);
+    update();
+}
+
+void StateWidget::addRedPoint()
+{
+    QPixmap redPointPixmap(":/images/red_point.png");
+    QVBoxLayout* layout = new QVBoxLayout(this);
+    _redPointLabel->setObjectName("redPoint");
+    _redPointLabel->setAlignment(Qt::AlignCenter);
+    layout->setContentsMargins(0, 0, 0, 0);
+    layout->setSpacing(0);
+    layout->addWidget(_redPointLabel);
+    redPointPixmap = redPointPixmap.scaled(_redPointLabel->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    _redPointLabel->setScaledContents(true);
+    _redPointLabel->setPixmap(redPointPixmap);
+    setLayout(layout);
+    _redPointLabel->setVisible(false); // 默认隐藏红点
+}
+
+void StateWidget::showRedPoint(bool show)
+{
+    _redPointLabel->setVisible(show);
+}
+
+StateType StateWidget::currentState() const
+{
+    if (property("state") == _normalState) {
+        return StateType::Normal;
+    } else if (property("state") == _hoverState) {
+        return StateType::Hover;
+    } else if (property("state") == _pressedState) {
+        return StateType::Pressed;
+    }
+    return StateType::Normal; // 默认返回Normal状态
+}
+
 void StateWidget::paintEvent(QPaintEvent *event)
 {
+    Q_UNUSED(event);
     QStyleOption opt;
     opt.initFrom(this);
     QPainter p(this);

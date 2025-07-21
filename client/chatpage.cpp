@@ -3,6 +3,7 @@
 #include "textframe.h"
 #include "customized_textedit.h"
 #include "basemessageitem.h"
+#include "pictureframe.h"
 
 ChatPage::ChatPage(QWidget *parent)
     : QDialog(parent)
@@ -51,7 +52,7 @@ void ChatPage::on_send_btn_clicked()
             // 创建文本气泡
             BubbleWidget = new TextFrame(role, message.messageContent); // 多态
         } else if (message.messageType == "image") {
-            qDebug() << "Image message type not implemented yet.";
+            BubbleWidget = new PictureFrame(message.image, role);
         } else {
             qDebug() << "Unknown message type:" << message.messageType;
         }

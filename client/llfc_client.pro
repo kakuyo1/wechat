@@ -9,6 +9,7 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    addcontactitem.cpp \
     baselistitem.cpp \
     basemessageitem.cpp \
     bubbleframe.cpp \
@@ -16,6 +17,7 @@ SOURCES += \
     chatpage.cpp \
     chatviewarea.cpp \
     clickablelabel.cpp \
+    contactinfodata.cpp \
     customized_button.cpp \
     customized_editline.cpp \
     customized_label.cpp \
@@ -29,6 +31,8 @@ SOURCES += \
     pictureframe.cpp \
     registerdialog.cpp \
     resetpassworddialog.cpp \
+    searchcontactsuccesseddialog.cpp \
+    searchlist.cpp \
     sessionlist.cpp \
     sessionlistitem.cpp \
     statewidget.cpp \
@@ -37,6 +41,7 @@ SOURCES += \
     timerbutton.cpp
 
 HEADERS += \
+    addcontactitem.h \
     baselistitem.h \
     basemessageitem.h \
     bubbleframe.h \
@@ -44,6 +49,7 @@ HEADERS += \
     chatpage.h \
     chatviewarea.h \
     clickablelabel.h \
+    contactinfodata.h \
     customized_button.h \
     customized_editline.h \
     customized_label.h \
@@ -56,6 +62,8 @@ HEADERS += \
     pictureframe.h \
     registerdialog.h \
     resetpassworddialog.h \
+    searchcontactsuccesseddialog.h \
+    searchlist.h \
     sessionlist.h \
     sessionlistitem.h \
     singleton.h \
@@ -65,6 +73,7 @@ HEADERS += \
     timerbutton.h
 
 FORMS += \
+    addcontactitem.ui \
     chatdialog.ui \
     chatpage.ui \
     chatviewarea.ui \
@@ -72,6 +81,7 @@ FORMS += \
     mainwindow.ui \
     registerdialog.ui \
     resetpassworddialog.ui \
+    searchcontactsuccesseddialog.ui \
     sessionlistitem.ui
 
 # Default rules for deployment.
@@ -136,16 +146,32 @@ DISTFILES += \
     images/voice_chat_hover.png \
     images/voice_chat_normal.png \
     images/voice_chat_press.png \
-    images/wechat.png
+    images/wechat.png \
+    static/head_1.jpg
 
 # copy config.ini to build directory
-win32::CONFIG(debug, debug | release)
-{
-    TargetConfig = $${_PRO_FILE_PWD_}/config.ini
-    TargetConfig = $$replace(TargetConfig, /, \\) # TO ensure Windows compatibility
+# win32::CONFIG(debug, debug | release)
+# {
+#                 #------------------ 原有 config.ini 拷贝 ------------------
+#     TargetConfig = $${_PRO_FILE_PWD_}/config.ini
+#     TargetConfig = $$replace(TargetConfig, /, \\) # TO ensure Windows compatibility
 
-    OutputDir = $${OUT_PWD}/debug #DESTDIR is the directory where the executable will be placed
-    OutputDir = $$replace(OutputDir, /, \\)
+#     OutputDir = $${OUT_PWD}/debug #DESTDIR is the directory where the executable will be placed
+#     OutputDir = $$replace(OutputDir, /, \\)
 
-    system(copy /Y \"$$TargetConfig\" \"$$OutputDir\\config.ini\") # copy config.ini to build directory
+#     system(copy /Y \"$$TargetConfig\" \"$$OutputDir\\config.ini\") # copy config.ini to build directory
+#                  #------------------ 新增 static 文件夹拷贝 ------------------
+#     SourceStatic = $${_PRO_FILE_PWD_}/static
+#     SourceStatic = $$replace(SourceStatic, /, \\)
+#     DestStatic = $$OutputDir\\static
+#     system(xcopy /E /I /Y \"$$SourceStatic\" \"$$DestStatic\")
+# }
+message(PWD=$$PWD)
+message(OUT_PWD=$$OUT_PWD)
+win32 {
+    # 拷贝 config.ini
+    QMAKE_POST_LINK += $$QMAKE_COPY \"$$PWD/config.ini\" \"$$OUT_PWD/debug/config.ini\"
+
+    # 拷贝 static 整个目录
+    QMAKE_POST_LINK += $$QMAKE_COPY_DIR \"$$PWD/static\" \"$$OUT_PWD/debug/static\"
 }

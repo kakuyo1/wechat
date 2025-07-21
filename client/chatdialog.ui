@@ -57,7 +57,7 @@
        <number>0</number>
       </property>
       <property name="topMargin">
-       <number>30</number>
+       <number>40</number>
       </property>
       <property name="rightMargin">
        <number>0</number>
@@ -101,7 +101,7 @@
         <property name="sizeHint" stdset="0">
          <size>
           <width>20</width>
-          <height>40</height>
+          <height>30</height>
          </size>
         </property>
        </spacer>
@@ -267,9 +267,9 @@
        </widget>
       </item>
       <item>
-       <widget class="QListWidget" name="search_list">
+       <widget class="SearchList" name="search_list">
         <property name="styleSheet">
-         <string notr="true">background-color: rgb(59, 24, 255);</string>
+         <string notr="true"/>
         </property>
        </widget>
       </item>
@@ -280,6 +280,7 @@
     <widget class="QStackedWidget" name="stackedWidget">
      <widget class="ChatPage" name="chat_page"/>
      <widget class="QWidget" name="friend_apply_page"/>
+     <widget class="QWidget" name="contact_info_page"/>
     </widget>
    </item>
   </layout>
@@ -311,6 +312,11 @@
    <class>SessionList</class>
    <extends>QListWidget</extends>
    <header location="global">sessionlist.h</header>
+  </customwidget>
+  <customwidget>
+   <class>SearchList</class>
+   <extends>QListWidget</extends>
+   <header location="global">searchlist.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

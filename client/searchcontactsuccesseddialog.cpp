@@ -1,0 +1,49 @@
+#include "searchcontactsuccesseddialog.h"
+#include "ui_searchcontactsuccesseddialog.h"
+
+searchContactSuccessedDialog::searchContactSuccessedDialog(QWidget *parent)
+    : QDialog(parent)
+    , ui(new Ui::searchContactSuccessedDialog)
+{
+    ui->setupUi(this);
+    setWindowTitle("添加");
+    setWindowFlags(windowFlags() | Qt::FramelessWindowHint);
+    // 从static文件夹中获取要添加的头像(Icon path: "B:\\qt learing\\llfc_client\\build\\Desktop_Qt_6_9_0_MinGW_64_bit-Debug\\debug\\static\\head_1.jpg")
+    QString appPath = QCoreApplication::applicationDirPath();
+    QString iconPath = QDir::toNativeSeparators(appPath + QDir::separator() + "static" + QDir::separator() + "head_1.jpg");
+    QPixmap pixmap(iconPath);
+    if (!pixmap.isNull()) {
+        pixmap = pixmap.scaled(ui->icon_label->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        ui->icon_label->setPixmap(pixmap);
+    } else {
+        ui->icon_label->setText("头像加载失败");
+    }
+    // 设置按钮样式
+    ui->add_contact_btn->setState("normal", "hover", "pressed");
+    ui->cancel_btn->setState("normal", "hover", "pressed");
+    // 设置模态对话框
+    this->setModal(true);
+}
+
+searchContactSuccessedDialog::~searchContactSuccessedDialog()
+{
+    delete ui;
+}
+
+void searchContactSuccessedDialog::setContactInfo(std::shared_ptr<SearchInfo> contactInfo)
+{
+    ui->name_label->setText(contactInfo->getName());
+    _contactInfo = contactInfo;
+}
+
+void searchContactSuccessedDialog::on_add_contact_btn_clicked()
+{
+
+}
+
+
+void searchContactSuccessedDialog::on_cancel_btn_clicked()
+{
+
+}
+

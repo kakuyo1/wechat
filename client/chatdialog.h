@@ -7,6 +7,10 @@
 #include <QListWidgetItem>
 #include <QMovie>
 #include <QTimer>
+#include <statewidget.h>
+#include <QList>
+#include <QEvent>
+#include <QWidget>
 namespace Ui {
 class ChatDialog;
 }
@@ -22,10 +26,14 @@ private:
     void showSearchList(bool show);
     void Test_addSessionItem();
     virtual QSize sizeHint() const override;
+    void addSideBarButtons(StateWidget* button);
+protected:
+    virtual bool eventFilter(QObject* watched, QEvent* event) override;
 private:
     Ui::ChatDialog *ui;
     ChatUIMode chatUIMode;
     bool isLoading; // 是否正在加载会话列表;
+    QList<StateWidget*> sideBarButtons; // 侧边栏按钮列表
 private slots:
     void slot_load_more_sessionitems();
 };

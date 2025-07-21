@@ -75,8 +75,8 @@ void MainWindow::showChatDialog()
     chatDialog->setWindowFlags(Qt::CustomizeWindowHint|Qt::FramelessWindowHint);
     setCentralWidget(chatDialog); // will destroy the login widget
     chatDialog->show();
-    this->resize(QSize(800, 600));
-    this->setMinimumSize(QSize(400, 300));
+    this->resize(QSize(906, 600));
+    this->setMinimumSize(QSize(906, 600));
     this->setMaximumSize(QWIDGETSIZE_MAX, QWIDGETSIZE_MAX);
     qDebug() << "Chat dialog shown.";
 }

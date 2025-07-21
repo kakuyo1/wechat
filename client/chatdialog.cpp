@@ -12,6 +12,9 @@ ChatDialog::ChatDialog(QWidget *parent)
     ui->add_btn->setState("normal","hover","pressed"); // content_panal的添加好友按钮
     ui->side_chat_label->setState("normal","hover","pressed"); // 侧边栏的聊天按钮
     ui->side_contact_label->setState("normal","hover","pressed"); // 侧边栏的联系人按钮
+    addSideBarButtons(ui->side_chat_label);
+    addSideBarButtons(ui->side_contact_label);
+
     ui->search_lineEdit->setFocusPolicy(Qt::ClickFocus); // 设置搜索输入框的焦点策略为点击获取焦点
     // 初始显示chat_list,隐藏search_list和contact_list
     ui->chat_list->show();
@@ -26,10 +29,24 @@ ChatDialog::ChatDialog(QWidget *parent)
 
     // 设置搜索输入框焦点变化时搜索页面的显示和隐藏
     connect(ui->search_lineEdit, &Customized_EditLine::signal_focusIn, this, [this](){
-        showSearchList(true); // 当获得焦点时显示搜索列表
+        QTimer::singleShot(0, this, [this]() { // 延迟到事件循环再执行
+            showSearchList(true);
+        });
     });
     connect(ui->search_lineEdit, &Customized_EditLine::signal_focusOut, this, [this]() {
-        showSearchList(false); // 当失去焦点时隐藏搜索列表
+        // 延迟一点点时间判断，避免和 focusIn 同时发生冲突
+        QTimer::singleShot(0, this, [this]() {
+            if (!ui->search_lineEdit->hasFocus()) {
+                QPoint globalPos = QCursor::pos();
+                QRect searchRect = ui->search_list->rect();
+                QRect globalSearchRect(ui->search_list->mapToGlobal(searchRect.topLeft()),
+                                       ui->search_list->mapToGlobal(searchRect.bottomRight()));
+                if (!globalSearchRect.contains(globalPos)) {
+                    showSearchList(false);
+                    ui->search_lineEdit->clear();
+                }
+            }
+        });
     });
 
     // 设置侧边栏按钮的点击事件，进行contents_panal页面的切换
@@ -37,6 +54,8 @@ ChatDialog::ChatDialog(QWidget *parent)
         ui->contact_list->hide();
         ui->search_list->hide();
         ui->chat_list->show();
+        ui->side_chat_label->clearState(); // 清除聊天按钮的红点状态
+        ui->stackedWidget->setCurrentWidget(ui->chat_page); // 切换到聊天页面
         chatUIMode = ChatUIMode::ChatMode; // 切换到聊天模式
     });
 
@@ -44,11 +63,16 @@ ChatDialog::ChatDialog(QWidget *parent)
         ui->chat_list->hide();
         ui->search_list->hide();
         ui->contact_list->show();
+        ui->side_contact_label->clearState();
+        ui->stackedWidget->setCurrentWidget(ui->contact_info_page); // 切换到联系人页面
         chatUIMode = ChatUIMode::ContactMode; // 切换到联系人模式
     });
 
     // 设置会话列表的加载更多事件
     connect(ui->chat_list, &SessionList::signal_loading_sessionItems, this, &ChatDialog::slot_load_more_sessionitems);
+
+    // 安装事件过滤器
+    this->installEventFilter(this);
 
     // Test 添加会话列表项
     Test_addSessionItem();
@@ -94,6 +118,40 @@ void ChatDialog::Test_addSessionItem()
 QSize ChatDialog::sizeHint() const
 {
     return QSize(1225, 810);
+}
+
+void ChatDialog::addSideBarButtons(StateWidget *button)
+{
+    if (!button) return;
+    sideBarButtons.append(button);
+}
+
+bool ChatDialog::eventFilter(QObject *watched, QEvent *event)
+{
+     // 点击TextEdit不会触发该情况，因为点击TextEdit只是导致失去焦点，而不是点击事件
+    if (event->type() == QEvent::MouseButtonPress) {
+        QMouseEvent *mouseEvent = static_cast<QMouseEvent *>(event);
+        QPoint globalPos = mouseEvent->globalPosition().toPoint(); // 获取全局坐标;
+
+        // 计算 search_list 在全局的矩形
+        QRect searchRect = ui->search_list->rect();
+        QPoint topLeft = ui->search_list->mapToGlobal(searchRect.topLeft());
+        QPoint bottomRight = ui->search_list->mapToGlobal(searchRect.bottomRight());
+        QRect globalSearchRect(topLeft, bottomRight);
+
+        if (chatUIMode != ChatUIMode::SearchMode) {
+            return false;  // 不拦截，让事件继续
+        } else {
+            if (globalSearchRect.contains(globalPos)) {
+                return false; // 点击在 search_list 内，不处理
+            } else {
+                showSearchList(false);
+                ui->search_lineEdit->clear();
+                return true;
+            }
+        }
+    }
+    return QDialog::eventFilter(watched, event);
 }
 
 void ChatDialog::slot_load_more_sessionitems()
