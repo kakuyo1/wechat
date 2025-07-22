@@ -260,9 +260,9 @@
        </widget>
       </item>
       <item>
-       <widget class="QListWidget" name="contact_list">
+       <widget class="ContactList" name="contact_list">
         <property name="styleSheet">
-         <string notr="true">background-color: rgb(0, 255, 127);</string>
+         <string notr="true"/>
         </property>
        </widget>
       </item>
@@ -279,7 +279,7 @@
    <item>
     <widget class="QStackedWidget" name="stackedWidget">
      <widget class="ChatPage" name="chat_page"/>
-     <widget class="QWidget" name="friend_apply_page"/>
+     <widget class="QWidget" name="friend_request_page"/>
      <widget class="QWidget" name="contact_info_page"/>
     </widget>
    </item>
@@ -290,6 +290,11 @@
    <class>Customized_button</class>
    <extends>QPushButton</extends>
    <header location="global">customized_button.h</header>
+  </customwidget>
+  <customwidget>
+   <class>Customized_EditLine</class>
+   <extends>QLineEdit</extends>
+   <header location="global">customized_editline.h</header>
   </customwidget>
   <customwidget>
    <class>ChatPage</class>
@@ -304,11 +309,6 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>Customized_EditLine</class>
-   <extends>QLineEdit</extends>
-   <header location="global">customized_editline.h</header>
-  </customwidget>
-  <customwidget>
    <class>SessionList</class>
    <extends>QListWidget</extends>
    <header location="global">sessionlist.h</header>
@@ -317,6 +317,11 @@
    <class>SearchList</class>
    <extends>QListWidget</extends>
    <header location="global">searchlist.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ContactList</class>
+   <extends>QListWidget</extends>
+   <header location="global">contactlist.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

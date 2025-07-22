@@ -41,12 +41,15 @@ template <> constexpr inline auto ChatDialog::qt_create_metaobjectdata<qt_meta_t
     QtMocHelpers::StringRefStorage qt_stringData {
         "ChatDialog",
         "slot_load_more_sessionitems",
-        ""
+        "",
+        "slot_load_more_contactitems"
     };
 
     QtMocHelpers::UintData qt_methods {
         // Slot 'slot_load_more_sessionitems'
         QtMocHelpers::SlotData<void()>(1, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'slot_load_more_contactitems'
+        QtMocHelpers::SlotData<void()>(3, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -71,6 +74,7 @@ void ChatDialog::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
         case 0: _t->slot_load_more_sessionitems(); break;
+        case 1: _t->slot_load_more_contactitems(); break;
         default: ;
         }
     }
@@ -96,14 +100,14 @@ int ChatDialog::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 1)
+        if (_id < 2)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
+        _id -= 2;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 1)
+        if (_id < 2)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 1;
+        _id -= 2;
     }
     return _id;
 }

@@ -74,7 +74,10 @@ enum class ListItemType {
     SearchItem, // 搜索列表项
     AddContactTipItem, // 添加联系人提示项
     ContactItem, // 联系人列表项
-    NonClickableItem // 非点击项
+    AddContactItem, // 添加联系人项
+    ContactGroupTipItem, // 联系人分组提示项
+    NonClickableItem, // 非点击项
+    FriendRequestItem // 好友请求项
 };
 
 // roles for message

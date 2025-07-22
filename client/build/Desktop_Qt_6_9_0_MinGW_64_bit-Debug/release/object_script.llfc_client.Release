@@ -7,7 +7,10 @@ release/chatpage.o
 release/chatviewarea.o
 release/chosentag.o
 release/clickablelabel.o
+release/contactgrouptipitem.o
 release/contactinfodata.o
+release/contactlist.o
+release/contactlistitem.o
 release/customized_button.o
 release/customized_editline.o
 release/customized_label.o
@@ -41,6 +44,9 @@ release/moc_chatpage.o
 release/moc_chatviewarea.o
 release/moc_chosentag.o
 release/moc_clickablelabel.o
+release/moc_contactgrouptipitem.o
+release/moc_contactlist.o
+release/moc_contactlistitem.o
 release/moc_customized_button.o
 release/moc_customized_editline.o
 release/moc_customized_label.o

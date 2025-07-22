@@ -71,6 +71,9 @@ ChatDialog::ChatDialog(QWidget *parent)
     // 设置会话列表的加载更多事件
     connect(ui->chat_list, &SessionList::signal_loading_sessionItems, this, &ChatDialog::slot_load_more_sessionitems);
 
+    // 加上联系人列表的加载更多事件
+    connect(ui->contact_list, &ContactList::signal_load_contacts, this, &ChatDialog::slot_load_more_contactitems);
+
     // 安装事件过滤器
     this->installEventFilter(this);
 
@@ -112,6 +115,21 @@ void ChatDialog::Test_addSessionItem()
         listItem->setSizeHint(item->sizeHint()); // 设置列表项的大小提示
         ui->chat_list->addItem(listItem); // 添加列表项
         ui->chat_list->setItemWidget(listItem, item); // 设置列表项的widget
+    }
+}
+
+void ChatDialog::Test_AddMoreContacts()
+{
+    for (int i = 0; i < 13; ++i) {
+        int randomValue = QRandomGenerator::global()->bounded(100); // 生成0到99之间的随机整数
+        int head_i = randomValue%heads.size();
+        int name_i = randomValue%names.size();
+        auto *item = new ContactListItem(this);
+        item->setInfo(0, names[name_i], heads[head_i]);
+        QListWidgetItem *listItem = new QListWidgetItem();
+        listItem->setSizeHint(item->sizeHint()); // 设置列表项的大小提示
+        ui->contact_list->addItem(listItem); // 添加列表项
+        ui->contact_list->setItemWidget(listItem, item); // 设置列表项的widget
     }
 }
 
@@ -175,6 +193,35 @@ void ChatDialog::slot_load_more_sessionitems()
     // 模拟加载数据
     QTimer::singleShot(100, this, [this, loadingItem, loadingLabel]() {
         Test_addSessionItem(); // 测试添加更多会话项
+        // 模拟加载完成后移除加载动画
+        ui->chat_list->removeItemWidget(loadingItem);
+        delete loadingLabel; // 删除加载标签
+        delete loadingItem; // 删除加载项
+        isLoading = false; // 重置加载状态
+    });
+}
+
+void ChatDialog::slot_load_more_contactitems()
+{
+    /*进入槽函数后，首先往sessionlist增加加载gif动画效果
+     * ，设置模态窗口，然后加载sessionitems*/
+    if (isLoading) return;
+    isLoading = true;
+    // 动画效果
+    QLabel *loadingLabel = new QLabel(this);
+    QMovie *loadingMovie = new QMovie(":/images/loading.gif");
+    loadingLabel->setMovie(loadingMovie);
+    loadingLabel->setFixedSize(250, 70);
+    loadingLabel->setAlignment(Qt::AlignCenter);
+    loadingMovie->setScaledSize(QSize(50, 50));
+    QListWidgetItem *loadingItem = new QListWidgetItem();
+    loadingItem->setSizeHint(loadingLabel->sizeHint());
+    ui->contact_list->addItem(loadingItem);
+    ui->contact_list->setItemWidget(loadingItem, loadingLabel);
+    loadingMovie->start();
+    // 模拟加载数据
+    QTimer::singleShot(100, this, [this, loadingItem, loadingLabel]() {
+        Test_AddMoreContacts(); // 测试添加更多联系人项
         // 模拟加载完成后移除加载动画
         ui->chat_list->removeItemWidget(loadingItem);
         delete loadingLabel; // 删除加载标签

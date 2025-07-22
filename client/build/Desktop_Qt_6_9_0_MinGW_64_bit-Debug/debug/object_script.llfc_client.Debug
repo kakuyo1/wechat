@@ -7,7 +7,10 @@ debug/chatpage.o
 debug/chatviewarea.o
 debug/chosentag.o
 debug/clickablelabel.o
+debug/contactgrouptipitem.o
 debug/contactinfodata.o
+debug/contactlist.o
+debug/contactlistitem.o
 debug/customized_button.o
 debug/customized_editline.o
 debug/customized_label.o
@@ -41,6 +44,9 @@ debug/moc_chatpage.o
 debug/moc_chatviewarea.o
 debug/moc_chosentag.o
 debug/moc_clickablelabel.o
+debug/moc_contactgrouptipitem.o
+debug/moc_contactlist.o
+debug/moc_contactlistitem.o
 debug/moc_customized_button.o
 debug/moc_customized_editline.o
 debug/moc_customized_label.o

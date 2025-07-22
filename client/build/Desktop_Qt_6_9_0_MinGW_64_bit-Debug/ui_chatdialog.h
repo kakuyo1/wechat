@@ -14,12 +14,12 @@
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
-#include <QtWidgets/QListWidget>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 #include <chatpage.h>
+#include <contactlist.h>
 #include <customized_button.h>
 #include <customized_editline.h>
 #include <searchlist.h>
@@ -46,11 +46,11 @@ public:
     Customized_EditLine *search_lineEdit;
     Customized_button *add_btn;
     SessionList *chat_list;
-    QListWidget *contact_list;
+    ContactList *contact_list;
     SearchList *search_list;
     QStackedWidget *stackedWidget;
     ChatPage *chat_page;
-    QWidget *friend_apply_page;
+    QWidget *friend_request_page;
     QWidget *contact_info_page;
 
     void setupUi(QDialog *ChatDialog)
@@ -147,9 +147,9 @@ public:
 
         verticalLayout_2->addWidget(chat_list);
 
-        contact_list = new QListWidget(content_panal);
+        contact_list = new ContactList(content_panal);
         contact_list->setObjectName("contact_list");
-        contact_list->setStyleSheet(QString::fromUtf8("background-color: rgb(0, 255, 127);"));
+        contact_list->setStyleSheet(QString::fromUtf8(""));
 
         verticalLayout_2->addWidget(contact_list);
 
@@ -167,9 +167,9 @@ public:
         chat_page = new ChatPage();
         chat_page->setObjectName("chat_page");
         stackedWidget->addWidget(chat_page);
-        friend_apply_page = new QWidget();
-        friend_apply_page->setObjectName("friend_apply_page");
-        stackedWidget->addWidget(friend_apply_page);
+        friend_request_page = new QWidget();
+        friend_request_page->setObjectName("friend_request_page");
+        stackedWidget->addWidget(friend_request_page);
         contact_info_page = new QWidget();
         contact_info_page->setObjectName("contact_info_page");
         stackedWidget->addWidget(contact_info_page);

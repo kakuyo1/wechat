@@ -11,6 +11,7 @@
 #include <QList>
 #include <QEvent>
 #include <QWidget>
+#include "contactlist.h"
 namespace Ui {
 class ChatDialog;
 }
@@ -25,6 +26,7 @@ public:
 private:
     void showSearchList(bool show);
     void Test_addSessionItem();
+    void Test_AddMoreContacts();
     virtual QSize sizeHint() const override;
     void addSideBarButtons(StateWidget* button);
 protected:
@@ -32,10 +34,11 @@ protected:
 private:
     Ui::ChatDialog *ui;
     ChatUIMode chatUIMode;
-    bool isLoading; // 是否正在加载会话列表;
+    bool isLoading; // 是否正在加载会话/联系人列表;
     QList<StateWidget*> sideBarButtons; // 侧边栏按钮列表
 private slots:
     void slot_load_more_sessionitems();
+    void slot_load_more_contactitems();
 };
 
 #endif // CHATDIALOG_H

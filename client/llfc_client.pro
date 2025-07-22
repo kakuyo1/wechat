@@ -18,13 +18,19 @@ SOURCES += \
     chatviewarea.cpp \
     chosentag.cpp \
     clickablelabel.cpp \
+    contactgrouptipitem.cpp \
     contactinfodata.cpp \
+    contactlist.cpp \
+    contactlistitem.cpp \
     customized_button.cpp \
     customized_editline.cpp \
     customized_label.cpp \
     customized_textedit.cpp \
     forgetlabel.cpp \
     friendrequestdialog.cpp \
+    friendrequestlist.cpp \
+    friendrequestlistitem.cpp \
+    friendrequestpage.cpp \
     global.cpp \
     httpmanager.cpp \
     logindialog.cpp \
@@ -53,13 +59,19 @@ HEADERS += \
     chatviewarea.h \
     chosentag.h \
     clickablelabel.h \
+    contactgrouptipitem.h \
     contactinfodata.h \
+    contactlist.h \
+    contactlistitem.h \
     customized_button.h \
     customized_editline.h \
     customized_label.h \
     customized_textedit.h \
     forgetlabel.h \
     friendrequestdialog.h \
+    friendrequestlist.h \
+    friendrequestlistitem.h \
+    friendrequestpage.h \
     global.h \
     httpmanager.h \
     logindialog.h \
@@ -84,7 +96,11 @@ FORMS += \
     chatpage.ui \
     chatviewarea.ui \
     chosentag.ui \
+    contactgrouptipitem.ui \
+    contactlistitem.ui \
     friendrequestdialog.ui \
+    friendrequestlistitem.ui \
+    friendrequestpage.ui \
     logindialog.ui \
     mainwindow.ui \
     registerdialog.ui \
