@@ -75,7 +75,7 @@ void SearchList::slot_itemClicked(QListWidgetItem *item)
             qDebug() << "Dialog pointer is null";
             return;
         }
-
+        // 数据应该从服务器获取，这里只是模拟数据
         std::shared_ptr<SearchInfo> contactInfoPtr = std::make_shared<SearchInfo>(0, "张三", "小张", "这是一个测试用户", 1);
         _searchContactSuccessedDialog->setContactInfo(contactInfoPtr);
         _searchContactSuccessedDialog->show();

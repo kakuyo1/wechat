@@ -16,6 +16,7 @@ SOURCES += \
     chatdialog.cpp \
     chatpage.cpp \
     chatviewarea.cpp \
+    chosentag.cpp \
     clickablelabel.cpp \
     contactinfodata.cpp \
     customized_button.cpp \
@@ -23,6 +24,7 @@ SOURCES += \
     customized_label.cpp \
     customized_textedit.cpp \
     forgetlabel.cpp \
+    friendrequestdialog.cpp \
     global.cpp \
     httpmanager.cpp \
     logindialog.cpp \
@@ -36,6 +38,7 @@ SOURCES += \
     sessionlist.cpp \
     sessionlistitem.cpp \
     statewidget.cpp \
+    taglabel.cpp \
     tcpmanager.cpp \
     textframe.cpp \
     timerbutton.cpp
@@ -48,6 +51,7 @@ HEADERS += \
     chatdialog.h \
     chatpage.h \
     chatviewarea.h \
+    chosentag.h \
     clickablelabel.h \
     contactinfodata.h \
     customized_button.h \
@@ -55,6 +59,7 @@ HEADERS += \
     customized_label.h \
     customized_textedit.h \
     forgetlabel.h \
+    friendrequestdialog.h \
     global.h \
     httpmanager.h \
     logindialog.h \
@@ -68,6 +73,7 @@ HEADERS += \
     sessionlistitem.h \
     singleton.h \
     statewidget.h \
+    taglabel.h \
     tcpmanager.h \
     textframe.h \
     timerbutton.h
@@ -77,6 +83,8 @@ FORMS += \
     chatdialog.ui \
     chatpage.ui \
     chatviewarea.ui \
+    chosentag.ui \
+    friendrequestdialog.ui \
     logindialog.ui \
     mainwindow.ui \
     registerdialog.ui \

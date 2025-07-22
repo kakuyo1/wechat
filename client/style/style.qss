@@ -378,3 +378,156 @@ searchContactSuccessedDialog #cancel_btn[state='pressed']{
    border: 1px solid transparent;
    border-radius: 20px; /* 设置圆角 */
 }
+
+
+QDialog#FriendRequestDialog{
+    border: 2px solid #f1f1f1;
+    font-size: 14px;
+    background: #f7f7f8;
+}
+
+QDialog#FriendRequestDialog QScrollArea#scrollArea{
+    background: #f7f7f8;
+    border: none;
+}
+
+QDialog#FriendRequestDialog QWidget#scrollAreaWidgetContents{
+     background: #f7f7f8;
+}
+
+QDialog#FriendRequestDialog QLabel#title_label{
+    font-family: "Microsoft YaHei";
+    font-size: 16px;
+    font-weight: normal;
+}
+
+QDialog#FriendRequestDialog QWidget#request_widget QLabel{
+    color:rgb(140,140,140);
+    font-size: 14px;
+    font-family: "Microsoft YaHei";
+    height: 25px;
+}
+
+QDialog#FriendRequestDialog QWidget#request_widget Customized_EditLine#request_lineEdit,
+QDialog#FriendRequestDialog QWidget#request_widget Customized_EditLine#backup_lineEdit{
+    border: 1px solid #f7f7f8;
+    font-size: 14px;
+    font-family: "Microsoft YaHei";
+}
+
+QDialog#FriendRequestDialog QWidget#request_widget Customized_EditLine#tags_lineEdit {
+       border: none;
+       font-size: 14px;
+       font-family: "Microsoft YaHei";
+}
+
+QDialog#FriendRequestDialog QWidget#request_widget QLabel#moretags_icon{
+    border-image: url(:/images/arowdown.png);
+}
+
+QDialog#FriendRequestDialog QWidget#request_widget Customized_Label#tagLabel[state='normal'] {
+    padding: 2px;
+    background: #e1e1e1;
+    color: #1e1e1e;
+    border-radius: 10px;
+}
+
+QDialog#FriendRequestDialog QWidget#request_widget Customized_Label#tagLabel[state='hover'] {
+    padding: 2px;
+    background: #e1e1e1;
+    color: #1e1e1e;
+    border-radius: 10px;
+}
+
+QDialog#FriendRequestDialog QWidget#request_widget Customized_Label#tagLabel[state='pressed'] {
+    padding: 2px;
+    background: #e1e1e1;
+    color: #48bf56;
+    border-radius: 10px;
+}
+
+QDialog#FriendRequestDialog QWidget#input_tip_widget {
+    background: #d3eaf8;
+}
+
+QDialog#FriendRequestDialog QWidget#request_widget ChosenTag#chosenTag {
+    background: #daf6e7;
+    color: #48bf56;
+    border-radius: 10px;
+}
+
+QDialog#FriendRequestDialog#request_widget TagLabel#tip_label {
+    padding-left: 2px;
+    color:rgb(153,153,153);
+    font-size: 14px;
+    font-family: "Microsoft YaHei";
+}
+
+QDialog#FriendRequestDialog tags_grid_widget {
+   background: #fdfdfd;
+}
+
+Customized_Label#remove_label[state='normal'] {
+    border-image: url(:/images/tipclose.png);
+}
+
+Customized_Label#remove_label[state='hover'] {
+    border-image: url(:/images/tipclose.png);
+}
+
+Customized_Label#remove_label[state='pressed'] {
+    border-image: url(:/images/tipclose.png);
+}
+
+QDialog#FriendRequestDialog QWidget#buttons_widget Customized_button#confirm_btn[state='normal']  {
+    background: #f0f0f0;
+    color: #2cb46e;
+    font-size: 16px; /* 设置字体大小 */
+    font-family: "Microsoft YaHei"; /* 设置字体 */
+    border-radius: 20px; /* 设置圆角 */
+}
+
+QDialog#FriendRequestDialog QWidget#buttons_widget Customized_button#confirm_btn[state='hover'] {
+    background: #d2d2d2;
+    color: #2cb46e;
+    font-size: 16px; /* 设置字体大小 */
+    font-family: "Microsoft YaHei"; /* 设置字体 */
+    border-radius: 20px; /* 设置圆角 */
+}
+
+QDialog#FriendRequestDialog QWidget#buttons_widget Customized_button#confirm_btn[state='pressed'] {
+    background: #c6c6c6;
+    color: #2cb46e;
+    font-size: 16px; /* 设置字体大小 */
+    font-family: "Microsoft YaHei"; /* 设置字体 */
+    border-radius: 20px; /* 设置圆角 */
+}
+
+QDialog#FriendRequestDialog QWidget#buttons_widget Customized_button#cancel_btn[state='normal']  {
+    background: #f0f0f0;
+    color: #2e2f30;
+    font-size: 16px; /* 设置字体大小 */
+    font-family: "Microsoft YaHei"; /* 设置字体 */
+    border-radius: 20px; /* 设置圆角 */
+}
+
+QDialog#FriendRequestDialog QWidget#buttons_widget Customized_button#cancel_btn[state='hover'] {
+    background: #d2d2d2;
+    color: #2e2f30;
+    font-size: 16px; /* 设置字体大小 */
+    font-family: "Microsoft YaHei"; /* 设置字体 */
+    border-radius: 20px; /* 设置圆角 */
+}
+
+QDialog#FriendRequestDialog QWidget#buttons_widget Customized_button#cancel_btn[state='pressed'] {
+    background: #c6c6c6;
+    color: #2e2f30;
+    font-size: 16px; /* 设置字体大小 */
+    font-family: "Microsoft YaHei"; /* 设置字体 */
+    border-radius: 20px; /* 设置圆角 */
+}
+#all_tags_displayed {
+    background: #E8E8E8;
+    border: none;
+    border-radius: 4px;
+}

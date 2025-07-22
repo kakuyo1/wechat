@@ -5,6 +5,7 @@ release/bubbleframe.o
 release/chatdialog.o
 release/chatpage.o
 release/chatviewarea.o
+release/chosentag.o
 release/clickablelabel.o
 release/contactinfodata.o
 release/customized_button.o
@@ -12,6 +13,7 @@ release/customized_editline.o
 release/customized_label.o
 release/customized_textedit.o
 release/forgetlabel.o
+release/friendrequestdialog.o
 release/global.o
 release/httpmanager.o
 release/logindialog.o
@@ -25,6 +27,7 @@ release/searchlist.o
 release/sessionlist.o
 release/sessionlistitem.o
 release/statewidget.o
+release/taglabel.o
 release/tcpmanager.o
 release/textframe.o
 release/timerbutton.o
@@ -36,12 +39,14 @@ release/moc_bubbleframe.o
 release/moc_chatdialog.o
 release/moc_chatpage.o
 release/moc_chatviewarea.o
+release/moc_chosentag.o
 release/moc_clickablelabel.o
 release/moc_customized_button.o
 release/moc_customized_editline.o
 release/moc_customized_label.o
 release/moc_customized_textedit.o
 release/moc_forgetlabel.o
+release/moc_friendrequestdialog.o
 release/moc_httpmanager.o
 release/moc_logindialog.o
 release/moc_mainwindow.o
@@ -53,6 +58,7 @@ release/moc_searchlist.o
 release/moc_sessionlist.o
 release/moc_sessionlistitem.o
 release/moc_statewidget.o
+release/moc_taglabel.o
 release/moc_tcpmanager.o
 release/moc_textframe.o
 release/moc_timerbutton.o

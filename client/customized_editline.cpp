@@ -40,6 +40,11 @@ void Customized_EditLine::MsetMaxTextLength(int maxLength)
     maxTextLength = maxLength;
 }
 
+QAction *Customized_EditLine::getSearchAction() const
+{
+    return _searchAction; // 返回搜索图标的Action
+}
+
 void Customized_EditLine::limitInputLength(const QString &text)
 {
     if (text.length() > maxTextLength) {
@@ -61,6 +66,6 @@ void Customized_EditLine::equipWithClearButton()
 void Customized_EditLine::equipWithSearchAction()
 {
     // 添加搜索图标到输入框左侧
-    QAction *searchAction = new QAction(QIcon(searchIconPath),"", this);
-    this->addAction(searchAction, QLineEdit::LeadingPosition); // 添加到左侧
+    _searchAction = new QAction(QIcon(searchIconPath),"", this);
+    this->addAction(_searchAction, QLineEdit::LeadingPosition); // 添加到左侧
 }

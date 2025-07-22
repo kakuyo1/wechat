@@ -39,10 +39,14 @@ template <> constexpr inline auto Customized_Label::qt_create_metaobjectdata<qt_
 {
     namespace QMC = QtMocConstants;
     QtMocHelpers::StringRefStorage qt_stringData {
-        "Customized_Label"
+        "Customized_Label",
+        "clicked",
+        ""
     };
 
     QtMocHelpers::UintData qt_methods {
+        // Signal 'clicked'
+        QtMocHelpers::SignalData<void()>(1, 2, QMC::AccessPublic, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -64,10 +68,16 @@ Q_CONSTINIT const QMetaObject Customized_Label::staticMetaObject = { {
 void Customized_Label::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     auto *_t = static_cast<Customized_Label *>(_o);
-    (void)_t;
-    (void)_c;
-    (void)_id;
-    (void)_a;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: _t->clicked(); break;
+        default: ;
+        }
+    }
+    if (_c == QMetaObject::IndexOfMethod) {
+        if (QtMocHelpers::indexOfMethod<void (Customized_Label::*)()>(_a, &Customized_Label::clicked, 0))
+            return;
+    }
 }
 
 const QMetaObject *Customized_Label::metaObject() const
@@ -86,6 +96,24 @@ void *Customized_Label::qt_metacast(const char *_clname)
 int Customized_Label::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QLabel::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 1)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 1;
+    }
+    if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 1)
+            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
+        _id -= 1;
+    }
     return _id;
+}
+
+// SIGNAL 0
+void Customized_Label::clicked()
+{
+    QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
 }
 QT_WARNING_POP

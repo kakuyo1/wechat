@@ -2,7 +2,7 @@
 #define CUSTOMIZED_LABEL_H
 #include <QLabel>
 #include <QWidget>
-
+#include "global.h"
 /*
     注意：这个类不同于ClickableLabel，此类是一个自定义标签，可以
     用于任意label的normal，hover和pressed状态下图片的切换。
@@ -15,6 +15,8 @@ public:
     Customized_Label(QWidget* parent = nullptr);
     ~Customized_Label() = default;
     void setState(const QString& normal, const QString& hover, const QString& pressed);
+    bool getState() const;
+    void setSelected(bool selected);
 protected:
     virtual void mousePressEvent(QMouseEvent *event) override;
     virtual void mouseReleaseEvent(QMouseEvent *event) override;
@@ -24,6 +26,9 @@ private:
     QString _normalState;
     QString _hoverState;
     QString _pressedState;
+    bool _isSelected;
+signals:
+    void clicked();
 };
 
 #endif // CUSTOMIZED_LABEL_H

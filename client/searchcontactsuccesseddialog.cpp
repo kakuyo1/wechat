@@ -1,5 +1,6 @@
 #include "searchcontactsuccesseddialog.h"
 #include "ui_searchcontactsuccesseddialog.h"
+#include "friendrequestdialog.h"
 
 searchContactSuccessedDialog::searchContactSuccessedDialog(QWidget *parent)
     : QDialog(parent)
@@ -38,7 +39,11 @@ void searchContactSuccessedDialog::setContactInfo(std::shared_ptr<SearchInfo> co
 
 void searchContactSuccessedDialog::on_add_contact_btn_clicked()
 {
-
+    this->close();
+    auto friendRequestDialog = new FriendRequestDialog(parentWidget());
+    friendRequestDialog->setContactInfo(_contactInfo); // 设置联系人信息
+    friendRequestDialog->show(); // 显示添加好友对话框
+    friendRequestDialog->setModal(true);
 }
 
 
