@@ -4,6 +4,9 @@
 #include <QListWidget>
 #include "friendrequestlistitem.h"
 #include "global.h"
+#include <QEvent>
+#include <QWheelEvent>
+#include <QScrollBar>
 
 class FriendRequestList : public QListWidget
 {

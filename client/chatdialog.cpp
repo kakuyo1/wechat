@@ -74,6 +74,11 @@ ChatDialog::ChatDialog(QWidget *parent)
     // 加上联系人列表的加载更多事件
     connect(ui->contact_list, &ContactList::signal_load_contacts, this, &ChatDialog::slot_load_more_contactitems);
 
+    // 切换到好友申请页面
+    connect(ui->contact_list, &ContactList::signal_switchTo_friendRequestPage, this, [this]() {
+        ui->stackedWidget->setCurrentWidget(ui->friend_request_page); // 切换到好友申请页面
+    });
+
     // 安装事件过滤器
     this->installEventFilter(this);
 

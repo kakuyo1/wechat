@@ -4,7 +4,7 @@
 FriendRequestListItem::FriendRequestListItem(QWidget *parent)
     : BaseListItem(parent)
     , ui(new Ui::FriendRequestListItem)
-    , _requestInfo(std::make_shared<RequestInfo>())
+    , _requestInfo(nullptr)
     , _AlreadyAdded(false)
 {
     ui->setupUi(this);

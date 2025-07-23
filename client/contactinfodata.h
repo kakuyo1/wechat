@@ -48,6 +48,33 @@ public:
     int _status; // 请求状态
 };
 
+class AuthRequest {
+public:
+    AuthRequest(int uid, QString name, QString nickname, QString avatarPath,
+                int gender);
+    ~AuthRequest() = default;
+public:
+    int _uid;
+    QString _name;
+    QString _nickname;
+    QString _icon;
+    int _gender;
+};
+
+class AuthResponse {
+public:
+    AuthResponse(int peeruid, QString peername, QString peernickname,
+                 QString peericon, int peergender);
+    ~AuthResponse() = default;
+public:
+    int _peeruid;
+    QString _peername;
+    QString _peernickname;
+    QString _peericon;
+    int _peergender;
+};
+
+
 class UserInfo {
 public:
     UserInfo(int uid, QString name, QString avatarPath);

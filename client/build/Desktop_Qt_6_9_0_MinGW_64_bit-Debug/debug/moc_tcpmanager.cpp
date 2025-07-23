@@ -49,6 +49,9 @@ template <> constexpr inline auto TcpManager::qt_create_metaobjectdata<qt_meta_t
         "type",
         "jsondata",
         "signal_login_failed_online_already",
+        "signal_get_authResponse",
+        "std::shared_ptr<AuthResponse>",
+        "response",
         "slot_connect_to_chatserver",
         "serverInfo",
         "info",
@@ -70,12 +73,16 @@ template <> constexpr inline auto TcpManager::qt_create_metaobjectdata<qt_meta_t
         }}),
         // Signal 'signal_login_failed_online_already'
         QtMocHelpers::SignalData<void()>(10, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'slot_connect_to_chatserver'
-        QtMocHelpers::SlotData<void(serverInfo)>(11, 2, QMC::AccessPublic, QMetaType::Void, {{
+        // Signal 'signal_get_authResponse'
+        QtMocHelpers::SignalData<void(std::shared_ptr<AuthResponse>)>(11, 2, QMC::AccessPublic, QMetaType::Void, {{
             { 0x80000000 | 12, 13 },
         }}),
+        // Slot 'slot_connect_to_chatserver'
+        QtMocHelpers::SlotData<void(serverInfo)>(14, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 15, 16 },
+        }}),
         // Slot 'slot_send_data'
-        QtMocHelpers::SlotData<void(RequestType, const QString &)>(14, 2, QMC::AccessPublic, QMetaType::Void, {{
+        QtMocHelpers::SlotData<void(RequestType, const QString &)>(17, 2, QMC::AccessPublic, QMetaType::Void, {{
             { 0x80000000 | 7, 8 }, { QMetaType::QString, 9 },
         }}),
     };
@@ -106,8 +113,9 @@ void TcpManager::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 2: _t->signal_switchto_chatdialog(); break;
         case 3: _t->signal_send_data((*reinterpret_cast< std::add_pointer_t<RequestType>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2]))); break;
         case 4: _t->signal_login_failed_online_already(); break;
-        case 5: _t->slot_connect_to_chatserver((*reinterpret_cast< std::add_pointer_t<serverInfo>>(_a[1]))); break;
-        case 6: _t->slot_send_data((*reinterpret_cast< std::add_pointer_t<RequestType>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2]))); break;
+        case 5: _t->signal_get_authResponse((*reinterpret_cast< std::add_pointer_t<std::shared_ptr<AuthResponse>>>(_a[1]))); break;
+        case 6: _t->slot_connect_to_chatserver((*reinterpret_cast< std::add_pointer_t<serverInfo>>(_a[1]))); break;
+        case 7: _t->slot_send_data((*reinterpret_cast< std::add_pointer_t<RequestType>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2]))); break;
         default: ;
         }
     }
@@ -121,6 +129,8 @@ void TcpManager::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         if (QtMocHelpers::indexOfMethod<void (TcpManager::*)(RequestType , const QString & )>(_a, &TcpManager::signal_send_data, 3))
             return;
         if (QtMocHelpers::indexOfMethod<void (TcpManager::*)()>(_a, &TcpManager::signal_login_failed_online_already, 4))
+            return;
+        if (QtMocHelpers::indexOfMethod<void (TcpManager::*)(std::shared_ptr<AuthResponse> )>(_a, &TcpManager::signal_get_authResponse, 5))
             return;
     }
 }
@@ -148,14 +158,14 @@ int TcpManager::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 8;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 7)
+        if (_id < 8)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 7;
+        _id -= 8;
     }
     return _id;
 }
@@ -188,5 +198,11 @@ void TcpManager::signal_send_data(RequestType _t1, const QString & _t2)
 void TcpManager::signal_login_failed_online_already()
 {
     QMetaObject::activate(this, &staticMetaObject, 4, nullptr);
+}
+
+// SIGNAL 5
+void TcpManager::signal_get_authResponse(std::shared_ptr<AuthResponse> _t1)
+{
+    QMetaObject::activate<void>(this, &staticMetaObject, 5, nullptr, _t1);
 }
 QT_WARNING_POP

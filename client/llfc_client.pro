@@ -47,7 +47,8 @@ SOURCES += \
     taglabel.cpp \
     tcpmanager.cpp \
     textframe.cpp \
-    timerbutton.cpp
+    timerbutton.cpp \
+    usermanager.cpp
 
 HEADERS += \
     addcontactitem.h \
@@ -88,7 +89,8 @@ HEADERS += \
     taglabel.h \
     tcpmanager.h \
     textframe.h \
-    timerbutton.h
+    timerbutton.h \
+    usermanager.h
 
 FORMS += \
     addcontactitem.ui \

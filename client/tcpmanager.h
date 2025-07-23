@@ -8,6 +8,7 @@
 #include "global.h"
 #include "singleton.h"
 #include <memory>
+#include "contactinfodata.h"
 
 /***********************************************************************
  * loginDialog在收到StatusServer返回的（uid，token，port，host）后构建聊天服务器SeverInfo
@@ -59,6 +60,7 @@ signals:
     void signal_switchto_chatdialog();
     void signal_send_data(RequestType type, const QString& jsondata);
     void signal_login_failed_online_already();
+    void signal_get_authResponse(std::shared_ptr<AuthResponse> response);
 };
 
 #endif // TCPMANAGER_H

@@ -69,3 +69,15 @@ RequestInfo::RequestInfo(std::shared_ptr<AddContactRequest> addContactRequest) :
 {
 
 }
+
+AuthRequest::AuthRequest(int uid, QString name, QString nickname, QString avatarPath, int gender) :
+    _uid(uid), _name(name), _nickname(nickname), _icon(avatarPath), _gender(gender)
+{
+
+}
+
+AuthResponse::AuthResponse(int peeruid, QString peername, QString peernickname, QString peericon, int peergender) :
+    _peeruid(peeruid), _peername(peername), _peernickname(peernickname), _peericon(peericon), _peergender(peergender)
+{
+
+}

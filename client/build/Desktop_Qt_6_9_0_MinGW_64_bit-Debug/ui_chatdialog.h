@@ -22,6 +22,7 @@
 #include <contactlist.h>
 #include <customized_button.h>
 #include <customized_editline.h>
+#include <friendrequestpage.h>
 #include <searchlist.h>
 #include <sessionlist.h>
 #include <statewidget.h>
@@ -50,7 +51,7 @@ public:
     SearchList *search_list;
     QStackedWidget *stackedWidget;
     ChatPage *chat_page;
-    QWidget *friend_request_page;
+    FriendRequestPage *friend_request_page;
     QWidget *contact_info_page;
 
     void setupUi(QDialog *ChatDialog)
@@ -167,7 +168,7 @@ public:
         chat_page = new ChatPage();
         chat_page->setObjectName("chat_page");
         stackedWidget->addWidget(chat_page);
-        friend_request_page = new QWidget();
+        friend_request_page = new FriendRequestPage();
         friend_request_page->setObjectName("friend_request_page");
         stackedWidget->addWidget(friend_request_page);
         contact_info_page = new QWidget();
