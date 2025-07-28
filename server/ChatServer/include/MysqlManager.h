@@ -16,6 +16,8 @@ public:
     bool CheckEmailAndPasswordMatch(const std::string& email, const std::string& password, UserInfo& user_info);
     bool ResetPassword(const std::string& name, const std::string& new_password);
     UserInfo GetUserInfo(int uid);
+    std::shared_ptr<FullUserInfo> getFullUserInfo(int uid);
+    std::shared_ptr<FullUserInfo> getFullUserInfo(const std::string& name);
     bool CheckEmailExists(const std::string& email);
 private:
     MysqlManager();

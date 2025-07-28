@@ -31,3 +31,13 @@ bool MysqlManager::CheckEmailExists(const std::string &email)
 {
     return _dao->CheckEmailExists(email);
 }
+
+std::shared_ptr<FullUserInfo> MysqlManager::getFullUserInfo(int uid)
+{
+    return _dao->getFullUserInfo(uid);
+}
+
+std::shared_ptr<FullUserInfo> MysqlManager::getFullUserInfo(const std::string& name)
+{
+    return _dao->getFullUserInfo(name);
+}

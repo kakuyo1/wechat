@@ -17,7 +17,7 @@ void CServer::Start() {
             if (!ec) {
                 // Successfully accepted a new connection
                 spdlog::info("New connection accepted.");
-                self->_sessions[new_session->GetUUID()] = new_session;
+                self->_sessions[new_session->GetSessionId()] = new_session;
                 new_session->Start();
             } else {
                 spdlog::error("Failed to accept new connection: {}", ec.message());

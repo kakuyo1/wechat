@@ -382,3 +382,67 @@ bool MysqlDAO::CheckEmailExists(const std::string& email) {
         return false; // Error occurred while checking email existence
     }
 }
+
+std::shared_ptr<FullUserInfo> MysqlDAO::getFullUserInfo(int uid) {
+    auto con = _pool->GetConnection();
+    try {
+        if (con == nullptr) {
+            return nullptr; // Return nullptr on failure
+        }
+        std::unique_ptr<sql::PreparedStatement> stmt(con->con_->prepareStatement("SELECT * FROM user WHERE uid = ?"));
+        stmt->setInt(1, uid);
+        std::unique_ptr<sql::ResultSet> result(stmt->executeQuery());
+        if (result->next()) {
+            FullUserInfo user_info;
+            user_info.uid = result->getInt("uid");
+            user_info.gender = result->getInt("gender");
+            user_info.name = result->getString("name");
+            user_info.email = result->getString("email");
+            user_info.password = result->getString("password"); // Store the encrypted password
+            user_info.icon = result->getString("icon");
+            user_info.desc = result->getString("desc");
+            user_info.nickname = result->getString("nickname");
+            _pool->ReturnConnection(std::move(con));
+            return std::make_shared<FullUserInfo>(user_info); // Return the retrieved user info
+        }
+        _pool->ReturnConnection(std::move(con));
+        return nullptr; // Return nullptr if no record found
+    } catch (sql::SQLException& e) {
+        _pool->ReturnConnection(std::move(con));
+        spdlog::error("SQLException: {}", e.what());
+        spdlog::error("(MYSQL error code: {}, SQLState: {})", e.getErrorCode(), e.getSQLState());
+        return nullptr; // Return nullptr on error
+    }
+}
+
+std::shared_ptr<FullUserInfo> MysqlDAO::getFullUserInfo(const std::string& name) {
+    auto con = _pool->GetConnection();
+    try {
+        if (con == nullptr) {
+            return nullptr; // Return nullptr on failure
+        }
+        std::unique_ptr<sql::PreparedStatement> stmt(con->con_->prepareStatement("SELECT * FROM user WHERE name = ?"));
+        stmt->setString(1, name);
+        std::unique_ptr<sql::ResultSet> result(stmt->executeQuery());
+        if (result->next()) {
+            FullUserInfo user_info;
+            user_info.uid = result->getInt("uid");
+            user_info.gender = result->getInt("gender");
+            user_info.name = result->getString("name");
+            user_info.email = result->getString("email");
+            user_info.password = result->getString("password"); // Store the encrypted password
+            user_info.icon = result->getString("icon");
+            user_info.desc = result->getString("desc");
+            user_info.nickname = result->getString("nickname");
+            _pool->ReturnConnection(std::move(con));
+            return std::make_shared<FullUserInfo>(user_info); // Return the retrieved user info
+        }
+        _pool->ReturnConnection(std::move(con));
+        return nullptr; // Return nullptr if no record found
+    } catch (sql::SQLException& e) {
+        _pool->ReturnConnection(std::move(con));
+        spdlog::error("SQLException: {}", e.what());
+        spdlog::error("(MYSQL error code: {}, SQLState: {})", e.getErrorCode(), e.getSQLState());
+        return nullptr; // Return nullptr on error
+    }
+}

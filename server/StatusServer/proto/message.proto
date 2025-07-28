@@ -46,11 +46,6 @@ service StatusService {
 message AddFriendRequest {
     int32 from_uid = 1;
     int32 to_uid = 2;
-    int32 gender = 3;
-    string name = 4;
-    string desc = 5;
-    string nick = 6;
-    string icon = 7;
 }
 
 message AddFriendResponse {

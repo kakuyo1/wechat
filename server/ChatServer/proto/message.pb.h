@@ -1229,70 +1229,9 @@ class AddFriendRequest final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kNameFieldNumber = 4,
-    kDescFieldNumber = 5,
-    kNickFieldNumber = 6,
-    kIconFieldNumber = 7,
     kFromUidFieldNumber = 1,
     kToUidFieldNumber = 2,
-    kGenderFieldNumber = 3,
   };
-  // string name = 4;
-  void clear_name();
-  const std::string& name() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_name(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_name();
-  PROTOBUF_NODISCARD std::string* release_name();
-  void set_allocated_name(std::string* name);
-  private:
-  const std::string& _internal_name() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_name(const std::string& value);
-  std::string* _internal_mutable_name();
-  public:
-
-  // string desc = 5;
-  void clear_desc();
-  const std::string& desc() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_desc(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_desc();
-  PROTOBUF_NODISCARD std::string* release_desc();
-  void set_allocated_desc(std::string* desc);
-  private:
-  const std::string& _internal_desc() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_desc(const std::string& value);
-  std::string* _internal_mutable_desc();
-  public:
-
-  // string nick = 6;
-  void clear_nick();
-  const std::string& nick() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_nick(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_nick();
-  PROTOBUF_NODISCARD std::string* release_nick();
-  void set_allocated_nick(std::string* nick);
-  private:
-  const std::string& _internal_nick() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_nick(const std::string& value);
-  std::string* _internal_mutable_nick();
-  public:
-
-  // string icon = 7;
-  void clear_icon();
-  const std::string& icon() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_icon(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_icon();
-  PROTOBUF_NODISCARD std::string* release_icon();
-  void set_allocated_icon(std::string* icon);
-  private:
-  const std::string& _internal_icon() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_icon(const std::string& value);
-  std::string* _internal_mutable_icon();
-  public:
-
   // int32 from_uid = 1;
   void clear_from_uid();
   int32_t from_uid() const;
@@ -1311,15 +1250,6 @@ class AddFriendRequest final :
   void _internal_set_to_uid(int32_t value);
   public:
 
-  // int32 gender = 3;
-  void clear_gender();
-  int32_t gender() const;
-  void set_gender(int32_t value);
-  private:
-  int32_t _internal_gender() const;
-  void _internal_set_gender(int32_t value);
-  public:
-
   // @@protoc_insertion_point(class_scope:chat_message.AddFriendRequest)
  private:
   class _Internal;
@@ -1328,13 +1258,8 @@ class AddFriendRequest final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr desc_;
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr nick_;
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr icon_;
     int32_t from_uid_;
     int32_t to_uid_;
-    int32_t gender_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -2432,226 +2357,6 @@ inline void AddFriendRequest::_internal_set_to_uid(int32_t value) {
 inline void AddFriendRequest::set_to_uid(int32_t value) {
   _internal_set_to_uid(value);
   // @@protoc_insertion_point(field_set:chat_message.AddFriendRequest.to_uid)
-}
-
-// int32 gender = 3;
-inline void AddFriendRequest::clear_gender() {
-  _impl_.gender_ = 0;
-}
-inline int32_t AddFriendRequest::_internal_gender() const {
-  return _impl_.gender_;
-}
-inline int32_t AddFriendRequest::gender() const {
-  // @@protoc_insertion_point(field_get:chat_message.AddFriendRequest.gender)
-  return _internal_gender();
-}
-inline void AddFriendRequest::_internal_set_gender(int32_t value) {
-  
-  _impl_.gender_ = value;
-}
-inline void AddFriendRequest::set_gender(int32_t value) {
-  _internal_set_gender(value);
-  // @@protoc_insertion_point(field_set:chat_message.AddFriendRequest.gender)
-}
-
-// string name = 4;
-inline void AddFriendRequest::clear_name() {
-  _impl_.name_.ClearToEmpty();
-}
-inline const std::string& AddFriendRequest::name() const {
-  // @@protoc_insertion_point(field_get:chat_message.AddFriendRequest.name)
-  return _internal_name();
-}
-template <typename ArgT0, typename... ArgT>
-inline PROTOBUF_ALWAYS_INLINE
-void AddFriendRequest::set_name(ArgT0&& arg0, ArgT... args) {
- 
- _impl_.name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:chat_message.AddFriendRequest.name)
-}
-inline std::string* AddFriendRequest::mutable_name() {
-  std::string* _s = _internal_mutable_name();
-  // @@protoc_insertion_point(field_mutable:chat_message.AddFriendRequest.name)
-  return _s;
-}
-inline const std::string& AddFriendRequest::_internal_name() const {
-  return _impl_.name_.Get();
-}
-inline void AddFriendRequest::_internal_set_name(const std::string& value) {
-  
-  _impl_.name_.Set(value, GetArenaForAllocation());
-}
-inline std::string* AddFriendRequest::_internal_mutable_name() {
-  
-  return _impl_.name_.Mutable(GetArenaForAllocation());
-}
-inline std::string* AddFriendRequest::release_name() {
-  // @@protoc_insertion_point(field_release:chat_message.AddFriendRequest.name)
-  return _impl_.name_.Release();
-}
-inline void AddFriendRequest::set_allocated_name(std::string* name) {
-  if (name != nullptr) {
-    
-  } else {
-    
-  }
-  _impl_.name_.SetAllocated(name, GetArenaForAllocation());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.name_.IsDefault()) {
-    _impl_.name_.Set("", GetArenaForAllocation());
-  }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:chat_message.AddFriendRequest.name)
-}
-
-// string desc = 5;
-inline void AddFriendRequest::clear_desc() {
-  _impl_.desc_.ClearToEmpty();
-}
-inline const std::string& AddFriendRequest::desc() const {
-  // @@protoc_insertion_point(field_get:chat_message.AddFriendRequest.desc)
-  return _internal_desc();
-}
-template <typename ArgT0, typename... ArgT>
-inline PROTOBUF_ALWAYS_INLINE
-void AddFriendRequest::set_desc(ArgT0&& arg0, ArgT... args) {
- 
- _impl_.desc_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:chat_message.AddFriendRequest.desc)
-}
-inline std::string* AddFriendRequest::mutable_desc() {
-  std::string* _s = _internal_mutable_desc();
-  // @@protoc_insertion_point(field_mutable:chat_message.AddFriendRequest.desc)
-  return _s;
-}
-inline const std::string& AddFriendRequest::_internal_desc() const {
-  return _impl_.desc_.Get();
-}
-inline void AddFriendRequest::_internal_set_desc(const std::string& value) {
-  
-  _impl_.desc_.Set(value, GetArenaForAllocation());
-}
-inline std::string* AddFriendRequest::_internal_mutable_desc() {
-  
-  return _impl_.desc_.Mutable(GetArenaForAllocation());
-}
-inline std::string* AddFriendRequest::release_desc() {
-  // @@protoc_insertion_point(field_release:chat_message.AddFriendRequest.desc)
-  return _impl_.desc_.Release();
-}
-inline void AddFriendRequest::set_allocated_desc(std::string* desc) {
-  if (desc != nullptr) {
-    
-  } else {
-    
-  }
-  _impl_.desc_.SetAllocated(desc, GetArenaForAllocation());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.desc_.IsDefault()) {
-    _impl_.desc_.Set("", GetArenaForAllocation());
-  }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:chat_message.AddFriendRequest.desc)
-}
-
-// string nick = 6;
-inline void AddFriendRequest::clear_nick() {
-  _impl_.nick_.ClearToEmpty();
-}
-inline const std::string& AddFriendRequest::nick() const {
-  // @@protoc_insertion_point(field_get:chat_message.AddFriendRequest.nick)
-  return _internal_nick();
-}
-template <typename ArgT0, typename... ArgT>
-inline PROTOBUF_ALWAYS_INLINE
-void AddFriendRequest::set_nick(ArgT0&& arg0, ArgT... args) {
- 
- _impl_.nick_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:chat_message.AddFriendRequest.nick)
-}
-inline std::string* AddFriendRequest::mutable_nick() {
-  std::string* _s = _internal_mutable_nick();
-  // @@protoc_insertion_point(field_mutable:chat_message.AddFriendRequest.nick)
-  return _s;
-}
-inline const std::string& AddFriendRequest::_internal_nick() const {
-  return _impl_.nick_.Get();
-}
-inline void AddFriendRequest::_internal_set_nick(const std::string& value) {
-  
-  _impl_.nick_.Set(value, GetArenaForAllocation());
-}
-inline std::string* AddFriendRequest::_internal_mutable_nick() {
-  
-  return _impl_.nick_.Mutable(GetArenaForAllocation());
-}
-inline std::string* AddFriendRequest::release_nick() {
-  // @@protoc_insertion_point(field_release:chat_message.AddFriendRequest.nick)
-  return _impl_.nick_.Release();
-}
-inline void AddFriendRequest::set_allocated_nick(std::string* nick) {
-  if (nick != nullptr) {
-    
-  } else {
-    
-  }
-  _impl_.nick_.SetAllocated(nick, GetArenaForAllocation());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.nick_.IsDefault()) {
-    _impl_.nick_.Set("", GetArenaForAllocation());
-  }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:chat_message.AddFriendRequest.nick)
-}
-
-// string icon = 7;
-inline void AddFriendRequest::clear_icon() {
-  _impl_.icon_.ClearToEmpty();
-}
-inline const std::string& AddFriendRequest::icon() const {
-  // @@protoc_insertion_point(field_get:chat_message.AddFriendRequest.icon)
-  return _internal_icon();
-}
-template <typename ArgT0, typename... ArgT>
-inline PROTOBUF_ALWAYS_INLINE
-void AddFriendRequest::set_icon(ArgT0&& arg0, ArgT... args) {
- 
- _impl_.icon_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:chat_message.AddFriendRequest.icon)
-}
-inline std::string* AddFriendRequest::mutable_icon() {
-  std::string* _s = _internal_mutable_icon();
-  // @@protoc_insertion_point(field_mutable:chat_message.AddFriendRequest.icon)
-  return _s;
-}
-inline const std::string& AddFriendRequest::_internal_icon() const {
-  return _impl_.icon_.Get();
-}
-inline void AddFriendRequest::_internal_set_icon(const std::string& value) {
-  
-  _impl_.icon_.Set(value, GetArenaForAllocation());
-}
-inline std::string* AddFriendRequest::_internal_mutable_icon() {
-  
-  return _impl_.icon_.Mutable(GetArenaForAllocation());
-}
-inline std::string* AddFriendRequest::release_icon() {
-  // @@protoc_insertion_point(field_release:chat_message.AddFriendRequest.icon)
-  return _impl_.icon_.Release();
-}
-inline void AddFriendRequest::set_allocated_icon(std::string* icon) {
-  if (icon != nullptr) {
-    
-  } else {
-    
-  }
-  _impl_.icon_.SetAllocated(icon, GetArenaForAllocation());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.icon_.IsDefault()) {
-    _impl_.icon_.Set("", GetArenaForAllocation());
-  }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:chat_message.AddFriendRequest.icon)
 }
 
 // -------------------------------------------------------------------

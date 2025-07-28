@@ -109,13 +109,8 @@ struct LoginResponseDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 LoginResponseDefaultTypeInternal _LoginResponse_default_instance_;
 PROTOBUF_CONSTEXPR AddFriendRequest::AddFriendRequest(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.desc_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.nick_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.icon_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.from_uid_)*/0
+    /*decltype(_impl_.from_uid_)*/0
   , /*decltype(_impl_.to_uid_)*/0
-  , /*decltype(_impl_.gender_)*/0
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct AddFriendRequestDefaultTypeInternal {
   PROTOBUF_CONSTEXPR AddFriendRequestDefaultTypeInternal()
@@ -234,11 +229,6 @@ const uint32_t TableStruct_message_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::message::AddFriendRequest, _impl_.from_uid_),
   PROTOBUF_FIELD_OFFSET(::message::AddFriendRequest, _impl_.to_uid_),
-  PROTOBUF_FIELD_OFFSET(::message::AddFriendRequest, _impl_.gender_),
-  PROTOBUF_FIELD_OFFSET(::message::AddFriendRequest, _impl_.name_),
-  PROTOBUF_FIELD_OFFSET(::message::AddFriendRequest, _impl_.desc_),
-  PROTOBUF_FIELD_OFFSET(::message::AddFriendRequest, _impl_.nick_),
-  PROTOBUF_FIELD_OFFSET(::message::AddFriendRequest, _impl_.icon_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::message::AddFriendResponse, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -274,9 +264,9 @@ static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protode
   { 33, -1, -1, sizeof(::message::LoginRequest)},
   { 41, -1, -1, sizeof(::message::LoginResponse)},
   { 50, -1, -1, sizeof(::message::AddFriendRequest)},
-  { 63, -1, -1, sizeof(::message::AddFriendResponse)},
-  { 72, -1, -1, sizeof(::message::AuthFriendRequest)},
-  { 80, -1, -1, sizeof(::message::AuthFriendResponse)},
+  { 58, -1, -1, sizeof(::message::AddFriendResponse)},
+  { 67, -1, -1, sizeof(::message::AuthFriendRequest)},
+  { 75, -1, -1, sizeof(::message::AuthFriendResponse)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -301,30 +291,28 @@ const char descriptor_table_protodef_message_2eproto[] PROTOBUF_SECTION_VARIABLE
   "\005\022\014\n\004host\030\002 \001(\t\022\014\n\004port\030\003 \001(\t\022\r\n\005token\030\004"
   " \001(\t\"*\n\014LoginRequest\022\013\n\003uid\030\001 \001(\005\022\r\n\005tok"
   "en\030\002 \001(\t\":\n\rLoginResponse\022\r\n\005error\030\001 \001(\005"
-  "\022\013\n\003uid\030\002 \001(\005\022\r\n\005token\030\003 \001(\t\"|\n\020AddFrien"
+  "\022\013\n\003uid\030\002 \001(\005\022\r\n\005token\030\003 \001(\t\"4\n\020AddFrien"
   "dRequest\022\020\n\010from_uid\030\001 \001(\005\022\016\n\006to_uid\030\002 \001"
-  "(\005\022\016\n\006gender\030\003 \001(\005\022\014\n\004name\030\004 \001(\t\022\014\n\004desc"
-  "\030\005 \001(\t\022\014\n\004nick\030\006 \001(\t\022\014\n\004icon\030\007 \001(\t\"D\n\021Ad"
-  "dFriendResponse\022\r\n\005error\030\001 \001(\005\022\020\n\010from_u"
-  "id\030\002 \001(\005\022\016\n\006to_uid\030\003 \001(\005\"5\n\021AuthFriendRe"
-  "quest\022\020\n\010from_uid\030\001 \001(\005\022\016\n\006to_uid\030\002 \001(\005\""
-  "E\n\022AuthFriendResponse\022\r\n\005error\030\001 \001(\005\022\020\n\010"
-  "from_uid\030\002 \001(\005\022\016\n\006to_uid\030\003 \001(\0052Y\n\rVerify"
-  "Service\022H\n\rGetVerifyCode\022\031.message.GetVe"
-  "rifyRequest\032\032.message.GetVerifyResponse\""
-  "\0002\233\001\n\rStatusService\022P\n\rGetChatServer\022\035.m"
-  "essage.GetChatServerRequest\032\036.message.Ge"
-  "tChatServerResponse\"\000\0228\n\005Login\022\025.message"
-  ".LoginRequest\032\026.message.LoginResponse\"\0002"
-  "\250\001\n\013ChatService\022J\n\017NotifyAddFriend\022\031.mes"
-  "sage.AddFriendRequest\032\032.message.AddFrien"
-  "dResponse\"\000\022M\n\020NotifyAuthFriend\022\032.messag"
-  "e.AuthFriendRequest\032\033.message.AuthFriend"
-  "Response\"\000b\006proto3"
+  "(\005\"D\n\021AddFriendResponse\022\r\n\005error\030\001 \001(\005\022\020"
+  "\n\010from_uid\030\002 \001(\005\022\016\n\006to_uid\030\003 \001(\005\"5\n\021Auth"
+  "FriendRequest\022\020\n\010from_uid\030\001 \001(\005\022\016\n\006to_ui"
+  "d\030\002 \001(\005\"E\n\022AuthFriendResponse\022\r\n\005error\030\001"
+  " \001(\005\022\020\n\010from_uid\030\002 \001(\005\022\016\n\006to_uid\030\003 \001(\0052Y"
+  "\n\rVerifyService\022H\n\rGetVerifyCode\022\031.messa"
+  "ge.GetVerifyRequest\032\032.message.GetVerifyR"
+  "esponse\"\0002\233\001\n\rStatusService\022P\n\rGetChatSe"
+  "rver\022\035.message.GetChatServerRequest\032\036.me"
+  "ssage.GetChatServerResponse\"\000\0228\n\005Login\022\025"
+  ".message.LoginRequest\032\026.message.LoginRes"
+  "ponse\"\0002\250\001\n\013ChatService\022J\n\017NotifyAddFrie"
+  "nd\022\031.message.AddFriendRequest\032\032.message."
+  "AddFriendResponse\"\000\022M\n\020NotifyAuthFriend\022"
+  "\032.message.AuthFriendRequest\032\033.message.Au"
+  "thFriendResponse\"\000b\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_message_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_message_2eproto = {
-    false, false, 1098, descriptor_table_protodef_message_2eproto,
+    false, false, 1026, descriptor_table_protodef_message_2eproto,
     "message.proto",
     &descriptor_table_message_2eproto_once, nullptr, 0, 10,
     schemas, file_default_instances, TableStruct_message_2eproto::offsets,
@@ -1839,51 +1827,14 @@ AddFriendRequest::AddFriendRequest(const AddFriendRequest& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   AddFriendRequest* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.name_){}
-    , decltype(_impl_.desc_){}
-    , decltype(_impl_.nick_){}
-    , decltype(_impl_.icon_){}
-    , decltype(_impl_.from_uid_){}
+      decltype(_impl_.from_uid_){}
     , decltype(_impl_.to_uid_){}
-    , decltype(_impl_.gender_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  _impl_.name_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.name_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_name().empty()) {
-    _this->_impl_.name_.Set(from._internal_name(), 
-      _this->GetArenaForAllocation());
-  }
-  _impl_.desc_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.desc_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_desc().empty()) {
-    _this->_impl_.desc_.Set(from._internal_desc(), 
-      _this->GetArenaForAllocation());
-  }
-  _impl_.nick_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.nick_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_nick().empty()) {
-    _this->_impl_.nick_.Set(from._internal_nick(), 
-      _this->GetArenaForAllocation());
-  }
-  _impl_.icon_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.icon_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_icon().empty()) {
-    _this->_impl_.icon_.Set(from._internal_icon(), 
-      _this->GetArenaForAllocation());
-  }
   ::memcpy(&_impl_.from_uid_, &from._impl_.from_uid_,
-    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.gender_) -
-    reinterpret_cast<char*>(&_impl_.from_uid_)) + sizeof(_impl_.gender_));
+    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.to_uid_) -
+    reinterpret_cast<char*>(&_impl_.from_uid_)) + sizeof(_impl_.to_uid_));
   // @@protoc_insertion_point(copy_constructor:message.AddFriendRequest)
 }
 
@@ -1892,31 +1843,10 @@ inline void AddFriendRequest::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.name_){}
-    , decltype(_impl_.desc_){}
-    , decltype(_impl_.nick_){}
-    , decltype(_impl_.icon_){}
-    , decltype(_impl_.from_uid_){0}
+      decltype(_impl_.from_uid_){0}
     , decltype(_impl_.to_uid_){0}
-    , decltype(_impl_.gender_){0}
     , /*decltype(_impl_._cached_size_)*/{}
   };
-  _impl_.name_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.name_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  _impl_.desc_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.desc_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  _impl_.nick_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.nick_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  _impl_.icon_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.icon_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
 AddFriendRequest::~AddFriendRequest() {
@@ -1930,10 +1860,6 @@ AddFriendRequest::~AddFriendRequest() {
 
 inline void AddFriendRequest::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  _impl_.name_.Destroy();
-  _impl_.desc_.Destroy();
-  _impl_.nick_.Destroy();
-  _impl_.icon_.Destroy();
 }
 
 void AddFriendRequest::SetCachedSize(int size) const {
@@ -1946,13 +1872,9 @@ void AddFriendRequest::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.name_.ClearToEmpty();
-  _impl_.desc_.ClearToEmpty();
-  _impl_.nick_.ClearToEmpty();
-  _impl_.icon_.ClearToEmpty();
   ::memset(&_impl_.from_uid_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&_impl_.gender_) -
-      reinterpret_cast<char*>(&_impl_.from_uid_)) + sizeof(_impl_.gender_));
+      reinterpret_cast<char*>(&_impl_.to_uid_) -
+      reinterpret_cast<char*>(&_impl_.from_uid_)) + sizeof(_impl_.to_uid_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -1975,54 +1897,6 @@ const char* AddFriendRequest::_InternalParse(const char* ptr, ::_pbi::ParseConte
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
           _impl_.to_uid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // int32 gender = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 24)) {
-          _impl_.gender_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // string name = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
-          auto str = _internal_mutable_name();
-          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "message.AddFriendRequest.name"));
-        } else
-          goto handle_unusual;
-        continue;
-      // string desc = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 42)) {
-          auto str = _internal_mutable_desc();
-          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "message.AddFriendRequest.desc"));
-        } else
-          goto handle_unusual;
-        continue;
-      // string nick = 6;
-      case 6:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 50)) {
-          auto str = _internal_mutable_nick();
-          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "message.AddFriendRequest.nick"));
-        } else
-          goto handle_unusual;
-        continue;
-      // string icon = 7;
-      case 7:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 58)) {
-          auto str = _internal_mutable_icon();
-          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "message.AddFriendRequest.icon"));
         } else
           goto handle_unusual;
         continue;
@@ -2067,52 +1941,6 @@ uint8_t* AddFriendRequest::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteInt32ToArray(2, this->_internal_to_uid(), target);
   }
 
-  // int32 gender = 3;
-  if (this->_internal_gender() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt32ToArray(3, this->_internal_gender(), target);
-  }
-
-  // string name = 4;
-  if (!this->_internal_name().empty()) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_name().data(), static_cast<int>(this->_internal_name().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "message.AddFriendRequest.name");
-    target = stream->WriteStringMaybeAliased(
-        4, this->_internal_name(), target);
-  }
-
-  // string desc = 5;
-  if (!this->_internal_desc().empty()) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_desc().data(), static_cast<int>(this->_internal_desc().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "message.AddFriendRequest.desc");
-    target = stream->WriteStringMaybeAliased(
-        5, this->_internal_desc(), target);
-  }
-
-  // string nick = 6;
-  if (!this->_internal_nick().empty()) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_nick().data(), static_cast<int>(this->_internal_nick().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "message.AddFriendRequest.nick");
-    target = stream->WriteStringMaybeAliased(
-        6, this->_internal_nick(), target);
-  }
-
-  // string icon = 7;
-  if (!this->_internal_icon().empty()) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_icon().data(), static_cast<int>(this->_internal_icon().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "message.AddFriendRequest.icon");
-    target = stream->WriteStringMaybeAliased(
-        7, this->_internal_icon(), target);
-  }
-
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -2129,34 +1957,6 @@ size_t AddFriendRequest::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string name = 4;
-  if (!this->_internal_name().empty()) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_name());
-  }
-
-  // string desc = 5;
-  if (!this->_internal_desc().empty()) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_desc());
-  }
-
-  // string nick = 6;
-  if (!this->_internal_nick().empty()) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_nick());
-  }
-
-  // string icon = 7;
-  if (!this->_internal_icon().empty()) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_icon());
-  }
-
   // int32 from_uid = 1;
   if (this->_internal_from_uid() != 0) {
     total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_from_uid());
@@ -2165,11 +1965,6 @@ size_t AddFriendRequest::ByteSizeLong() const {
   // int32 to_uid = 2;
   if (this->_internal_to_uid() != 0) {
     total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_to_uid());
-  }
-
-  // int32 gender = 3;
-  if (this->_internal_gender() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_gender());
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -2190,26 +1985,11 @@ void AddFriendRequest::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (!from._internal_name().empty()) {
-    _this->_internal_set_name(from._internal_name());
-  }
-  if (!from._internal_desc().empty()) {
-    _this->_internal_set_desc(from._internal_desc());
-  }
-  if (!from._internal_nick().empty()) {
-    _this->_internal_set_nick(from._internal_nick());
-  }
-  if (!from._internal_icon().empty()) {
-    _this->_internal_set_icon(from._internal_icon());
-  }
   if (from._internal_from_uid() != 0) {
     _this->_internal_set_from_uid(from._internal_from_uid());
   }
   if (from._internal_to_uid() != 0) {
     _this->_internal_set_to_uid(from._internal_to_uid());
-  }
-  if (from._internal_gender() != 0) {
-    _this->_internal_set_gender(from._internal_gender());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -2227,28 +2007,10 @@ bool AddFriendRequest::IsInitialized() const {
 
 void AddFriendRequest::InternalSwap(AddFriendRequest* other) {
   using std::swap;
-  auto* lhs_arena = GetArenaForAllocation();
-  auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.name_, lhs_arena,
-      &other->_impl_.name_, rhs_arena
-  );
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.desc_, lhs_arena,
-      &other->_impl_.desc_, rhs_arena
-  );
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.nick_, lhs_arena,
-      &other->_impl_.nick_, rhs_arena
-  );
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.icon_, lhs_arena,
-      &other->_impl_.icon_, rhs_arena
-  );
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(AddFriendRequest, _impl_.gender_)
-      + sizeof(AddFriendRequest::_impl_.gender_)
+      PROTOBUF_FIELD_OFFSET(AddFriendRequest, _impl_.to_uid_)
+      + sizeof(AddFriendRequest::_impl_.to_uid_)
       - PROTOBUF_FIELD_OFFSET(AddFriendRequest, _impl_.from_uid_)>(
           reinterpret_cast<char*>(&_impl_.from_uid_),
           reinterpret_cast<char*>(&other->_impl_.from_uid_));

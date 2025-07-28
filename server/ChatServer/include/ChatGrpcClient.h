@@ -1,3 +1,4 @@
+#pragma once
 #include "config.h"
 #include "../proto/message.grpc.pb.h"
 #include "../proto/message.pb.h"
@@ -13,6 +14,9 @@
 #include <spdlog/spdlog.h>
 #include <unordered_map>
 #include <iostream>
+#include "RedisManager.h"
+#include "MysqlManager.h"
+
 
 using grpc::Channel;
 using grpc::ClientContext;
@@ -53,5 +57,5 @@ public:
 private:
     ChatGrpcClient();
     /* serverIP(chat1, chat2...) : stubPool*/
-    std::unordered_map<std::string, std::shared_ptr<ChatStubPool>> _stubPools;
+    std::unordered_map<std::string, std::unique_ptr<ChatStubPool>> _stubPools;
 };

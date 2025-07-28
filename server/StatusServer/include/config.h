@@ -23,6 +23,13 @@ enum class ErrorCodes {
 
 const std::string code_prefix = "code_"; // Prefix for verify code keys in Redis
 
+
+#define USER_IP_PREFIX "user_ip_" // Prefix for user IP keys in Redis
+#define USER_TOKEN_PREFIX "user_token_" // Prefix for user token keys in Redis
+#define USER_FULLINFO_PREFIX "user_fullinfo_" // Prefix for user full info keys in Redis
+#define USER_SESSION_PREFIX "user_session_" // Prefix for user session keys in Redis
+#define SERVER_LOGIN_COUNT "server_login_count" //server login count keys in Redis
+
 class Defer {
 public:
     Defer(std::function<void()> func) : _func(std::move(func)) {}

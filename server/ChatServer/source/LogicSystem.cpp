@@ -1,6 +1,8 @@
 #include "LogicSystem.h"
 #include "MessageNode.h"
 #include "CSession.h"
+#include "RedisManager.h"
+#include "UserManager.h"
 
 void LogicSystem::RegisterHandler(short message_type, std::function<void(std::shared_ptr<CSession>, std::shared_ptr<RecieveMessageNode>)> handler)
 {
@@ -51,12 +53,12 @@ void LogicSystem::InitializeHandlers()
             return;
         }
         auto uid = source["uid"].asInt();
-        auto token = source["token"].asString();
-        spdlog::info("[LogicSystem]Received login auth request for UID: {}, Token: {}", uid, token);
+        auto client_token = source["token"].asString();
+        spdlog::info("[LogicSystem]Received login auth request for UID: {}, Token: {}", uid, client_token);
 
         // Validate the token and uid by calling StatusServer
         auto status_server = StatusGrpcClient::GetInstance();
-        auto status = status_server->Login(uid, token);
+        auto status = status_server->Login(uid, client_token);
         if (status.error() != static_cast<int>(ErrorCodes::SUCCESS)) {
             if (status.error() == static_cast<int>(ErrorCodes::ERROR_UID_NOT_FOUND)) {
                 spdlog::warn("UID {} not found, sending error response.", uid);
@@ -96,10 +98,15 @@ void LogicSystem::InitializeHandlers()
             // check if email exists
             _users[uid] = std::make_shared<UserInfo>(user_info);
         }
+        // get fullUserInfo for Client Initialization
+        std::shared_ptr<FullUserInfo> userinfoptr = nullptr;
+        bool isSuccess = UserManager::GetInstance()->getFullUserInfo(uid, userinfoptr);
+        if (isSuccess)
+
         spdlog::info("[LogicSystem]User with UID {} authenticated successfully, sending response.", uid);
         response["error"] = static_cast<short>(ErrorCodes::SUCCESS);
         response["uid"] = uid;
-        response["token"] = token;
+        response["token"] = client_token;
         response["message"] = "Login successful";
         session->Send(response.toStyledString(), static_cast<short>(MessageType::MESSAGE_CHATSERVER_LOGIN_AUTH_RESPONSE));
     });

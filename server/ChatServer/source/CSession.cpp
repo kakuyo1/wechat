@@ -5,7 +5,7 @@
 CSession::CSession(boost::asio::io_context& ioc, std::shared_ptr<CServer> server) :
     _socket(ioc),
     _server(server),
-    _uuid(boost::uuids::to_string(boost::uuids::random_generator()())),
+    _session_id(boost::uuids::to_string(boost::uuids::random_generator()())),
     _send_queue{},
     _send_mutex{},
     _is_sending(false),
@@ -16,7 +16,7 @@ CSession::CSession(boost::asio::io_context& ioc, std::shared_ptr<CServer> server
 
 CSession::~CSession() {
     Close();
-    spdlog::info("Session with UUID {} has been destroyed.", _uuid);
+    spdlog::info("Session with UUID {} has been destroyed.", _session_id);
 }
 
 void CSession::Start() {
@@ -27,8 +27,18 @@ tcp::socket& CSession::GetSocket() {
     return _socket;
 }
 
-std::string CSession::GetUUID() const {
-    return _uuid;
+std::string CSession::GetSessionId() const {
+    return _session_id;
+}
+
+void CSession::setSessionUid(int uid)
+{
+    _uid = uid;
+}
+
+int CSession::getSessionUid() const
+{
+    return _uid;
 }
 
 void CSession::ReadHead(short head_length)
@@ -111,7 +121,7 @@ void CSession::ReadBody(short message_length, short message_type) {
 
 void CSession::Send(const char* data, short length, short message_type) {
     if (_is_stopped) {
-        spdlog::warn("Session {} is stopped, cannot send data.", _uuid);
+        spdlog::warn("Session {} is stopped, cannot send data.", _session_id);
         return;
     }
 
@@ -173,7 +183,7 @@ void CSession::Close()
         if (_server)
         {
             try {
-                _server->ClearSession(_uuid);
+                _server->ClearSession(_session_id);
             } catch (const std::exception& e) {
                 spdlog::warn("Failed to clear session from server: {}", e.what());
             }

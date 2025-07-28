@@ -10,6 +10,13 @@
 #include "config.h"
 #include <spdlog/spdlog.h>
 
+/*
+    用户一旦登陆验证成功，将会生成一个token，存储在Redis中。
+    该token将会在用户每次请求时携带，服务端通过验证token来确认用户身份。
+    token的生成方式为UUID，存储在Redis中，
+    key为"user_token_{uid}"，value为生成的token。
+*/
+
 struct ChatServer {
     std::string host;
     std::string port;
@@ -35,7 +42,7 @@ private:
     void insertToken(int uid, const std::string& token);
 private:
     std::unordered_map<std::string, ChatServer> chat_servers_;
-    std::unordered_map<int, std::string> _tokens;
+    // std::unordered_map<int, std::string> _tokens;
     std::mutex _server_mtx;
     std::mutex _token_mtx;
 };
