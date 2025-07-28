@@ -4,6 +4,7 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
+                "${workspaceFolder}/ChatServer/proto/**",
                 "/usr/include",
                 "/usr/local/include",
                 "/home/kakuyo/libbcrypt/include"

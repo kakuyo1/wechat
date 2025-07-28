@@ -9,6 +9,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/ChatServer.dir/source/CServer.cpp.o.d"
   "CMakeFiles/ChatServer.dir/source/CSession.cpp.o"
   "CMakeFiles/ChatServer.dir/source/CSession.cpp.o.d"
+  "CMakeFiles/ChatServer.dir/source/ChatGrpcClient.cpp.o"
+  "CMakeFiles/ChatServer.dir/source/ChatGrpcClient.cpp.o.d"
   "CMakeFiles/ChatServer.dir/source/ChatServer.cpp.o"
   "CMakeFiles/ChatServer.dir/source/ChatServer.cpp.o.d"
   "CMakeFiles/ChatServer.dir/source/ConfigIniManager.cpp.o"

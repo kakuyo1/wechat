@@ -42,3 +42,35 @@ service StatusService {
     rpc GetChatServer (GetChatServerRequest) returns (GetChatServerResponse) {}
     rpc Login (LoginRequest) returns (LoginResponse) {}
 }
+
+message AddFriendRequest {
+    int32 from_uid = 1;
+    int32 to_uid = 2;
+    int32 gender = 3;
+    string name = 4;
+    string desc = 5;
+    string nick = 6;
+    string icon = 7;
+}
+
+message AddFriendResponse {
+    int32 error = 1;
+    int32 from_uid = 2;
+    int32 to_uid = 3;
+}
+
+message AuthFriendRequest {
+    int32 from_uid = 1;
+    int32 to_uid = 2;
+}
+
+message AuthFriendResponse {
+    int32 error = 1;
+    int32 from_uid = 2;
+    int32 to_uid = 3;
+}
+
+service ChatService {
+    rpc NotifyAddFriend(AddFriendRequest) returns (AddFriendResponse) {}
+    rpc NotifyAuthFriend(AuthFriendRequest) returns (AuthFriendResponse) {}
+}

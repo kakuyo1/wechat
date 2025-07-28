@@ -76,7 +76,8 @@
         "fstream": "cpp",
         "filesystem": "cpp",
         "unordered_set": "cpp",
-        "strstream": "cpp"
+        "strstream": "cpp",
+        "*.inc": "cpp"
     },
     "cmake.sourceDirectory": "/home/kakuyo/wechat/server/GateServer"
 }

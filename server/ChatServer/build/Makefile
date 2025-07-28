@@ -249,6 +249,30 @@ source/CSession.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ChatServer.dir/build.make CMakeFiles/ChatServer.dir/source/CSession.cpp.s
 .PHONY : source/CSession.cpp.s
 
+source/ChatGrpcClient.o: source/ChatGrpcClient.cpp.o
+.PHONY : source/ChatGrpcClient.o
+
+# target to build an object file
+source/ChatGrpcClient.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ChatServer.dir/build.make CMakeFiles/ChatServer.dir/source/ChatGrpcClient.cpp.o
+.PHONY : source/ChatGrpcClient.cpp.o
+
+source/ChatGrpcClient.i: source/ChatGrpcClient.cpp.i
+.PHONY : source/ChatGrpcClient.i
+
+# target to preprocess a source file
+source/ChatGrpcClient.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ChatServer.dir/build.make CMakeFiles/ChatServer.dir/source/ChatGrpcClient.cpp.i
+.PHONY : source/ChatGrpcClient.cpp.i
+
+source/ChatGrpcClient.s: source/ChatGrpcClient.cpp.s
+.PHONY : source/ChatGrpcClient.s
+
+# target to generate assembly for a file
+source/ChatGrpcClient.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ChatServer.dir/build.make CMakeFiles/ChatServer.dir/source/ChatGrpcClient.cpp.s
+.PHONY : source/ChatGrpcClient.cpp.s
+
 source/ChatServer.o: source/ChatServer.cpp.o
 .PHONY : source/ChatServer.o
 
@@ -465,6 +489,9 @@ help:
 	@echo "... source/CSession.o"
 	@echo "... source/CSession.i"
 	@echo "... source/CSession.s"
+	@echo "... source/ChatGrpcClient.o"
+	@echo "... source/ChatGrpcClient.i"
+	@echo "... source/ChatGrpcClient.s"
 	@echo "... source/ChatServer.o"
 	@echo "... source/ChatServer.i"
 	@echo "... source/ChatServer.s"

@@ -22,7 +22,7 @@ SectionPairs::~SectionPairs()
 
 std::string& SectionPairs::operator[](const std::string &key) //插入版本：用于加载配置（允许插入）
 {
-    return pairs[key]; // 使用 std::map 的原始行为
+    return pairs[key]; // 使用 std::map 的原始行为(不存在就插入)
 
     /*不允许插入新 key，而是抛异常(先检测是否存在，都没插入，肯定不存在！！！！！故下面的代码应该写成一个只读函数)：
     auto it = pairs.find(key);

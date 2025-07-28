@@ -160,7 +160,7 @@ void LogicSystem::ProcessMessageQueue()
 
 LogicSystem::LogicSystem() :
     _stopped(false),
-    _worker_thread(&LogicSystem::ProcessMessageQueue, this),
+    _worker_thread(&LogicSystem::ProcessMessageQueue, this), // LogicSystem一构造就不断处理消息队列(客户端的信息转发,好友申请,登陆验证等)
     _message_queue{},
     _handlers{},
     _mutex{},

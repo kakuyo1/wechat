@@ -111,10 +111,24 @@ CMakeFiles/ChatServer.dir/source/CSession.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ChatServer.dir/source/CSession.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kakuyo/wechat/server/ChatServer/source/CSession.cpp -o CMakeFiles/ChatServer.dir/source/CSession.cpp.s
 
+CMakeFiles/ChatServer.dir/source/ChatGrpcClient.cpp.o: CMakeFiles/ChatServer.dir/flags.make
+CMakeFiles/ChatServer.dir/source/ChatGrpcClient.cpp.o: /home/kakuyo/wechat/server/ChatServer/source/ChatGrpcClient.cpp
+CMakeFiles/ChatServer.dir/source/ChatGrpcClient.cpp.o: CMakeFiles/ChatServer.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kakuyo/wechat/server/ChatServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/ChatServer.dir/source/ChatGrpcClient.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ChatServer.dir/source/ChatGrpcClient.cpp.o -MF CMakeFiles/ChatServer.dir/source/ChatGrpcClient.cpp.o.d -o CMakeFiles/ChatServer.dir/source/ChatGrpcClient.cpp.o -c /home/kakuyo/wechat/server/ChatServer/source/ChatGrpcClient.cpp
+
+CMakeFiles/ChatServer.dir/source/ChatGrpcClient.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ChatServer.dir/source/ChatGrpcClient.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kakuyo/wechat/server/ChatServer/source/ChatGrpcClient.cpp > CMakeFiles/ChatServer.dir/source/ChatGrpcClient.cpp.i
+
+CMakeFiles/ChatServer.dir/source/ChatGrpcClient.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ChatServer.dir/source/ChatGrpcClient.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kakuyo/wechat/server/ChatServer/source/ChatGrpcClient.cpp -o CMakeFiles/ChatServer.dir/source/ChatGrpcClient.cpp.s
+
 CMakeFiles/ChatServer.dir/source/ChatServer.cpp.o: CMakeFiles/ChatServer.dir/flags.make
 CMakeFiles/ChatServer.dir/source/ChatServer.cpp.o: /home/kakuyo/wechat/server/ChatServer/source/ChatServer.cpp
 CMakeFiles/ChatServer.dir/source/ChatServer.cpp.o: CMakeFiles/ChatServer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kakuyo/wechat/server/ChatServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/ChatServer.dir/source/ChatServer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kakuyo/wechat/server/ChatServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/ChatServer.dir/source/ChatServer.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ChatServer.dir/source/ChatServer.cpp.o -MF CMakeFiles/ChatServer.dir/source/ChatServer.cpp.o.d -o CMakeFiles/ChatServer.dir/source/ChatServer.cpp.o -c /home/kakuyo/wechat/server/ChatServer/source/ChatServer.cpp
 
 CMakeFiles/ChatServer.dir/source/ChatServer.cpp.i: cmake_force
@@ -128,7 +142,7 @@ CMakeFiles/ChatServer.dir/source/ChatServer.cpp.s: cmake_force
 CMakeFiles/ChatServer.dir/source/ConfigIniManager.cpp.o: CMakeFiles/ChatServer.dir/flags.make
 CMakeFiles/ChatServer.dir/source/ConfigIniManager.cpp.o: /home/kakuyo/wechat/server/ChatServer/source/ConfigIniManager.cpp
 CMakeFiles/ChatServer.dir/source/ConfigIniManager.cpp.o: CMakeFiles/ChatServer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kakuyo/wechat/server/ChatServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/ChatServer.dir/source/ConfigIniManager.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kakuyo/wechat/server/ChatServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/ChatServer.dir/source/ConfigIniManager.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ChatServer.dir/source/ConfigIniManager.cpp.o -MF CMakeFiles/ChatServer.dir/source/ConfigIniManager.cpp.o.d -o CMakeFiles/ChatServer.dir/source/ConfigIniManager.cpp.o -c /home/kakuyo/wechat/server/ChatServer/source/ConfigIniManager.cpp
 
 CMakeFiles/ChatServer.dir/source/ConfigIniManager.cpp.i: cmake_force
@@ -142,7 +156,7 @@ CMakeFiles/ChatServer.dir/source/ConfigIniManager.cpp.s: cmake_force
 CMakeFiles/ChatServer.dir/source/LogicSystem.cpp.o: CMakeFiles/ChatServer.dir/flags.make
 CMakeFiles/ChatServer.dir/source/LogicSystem.cpp.o: /home/kakuyo/wechat/server/ChatServer/source/LogicSystem.cpp
 CMakeFiles/ChatServer.dir/source/LogicSystem.cpp.o: CMakeFiles/ChatServer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kakuyo/wechat/server/ChatServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/ChatServer.dir/source/LogicSystem.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kakuyo/wechat/server/ChatServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/ChatServer.dir/source/LogicSystem.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ChatServer.dir/source/LogicSystem.cpp.o -MF CMakeFiles/ChatServer.dir/source/LogicSystem.cpp.o.d -o CMakeFiles/ChatServer.dir/source/LogicSystem.cpp.o -c /home/kakuyo/wechat/server/ChatServer/source/LogicSystem.cpp
 
 CMakeFiles/ChatServer.dir/source/LogicSystem.cpp.i: cmake_force
@@ -156,7 +170,7 @@ CMakeFiles/ChatServer.dir/source/LogicSystem.cpp.s: cmake_force
 CMakeFiles/ChatServer.dir/source/MessageNode.cpp.o: CMakeFiles/ChatServer.dir/flags.make
 CMakeFiles/ChatServer.dir/source/MessageNode.cpp.o: /home/kakuyo/wechat/server/ChatServer/source/MessageNode.cpp
 CMakeFiles/ChatServer.dir/source/MessageNode.cpp.o: CMakeFiles/ChatServer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kakuyo/wechat/server/ChatServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/ChatServer.dir/source/MessageNode.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kakuyo/wechat/server/ChatServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/ChatServer.dir/source/MessageNode.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ChatServer.dir/source/MessageNode.cpp.o -MF CMakeFiles/ChatServer.dir/source/MessageNode.cpp.o.d -o CMakeFiles/ChatServer.dir/source/MessageNode.cpp.o -c /home/kakuyo/wechat/server/ChatServer/source/MessageNode.cpp
 
 CMakeFiles/ChatServer.dir/source/MessageNode.cpp.i: cmake_force
@@ -170,7 +184,7 @@ CMakeFiles/ChatServer.dir/source/MessageNode.cpp.s: cmake_force
 CMakeFiles/ChatServer.dir/source/MysqlDAO.cpp.o: CMakeFiles/ChatServer.dir/flags.make
 CMakeFiles/ChatServer.dir/source/MysqlDAO.cpp.o: /home/kakuyo/wechat/server/ChatServer/source/MysqlDAO.cpp
 CMakeFiles/ChatServer.dir/source/MysqlDAO.cpp.o: CMakeFiles/ChatServer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kakuyo/wechat/server/ChatServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/ChatServer.dir/source/MysqlDAO.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kakuyo/wechat/server/ChatServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/ChatServer.dir/source/MysqlDAO.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ChatServer.dir/source/MysqlDAO.cpp.o -MF CMakeFiles/ChatServer.dir/source/MysqlDAO.cpp.o.d -o CMakeFiles/ChatServer.dir/source/MysqlDAO.cpp.o -c /home/kakuyo/wechat/server/ChatServer/source/MysqlDAO.cpp
 
 CMakeFiles/ChatServer.dir/source/MysqlDAO.cpp.i: cmake_force
@@ -184,7 +198,7 @@ CMakeFiles/ChatServer.dir/source/MysqlDAO.cpp.s: cmake_force
 CMakeFiles/ChatServer.dir/source/MysqlManager.cpp.o: CMakeFiles/ChatServer.dir/flags.make
 CMakeFiles/ChatServer.dir/source/MysqlManager.cpp.o: /home/kakuyo/wechat/server/ChatServer/source/MysqlManager.cpp
 CMakeFiles/ChatServer.dir/source/MysqlManager.cpp.o: CMakeFiles/ChatServer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kakuyo/wechat/server/ChatServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/ChatServer.dir/source/MysqlManager.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kakuyo/wechat/server/ChatServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/ChatServer.dir/source/MysqlManager.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ChatServer.dir/source/MysqlManager.cpp.o -MF CMakeFiles/ChatServer.dir/source/MysqlManager.cpp.o.d -o CMakeFiles/ChatServer.dir/source/MysqlManager.cpp.o -c /home/kakuyo/wechat/server/ChatServer/source/MysqlManager.cpp
 
 CMakeFiles/ChatServer.dir/source/MysqlManager.cpp.i: cmake_force
@@ -198,7 +212,7 @@ CMakeFiles/ChatServer.dir/source/MysqlManager.cpp.s: cmake_force
 CMakeFiles/ChatServer.dir/source/RedisManager.cpp.o: CMakeFiles/ChatServer.dir/flags.make
 CMakeFiles/ChatServer.dir/source/RedisManager.cpp.o: /home/kakuyo/wechat/server/ChatServer/source/RedisManager.cpp
 CMakeFiles/ChatServer.dir/source/RedisManager.cpp.o: CMakeFiles/ChatServer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kakuyo/wechat/server/ChatServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/ChatServer.dir/source/RedisManager.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kakuyo/wechat/server/ChatServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/ChatServer.dir/source/RedisManager.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ChatServer.dir/source/RedisManager.cpp.o -MF CMakeFiles/ChatServer.dir/source/RedisManager.cpp.o.d -o CMakeFiles/ChatServer.dir/source/RedisManager.cpp.o -c /home/kakuyo/wechat/server/ChatServer/source/RedisManager.cpp
 
 CMakeFiles/ChatServer.dir/source/RedisManager.cpp.i: cmake_force
@@ -212,7 +226,7 @@ CMakeFiles/ChatServer.dir/source/RedisManager.cpp.s: cmake_force
 CMakeFiles/ChatServer.dir/source/StatusGrpcClient.cpp.o: CMakeFiles/ChatServer.dir/flags.make
 CMakeFiles/ChatServer.dir/source/StatusGrpcClient.cpp.o: /home/kakuyo/wechat/server/ChatServer/source/StatusGrpcClient.cpp
 CMakeFiles/ChatServer.dir/source/StatusGrpcClient.cpp.o: CMakeFiles/ChatServer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kakuyo/wechat/server/ChatServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/ChatServer.dir/source/StatusGrpcClient.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kakuyo/wechat/server/ChatServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/ChatServer.dir/source/StatusGrpcClient.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ChatServer.dir/source/StatusGrpcClient.cpp.o -MF CMakeFiles/ChatServer.dir/source/StatusGrpcClient.cpp.o.d -o CMakeFiles/ChatServer.dir/source/StatusGrpcClient.cpp.o -c /home/kakuyo/wechat/server/ChatServer/source/StatusGrpcClient.cpp
 
 CMakeFiles/ChatServer.dir/source/StatusGrpcClient.cpp.i: cmake_force
@@ -226,7 +240,7 @@ CMakeFiles/ChatServer.dir/source/StatusGrpcClient.cpp.s: cmake_force
 CMakeFiles/ChatServer.dir/proto/message.pb.cc.o: CMakeFiles/ChatServer.dir/flags.make
 CMakeFiles/ChatServer.dir/proto/message.pb.cc.o: /home/kakuyo/wechat/server/ChatServer/proto/message.pb.cc
 CMakeFiles/ChatServer.dir/proto/message.pb.cc.o: CMakeFiles/ChatServer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kakuyo/wechat/server/ChatServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/ChatServer.dir/proto/message.pb.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kakuyo/wechat/server/ChatServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/ChatServer.dir/proto/message.pb.cc.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ChatServer.dir/proto/message.pb.cc.o -MF CMakeFiles/ChatServer.dir/proto/message.pb.cc.o.d -o CMakeFiles/ChatServer.dir/proto/message.pb.cc.o -c /home/kakuyo/wechat/server/ChatServer/proto/message.pb.cc
 
 CMakeFiles/ChatServer.dir/proto/message.pb.cc.i: cmake_force
@@ -240,7 +254,7 @@ CMakeFiles/ChatServer.dir/proto/message.pb.cc.s: cmake_force
 CMakeFiles/ChatServer.dir/proto/message.grpc.pb.cc.o: CMakeFiles/ChatServer.dir/flags.make
 CMakeFiles/ChatServer.dir/proto/message.grpc.pb.cc.o: /home/kakuyo/wechat/server/ChatServer/proto/message.grpc.pb.cc
 CMakeFiles/ChatServer.dir/proto/message.grpc.pb.cc.o: CMakeFiles/ChatServer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kakuyo/wechat/server/ChatServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/ChatServer.dir/proto/message.grpc.pb.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kakuyo/wechat/server/ChatServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/ChatServer.dir/proto/message.grpc.pb.cc.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ChatServer.dir/proto/message.grpc.pb.cc.o -MF CMakeFiles/ChatServer.dir/proto/message.grpc.pb.cc.o.d -o CMakeFiles/ChatServer.dir/proto/message.grpc.pb.cc.o -c /home/kakuyo/wechat/server/ChatServer/proto/message.grpc.pb.cc
 
 CMakeFiles/ChatServer.dir/proto/message.grpc.pb.cc.i: cmake_force
@@ -256,6 +270,7 @@ ChatServer_OBJECTS = \
 "CMakeFiles/ChatServer.dir/source/AsioIOContextPool.cpp.o" \
 "CMakeFiles/ChatServer.dir/source/CServer.cpp.o" \
 "CMakeFiles/ChatServer.dir/source/CSession.cpp.o" \
+"CMakeFiles/ChatServer.dir/source/ChatGrpcClient.cpp.o" \
 "CMakeFiles/ChatServer.dir/source/ChatServer.cpp.o" \
 "CMakeFiles/ChatServer.dir/source/ConfigIniManager.cpp.o" \
 "CMakeFiles/ChatServer.dir/source/LogicSystem.cpp.o" \
@@ -273,6 +288,7 @@ ChatServer_EXTERNAL_OBJECTS =
 ChatServer: CMakeFiles/ChatServer.dir/source/AsioIOContextPool.cpp.o
 ChatServer: CMakeFiles/ChatServer.dir/source/CServer.cpp.o
 ChatServer: CMakeFiles/ChatServer.dir/source/CSession.cpp.o
+ChatServer: CMakeFiles/ChatServer.dir/source/ChatGrpcClient.cpp.o
 ChatServer: CMakeFiles/ChatServer.dir/source/ChatServer.cpp.o
 ChatServer: CMakeFiles/ChatServer.dir/source/ConfigIniManager.cpp.o
 ChatServer: CMakeFiles/ChatServer.dir/source/LogicSystem.cpp.o
@@ -347,7 +363,7 @@ ChatServer: /usr/local/lib/libssl.a
 ChatServer: /usr/local/lib/libcrypto.a
 ChatServer: /usr/lib/x86_64-linux-gnu/libfmt.so.9.1.0
 ChatServer: CMakeFiles/ChatServer.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/kakuyo/wechat/server/ChatServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking CXX executable ChatServer"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/kakuyo/wechat/server/ChatServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Linking CXX executable ChatServer"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/ChatServer.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

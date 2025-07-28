@@ -13,6 +13,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/kakuyo/wechat/server/ChatServer/source/AsioIOContextPool.cpp" "CMakeFiles/ChatServer.dir/source/AsioIOContextPool.cpp.o" "gcc" "CMakeFiles/ChatServer.dir/source/AsioIOContextPool.cpp.o.d"
   "/home/kakuyo/wechat/server/ChatServer/source/CServer.cpp" "CMakeFiles/ChatServer.dir/source/CServer.cpp.o" "gcc" "CMakeFiles/ChatServer.dir/source/CServer.cpp.o.d"
   "/home/kakuyo/wechat/server/ChatServer/source/CSession.cpp" "CMakeFiles/ChatServer.dir/source/CSession.cpp.o" "gcc" "CMakeFiles/ChatServer.dir/source/CSession.cpp.o.d"
+  "/home/kakuyo/wechat/server/ChatServer/source/ChatGrpcClient.cpp" "CMakeFiles/ChatServer.dir/source/ChatGrpcClient.cpp.o" "gcc" "CMakeFiles/ChatServer.dir/source/ChatGrpcClient.cpp.o.d"
   "/home/kakuyo/wechat/server/ChatServer/source/ChatServer.cpp" "CMakeFiles/ChatServer.dir/source/ChatServer.cpp.o" "gcc" "CMakeFiles/ChatServer.dir/source/ChatServer.cpp.o.d"
   "/home/kakuyo/wechat/server/ChatServer/source/ConfigIniManager.cpp" "CMakeFiles/ChatServer.dir/source/ConfigIniManager.cpp.o" "gcc" "CMakeFiles/ChatServer.dir/source/ConfigIniManager.cpp.o.d"
   "/home/kakuyo/wechat/server/ChatServer/source/LogicSystem.cpp" "CMakeFiles/ChatServer.dir/source/LogicSystem.cpp.o" "gcc" "CMakeFiles/ChatServer.dir/source/LogicSystem.cpp.o.d"
