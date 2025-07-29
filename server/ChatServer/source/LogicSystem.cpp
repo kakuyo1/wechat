@@ -1,8 +1,8 @@
-#include "LogicSystem.h"
-#include "MessageNode.h"
-#include "CSession.h"
-#include "RedisManager.h"
-#include "UserManager.h"
+#include "../include/LogicSystem.h"
+#include "../include/MessageNode.h"
+#include "../include/CSession.h"
+#include "../include/RedisManager.h"
+#include "../include/UserManager.h"
 
 void LogicSystem::RegisterHandler(short message_type, std::function<void(std::shared_ptr<CSession>, std::shared_ptr<RecieveMessageNode>)> handler)
 {
@@ -38,7 +38,7 @@ void LogicSystem::InitializeHandlers()
 {
     // deal with login authentication messages
     RegisterHandler(static_cast<short>(MessageType::MESSAGE_CHATSERVER_LOGIN_AUTH), [this](std::shared_ptr<CSession> session, std::shared_ptr<RecieveMessageNode> message_node) {
-        // Extract message data by json parsing
+        // 1.Extract message data by json parsing
         std::string message_data(message_node->GetData(), message_node->GetCurrentLength());
         std::istringstream message_stream(message_data);
         Json::Value source;
@@ -56,7 +56,7 @@ void LogicSystem::InitializeHandlers()
         auto client_token = source["token"].asString();
         spdlog::info("[LogicSystem]Received login auth request for UID: {}, Token: {}", uid, client_token);
 
-        // Validate the token and uid by calling StatusServer
+        // 2.Validate the token and uid by calling StatusServer(Login)
         auto status_server = StatusGrpcClient::GetInstance();
         auto status = status_server->Login(uid, client_token);
         if (status.error() != static_cast<int>(ErrorCodes::SUCCESS)) {
@@ -77,7 +77,7 @@ void LogicSystem::InitializeHandlers()
                 session->Send(response.toStyledString(), static_cast<short>(MessageType::MESSAGE_CHATSERVER_LOGIN_AUTH_RESPONSE));
             }
         }
-        // If login is successful, cache the user into _users info by mysql, if already in, meaning user is online, return error
+        // 3.If login is successful, cache the user into _users info by mysql, if already in, meaning user is online, return error
         auto it = _users.find(uid);
         if (it != _users.end()) {
             spdlog::warn("User with UID {} is already online, sending error response.", uid);
@@ -98,16 +98,68 @@ void LogicSystem::InitializeHandlers()
             // check if email exists
             _users[uid] = std::make_shared<UserInfo>(user_info);
         }
-        // get fullUserInfo for Client Initialization
+        // 4.get fullUserInfo for Client Initialization
         std::shared_ptr<FullUserInfo> userinfoptr = nullptr;
         bool isSuccess = UserManager::GetInstance()->getFullUserInfo(uid, userinfoptr);
-        if (isSuccess)
-
+        if (!isSuccess) {
+            spdlog::error("Failed to get full user info for UID {}, sending error response.", uid);
+            response["error"] = static_cast<short>(ErrorCodes::ERROR_UID_NOT_FOUND);
+            response["message"] = "User not found";
+            session->Send(response.toStyledString(), static_cast<short>(MessageType::MESSAGE_CHATSERVER_LOGIN_AUTH_RESPONSE));
+            return;
+        }
         spdlog::info("[LogicSystem]User with UID {} authenticated successfully, sending response.", uid);
+        // 5.prepare the BaseFullInfo response to the client
         response["error"] = static_cast<short>(ErrorCodes::SUCCESS);
-        response["uid"] = uid;
+        response["uid"] = userinfoptr->uid;
+        response["gender"] = userinfoptr->gender;
+        response["name"] = userinfoptr->name;
+        response["nickname"] = userinfoptr->nickname;
+        response["email"] = userinfoptr->email;
+        response["icon"] = userinfoptr->icon;
+        response["desc"] = userinfoptr->desc;
+        response["password"] = userinfoptr->password;
         response["token"] = client_token;
         response["message"] = "Login successful";
+        // TODO 6.prepare the friend/contact list for the client
+
+        // TODO 7.prepare the friend request list for the client
+
+        // 8.increment the online user count in ChatServer by redis(maintain loginCount synchronization between all the ChatServers)
+        auto server_name = ConfigIniManager::Instance()["SelfServer"]["Name"];
+        auto current_login_count = RedisManager::GetInstance()->HGet(SERVER_LOGIN_COUNT_PREFIX, server_name);
+        if (current_login_count.empty()) {
+            spdlog::warn("No login count found for server: {}.", server_name);
+            response["error"] = static_cast<short>(ErrorCodes::ERROR_REDIS);
+            response["message"] = "Failed to retrieve login count from Redis";
+            session->Send(response.toStyledString(), static_cast<short>(MessageType::MESSAGE_CHATSERVER_LOGIN_AUTH_RESPONSE));
+            return;
+        }
+        int new_login_count = std::stoi(current_login_count) + 1; // increment
+        if (!RedisManager::GetInstance()->HSet(SERVER_LOGIN_COUNT_PREFIX, server_name, std::to_string(new_login_count))) {
+            spdlog::error("Failed to increment login count for server: {}.", server_name);
+            response["error"] = static_cast<short>(ErrorCodes::ERROR_REDIS);
+            response["message"] = "Failed to increment login count in Redis";
+            session->Send(response.toStyledString(), static_cast<short>(MessageType::MESSAGE_CHATSERVER_LOGIN_AUTH_RESPONSE));
+            return;
+        }
+        spdlog::info("[LogicSystem]server {} login count incremented to {}", server_name, new_login_count);
+
+        // 9. Bind the uid and session then Store the session in UserManager(aim for across server communication)
+        session->setSessionUid(uid);
+        UserManager::GetInstance()->setUidToSession(uid, session);
+
+        // 10. Set the serverIP for the user/session(aim for across server communication)
+        std::string server_ip_key = SERVER_IP_PREFIX + std::to_string(uid);
+        if (!RedisManager::GetInstance()->Set(server_ip_key, server_name)) {
+            spdlog::error("Failed to set server IP for UID {} in Redis.", uid);
+            response["error"] = static_cast<short>(ErrorCodes::ERROR_REDIS);
+            response["message"] = "Failed to set server IP in Redis";
+            session->Send(response.toStyledString(), static_cast<short>(MessageType::MESSAGE_CHATSERVER_LOGIN_AUTH_RESPONSE));
+            return;
+        }
+
+        // send the final response to the client
         session->Send(response.toStyledString(), static_cast<short>(MessageType::MESSAGE_CHATSERVER_LOGIN_AUTH_RESPONSE));
     });
 }

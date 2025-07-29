@@ -1,4 +1,4 @@
-#include "RedisManager.h"
+#include "../include/RedisManager.h"
 #include <spdlog/spdlog.h>
 RedisManager::RedisManager() {
     auto& config = ConfigIniManager::Instance();
@@ -275,6 +275,21 @@ std::string RedisManager::HGet(const std::string &key, const std::string &field)
     return value;
 }
 
+bool RedisManager::HDel(const std::string& key, const std::string& field) {
+    auto context = _context_pool->GetContext();
+    if (!CheckContextValid(context)) {
+        _context_pool->returnContext(context);
+        return false;
+    }
+
+    std::string result;
+    redisReply *reply = (redisReply *)redisCommand(context, "HDEL %s %s", key.c_str(), field.c_str());
+    bool ok = CheckReplyValid(reply, REDIS_REPLY_INTEGER, "HDEL", result) && result == "1";
+    if (context == nullptr || context->err != 0) redisFree(context);
+    else _context_pool->returnContext(context);
+    return ok;
+}
+
 void RedisManager::Close() {
     _context_pool->Close();
 }
@@ -352,4 +367,16 @@ void RedisContextPool::returnContext(redisContext *context)
     }
     _contexts.push(context); // 将上下文放回队列
     _cv.notify_one(); // 通知等待的线程有新的上下文可用
+}
+
+bool RedisManager::isConnected() const
+{
+    auto context = _context_pool->GetContext();
+    if (!context) {
+        return false; // 如果无法获取上下文，表示未连接
+    }
+    bool isValid = CheckContextValid(context);
+    if (context == nullptr || context->err != 0) redisFree(context);
+    else _context_pool->returnContext(context);
+    return isValid;
 }

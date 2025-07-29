@@ -1,5 +1,5 @@
-#include "CServer.h"
-#include "CSession.h"
+#include "../include/CServer.h"
+#include "../include/CSession.h"
 CServer::CServer(net::io_context& ioc, unsigned short port) :
     _ioc(ioc),
     _port(port),

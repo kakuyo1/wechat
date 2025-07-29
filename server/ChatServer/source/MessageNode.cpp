@@ -1,5 +1,5 @@
-#include "MessageNode.h"
-#include "config.h"
+#include "../include/MessageNode.h"
+#include "../include/config.h"
 MessageNode::MessageNode(short message_length) :
     _data(new char[message_length + 1]),
     _total_length(message_length),

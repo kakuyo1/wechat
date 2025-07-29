@@ -1,5 +1,5 @@
-#include "MysqlDAO.h"
-#include "MysqlManager.h"
+#include "../include/MysqlDAO.h"
+#include "../include/MysqlManager.h"
 #include <spdlog/spdlog.h>
 MysqlConnection::MysqlConnection(sql::Connection *con, int64_t last_used_time) :
     con_(std::unique_ptr<sql::Connection>(con)), last_used_time_(last_used_time)

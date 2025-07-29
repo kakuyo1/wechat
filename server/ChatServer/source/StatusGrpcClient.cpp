@@ -1,4 +1,4 @@
-#include "StatusGrpcClient.h"
+#include "../include/StatusGrpcClient.h"
 
 StatusStubPool::StatusStubPool(size_t pool_size, const std::string& RPCserver_address, const std::string& RPCserver_port):
     _closed(false),

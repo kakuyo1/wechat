@@ -1,6 +1,6 @@
-#include "CSession.h"
-#include "CServer.h"
-#include "MessageNode.h"
+#include "../include/CSession.h"
+#include "../include/CServer.h"
+#include "../include/MessageNode.h"
 
 CSession::CSession(boost::asio::io_context& ioc, std::shared_ptr<CServer> server) :
     _socket(ioc),

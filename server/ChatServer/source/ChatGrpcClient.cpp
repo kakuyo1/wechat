@@ -1,4 +1,4 @@
-#include "ChatGrpcClient.h"
+#include "../include/ChatGrpcClient.h"
 ChatStubPool::ChatStubPool(size_t pool_size, const std::string& RPCserver_address, const std::string& RPCserver_port):
     _closed(false),
     _RPCserver_address(RPCserver_address),
@@ -51,52 +51,6 @@ void ChatStubPool::ReturnStub(std::unique_ptr<ChatService::Stub> stub) {
 size_t ChatStubPool::GetPoolSize() const {
     std::lock_guard<std::mutex> lock(_mutex);
     return _stubs.size();
-}
-
-bool ChatGrpcClient::getFullUserInfo(int uid, std::shared_ptr<FullUserInfo> fulluserinfo)
-{
-    // prepare for redis string key
-    std::string redis_key = USER_FULLINFO_PREFIX + std::to_string(uid);
-    // First Try: get full user info from redis
-    auto redis_client = RedisManager::GetInstance();
-    std::string fulluserinfo_jsonString = ""; // to be filled by redis
-    if (redis_client->Get(redis_key, fulluserinfo_jsonString)) {
-        Json::Value root;
-        Json::Reader reader;
-        reader.parse(fulluserinfo_jsonString, root);
-        fulluserinfo->uid = root["uid"].asInt();
-        fulluserinfo->gender = root["gender"].asInt();
-        fulluserinfo->name = root["name"].asString();
-        fulluserinfo->desc = root["desc"].asString();
-        fulluserinfo->email = root["email"].asString();
-        fulluserinfo->password = root["password"].asString();
-        fulluserinfo->icon = root["icon"].asString();
-        fulluserinfo->nickname = root["nickname"].asString();
-        return true;
-    }
-    // Second Try: get full user info from Mysql
-    fulluserinfo = MysqlManager::GetInstance()->getFullUserInfo(uid);
-    if (fulluserinfo == nullptr) {
-        spdlog::error("Failed to get full user info from Mysql for uid: {}", uid);
-        return false;
-    }
-    // Store full user info to redis
-    Json::Value root;
-    root["uid"] = fulluserinfo->uid;
-    root["gender"] = fulluserinfo->gender;
-    root["name"] = fulluserinfo->name;
-    root["desc"] = fulluserinfo->desc;
-    root["email"] = fulluserinfo->email;
-    root["password"] = fulluserinfo->password;
-    root["icon"] = fulluserinfo->icon;
-    root["nickname"] = fulluserinfo->nickname;
-    Json::StreamWriterBuilder writer;
-    std::string fulluserinfo_jsonString_toRedis = Json::writeString(writer, root);
-    if (!redis_client->Set(redis_key, fulluserinfo_jsonString_toRedis)) {
-        spdlog::error("Failed to set full user info to Redis for uid: {}", uid);
-        return false;
-    }
-    return true;
 }
 
 AddFriendResponse ChatGrpcClient::NotifyAddFriend(const std::string &peer_serverIP, const AddFriendRequest &request)

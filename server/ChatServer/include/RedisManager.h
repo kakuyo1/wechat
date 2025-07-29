@@ -67,6 +67,8 @@ public:
     bool HSet(const char* key, const char* hkey, const char* hvalue, size_t hvalue_len); // 存储二进制、包含\0的数据
 
     std::string HGet(const std::string& key, const std::string& field);
+    bool HDel(const std::string& key, const std::string& field);
+    bool isConnected() const;
     void Close();
 private:
     RedisManager();
