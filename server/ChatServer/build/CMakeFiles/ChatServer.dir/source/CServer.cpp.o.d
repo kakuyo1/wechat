@@ -1,7 +1,7 @@
 CMakeFiles/ChatServer.dir/source/CServer.cpp.o: \
  /home/kakuyo/wechat/server/ChatServer/source/CServer.cpp \
  /usr/include/stdc-predef.h \
- /home/kakuyo/wechat/server/ChatServer/include/CServer.h \
+ /home/kakuyo/wechat/server/ChatServer/source/../include/CServer.h \
  /usr/local/include/boost/asio.hpp \
  /usr/local/include/boost/asio/any_completion_executor.hpp \
  /usr/local/include/boost/asio/detail/config.hpp \
@@ -1072,10 +1072,10 @@ CMakeFiles/ChatServer.dir/source/CServer.cpp.o: \
  /usr/local/include/boost/asio/impl/write_at.hpp /usr/include/c++/13/map \
  /usr/include/c++/13/bits/stl_tree.h /usr/include/c++/13/bits/stl_map.h \
  /usr/include/c++/13/bits/stl_multimap.h \
- /home/kakuyo/wechat/server/ChatServer/include/AsioIOContextPool.h \
+ /home/kakuyo/wechat/server/ChatServer/source/../include/AsioIOContextPool.h \
  /usr/include/c++/13/iostream /usr/include/c++/13/thread \
  /usr/include/c++/13/bits/this_thread_sleep.h \
- /home/kakuyo/wechat/server/ChatServer/include/Singleton.h \
+ /home/kakuyo/wechat/server/ChatServer/source/../include/Singleton.h \
  /usr/include/spdlog/spdlog.h /usr/include/spdlog/common.h \
  /usr/include/spdlog/tweakme.h /usr/include/spdlog/details/null_mutex.h \
  /usr/include/spdlog/fmt/fmt.h /usr/include/fmt/core.h \
@@ -1087,7 +1087,7 @@ CMakeFiles/ChatServer.dir/source/CServer.cpp.o: \
  /usr/include/spdlog/details/log_msg_buffer.h \
  /usr/include/spdlog/details/circular_q.h /usr/include/spdlog/version.h \
  /usr/include/spdlog/details/synchronous_factory.h \
- /home/kakuyo/wechat/server/ChatServer/include/CSession.h \
+ /home/kakuyo/wechat/server/ChatServer/source/../include/CSession.h \
  /usr/local/include/boost/uuid.hpp /usr/local/include/boost/uuid/uuid.hpp \
  /usr/local/include/boost/uuid/uuid_clock.hpp \
  /usr/local/include/boost/uuid/detail/endian.hpp \
@@ -1134,7 +1134,7 @@ CMakeFiles/ChatServer.dir/source/CServer.cpp.o: \
  /usr/local/include/boost/uuid/time_generator_v1.hpp \
  /usr/local/include/boost/uuid/time_generator_v6.hpp \
  /usr/local/include/boost/uuid/time_generator_v7.hpp \
- /home/kakuyo/wechat/server/ChatServer/include/config.h \
+ /home/kakuyo/wechat/server/ChatServer/source/../include/config.h \
  /usr/include/c++/13/queue /usr/include/c++/13/deque \
  /usr/include/c++/13/bits/stl_deque.h /usr/include/c++/13/bits/deque.tcc \
  /usr/include/c++/13/bits/stl_queue.h

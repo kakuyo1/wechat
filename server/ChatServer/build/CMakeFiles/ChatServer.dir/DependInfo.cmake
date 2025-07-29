@@ -15,6 +15,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/kakuyo/wechat/server/ChatServer/source/CSession.cpp" "CMakeFiles/ChatServer.dir/source/CSession.cpp.o" "gcc" "CMakeFiles/ChatServer.dir/source/CSession.cpp.o.d"
   "/home/kakuyo/wechat/server/ChatServer/source/ChatGrpcClient.cpp" "CMakeFiles/ChatServer.dir/source/ChatGrpcClient.cpp.o" "gcc" "CMakeFiles/ChatServer.dir/source/ChatGrpcClient.cpp.o.d"
   "/home/kakuyo/wechat/server/ChatServer/source/ChatServer.cpp" "CMakeFiles/ChatServer.dir/source/ChatServer.cpp.o" "gcc" "CMakeFiles/ChatServer.dir/source/ChatServer.cpp.o.d"
+  "/home/kakuyo/wechat/server/ChatServer/source/ChatServiceImpl.cpp" "CMakeFiles/ChatServer.dir/source/ChatServiceImpl.cpp.o" "gcc" "CMakeFiles/ChatServer.dir/source/ChatServiceImpl.cpp.o.d"
   "/home/kakuyo/wechat/server/ChatServer/source/ConfigIniManager.cpp" "CMakeFiles/ChatServer.dir/source/ConfigIniManager.cpp.o" "gcc" "CMakeFiles/ChatServer.dir/source/ConfigIniManager.cpp.o.d"
   "/home/kakuyo/wechat/server/ChatServer/source/LogicSystem.cpp" "CMakeFiles/ChatServer.dir/source/LogicSystem.cpp.o" "gcc" "CMakeFiles/ChatServer.dir/source/LogicSystem.cpp.o.d"
   "/home/kakuyo/wechat/server/ChatServer/source/MessageNode.cpp" "CMakeFiles/ChatServer.dir/source/MessageNode.cpp.o" "gcc" "CMakeFiles/ChatServer.dir/source/MessageNode.cpp.o.d"
@@ -22,6 +23,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/kakuyo/wechat/server/ChatServer/source/MysqlManager.cpp" "CMakeFiles/ChatServer.dir/source/MysqlManager.cpp.o" "gcc" "CMakeFiles/ChatServer.dir/source/MysqlManager.cpp.o.d"
   "/home/kakuyo/wechat/server/ChatServer/source/RedisManager.cpp" "CMakeFiles/ChatServer.dir/source/RedisManager.cpp.o" "gcc" "CMakeFiles/ChatServer.dir/source/RedisManager.cpp.o.d"
   "/home/kakuyo/wechat/server/ChatServer/source/StatusGrpcClient.cpp" "CMakeFiles/ChatServer.dir/source/StatusGrpcClient.cpp.o" "gcc" "CMakeFiles/ChatServer.dir/source/StatusGrpcClient.cpp.o.d"
+  "/home/kakuyo/wechat/server/ChatServer/source/UserManager.cpp" "CMakeFiles/ChatServer.dir/source/UserManager.cpp.o" "gcc" "CMakeFiles/ChatServer.dir/source/UserManager.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

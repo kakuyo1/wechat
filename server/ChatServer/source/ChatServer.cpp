@@ -25,7 +25,8 @@ int main() {
             spdlog::error("Failed to connect to Redis");
             return EXIT_FAILURE;
         }
-        redis->HSet(SERVER_LOGIN_COUNT_PREFIX, server_name, "0");
+        redis->HSet(SERVER_LOGIN_COUNT, server_name, "0");
+        spdlog::info("Set initial login count for server {} to 0", server_name);
 
         // 1.start the grpc server on a specified port1
         auto pool = AsioIOContextPool::GetInstance();
@@ -73,12 +74,17 @@ int main() {
             ioc.stop();               // 最后停止当前 io_context
         });
         // Create and start the chat_server
+        try {
+            auto chat_server = std::make_shared<CServer>(ioc, port);
+            chat_server->Start();
+        } catch (const std::exception& e) {
+            spdlog::error("Exception during chat_server->Start(): {}", e.what());
+            return EXIT_FAILURE;
+        }
         spdlog::info("Starting ChatServer1 on {}:{}", section["Host"], port);
-        auto chat_server = std::make_shared<CServer>(ioc, port);
-        chat_server->Start();
         ioc.run();
         // 4.clean work
-        redis->HDel(SERVER_LOGIN_COUNT_PREFIX, server_name);
+        redis->HDel(SERVER_LOGIN_COUNT, server_name);
         redis->Close();
         grpc_thread.join(); // Wait for the gRPC server thread to finish
         spdlog::info("ChatServer1 has stopped.");

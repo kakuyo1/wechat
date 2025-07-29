@@ -2,10 +2,14 @@
 #include "../include/CSession.h"
 CServer::CServer(net::io_context& ioc, unsigned short port) :
     _ioc(ioc),
-    _port(port),
-    _acceptor(ioc, tcp::endpoint(tcp::v4(), port))
+    _port(port)
 {
-
+    try {
+        _acceptor = std::make_unique<tcp::acceptor>(_ioc, tcp::endpoint(tcp::v4(), port));
+    } catch (const std::exception& e) {
+        spdlog::error("Exception in CServer constructor: {}", e.what());
+        throw;
+    }
 }
 
 void CServer::Start() {
@@ -13,7 +17,7 @@ void CServer::Start() {
         auto self = shared_from_this();
         auto &ioc = AsioIOContextPool::GetInstance()->GetNextIOContext();
         auto new_session = std::make_shared<CSession>(ioc, self);
-        _acceptor.async_accept(new_session->GetSocket(), [self, new_session](const boost::system::error_code& ec){
+        _acceptor->async_accept(new_session->GetSocket(), [self, new_session](const boost::system::error_code& ec){
             if (!ec) {
                 // Successfully accepted a new connection
                 spdlog::info("New connection accepted.");

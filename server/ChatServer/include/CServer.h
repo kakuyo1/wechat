@@ -19,7 +19,7 @@ public:
 private:
     boost::asio::io_context& _ioc;
     unsigned short _port;
-    tcp::acceptor _acceptor;
+    std::unique_ptr<tcp::acceptor> _acceptor;
     std::map<std::string, std::shared_ptr<CSession>> _sessions; // Map of session UUID to CSession pointer
     std::mutex _mutex; // Mutex to protect access to _sessions
 };

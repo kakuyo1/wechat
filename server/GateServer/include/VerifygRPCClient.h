@@ -64,6 +64,7 @@ public:
     VerifygRPCClient& operator=(VerifygRPCClient&&) = delete; // Disable move assignment
 
     GetVerifyResponse GetVerifyCode(std::string email);
+    
 private:
     std::unique_ptr<RPCStubPool> _stub_pool; // Use RPCStubPool to manage stubs
 private:

@@ -1,7 +1,7 @@
 CMakeFiles/ChatServer.dir/source/CSession.cpp.o: \
  /home/kakuyo/wechat/server/ChatServer/source/CSession.cpp \
  /usr/include/stdc-predef.h \
- /home/kakuyo/wechat/server/ChatServer/include/CSession.h \
+ /home/kakuyo/wechat/server/ChatServer/source/../include/CSession.h \
  /usr/local/include/boost/asio.hpp \
  /usr/local/include/boost/asio/any_completion_executor.hpp \
  /usr/local/include/boost/asio/detail/config.hpp \
@@ -1118,7 +1118,7 @@ CMakeFiles/ChatServer.dir/source/CSession.cpp.o: \
  /usr/local/include/boost/uuid/time_generator_v1.hpp \
  /usr/local/include/boost/uuid/time_generator_v6.hpp \
  /usr/local/include/boost/uuid/time_generator_v7.hpp \
- /home/kakuyo/wechat/server/ChatServer/include/config.h \
+ /home/kakuyo/wechat/server/ChatServer/source/../include/config.h \
  /usr/include/c++/13/queue /usr/include/c++/13/deque \
  /usr/include/c++/13/bits/stl_deque.h /usr/include/c++/13/bits/deque.tcc \
  /usr/include/c++/13/bits/stl_queue.h /usr/include/spdlog/spdlog.h \
@@ -1133,14 +1133,14 @@ CMakeFiles/ChatServer.dir/source/CSession.cpp.o: \
  /usr/include/spdlog/details/log_msg_buffer.h \
  /usr/include/spdlog/details/circular_q.h /usr/include/spdlog/version.h \
  /usr/include/spdlog/details/synchronous_factory.h \
- /home/kakuyo/wechat/server/ChatServer/include/CServer.h \
- /home/kakuyo/wechat/server/ChatServer/include/AsioIOContextPool.h \
+ /home/kakuyo/wechat/server/ChatServer/source/../include/CServer.h \
+ /home/kakuyo/wechat/server/ChatServer/source/../include/AsioIOContextPool.h \
  /usr/include/c++/13/iostream \
- /home/kakuyo/wechat/server/ChatServer/include/Singleton.h \
- /home/kakuyo/wechat/server/ChatServer/include/MessageNode.h \
- /home/kakuyo/wechat/server/ChatServer/include/LogicSystem.h \
- /home/kakuyo/wechat/server/ChatServer/include/StatusGrpcClient.h \
- /home/kakuyo/wechat/server/ChatServer/include/ConfigIniManager.h \
+ /home/kakuyo/wechat/server/ChatServer/source/../include/Singleton.h \
+ /home/kakuyo/wechat/server/ChatServer/source/../include/MessageNode.h \
+ /home/kakuyo/wechat/server/ChatServer/source/../include/LogicSystem.h \
+ /home/kakuyo/wechat/server/ChatServer/source/../include/StatusGrpcClient.h \
+ /home/kakuyo/wechat/server/ChatServer/source/../include/ConfigIniManager.h \
  /usr/local/include/boost/property_tree/ptree.hpp \
  /usr/local/include/boost/property_tree/ptree_fwd.hpp \
  /usr/local/include/boost/optional/optional_fwd.hpp \
@@ -1680,8 +1680,8 @@ CMakeFiles/ChatServer.dir/source/CSession.cpp.o: \
  /usr/local/include/grpcpp/security/authorization_policy_provider.h \
  /usr/local/include/grpcpp/server_context.h \
  /usr/local/include/grpcpp/server_posix.h \
- /home/kakuyo/wechat/server/ChatServer/proto/message.grpc.pb.h \
- /home/kakuyo/wechat/server/ChatServer/proto/message.pb.h \
+ /home/kakuyo/wechat/server/ChatServer/source/../include/../proto/message.grpc.pb.h \
+ /home/kakuyo/wechat/server/ChatServer/source/../include/../proto/message.pb.h \
  /usr/local/include/google/protobuf/port_def.inc \
  /usr/local/include/google/protobuf/port_undef.inc \
  /usr/local/include/google/protobuf/io/coded_stream.h \
@@ -1764,8 +1764,8 @@ CMakeFiles/ChatServer.dir/source/CSession.cpp.o: \
  /usr/include/jsoncpp/json/value.h /usr/include/c++/13/stack \
  /usr/include/c++/13/bits/stl_stack.h /usr/include/jsoncpp/json/writer.h \
  /usr/include/jsoncpp/json/reader.h /usr/include/jsoncpp/json/value.h \
- /home/kakuyo/wechat/server/ChatServer/include/MysqlManager.h \
- /home/kakuyo/wechat/server/ChatServer/include/MysqlDAO.h \
+ /home/kakuyo/wechat/server/ChatServer/source/../include/MysqlManager.h \
+ /home/kakuyo/wechat/server/ChatServer/source/../include/MysqlDAO.h \
  /usr/include/mysql_connection.h /usr/include/cppconn/connection.h \
  /usr/include/cppconn/build_config.h /usr/include/cppconn/warning.h \
  /usr/include/cppconn/sqlstring.h /usr/include/cppconn/variant.h \

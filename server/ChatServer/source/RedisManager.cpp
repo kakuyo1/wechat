@@ -6,8 +6,10 @@ RedisManager::RedisManager() {
     std::string host = redis_section["Host"];
     std::string port_str = redis_section["Port"];
     std::string password = redis_section["Password"];
+    spdlog::info("Redis config - Host: {}, Port: {}, Password: {}", host, port_str, password); // 新增日志
     int port = std::stoi(port_str);
     _context_pool = std::make_unique<RedisContextPool>(5, host.c_str(), port, password.c_str());
+    spdlog::info("RedisContextPool initialized with size: {}", _context_pool->GetPoolSize());
 }
 
 RedisManager::~RedisManager() {

@@ -297,6 +297,30 @@ source/ChatServer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ChatServer.dir/build.make CMakeFiles/ChatServer.dir/source/ChatServer.cpp.s
 .PHONY : source/ChatServer.cpp.s
 
+source/ChatServiceImpl.o: source/ChatServiceImpl.cpp.o
+.PHONY : source/ChatServiceImpl.o
+
+# target to build an object file
+source/ChatServiceImpl.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ChatServer.dir/build.make CMakeFiles/ChatServer.dir/source/ChatServiceImpl.cpp.o
+.PHONY : source/ChatServiceImpl.cpp.o
+
+source/ChatServiceImpl.i: source/ChatServiceImpl.cpp.i
+.PHONY : source/ChatServiceImpl.i
+
+# target to preprocess a source file
+source/ChatServiceImpl.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ChatServer.dir/build.make CMakeFiles/ChatServer.dir/source/ChatServiceImpl.cpp.i
+.PHONY : source/ChatServiceImpl.cpp.i
+
+source/ChatServiceImpl.s: source/ChatServiceImpl.cpp.s
+.PHONY : source/ChatServiceImpl.s
+
+# target to generate assembly for a file
+source/ChatServiceImpl.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ChatServer.dir/build.make CMakeFiles/ChatServer.dir/source/ChatServiceImpl.cpp.s
+.PHONY : source/ChatServiceImpl.cpp.s
+
 source/ConfigIniManager.o: source/ConfigIniManager.cpp.o
 .PHONY : source/ConfigIniManager.o
 
@@ -465,6 +489,30 @@ source/StatusGrpcClient.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ChatServer.dir/build.make CMakeFiles/ChatServer.dir/source/StatusGrpcClient.cpp.s
 .PHONY : source/StatusGrpcClient.cpp.s
 
+source/UserManager.o: source/UserManager.cpp.o
+.PHONY : source/UserManager.o
+
+# target to build an object file
+source/UserManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ChatServer.dir/build.make CMakeFiles/ChatServer.dir/source/UserManager.cpp.o
+.PHONY : source/UserManager.cpp.o
+
+source/UserManager.i: source/UserManager.cpp.i
+.PHONY : source/UserManager.i
+
+# target to preprocess a source file
+source/UserManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ChatServer.dir/build.make CMakeFiles/ChatServer.dir/source/UserManager.cpp.i
+.PHONY : source/UserManager.cpp.i
+
+source/UserManager.s: source/UserManager.cpp.s
+.PHONY : source/UserManager.s
+
+# target to generate assembly for a file
+source/UserManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ChatServer.dir/build.make CMakeFiles/ChatServer.dir/source/UserManager.cpp.s
+.PHONY : source/UserManager.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -495,6 +543,9 @@ help:
 	@echo "... source/ChatServer.o"
 	@echo "... source/ChatServer.i"
 	@echo "... source/ChatServer.s"
+	@echo "... source/ChatServiceImpl.o"
+	@echo "... source/ChatServiceImpl.i"
+	@echo "... source/ChatServiceImpl.s"
 	@echo "... source/ConfigIniManager.o"
 	@echo "... source/ConfigIniManager.i"
 	@echo "... source/ConfigIniManager.s"
@@ -516,6 +567,9 @@ help:
 	@echo "... source/StatusGrpcClient.o"
 	@echo "... source/StatusGrpcClient.i"
 	@echo "... source/StatusGrpcClient.s"
+	@echo "... source/UserManager.o"
+	@echo "... source/UserManager.i"
+	@echo "... source/UserManager.s"
 .PHONY : help
 
 

@@ -13,6 +13,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/ChatServer.dir/source/ChatGrpcClient.cpp.o.d"
   "CMakeFiles/ChatServer.dir/source/ChatServer.cpp.o"
   "CMakeFiles/ChatServer.dir/source/ChatServer.cpp.o.d"
+  "CMakeFiles/ChatServer.dir/source/ChatServiceImpl.cpp.o"
+  "CMakeFiles/ChatServer.dir/source/ChatServiceImpl.cpp.o.d"
   "CMakeFiles/ChatServer.dir/source/ConfigIniManager.cpp.o"
   "CMakeFiles/ChatServer.dir/source/ConfigIniManager.cpp.o.d"
   "CMakeFiles/ChatServer.dir/source/LogicSystem.cpp.o"
@@ -27,6 +29,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/ChatServer.dir/source/RedisManager.cpp.o.d"
   "CMakeFiles/ChatServer.dir/source/StatusGrpcClient.cpp.o"
   "CMakeFiles/ChatServer.dir/source/StatusGrpcClient.cpp.o.d"
+  "CMakeFiles/ChatServer.dir/source/UserManager.cpp.o"
+  "CMakeFiles/ChatServer.dir/source/UserManager.cpp.o.d"
   "ChatServer"
   "ChatServer.pdb"
 )

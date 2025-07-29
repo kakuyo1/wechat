@@ -29,6 +29,8 @@ public:
 private:
     LogicSystem();
     void ProcessMessageQueue();
+    void HandleLoginAuth(std::shared_ptr<CSession> session, std::shared_ptr<RecieveMessageNode> message_node);
+    void HandleClientSearchUser(std::shared_ptr<CSession> session, std::shared_ptr<RecieveMessageNode> message_node);
 private:
     std::unordered_map<short, std::function<void(std::shared_ptr<CSession>, std::shared_ptr<RecieveMessageNode>)>> _handlers;
     std::queue<std::shared_ptr<LogicNode>> _message_queue;

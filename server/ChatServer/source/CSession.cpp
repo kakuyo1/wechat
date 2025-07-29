@@ -106,7 +106,7 @@ void CSession::ReadBody(short message_length, short message_type) {
             std::memcpy(message_node->GetData(), self->_body.data(), message_length);
             message_node->SetCurrentLength(message_length);
             message_node->SetMessageType(message_type);
-            std::shared_ptr<LogicNode> logic_node = std::make_shared<LogicNode>(self, message_node);
+            std::shared_ptr<LogicNode> logic_node = std::make_shared<LogicNode>(self, message_node); // ?
 
             // Post the logic node to the LogicSystem for processing
             LogicSystem::GetInstance()->PostLogicNode(self, message_node);

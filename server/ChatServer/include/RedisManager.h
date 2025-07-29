@@ -28,6 +28,7 @@ public:
     void Close();
     redisContext* GetContext();
     void returnContext(redisContext* context);
+    size_t GetPoolSize() const { return _pool_size; }
 private:
     std::string _host;
     int _port;

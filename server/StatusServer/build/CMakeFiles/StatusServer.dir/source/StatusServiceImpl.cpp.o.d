@@ -1107,4 +1107,11 @@ CMakeFiles/StatusServer.dir/source/StatusServiceImpl.cpp.o: \
  /usr/include/spdlog/details/backtracer.h \
  /usr/include/spdlog/details/log_msg_buffer.h \
  /usr/include/spdlog/details/circular_q.h /usr/include/spdlog/version.h \
- /usr/include/spdlog/details/synchronous_factory.h
+ /usr/include/spdlog/details/synchronous_factory.h \
+ /home/kakuyo/wechat/server/StatusServer/include/RedisManager.h \
+ /usr/include/hiredis/hiredis.h /usr/include/hiredis/read.h \
+ /usr/include/hiredis/sds.h /usr/include/hiredis/alloc.h \
+ /home/kakuyo/wechat/server/StatusServer/include/Singleton.h \
+ /usr/include/c++/13/queue /usr/include/c++/13/deque \
+ /usr/include/c++/13/bits/stl_deque.h /usr/include/c++/13/bits/deque.tcc \
+ /usr/include/c++/13/bits/stl_queue.h

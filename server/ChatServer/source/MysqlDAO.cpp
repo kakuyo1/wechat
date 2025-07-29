@@ -383,7 +383,7 @@ bool MysqlDAO::CheckEmailExists(const std::string& email) {
     }
 }
 
-std::shared_ptr<FullUserInfo> MysqlDAO::getFullUserInfo(int uid) {
+std::shared_ptr<FullUserInfo> MysqlDAO::getFullUserInfoByUid(int uid) {
     auto con = _pool->GetConnection();
     try {
         if (con == nullptr) {
@@ -415,7 +415,7 @@ std::shared_ptr<FullUserInfo> MysqlDAO::getFullUserInfo(int uid) {
     }
 }
 
-std::shared_ptr<FullUserInfo> MysqlDAO::getFullUserInfo(const std::string& name) {
+std::shared_ptr<FullUserInfo> MysqlDAO::getFullUserInfoByName(const std::string& name) {
     auto con = _pool->GetConnection();
     try {
         if (con == nullptr) {

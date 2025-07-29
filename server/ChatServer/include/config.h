@@ -19,7 +19,9 @@ enum class ErrorCodes {
     ERROR_INVALID_AUTH_PARAMETERS = 14,
     ERROR_USER_ALREADY_ONLINE = 15,
     ERROR_EMAIL_DOES_NOT_EXIST = 16,
-    ERROR_USER_OFFLINE = 17
+    ERROR_USER_OFFLINE = 17,
+    ERROR_SEARCH_FAILED_BY_UID = 18,
+    ERROR_SEARCH_FAILED_BY_NAME = 19
 };
 
 const std::string code_prefix = "code_"; // Prefix for verify code keys in Redis
@@ -35,7 +37,9 @@ enum class MessageType {
     MESSAGE_CHATSERVER_AUTHFRIEND_PUSH = 1012, // 服务端 → 接收方客户端：转发好友验证处理结果通知
     MESSAGE_CLIENT_CHATTEXT_REQUEST = 1013, // 客户端 → 服务端：发送聊天文本消息
     MESSAGE_CHATSERVER_CHATTEXT_ACK = 1014, // 服务端 → 发起方客户端：处理聊天文本消息的反馈
-    MESSAGE_CHATSERVER_CHATTEXT_PUSH = 1015 // 服务端 → 接收方客户端：转发聊天文本消息
+    MESSAGE_CHATSERVER_CHATTEXT_PUSH = 1015, // 服务端 → 接收方客户端：转发聊天文本消息
+    MESSAGE_CLIENT_SEARCH_USER_REQUEST = 1016, // 客户端 → 服务端：搜索用户
+    MESSAGE_CHATSERVER_SEARCH_USER_RESPONSE = 1017 // 服务端 → 客户端：搜索用户结果
 };
 
 struct UserInfo {
@@ -64,11 +68,11 @@ struct FullUserInfo {
 #define DATA_MESSAGE_LENGTH 2
 
 
-#define USER_IP_PREFIX "user_ip_" // Prefix for user IP keys in Redis
+#define SERVER_IP_PREFIX "server_ip_" // Prefix for server IP keys in Redis
 #define USER_TOKEN_PREFIX "user_token_" // Prefix for user token keys in Redis
 #define USER_FULLINFO_PREFIX "user_fullinfo_" // Prefix for user full info keys in Redis
 #define USER_SESSION_PREFIX "user_session_" // Prefix for user session keys in Redis
-#define SERVER_LOGIN_COUNT_PREFIX "server_login_count_" // Prefix for server login count keys in Redis
+#define SERVER_LOGIN_COUNT "server_login_count" // server login count keys in Redis
 
 
 class Defer {

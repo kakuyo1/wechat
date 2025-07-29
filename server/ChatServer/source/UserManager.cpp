@@ -1,4 +1,5 @@
 #include "../include/UserManager.h"
+#include "UserManager.h"
 
 UserManager::~UserManager()
 {
@@ -37,7 +38,7 @@ void UserManager::removeUidToSession(int uid)
     }
 }
 
-bool UserManager::getFullUserInfo(int uid, std::shared_ptr<FullUserInfo> fulluserinfo) {
+bool UserManager::getFullUserInfoByUid(int uid, std::shared_ptr<FullUserInfo> fulluserinfo) {
     // prepare for redis string key
     std::string redis_key = USER_FULLINFO_PREFIX + std::to_string(uid);
     // First Try: get full user info from redis
@@ -58,7 +59,7 @@ bool UserManager::getFullUserInfo(int uid, std::shared_ptr<FullUserInfo> fulluse
         return true;
     }
     // Second Try: get full user info from Mysql
-    fulluserinfo = MysqlManager::GetInstance()->getFullUserInfo(uid);
+    fulluserinfo = MysqlManager::GetInstance()->getFullUserInfoByUid(uid);
     if (fulluserinfo == nullptr) {
         spdlog::error("Failed to get full user info from Mysql for uid: {}", uid);
         return false;
@@ -82,3 +83,48 @@ bool UserManager::getFullUserInfo(int uid, std::shared_ptr<FullUserInfo> fulluse
     return true;
 }
 
+bool UserManager::getFullUserInfoByName(const std::string &name, std::shared_ptr<FullUserInfo> fulluserinfo)
+{
+    // prepare for redis string key
+    std::string redis_key = USER_FULLINFO_PREFIX + name;
+    // First Try: get full user info from redis
+    auto redis_client = RedisManager::GetInstance();
+    std::string fulluserinfo_jsonString = ""; // to be filled by redis
+    if (redis_client->Get(redis_key, fulluserinfo_jsonString)) {
+        Json::Value root;
+        Json::Reader reader;
+        reader.parse(fulluserinfo_jsonString, root);
+        fulluserinfo->uid = root["uid"].asInt();
+        fulluserinfo->gender = root["gender"].asInt();
+        fulluserinfo->name = root["name"].asString();
+        fulluserinfo->desc = root["desc"].asString();
+        fulluserinfo->email = root["email"].asString();
+        fulluserinfo->password = root["password"].asString();
+        fulluserinfo->icon = root["icon"].asString();
+        fulluserinfo->nickname = root["nickname"].asString();
+        return true;
+    }
+    // Second Try: get full user info from Mysql
+    fulluserinfo = MysqlManager::GetInstance()->getFullUserInfoByName(name);
+    if (fulluserinfo == nullptr) {
+        spdlog::error("Failed to get full user info from Mysql for name: {}", name);
+        return false;
+    }
+    // Store full user info to redis
+    Json::Value root;
+    root["uid"] = fulluserinfo->uid;
+    root["gender"] = fulluserinfo->gender;
+    root["name"] = fulluserinfo->name;
+    root["desc"] = fulluserinfo->desc;
+    root["email"] = fulluserinfo->email;
+    root["password"] = fulluserinfo->password;
+    root["icon"] = fulluserinfo->icon;
+    root["nickname"] = fulluserinfo->nickname;
+    Json::StreamWriterBuilder writer;
+    std::string fulluserinfo_jsonString_toRedis = Json::writeString(writer, root);
+    if (!redis_client->Set(redis_key, fulluserinfo_jsonString_toRedis)) {
+        spdlog::error("Failed to set full user info to Redis for name: {}", name);
+        return false;
+    }
+    return true;
+}

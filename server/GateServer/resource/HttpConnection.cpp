@@ -12,8 +12,8 @@ void HttpConnection::Start() {
     self->CheckDeadline();// start deadline check for 60 seconds
     http::async_read(_socket, _buffer, _request, [self](beast::error_code ec, std::size_t bytes_transferred){ // raw _buffer data to construct _request
         if (ec) {
-            if (ec == boost::asio::error::operation_aborted) { // canceled by deadline
-                spdlog::info("Request cancelled (possibly due to timeout)");
+            if (ec == boost::asio::error::operation_aborted || ec == boost::asio::error::bad_descriptor) { // canceled by deadline
+                spdlog::info("Request cancelled (possibly due to timeout) or socket closed.");
             } else {
                 spdlog::error("Error reading request: {}", ec.message());
             }

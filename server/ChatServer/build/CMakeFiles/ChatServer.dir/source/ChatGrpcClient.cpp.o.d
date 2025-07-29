@@ -1,8 +1,8 @@
 CMakeFiles/ChatServer.dir/source/ChatGrpcClient.cpp.o: \
  /home/kakuyo/wechat/server/ChatServer/source/ChatGrpcClient.cpp \
  /usr/include/stdc-predef.h \
- /home/kakuyo/wechat/server/ChatServer/include/ChatGrpcClient.h \
- /home/kakuyo/wechat/server/ChatServer/include/config.h \
+ /home/kakuyo/wechat/server/ChatServer/source/../include/ChatGrpcClient.h \
+ /home/kakuyo/wechat/server/ChatServer/source/../include/config.h \
  /usr/include/c++/13/string /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -135,8 +135,8 @@ CMakeFiles/ChatServer.dir/source/ChatGrpcClient.cpp.o: \
  /usr/include/c++/13/bits/stl_heap.h \
  /usr/include/c++/13/bits/uniform_int_dist.h \
  /usr/include/c++/13/bits/stl_tempbuf.h \
- /home/kakuyo/wechat/server/ChatServer/proto/message.grpc.pb.h \
- /home/kakuyo/wechat/server/ChatServer/proto/message.pb.h \
+ /home/kakuyo/wechat/server/ChatServer/source/../include/../proto/message.grpc.pb.h \
+ /home/kakuyo/wechat/server/ChatServer/source/../include/../proto/message.pb.h \
  /usr/include/c++/13/limits \
  /usr/local/include/google/protobuf/port_def.inc \
  /usr/local/include/google/protobuf/port_undef.inc \
@@ -420,7 +420,7 @@ CMakeFiles/ChatServer.dir/source/ChatGrpcClient.cpp.o: \
  /usr/local/include/grpcpp/impl/codegen/proto_buffer_reader.h \
  /usr/local/include/grpcpp/impl/codegen/proto_buffer_writer.h \
  /usr/local/include/grpcpp/impl/codegen/stub_options.h \
- /home/kakuyo/wechat/server/ChatServer/proto/message.pb.h \
+ /home/kakuyo/wechat/server/ChatServer/source/../include/../proto/message.pb.h \
  /usr/local/include/grpcpp/grpcpp.h /usr/local/include/grpcpp/channel.h \
  /usr/local/include/grpcpp/completion_queue.h \
  /usr/local/include/grpcpp/create_channel.h \
@@ -450,7 +450,7 @@ CMakeFiles/ChatServer.dir/source/ChatGrpcClient.cpp.o: \
  /usr/local/include/grpcpp/impl/server_builder_plugin.h \
  /usr/local/include/grpcpp/security/authorization_policy_provider.h \
  /usr/local/include/grpcpp/server_posix.h \
- /home/kakuyo/wechat/server/ChatServer/include/ConfigIniManager.h \
+ /home/kakuyo/wechat/server/ChatServer/source/../include/ConfigIniManager.h \
  /usr/local/include/boost/property_tree/ptree.hpp \
  /usr/local/include/boost/property_tree/ptree_fwd.hpp \
  /usr/local/include/boost/config.hpp \
@@ -1068,7 +1068,52 @@ CMakeFiles/ChatServer.dir/source/ChatGrpcClient.cpp.o: \
  /usr/include/spdlog/details/log_msg_buffer.h \
  /usr/include/spdlog/details/circular_q.h /usr/include/spdlog/version.h \
  /usr/include/spdlog/details/synchronous_factory.h \
- /home/kakuyo/wechat/server/ChatServer/include/Singleton.h \
+ /home/kakuyo/wechat/server/ChatServer/source/../include/Singleton.h \
  /usr/include/c++/13/queue /usr/include/c++/13/deque \
  /usr/include/c++/13/bits/stl_deque.h /usr/include/c++/13/bits/deque.tcc \
- /usr/include/c++/13/bits/stl_queue.h
+ /usr/include/c++/13/bits/stl_queue.h \
+ /home/kakuyo/wechat/server/ChatServer/source/../include/RedisManager.h \
+ /usr/include/hiredis/hiredis.h /usr/include/hiredis/read.h \
+ /usr/include/hiredis/sds.h /usr/include/hiredis/alloc.h \
+ /home/kakuyo/wechat/server/ChatServer/source/../include/MysqlManager.h \
+ /home/kakuyo/wechat/server/ChatServer/source/../include/MysqlDAO.h \
+ /usr/include/mysql_connection.h /usr/include/cppconn/connection.h \
+ /usr/include/cppconn/build_config.h /usr/include/cppconn/warning.h \
+ /usr/include/cppconn/sqlstring.h /usr/include/cppconn/variant.h \
+ /usr/include/cppconn/exception.h /usr/local/include/boost/shared_ptr.hpp \
+ /usr/local/include/boost/smart_ptr/shared_ptr.hpp \
+ /usr/local/include/boost/smart_ptr/detail/shared_count.hpp \
+ /usr/local/include/boost/smart_ptr/bad_weak_ptr.hpp \
+ /usr/local/include/boost/smart_ptr/detail/sp_counted_base.hpp \
+ /usr/local/include/boost/smart_ptr/detail/sp_has_gcc_intrinsics.hpp \
+ /usr/local/include/boost/smart_ptr/detail/sp_has_sync_intrinsics.hpp \
+ /usr/local/include/boost/smart_ptr/detail/deprecated_macros.hpp \
+ /usr/local/include/boost/smart_ptr/detail/sp_counted_base_gcc_atomic.hpp \
+ /usr/local/include/boost/smart_ptr/detail/sp_typeinfo_.hpp \
+ /usr/local/include/boost/smart_ptr/detail/sp_counted_impl.hpp \
+ /usr/local/include/boost/core/checked_delete.hpp \
+ /usr/local/include/boost/smart_ptr/detail/sp_disable_deprecated.hpp \
+ /usr/local/include/boost/smart_ptr/detail/sp_convertible.hpp \
+ /usr/local/include/boost/smart_ptr/detail/sp_noexcept.hpp \
+ /usr/local/include/boost/smart_ptr/detail/spinlock_pool.hpp \
+ /usr/local/include/boost/smart_ptr/detail/spinlock.hpp \
+ /usr/local/include/boost/smart_ptr/detail/spinlock_gcc_atomic.hpp \
+ /usr/local/include/boost/smart_ptr/detail/yield_k.hpp \
+ /usr/local/include/boost/core/yield_primitives.hpp \
+ /usr/local/include/boost/core/detail/sp_thread_pause.hpp \
+ /usr/local/include/boost/core/detail/sp_thread_yield.hpp \
+ /usr/local/include/boost/core/detail/sp_thread_sleep.hpp \
+ /usr/local/include/boost/smart_ptr/detail/local_sp_deleter.hpp \
+ /usr/local/include/boost/smart_ptr/detail/local_counted_base.hpp \
+ /usr/local/include/boost/scoped_ptr.hpp \
+ /usr/local/include/boost/smart_ptr/scoped_ptr.hpp \
+ /usr/include/mysql_driver.h /usr/include/cppconn/driver.h \
+ /usr/include/cppconn/connection.h /usr/include/cppconn/statement.h \
+ /usr/include/cppconn/config.h /usr/include/inttypes.h \
+ /usr/include/cppconn/resultset.h \
+ /usr/include/cppconn/resultset_metadata.h \
+ /usr/include/cppconn/datatype.h \
+ /usr/include/cppconn/prepared_statement.h \
+ /usr/include/cppconn/statement.h /usr/include/cppconn/resultset.h \
+ /usr/include/cppconn/exception.h \
+ /home/kakuyo/libbcrypt/include/bcrypt/bcrypt.h

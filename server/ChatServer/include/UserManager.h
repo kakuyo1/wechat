@@ -21,7 +21,8 @@ public:
     std::shared_ptr<CSession> getSessionByUid(int uid);
     void setUidToSession(int uid, std::shared_ptr<CSession> session);
     void removeUidToSession(int uid);
-    bool getFullUserInfo(int uid, std::shared_ptr<FullUserInfo> fulluserinfo);
+    bool getFullUserInfoByUid(int uid, std::shared_ptr<FullUserInfo> fulluserinfo);
+    bool getFullUserInfoByName(const std::string& name, std::shared_ptr<FullUserInfo> fulluserinfo);
 private:
     UserManager() = default;
     UserManager(const UserManager&) = delete;
