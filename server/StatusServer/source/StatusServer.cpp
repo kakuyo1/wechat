@@ -6,6 +6,8 @@
 #include <spdlog/spdlog.h>
 
 void RunServer() {
+    // 设置日志等级debug
+    spdlog::set_level(spdlog::level::debug); // Set log level to debug
     auto& config = ConfigIniManager::Instance();
     auto section = config["StatusServer"];
     auto host = section["Host"];

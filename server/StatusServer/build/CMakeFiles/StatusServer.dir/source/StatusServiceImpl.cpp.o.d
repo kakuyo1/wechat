@@ -1,7 +1,7 @@
 CMakeFiles/StatusServer.dir/source/StatusServiceImpl.cpp.o: \
  /home/kakuyo/wechat/server/StatusServer/source/StatusServiceImpl.cpp \
  /usr/include/stdc-predef.h \
- /home/kakuyo/wechat/server/StatusServer/include/StatusServiceImpl.h \
+ /home/kakuyo/wechat/server/StatusServer/source/../include/StatusServiceImpl.h \
  /home/kakuyo/wechat/server/StatusServer/proto/message.grpc.pb.h \
  /home/kakuyo/wechat/server/StatusServer/proto/message.pb.h \
  /usr/include/c++/13/limits \
@@ -516,7 +516,7 @@ CMakeFiles/StatusServer.dir/source/StatusServiceImpl.cpp.o: \
  /usr/local/include/boost/uuid/time_generator_v1.hpp \
  /usr/local/include/boost/uuid/time_generator_v6.hpp \
  /usr/local/include/boost/uuid/time_generator_v7.hpp \
- /home/kakuyo/wechat/server/StatusServer/include/ConfigIniManager.h \
+ /home/kakuyo/wechat/server/StatusServer/source/../include/ConfigIniManager.h \
  /usr/local/include/boost/property_tree/ptree.hpp \
  /usr/local/include/boost/property_tree/ptree_fwd.hpp \
  /usr/local/include/boost/optional/optional_fwd.hpp \
@@ -1093,7 +1093,7 @@ CMakeFiles/StatusServer.dir/source/StatusServiceImpl.cpp.o: \
  /usr/include/c++/13/iomanip /usr/include/c++/13/bits/quoted_string.h \
  /usr/include/c++/13/codecvt /usr/include/c++/13/bits/fs_dir.h \
  /usr/include/c++/13/bits/fs_ops.h \
- /home/kakuyo/wechat/server/StatusServer/include/config.h \
+ /home/kakuyo/wechat/server/StatusServer/source/../include/config.h \
  /usr/include/spdlog/spdlog.h /usr/include/spdlog/common.h \
  /usr/include/spdlog/tweakme.h /usr/include/spdlog/details/null_mutex.h \
  /usr/include/spdlog/fmt/fmt.h /usr/include/fmt/core.h \
@@ -1108,10 +1108,10 @@ CMakeFiles/StatusServer.dir/source/StatusServiceImpl.cpp.o: \
  /usr/include/spdlog/details/log_msg_buffer.h \
  /usr/include/spdlog/details/circular_q.h /usr/include/spdlog/version.h \
  /usr/include/spdlog/details/synchronous_factory.h \
- /home/kakuyo/wechat/server/StatusServer/include/RedisManager.h \
+ /home/kakuyo/wechat/server/StatusServer/source/../include/RedisManager.h \
  /usr/include/hiredis/hiredis.h /usr/include/hiredis/read.h \
  /usr/include/hiredis/sds.h /usr/include/hiredis/alloc.h \
- /home/kakuyo/wechat/server/StatusServer/include/Singleton.h \
+ /home/kakuyo/wechat/server/StatusServer/source/../include/Singleton.h \
  /usr/include/c++/13/queue /usr/include/c++/13/deque \
  /usr/include/c++/13/bits/stl_deque.h /usr/include/c++/13/bits/deque.tcc \
  /usr/include/c++/13/bits/stl_queue.h

@@ -3,7 +3,7 @@
 #include <grpcpp/grpcpp.h>
 #include <memory>
 #include <string>
-#include "message.grpc.pb.h"
+#include "../proto/message.grpc.pb.h"
 #include "Singleton.h"
 #include "iostream"
 #include <queue>
@@ -17,9 +17,9 @@ using grpc::Channel;
 using grpc::ClientContext;
 using grpc::Status;
 
-using message::VerifyService;
-using message::GetVerifyRequest;
-using message::GetVerifyResponse;
+using chat_message::VerifyService;
+using chat_message::GetVerifyRequest;
+using chat_message::GetVerifyResponse;
 
 /***************************************************************************
  * RPCStubPool: to manage the stubs

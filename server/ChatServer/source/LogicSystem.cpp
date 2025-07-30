@@ -102,6 +102,7 @@ void LogicSystem::ProcessMessageQueue()
 void LogicSystem::HandleLoginAuth(std::shared_ptr<CSession> session, std::shared_ptr<RecieveMessageNode> message_node)
 {
     // 1.Extract message data by json parsing
+    spdlog::debug("Step 1");
     std::string message_data(message_node->GetData(), message_node->GetCurrentLength());
     std::istringstream message_stream(message_data);
     Json::Value source;
@@ -121,6 +122,7 @@ void LogicSystem::HandleLoginAuth(std::shared_ptr<CSession> session, std::shared
     spdlog::info("[LogicSystem]Received login auth request for UID: {}, Token: {}", uid, client_token);
 
     // 2.Validate the token and uid by calling StatusServer(Login)
+    spdlog::debug("Step 2");
     auto status_server = StatusGrpcClient::GetInstance();
     auto status = status_server->Login(uid, client_token);
     if (status.error() != static_cast<int>(ErrorCodes::SUCCESS))
@@ -148,6 +150,7 @@ void LogicSystem::HandleLoginAuth(std::shared_ptr<CSession> session, std::shared
         }
     }
     // 3.If login is successful, cache the user into _users info by mysql, if already in, meaning user is online, return error
+    spdlog::debug("Step 3");
     auto it = _users.find(uid);
     if (it != _users.end())
     {
@@ -173,7 +176,8 @@ void LogicSystem::HandleLoginAuth(std::shared_ptr<CSession> session, std::shared
         _users[uid] = std::make_shared<UserInfo>(user_info);
     }
     // 4.get fullUserInfo for Client Initialization
-    std::shared_ptr<FullUserInfo> userinfoptr = nullptr;
+    spdlog::debug("Step 4");
+    std::shared_ptr<FullUserInfo> userinfoptr = std::make_shared<FullUserInfo>();
     bool isSuccess = UserManager::GetInstance()->getFullUserInfoByUid(uid, userinfoptr);
     if (!isSuccess)
     {
@@ -185,6 +189,7 @@ void LogicSystem::HandleLoginAuth(std::shared_ptr<CSession> session, std::shared
     }
     spdlog::info("[LogicSystem]User with UID {} authenticated successfully, sending response.", uid);
     // 5.prepare the BaseFullInfo response to the client
+    spdlog::debug("Step 5");
     response["error"] = static_cast<short>(ErrorCodes::SUCCESS);
     response["uid"] = userinfoptr->uid;
     response["gender"] = userinfoptr->gender;
@@ -201,6 +206,7 @@ void LogicSystem::HandleLoginAuth(std::shared_ptr<CSession> session, std::shared
     // TODO 7.prepare the friend request list for the client
 
     // 8.increment the online user count in ChatServer by redis(maintain loginCount synchronization between all the ChatServers)
+    spdlog::debug("Step 8");
     auto server_name = ConfigIniManager::Instance()["SelfServer"]["Name"];
     auto current_login_count = RedisManager::GetInstance()->HGet(SERVER_LOGIN_COUNT, server_name);
     if (current_login_count.empty())
@@ -223,10 +229,12 @@ void LogicSystem::HandleLoginAuth(std::shared_ptr<CSession> session, std::shared
     spdlog::info("[LogicSystem]server {} login count incremented to {}", server_name, new_login_count);
 
     // 9. Bind the uid and session then Store the session in UserManager(aim for across server communication)
+    spdlog::debug("Step 9");
     session->setSessionUid(uid);
     UserManager::GetInstance()->setUidToSession(uid, session);
 
     // 10. Set the serverIP for the user/session(aim for across server communication)
+    spdlog::debug("Step 10");
     std::string server_ip_key = SERVER_IP_PREFIX + std::to_string(uid);
     if (!RedisManager::GetInstance()->Set(server_ip_key, server_name))
     {
@@ -238,6 +246,7 @@ void LogicSystem::HandleLoginAuth(std::shared_ptr<CSession> session, std::shared
     }
 
     // send the final response to the client
+    spdlog::debug("Step final");
     session->Send(response.toStyledString(), static_cast<short>(MessageType::MESSAGE_CHATSERVER_LOGIN_AUTH_RESPONSE));
 }
 

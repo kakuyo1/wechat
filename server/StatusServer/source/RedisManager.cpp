@@ -353,3 +353,4 @@ void RedisContextPool::returnContext(redisContext *context)
     _contexts.push(context); // 将上下文放回队列
     _cv.notify_one(); // 通知等待的线程有新的上下文可用
 }
+

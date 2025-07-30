@@ -44,7 +44,7 @@ struct TableStruct_message_2eproto {
   static const uint32_t offsets[];
 };
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_message_2eproto;
-namespace message {
+namespace chat_message {
 class AddFriendRequest;
 struct AddFriendRequestDefaultTypeInternal;
 extern AddFriendRequestDefaultTypeInternal _AddFriendRequest_default_instance_;
@@ -75,25 +75,25 @@ extern LoginRequestDefaultTypeInternal _LoginRequest_default_instance_;
 class LoginResponse;
 struct LoginResponseDefaultTypeInternal;
 extern LoginResponseDefaultTypeInternal _LoginResponse_default_instance_;
-}  // namespace message
+}  // namespace chat_message
 PROTOBUF_NAMESPACE_OPEN
-template<> ::message::AddFriendRequest* Arena::CreateMaybeMessage<::message::AddFriendRequest>(Arena*);
-template<> ::message::AddFriendResponse* Arena::CreateMaybeMessage<::message::AddFriendResponse>(Arena*);
-template<> ::message::AuthFriendRequest* Arena::CreateMaybeMessage<::message::AuthFriendRequest>(Arena*);
-template<> ::message::AuthFriendResponse* Arena::CreateMaybeMessage<::message::AuthFriendResponse>(Arena*);
-template<> ::message::GetChatServerRequest* Arena::CreateMaybeMessage<::message::GetChatServerRequest>(Arena*);
-template<> ::message::GetChatServerResponse* Arena::CreateMaybeMessage<::message::GetChatServerResponse>(Arena*);
-template<> ::message::GetVerifyRequest* Arena::CreateMaybeMessage<::message::GetVerifyRequest>(Arena*);
-template<> ::message::GetVerifyResponse* Arena::CreateMaybeMessage<::message::GetVerifyResponse>(Arena*);
-template<> ::message::LoginRequest* Arena::CreateMaybeMessage<::message::LoginRequest>(Arena*);
-template<> ::message::LoginResponse* Arena::CreateMaybeMessage<::message::LoginResponse>(Arena*);
+template<> ::chat_message::AddFriendRequest* Arena::CreateMaybeMessage<::chat_message::AddFriendRequest>(Arena*);
+template<> ::chat_message::AddFriendResponse* Arena::CreateMaybeMessage<::chat_message::AddFriendResponse>(Arena*);
+template<> ::chat_message::AuthFriendRequest* Arena::CreateMaybeMessage<::chat_message::AuthFriendRequest>(Arena*);
+template<> ::chat_message::AuthFriendResponse* Arena::CreateMaybeMessage<::chat_message::AuthFriendResponse>(Arena*);
+template<> ::chat_message::GetChatServerRequest* Arena::CreateMaybeMessage<::chat_message::GetChatServerRequest>(Arena*);
+template<> ::chat_message::GetChatServerResponse* Arena::CreateMaybeMessage<::chat_message::GetChatServerResponse>(Arena*);
+template<> ::chat_message::GetVerifyRequest* Arena::CreateMaybeMessage<::chat_message::GetVerifyRequest>(Arena*);
+template<> ::chat_message::GetVerifyResponse* Arena::CreateMaybeMessage<::chat_message::GetVerifyResponse>(Arena*);
+template<> ::chat_message::LoginRequest* Arena::CreateMaybeMessage<::chat_message::LoginRequest>(Arena*);
+template<> ::chat_message::LoginResponse* Arena::CreateMaybeMessage<::chat_message::LoginResponse>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
-namespace message {
+namespace chat_message {
 
 // ===================================================================
 
 class GetVerifyRequest final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:message.GetVerifyRequest) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:chat_message.GetVerifyRequest) */ {
  public:
   inline GetVerifyRequest() : GetVerifyRequest(nullptr) {}
   ~GetVerifyRequest() override;
@@ -196,7 +196,7 @@ class GetVerifyRequest final :
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "message.GetVerifyRequest";
+    return "chat_message.GetVerifyRequest";
   }
   protected:
   explicit GetVerifyRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
@@ -229,7 +229,7 @@ class GetVerifyRequest final :
   std::string* _internal_mutable_email();
   public:
 
-  // @@protoc_insertion_point(class_scope:message.GetVerifyRequest)
+  // @@protoc_insertion_point(class_scope:chat_message.GetVerifyRequest)
  private:
   class _Internal;
 
@@ -246,7 +246,7 @@ class GetVerifyRequest final :
 // -------------------------------------------------------------------
 
 class GetVerifyResponse final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:message.GetVerifyResponse) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:chat_message.GetVerifyResponse) */ {
  public:
   inline GetVerifyResponse() : GetVerifyResponse(nullptr) {}
   ~GetVerifyResponse() override;
@@ -349,7 +349,7 @@ class GetVerifyResponse final :
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "message.GetVerifyResponse";
+    return "chat_message.GetVerifyResponse";
   }
   protected:
   explicit GetVerifyResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena,
@@ -407,7 +407,7 @@ class GetVerifyResponse final :
   void _internal_set_error(int32_t value);
   public:
 
-  // @@protoc_insertion_point(class_scope:message.GetVerifyResponse)
+  // @@protoc_insertion_point(class_scope:chat_message.GetVerifyResponse)
  private:
   class _Internal;
 
@@ -426,7 +426,7 @@ class GetVerifyResponse final :
 // -------------------------------------------------------------------
 
 class GetChatServerRequest final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:message.GetChatServerRequest) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:chat_message.GetChatServerRequest) */ {
  public:
   inline GetChatServerRequest() : GetChatServerRequest(nullptr) {}
   ~GetChatServerRequest() override;
@@ -529,7 +529,7 @@ class GetChatServerRequest final :
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "message.GetChatServerRequest";
+    return "chat_message.GetChatServerRequest";
   }
   protected:
   explicit GetChatServerRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
@@ -557,7 +557,7 @@ class GetChatServerRequest final :
   void _internal_set_uid(int32_t value);
   public:
 
-  // @@protoc_insertion_point(class_scope:message.GetChatServerRequest)
+  // @@protoc_insertion_point(class_scope:chat_message.GetChatServerRequest)
  private:
   class _Internal;
 
@@ -574,7 +574,7 @@ class GetChatServerRequest final :
 // -------------------------------------------------------------------
 
 class GetChatServerResponse final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:message.GetChatServerResponse) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:chat_message.GetChatServerResponse) */ {
  public:
   inline GetChatServerResponse() : GetChatServerResponse(nullptr) {}
   ~GetChatServerResponse() override;
@@ -677,7 +677,7 @@ class GetChatServerResponse final :
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "message.GetChatServerResponse";
+    return "chat_message.GetChatServerResponse";
   }
   protected:
   explicit GetChatServerResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena,
@@ -750,7 +750,7 @@ class GetChatServerResponse final :
   void _internal_set_error(int32_t value);
   public:
 
-  // @@protoc_insertion_point(class_scope:message.GetChatServerResponse)
+  // @@protoc_insertion_point(class_scope:chat_message.GetChatServerResponse)
  private:
   class _Internal;
 
@@ -770,7 +770,7 @@ class GetChatServerResponse final :
 // -------------------------------------------------------------------
 
 class LoginRequest final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:message.LoginRequest) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:chat_message.LoginRequest) */ {
  public:
   inline LoginRequest() : LoginRequest(nullptr) {}
   ~LoginRequest() override;
@@ -873,7 +873,7 @@ class LoginRequest final :
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "message.LoginRequest";
+    return "chat_message.LoginRequest";
   }
   protected:
   explicit LoginRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
@@ -916,7 +916,7 @@ class LoginRequest final :
   void _internal_set_uid(int32_t value);
   public:
 
-  // @@protoc_insertion_point(class_scope:message.LoginRequest)
+  // @@protoc_insertion_point(class_scope:chat_message.LoginRequest)
  private:
   class _Internal;
 
@@ -934,7 +934,7 @@ class LoginRequest final :
 // -------------------------------------------------------------------
 
 class LoginResponse final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:message.LoginResponse) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:chat_message.LoginResponse) */ {
  public:
   inline LoginResponse() : LoginResponse(nullptr) {}
   ~LoginResponse() override;
@@ -1037,7 +1037,7 @@ class LoginResponse final :
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "message.LoginResponse";
+    return "chat_message.LoginResponse";
   }
   protected:
   explicit LoginResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena,
@@ -1090,7 +1090,7 @@ class LoginResponse final :
   void _internal_set_uid(int32_t value);
   public:
 
-  // @@protoc_insertion_point(class_scope:message.LoginResponse)
+  // @@protoc_insertion_point(class_scope:chat_message.LoginResponse)
  private:
   class _Internal;
 
@@ -1109,7 +1109,7 @@ class LoginResponse final :
 // -------------------------------------------------------------------
 
 class AddFriendRequest final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:message.AddFriendRequest) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:chat_message.AddFriendRequest) */ {
  public:
   inline AddFriendRequest() : AddFriendRequest(nullptr) {}
   ~AddFriendRequest() override;
@@ -1212,7 +1212,7 @@ class AddFriendRequest final :
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "message.AddFriendRequest";
+    return "chat_message.AddFriendRequest";
   }
   protected:
   explicit AddFriendRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
@@ -1250,7 +1250,7 @@ class AddFriendRequest final :
   void _internal_set_to_uid(int32_t value);
   public:
 
-  // @@protoc_insertion_point(class_scope:message.AddFriendRequest)
+  // @@protoc_insertion_point(class_scope:chat_message.AddFriendRequest)
  private:
   class _Internal;
 
@@ -1268,7 +1268,7 @@ class AddFriendRequest final :
 // -------------------------------------------------------------------
 
 class AddFriendResponse final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:message.AddFriendResponse) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:chat_message.AddFriendResponse) */ {
  public:
   inline AddFriendResponse() : AddFriendResponse(nullptr) {}
   ~AddFriendResponse() override;
@@ -1371,7 +1371,7 @@ class AddFriendResponse final :
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "message.AddFriendResponse";
+    return "chat_message.AddFriendResponse";
   }
   protected:
   explicit AddFriendResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena,
@@ -1419,7 +1419,7 @@ class AddFriendResponse final :
   void _internal_set_to_uid(int32_t value);
   public:
 
-  // @@protoc_insertion_point(class_scope:message.AddFriendResponse)
+  // @@protoc_insertion_point(class_scope:chat_message.AddFriendResponse)
  private:
   class _Internal;
 
@@ -1438,7 +1438,7 @@ class AddFriendResponse final :
 // -------------------------------------------------------------------
 
 class AuthFriendRequest final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:message.AuthFriendRequest) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:chat_message.AuthFriendRequest) */ {
  public:
   inline AuthFriendRequest() : AuthFriendRequest(nullptr) {}
   ~AuthFriendRequest() override;
@@ -1541,7 +1541,7 @@ class AuthFriendRequest final :
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "message.AuthFriendRequest";
+    return "chat_message.AuthFriendRequest";
   }
   protected:
   explicit AuthFriendRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
@@ -1579,7 +1579,7 @@ class AuthFriendRequest final :
   void _internal_set_to_uid(int32_t value);
   public:
 
-  // @@protoc_insertion_point(class_scope:message.AuthFriendRequest)
+  // @@protoc_insertion_point(class_scope:chat_message.AuthFriendRequest)
  private:
   class _Internal;
 
@@ -1597,7 +1597,7 @@ class AuthFriendRequest final :
 // -------------------------------------------------------------------
 
 class AuthFriendResponse final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:message.AuthFriendResponse) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:chat_message.AuthFriendResponse) */ {
  public:
   inline AuthFriendResponse() : AuthFriendResponse(nullptr) {}
   ~AuthFriendResponse() override;
@@ -1700,7 +1700,7 @@ class AuthFriendResponse final :
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "message.AuthFriendResponse";
+    return "chat_message.AuthFriendResponse";
   }
   protected:
   explicit AuthFriendResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena,
@@ -1748,7 +1748,7 @@ class AuthFriendResponse final :
   void _internal_set_to_uid(int32_t value);
   public:
 
-  // @@protoc_insertion_point(class_scope:message.AuthFriendResponse)
+  // @@protoc_insertion_point(class_scope:chat_message.AuthFriendResponse)
  private:
   class _Internal;
 
@@ -1780,7 +1780,7 @@ inline void GetVerifyRequest::clear_email() {
   _impl_.email_.ClearToEmpty();
 }
 inline const std::string& GetVerifyRequest::email() const {
-  // @@protoc_insertion_point(field_get:message.GetVerifyRequest.email)
+  // @@protoc_insertion_point(field_get:chat_message.GetVerifyRequest.email)
   return _internal_email();
 }
 template <typename ArgT0, typename... ArgT>
@@ -1788,11 +1788,11 @@ inline PROTOBUF_ALWAYS_INLINE
 void GetVerifyRequest::set_email(ArgT0&& arg0, ArgT... args) {
  
  _impl_.email_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:message.GetVerifyRequest.email)
+  // @@protoc_insertion_point(field_set:chat_message.GetVerifyRequest.email)
 }
 inline std::string* GetVerifyRequest::mutable_email() {
   std::string* _s = _internal_mutable_email();
-  // @@protoc_insertion_point(field_mutable:message.GetVerifyRequest.email)
+  // @@protoc_insertion_point(field_mutable:chat_message.GetVerifyRequest.email)
   return _s;
 }
 inline const std::string& GetVerifyRequest::_internal_email() const {
@@ -1807,7 +1807,7 @@ inline std::string* GetVerifyRequest::_internal_mutable_email() {
   return _impl_.email_.Mutable(GetArenaForAllocation());
 }
 inline std::string* GetVerifyRequest::release_email() {
-  // @@protoc_insertion_point(field_release:message.GetVerifyRequest.email)
+  // @@protoc_insertion_point(field_release:chat_message.GetVerifyRequest.email)
   return _impl_.email_.Release();
 }
 inline void GetVerifyRequest::set_allocated_email(std::string* email) {
@@ -1822,7 +1822,7 @@ inline void GetVerifyRequest::set_allocated_email(std::string* email) {
     _impl_.email_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:message.GetVerifyRequest.email)
+  // @@protoc_insertion_point(field_set_allocated:chat_message.GetVerifyRequest.email)
 }
 
 // -------------------------------------------------------------------
@@ -1837,7 +1837,7 @@ inline int32_t GetVerifyResponse::_internal_error() const {
   return _impl_.error_;
 }
 inline int32_t GetVerifyResponse::error() const {
-  // @@protoc_insertion_point(field_get:message.GetVerifyResponse.error)
+  // @@protoc_insertion_point(field_get:chat_message.GetVerifyResponse.error)
   return _internal_error();
 }
 inline void GetVerifyResponse::_internal_set_error(int32_t value) {
@@ -1846,7 +1846,7 @@ inline void GetVerifyResponse::_internal_set_error(int32_t value) {
 }
 inline void GetVerifyResponse::set_error(int32_t value) {
   _internal_set_error(value);
-  // @@protoc_insertion_point(field_set:message.GetVerifyResponse.error)
+  // @@protoc_insertion_point(field_set:chat_message.GetVerifyResponse.error)
 }
 
 // string email = 2;
@@ -1854,7 +1854,7 @@ inline void GetVerifyResponse::clear_email() {
   _impl_.email_.ClearToEmpty();
 }
 inline const std::string& GetVerifyResponse::email() const {
-  // @@protoc_insertion_point(field_get:message.GetVerifyResponse.email)
+  // @@protoc_insertion_point(field_get:chat_message.GetVerifyResponse.email)
   return _internal_email();
 }
 template <typename ArgT0, typename... ArgT>
@@ -1862,11 +1862,11 @@ inline PROTOBUF_ALWAYS_INLINE
 void GetVerifyResponse::set_email(ArgT0&& arg0, ArgT... args) {
  
  _impl_.email_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:message.GetVerifyResponse.email)
+  // @@protoc_insertion_point(field_set:chat_message.GetVerifyResponse.email)
 }
 inline std::string* GetVerifyResponse::mutable_email() {
   std::string* _s = _internal_mutable_email();
-  // @@protoc_insertion_point(field_mutable:message.GetVerifyResponse.email)
+  // @@protoc_insertion_point(field_mutable:chat_message.GetVerifyResponse.email)
   return _s;
 }
 inline const std::string& GetVerifyResponse::_internal_email() const {
@@ -1881,7 +1881,7 @@ inline std::string* GetVerifyResponse::_internal_mutable_email() {
   return _impl_.email_.Mutable(GetArenaForAllocation());
 }
 inline std::string* GetVerifyResponse::release_email() {
-  // @@protoc_insertion_point(field_release:message.GetVerifyResponse.email)
+  // @@protoc_insertion_point(field_release:chat_message.GetVerifyResponse.email)
   return _impl_.email_.Release();
 }
 inline void GetVerifyResponse::set_allocated_email(std::string* email) {
@@ -1896,7 +1896,7 @@ inline void GetVerifyResponse::set_allocated_email(std::string* email) {
     _impl_.email_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:message.GetVerifyResponse.email)
+  // @@protoc_insertion_point(field_set_allocated:chat_message.GetVerifyResponse.email)
 }
 
 // string code = 3;
@@ -1904,7 +1904,7 @@ inline void GetVerifyResponse::clear_code() {
   _impl_.code_.ClearToEmpty();
 }
 inline const std::string& GetVerifyResponse::code() const {
-  // @@protoc_insertion_point(field_get:message.GetVerifyResponse.code)
+  // @@protoc_insertion_point(field_get:chat_message.GetVerifyResponse.code)
   return _internal_code();
 }
 template <typename ArgT0, typename... ArgT>
@@ -1912,11 +1912,11 @@ inline PROTOBUF_ALWAYS_INLINE
 void GetVerifyResponse::set_code(ArgT0&& arg0, ArgT... args) {
  
  _impl_.code_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:message.GetVerifyResponse.code)
+  // @@protoc_insertion_point(field_set:chat_message.GetVerifyResponse.code)
 }
 inline std::string* GetVerifyResponse::mutable_code() {
   std::string* _s = _internal_mutable_code();
-  // @@protoc_insertion_point(field_mutable:message.GetVerifyResponse.code)
+  // @@protoc_insertion_point(field_mutable:chat_message.GetVerifyResponse.code)
   return _s;
 }
 inline const std::string& GetVerifyResponse::_internal_code() const {
@@ -1931,7 +1931,7 @@ inline std::string* GetVerifyResponse::_internal_mutable_code() {
   return _impl_.code_.Mutable(GetArenaForAllocation());
 }
 inline std::string* GetVerifyResponse::release_code() {
-  // @@protoc_insertion_point(field_release:message.GetVerifyResponse.code)
+  // @@protoc_insertion_point(field_release:chat_message.GetVerifyResponse.code)
   return _impl_.code_.Release();
 }
 inline void GetVerifyResponse::set_allocated_code(std::string* code) {
@@ -1946,7 +1946,7 @@ inline void GetVerifyResponse::set_allocated_code(std::string* code) {
     _impl_.code_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:message.GetVerifyResponse.code)
+  // @@protoc_insertion_point(field_set_allocated:chat_message.GetVerifyResponse.code)
 }
 
 // -------------------------------------------------------------------
@@ -1961,7 +1961,7 @@ inline int32_t GetChatServerRequest::_internal_uid() const {
   return _impl_.uid_;
 }
 inline int32_t GetChatServerRequest::uid() const {
-  // @@protoc_insertion_point(field_get:message.GetChatServerRequest.uid)
+  // @@protoc_insertion_point(field_get:chat_message.GetChatServerRequest.uid)
   return _internal_uid();
 }
 inline void GetChatServerRequest::_internal_set_uid(int32_t value) {
@@ -1970,7 +1970,7 @@ inline void GetChatServerRequest::_internal_set_uid(int32_t value) {
 }
 inline void GetChatServerRequest::set_uid(int32_t value) {
   _internal_set_uid(value);
-  // @@protoc_insertion_point(field_set:message.GetChatServerRequest.uid)
+  // @@protoc_insertion_point(field_set:chat_message.GetChatServerRequest.uid)
 }
 
 // -------------------------------------------------------------------
@@ -1985,7 +1985,7 @@ inline int32_t GetChatServerResponse::_internal_error() const {
   return _impl_.error_;
 }
 inline int32_t GetChatServerResponse::error() const {
-  // @@protoc_insertion_point(field_get:message.GetChatServerResponse.error)
+  // @@protoc_insertion_point(field_get:chat_message.GetChatServerResponse.error)
   return _internal_error();
 }
 inline void GetChatServerResponse::_internal_set_error(int32_t value) {
@@ -1994,7 +1994,7 @@ inline void GetChatServerResponse::_internal_set_error(int32_t value) {
 }
 inline void GetChatServerResponse::set_error(int32_t value) {
   _internal_set_error(value);
-  // @@protoc_insertion_point(field_set:message.GetChatServerResponse.error)
+  // @@protoc_insertion_point(field_set:chat_message.GetChatServerResponse.error)
 }
 
 // string host = 2;
@@ -2002,7 +2002,7 @@ inline void GetChatServerResponse::clear_host() {
   _impl_.host_.ClearToEmpty();
 }
 inline const std::string& GetChatServerResponse::host() const {
-  // @@protoc_insertion_point(field_get:message.GetChatServerResponse.host)
+  // @@protoc_insertion_point(field_get:chat_message.GetChatServerResponse.host)
   return _internal_host();
 }
 template <typename ArgT0, typename... ArgT>
@@ -2010,11 +2010,11 @@ inline PROTOBUF_ALWAYS_INLINE
 void GetChatServerResponse::set_host(ArgT0&& arg0, ArgT... args) {
  
  _impl_.host_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:message.GetChatServerResponse.host)
+  // @@protoc_insertion_point(field_set:chat_message.GetChatServerResponse.host)
 }
 inline std::string* GetChatServerResponse::mutable_host() {
   std::string* _s = _internal_mutable_host();
-  // @@protoc_insertion_point(field_mutable:message.GetChatServerResponse.host)
+  // @@protoc_insertion_point(field_mutable:chat_message.GetChatServerResponse.host)
   return _s;
 }
 inline const std::string& GetChatServerResponse::_internal_host() const {
@@ -2029,7 +2029,7 @@ inline std::string* GetChatServerResponse::_internal_mutable_host() {
   return _impl_.host_.Mutable(GetArenaForAllocation());
 }
 inline std::string* GetChatServerResponse::release_host() {
-  // @@protoc_insertion_point(field_release:message.GetChatServerResponse.host)
+  // @@protoc_insertion_point(field_release:chat_message.GetChatServerResponse.host)
   return _impl_.host_.Release();
 }
 inline void GetChatServerResponse::set_allocated_host(std::string* host) {
@@ -2044,7 +2044,7 @@ inline void GetChatServerResponse::set_allocated_host(std::string* host) {
     _impl_.host_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:message.GetChatServerResponse.host)
+  // @@protoc_insertion_point(field_set_allocated:chat_message.GetChatServerResponse.host)
 }
 
 // string port = 3;
@@ -2052,7 +2052,7 @@ inline void GetChatServerResponse::clear_port() {
   _impl_.port_.ClearToEmpty();
 }
 inline const std::string& GetChatServerResponse::port() const {
-  // @@protoc_insertion_point(field_get:message.GetChatServerResponse.port)
+  // @@protoc_insertion_point(field_get:chat_message.GetChatServerResponse.port)
   return _internal_port();
 }
 template <typename ArgT0, typename... ArgT>
@@ -2060,11 +2060,11 @@ inline PROTOBUF_ALWAYS_INLINE
 void GetChatServerResponse::set_port(ArgT0&& arg0, ArgT... args) {
  
  _impl_.port_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:message.GetChatServerResponse.port)
+  // @@protoc_insertion_point(field_set:chat_message.GetChatServerResponse.port)
 }
 inline std::string* GetChatServerResponse::mutable_port() {
   std::string* _s = _internal_mutable_port();
-  // @@protoc_insertion_point(field_mutable:message.GetChatServerResponse.port)
+  // @@protoc_insertion_point(field_mutable:chat_message.GetChatServerResponse.port)
   return _s;
 }
 inline const std::string& GetChatServerResponse::_internal_port() const {
@@ -2079,7 +2079,7 @@ inline std::string* GetChatServerResponse::_internal_mutable_port() {
   return _impl_.port_.Mutable(GetArenaForAllocation());
 }
 inline std::string* GetChatServerResponse::release_port() {
-  // @@protoc_insertion_point(field_release:message.GetChatServerResponse.port)
+  // @@protoc_insertion_point(field_release:chat_message.GetChatServerResponse.port)
   return _impl_.port_.Release();
 }
 inline void GetChatServerResponse::set_allocated_port(std::string* port) {
@@ -2094,7 +2094,7 @@ inline void GetChatServerResponse::set_allocated_port(std::string* port) {
     _impl_.port_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:message.GetChatServerResponse.port)
+  // @@protoc_insertion_point(field_set_allocated:chat_message.GetChatServerResponse.port)
 }
 
 // string token = 4;
@@ -2102,7 +2102,7 @@ inline void GetChatServerResponse::clear_token() {
   _impl_.token_.ClearToEmpty();
 }
 inline const std::string& GetChatServerResponse::token() const {
-  // @@protoc_insertion_point(field_get:message.GetChatServerResponse.token)
+  // @@protoc_insertion_point(field_get:chat_message.GetChatServerResponse.token)
   return _internal_token();
 }
 template <typename ArgT0, typename... ArgT>
@@ -2110,11 +2110,11 @@ inline PROTOBUF_ALWAYS_INLINE
 void GetChatServerResponse::set_token(ArgT0&& arg0, ArgT... args) {
  
  _impl_.token_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:message.GetChatServerResponse.token)
+  // @@protoc_insertion_point(field_set:chat_message.GetChatServerResponse.token)
 }
 inline std::string* GetChatServerResponse::mutable_token() {
   std::string* _s = _internal_mutable_token();
-  // @@protoc_insertion_point(field_mutable:message.GetChatServerResponse.token)
+  // @@protoc_insertion_point(field_mutable:chat_message.GetChatServerResponse.token)
   return _s;
 }
 inline const std::string& GetChatServerResponse::_internal_token() const {
@@ -2129,7 +2129,7 @@ inline std::string* GetChatServerResponse::_internal_mutable_token() {
   return _impl_.token_.Mutable(GetArenaForAllocation());
 }
 inline std::string* GetChatServerResponse::release_token() {
-  // @@protoc_insertion_point(field_release:message.GetChatServerResponse.token)
+  // @@protoc_insertion_point(field_release:chat_message.GetChatServerResponse.token)
   return _impl_.token_.Release();
 }
 inline void GetChatServerResponse::set_allocated_token(std::string* token) {
@@ -2144,7 +2144,7 @@ inline void GetChatServerResponse::set_allocated_token(std::string* token) {
     _impl_.token_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:message.GetChatServerResponse.token)
+  // @@protoc_insertion_point(field_set_allocated:chat_message.GetChatServerResponse.token)
 }
 
 // -------------------------------------------------------------------
@@ -2159,7 +2159,7 @@ inline int32_t LoginRequest::_internal_uid() const {
   return _impl_.uid_;
 }
 inline int32_t LoginRequest::uid() const {
-  // @@protoc_insertion_point(field_get:message.LoginRequest.uid)
+  // @@protoc_insertion_point(field_get:chat_message.LoginRequest.uid)
   return _internal_uid();
 }
 inline void LoginRequest::_internal_set_uid(int32_t value) {
@@ -2168,7 +2168,7 @@ inline void LoginRequest::_internal_set_uid(int32_t value) {
 }
 inline void LoginRequest::set_uid(int32_t value) {
   _internal_set_uid(value);
-  // @@protoc_insertion_point(field_set:message.LoginRequest.uid)
+  // @@protoc_insertion_point(field_set:chat_message.LoginRequest.uid)
 }
 
 // string token = 2;
@@ -2176,7 +2176,7 @@ inline void LoginRequest::clear_token() {
   _impl_.token_.ClearToEmpty();
 }
 inline const std::string& LoginRequest::token() const {
-  // @@protoc_insertion_point(field_get:message.LoginRequest.token)
+  // @@protoc_insertion_point(field_get:chat_message.LoginRequest.token)
   return _internal_token();
 }
 template <typename ArgT0, typename... ArgT>
@@ -2184,11 +2184,11 @@ inline PROTOBUF_ALWAYS_INLINE
 void LoginRequest::set_token(ArgT0&& arg0, ArgT... args) {
  
  _impl_.token_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:message.LoginRequest.token)
+  // @@protoc_insertion_point(field_set:chat_message.LoginRequest.token)
 }
 inline std::string* LoginRequest::mutable_token() {
   std::string* _s = _internal_mutable_token();
-  // @@protoc_insertion_point(field_mutable:message.LoginRequest.token)
+  // @@protoc_insertion_point(field_mutable:chat_message.LoginRequest.token)
   return _s;
 }
 inline const std::string& LoginRequest::_internal_token() const {
@@ -2203,7 +2203,7 @@ inline std::string* LoginRequest::_internal_mutable_token() {
   return _impl_.token_.Mutable(GetArenaForAllocation());
 }
 inline std::string* LoginRequest::release_token() {
-  // @@protoc_insertion_point(field_release:message.LoginRequest.token)
+  // @@protoc_insertion_point(field_release:chat_message.LoginRequest.token)
   return _impl_.token_.Release();
 }
 inline void LoginRequest::set_allocated_token(std::string* token) {
@@ -2218,7 +2218,7 @@ inline void LoginRequest::set_allocated_token(std::string* token) {
     _impl_.token_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:message.LoginRequest.token)
+  // @@protoc_insertion_point(field_set_allocated:chat_message.LoginRequest.token)
 }
 
 // -------------------------------------------------------------------
@@ -2233,7 +2233,7 @@ inline int32_t LoginResponse::_internal_error() const {
   return _impl_.error_;
 }
 inline int32_t LoginResponse::error() const {
-  // @@protoc_insertion_point(field_get:message.LoginResponse.error)
+  // @@protoc_insertion_point(field_get:chat_message.LoginResponse.error)
   return _internal_error();
 }
 inline void LoginResponse::_internal_set_error(int32_t value) {
@@ -2242,7 +2242,7 @@ inline void LoginResponse::_internal_set_error(int32_t value) {
 }
 inline void LoginResponse::set_error(int32_t value) {
   _internal_set_error(value);
-  // @@protoc_insertion_point(field_set:message.LoginResponse.error)
+  // @@protoc_insertion_point(field_set:chat_message.LoginResponse.error)
 }
 
 // int32 uid = 2;
@@ -2253,7 +2253,7 @@ inline int32_t LoginResponse::_internal_uid() const {
   return _impl_.uid_;
 }
 inline int32_t LoginResponse::uid() const {
-  // @@protoc_insertion_point(field_get:message.LoginResponse.uid)
+  // @@protoc_insertion_point(field_get:chat_message.LoginResponse.uid)
   return _internal_uid();
 }
 inline void LoginResponse::_internal_set_uid(int32_t value) {
@@ -2262,7 +2262,7 @@ inline void LoginResponse::_internal_set_uid(int32_t value) {
 }
 inline void LoginResponse::set_uid(int32_t value) {
   _internal_set_uid(value);
-  // @@protoc_insertion_point(field_set:message.LoginResponse.uid)
+  // @@protoc_insertion_point(field_set:chat_message.LoginResponse.uid)
 }
 
 // string token = 3;
@@ -2270,7 +2270,7 @@ inline void LoginResponse::clear_token() {
   _impl_.token_.ClearToEmpty();
 }
 inline const std::string& LoginResponse::token() const {
-  // @@protoc_insertion_point(field_get:message.LoginResponse.token)
+  // @@protoc_insertion_point(field_get:chat_message.LoginResponse.token)
   return _internal_token();
 }
 template <typename ArgT0, typename... ArgT>
@@ -2278,11 +2278,11 @@ inline PROTOBUF_ALWAYS_INLINE
 void LoginResponse::set_token(ArgT0&& arg0, ArgT... args) {
  
  _impl_.token_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:message.LoginResponse.token)
+  // @@protoc_insertion_point(field_set:chat_message.LoginResponse.token)
 }
 inline std::string* LoginResponse::mutable_token() {
   std::string* _s = _internal_mutable_token();
-  // @@protoc_insertion_point(field_mutable:message.LoginResponse.token)
+  // @@protoc_insertion_point(field_mutable:chat_message.LoginResponse.token)
   return _s;
 }
 inline const std::string& LoginResponse::_internal_token() const {
@@ -2297,7 +2297,7 @@ inline std::string* LoginResponse::_internal_mutable_token() {
   return _impl_.token_.Mutable(GetArenaForAllocation());
 }
 inline std::string* LoginResponse::release_token() {
-  // @@protoc_insertion_point(field_release:message.LoginResponse.token)
+  // @@protoc_insertion_point(field_release:chat_message.LoginResponse.token)
   return _impl_.token_.Release();
 }
 inline void LoginResponse::set_allocated_token(std::string* token) {
@@ -2312,7 +2312,7 @@ inline void LoginResponse::set_allocated_token(std::string* token) {
     _impl_.token_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:message.LoginResponse.token)
+  // @@protoc_insertion_point(field_set_allocated:chat_message.LoginResponse.token)
 }
 
 // -------------------------------------------------------------------
@@ -2327,7 +2327,7 @@ inline int32_t AddFriendRequest::_internal_from_uid() const {
   return _impl_.from_uid_;
 }
 inline int32_t AddFriendRequest::from_uid() const {
-  // @@protoc_insertion_point(field_get:message.AddFriendRequest.from_uid)
+  // @@protoc_insertion_point(field_get:chat_message.AddFriendRequest.from_uid)
   return _internal_from_uid();
 }
 inline void AddFriendRequest::_internal_set_from_uid(int32_t value) {
@@ -2336,7 +2336,7 @@ inline void AddFriendRequest::_internal_set_from_uid(int32_t value) {
 }
 inline void AddFriendRequest::set_from_uid(int32_t value) {
   _internal_set_from_uid(value);
-  // @@protoc_insertion_point(field_set:message.AddFriendRequest.from_uid)
+  // @@protoc_insertion_point(field_set:chat_message.AddFriendRequest.from_uid)
 }
 
 // int32 to_uid = 2;
@@ -2347,7 +2347,7 @@ inline int32_t AddFriendRequest::_internal_to_uid() const {
   return _impl_.to_uid_;
 }
 inline int32_t AddFriendRequest::to_uid() const {
-  // @@protoc_insertion_point(field_get:message.AddFriendRequest.to_uid)
+  // @@protoc_insertion_point(field_get:chat_message.AddFriendRequest.to_uid)
   return _internal_to_uid();
 }
 inline void AddFriendRequest::_internal_set_to_uid(int32_t value) {
@@ -2356,7 +2356,7 @@ inline void AddFriendRequest::_internal_set_to_uid(int32_t value) {
 }
 inline void AddFriendRequest::set_to_uid(int32_t value) {
   _internal_set_to_uid(value);
-  // @@protoc_insertion_point(field_set:message.AddFriendRequest.to_uid)
+  // @@protoc_insertion_point(field_set:chat_message.AddFriendRequest.to_uid)
 }
 
 // -------------------------------------------------------------------
@@ -2371,7 +2371,7 @@ inline int32_t AddFriendResponse::_internal_error() const {
   return _impl_.error_;
 }
 inline int32_t AddFriendResponse::error() const {
-  // @@protoc_insertion_point(field_get:message.AddFriendResponse.error)
+  // @@protoc_insertion_point(field_get:chat_message.AddFriendResponse.error)
   return _internal_error();
 }
 inline void AddFriendResponse::_internal_set_error(int32_t value) {
@@ -2380,7 +2380,7 @@ inline void AddFriendResponse::_internal_set_error(int32_t value) {
 }
 inline void AddFriendResponse::set_error(int32_t value) {
   _internal_set_error(value);
-  // @@protoc_insertion_point(field_set:message.AddFriendResponse.error)
+  // @@protoc_insertion_point(field_set:chat_message.AddFriendResponse.error)
 }
 
 // int32 from_uid = 2;
@@ -2391,7 +2391,7 @@ inline int32_t AddFriendResponse::_internal_from_uid() const {
   return _impl_.from_uid_;
 }
 inline int32_t AddFriendResponse::from_uid() const {
-  // @@protoc_insertion_point(field_get:message.AddFriendResponse.from_uid)
+  // @@protoc_insertion_point(field_get:chat_message.AddFriendResponse.from_uid)
   return _internal_from_uid();
 }
 inline void AddFriendResponse::_internal_set_from_uid(int32_t value) {
@@ -2400,7 +2400,7 @@ inline void AddFriendResponse::_internal_set_from_uid(int32_t value) {
 }
 inline void AddFriendResponse::set_from_uid(int32_t value) {
   _internal_set_from_uid(value);
-  // @@protoc_insertion_point(field_set:message.AddFriendResponse.from_uid)
+  // @@protoc_insertion_point(field_set:chat_message.AddFriendResponse.from_uid)
 }
 
 // int32 to_uid = 3;
@@ -2411,7 +2411,7 @@ inline int32_t AddFriendResponse::_internal_to_uid() const {
   return _impl_.to_uid_;
 }
 inline int32_t AddFriendResponse::to_uid() const {
-  // @@protoc_insertion_point(field_get:message.AddFriendResponse.to_uid)
+  // @@protoc_insertion_point(field_get:chat_message.AddFriendResponse.to_uid)
   return _internal_to_uid();
 }
 inline void AddFriendResponse::_internal_set_to_uid(int32_t value) {
@@ -2420,7 +2420,7 @@ inline void AddFriendResponse::_internal_set_to_uid(int32_t value) {
 }
 inline void AddFriendResponse::set_to_uid(int32_t value) {
   _internal_set_to_uid(value);
-  // @@protoc_insertion_point(field_set:message.AddFriendResponse.to_uid)
+  // @@protoc_insertion_point(field_set:chat_message.AddFriendResponse.to_uid)
 }
 
 // -------------------------------------------------------------------
@@ -2435,7 +2435,7 @@ inline int32_t AuthFriendRequest::_internal_from_uid() const {
   return _impl_.from_uid_;
 }
 inline int32_t AuthFriendRequest::from_uid() const {
-  // @@protoc_insertion_point(field_get:message.AuthFriendRequest.from_uid)
+  // @@protoc_insertion_point(field_get:chat_message.AuthFriendRequest.from_uid)
   return _internal_from_uid();
 }
 inline void AuthFriendRequest::_internal_set_from_uid(int32_t value) {
@@ -2444,7 +2444,7 @@ inline void AuthFriendRequest::_internal_set_from_uid(int32_t value) {
 }
 inline void AuthFriendRequest::set_from_uid(int32_t value) {
   _internal_set_from_uid(value);
-  // @@protoc_insertion_point(field_set:message.AuthFriendRequest.from_uid)
+  // @@protoc_insertion_point(field_set:chat_message.AuthFriendRequest.from_uid)
 }
 
 // int32 to_uid = 2;
@@ -2455,7 +2455,7 @@ inline int32_t AuthFriendRequest::_internal_to_uid() const {
   return _impl_.to_uid_;
 }
 inline int32_t AuthFriendRequest::to_uid() const {
-  // @@protoc_insertion_point(field_get:message.AuthFriendRequest.to_uid)
+  // @@protoc_insertion_point(field_get:chat_message.AuthFriendRequest.to_uid)
   return _internal_to_uid();
 }
 inline void AuthFriendRequest::_internal_set_to_uid(int32_t value) {
@@ -2464,7 +2464,7 @@ inline void AuthFriendRequest::_internal_set_to_uid(int32_t value) {
 }
 inline void AuthFriendRequest::set_to_uid(int32_t value) {
   _internal_set_to_uid(value);
-  // @@protoc_insertion_point(field_set:message.AuthFriendRequest.to_uid)
+  // @@protoc_insertion_point(field_set:chat_message.AuthFriendRequest.to_uid)
 }
 
 // -------------------------------------------------------------------
@@ -2479,7 +2479,7 @@ inline int32_t AuthFriendResponse::_internal_error() const {
   return _impl_.error_;
 }
 inline int32_t AuthFriendResponse::error() const {
-  // @@protoc_insertion_point(field_get:message.AuthFriendResponse.error)
+  // @@protoc_insertion_point(field_get:chat_message.AuthFriendResponse.error)
   return _internal_error();
 }
 inline void AuthFriendResponse::_internal_set_error(int32_t value) {
@@ -2488,7 +2488,7 @@ inline void AuthFriendResponse::_internal_set_error(int32_t value) {
 }
 inline void AuthFriendResponse::set_error(int32_t value) {
   _internal_set_error(value);
-  // @@protoc_insertion_point(field_set:message.AuthFriendResponse.error)
+  // @@protoc_insertion_point(field_set:chat_message.AuthFriendResponse.error)
 }
 
 // int32 from_uid = 2;
@@ -2499,7 +2499,7 @@ inline int32_t AuthFriendResponse::_internal_from_uid() const {
   return _impl_.from_uid_;
 }
 inline int32_t AuthFriendResponse::from_uid() const {
-  // @@protoc_insertion_point(field_get:message.AuthFriendResponse.from_uid)
+  // @@protoc_insertion_point(field_get:chat_message.AuthFriendResponse.from_uid)
   return _internal_from_uid();
 }
 inline void AuthFriendResponse::_internal_set_from_uid(int32_t value) {
@@ -2508,7 +2508,7 @@ inline void AuthFriendResponse::_internal_set_from_uid(int32_t value) {
 }
 inline void AuthFriendResponse::set_from_uid(int32_t value) {
   _internal_set_from_uid(value);
-  // @@protoc_insertion_point(field_set:message.AuthFriendResponse.from_uid)
+  // @@protoc_insertion_point(field_set:chat_message.AuthFriendResponse.from_uid)
 }
 
 // int32 to_uid = 3;
@@ -2519,7 +2519,7 @@ inline int32_t AuthFriendResponse::_internal_to_uid() const {
   return _impl_.to_uid_;
 }
 inline int32_t AuthFriendResponse::to_uid() const {
-  // @@protoc_insertion_point(field_get:message.AuthFriendResponse.to_uid)
+  // @@protoc_insertion_point(field_get:chat_message.AuthFriendResponse.to_uid)
   return _internal_to_uid();
 }
 inline void AuthFriendResponse::_internal_set_to_uid(int32_t value) {
@@ -2528,7 +2528,7 @@ inline void AuthFriendResponse::_internal_set_to_uid(int32_t value) {
 }
 inline void AuthFriendResponse::set_to_uid(int32_t value) {
   _internal_set_to_uid(value);
-  // @@protoc_insertion_point(field_set:message.AuthFriendResponse.to_uid)
+  // @@protoc_insertion_point(field_set:chat_message.AuthFriendResponse.to_uid)
 }
 
 #ifdef __GNUC__
@@ -2555,7 +2555,7 @@ inline void AuthFriendResponse::set_to_uid(int32_t value) {
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace message
+}  // namespace chat_message
 
 // @@protoc_insertion_point(global_scope)
 

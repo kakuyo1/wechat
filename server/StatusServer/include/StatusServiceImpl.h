@@ -27,15 +27,15 @@ struct ChatServer {
 using grpc::Status;
 using grpc::ServerContext;
 
-using message::StatusService;
-using message::GetChatServerRequest;
-using message::GetChatServerResponse;
+using chat_message::StatusService;
+using chat_message::GetChatServerRequest;
+using chat_message::GetChatServerResponse;
 
 class StatusServiceImpl final : public StatusService::Service {
 public:
     StatusServiceImpl();
     Status GetChatServer(ServerContext* context, const GetChatServerRequest* request, GetChatServerResponse* response) override;
-    Status Login(ServerContext* context, const message::LoginRequest* request, message::LoginResponse* response) override;
+    Status Login(ServerContext* context, const chat_message::LoginRequest* request, chat_message::LoginResponse* response) override;
 private:
     ChatServer& getChatServer();
     std::string generateTokenByUUID();

@@ -4,7 +4,7 @@
 #include <grpcpp/grpcpp.h>
 #include <memory>
 #include <string>
-#include "message.grpc.pb.h"
+#include "../proto/message.grpc.pb.h"
 #include <spdlog/spdlog.h>
 #include <queue>
 #include <atomic>
@@ -15,9 +15,9 @@ using grpc::Channel;
 using grpc::ClientContext;
 using grpc::Status;
 
-using message::StatusService;
-using message::GetChatServerRequest;
-using message::GetChatServerResponse;
+using chat_message::StatusService;
+using chat_message::GetChatServerRequest;
+using chat_message::GetChatServerResponse;
 
 class StatusStubPool {
 public:

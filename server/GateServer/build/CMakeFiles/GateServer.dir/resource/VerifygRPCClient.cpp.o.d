@@ -371,8 +371,8 @@ CMakeFiles/GateServer.dir/resource/VerifygRPCClient.cpp.o: \
  /usr/local/include/grpcpp/security/authorization_policy_provider.h \
  /usr/local/include/grpcpp/server_context.h \
  /usr/local/include/grpcpp/server_posix.h \
- /home/kakuyo/wechat/server/GateServer/proto/message.grpc.pb.h \
- /home/kakuyo/wechat/server/GateServer/proto/message.pb.h \
+ /home/kakuyo/wechat/server/GateServer/include/../proto/message.grpc.pb.h \
+ /home/kakuyo/wechat/server/GateServer/include/../proto/message.pb.h \
  /usr/local/include/google/protobuf/port_def.inc \
  /usr/local/include/google/protobuf/port_undef.inc \
  /usr/local/include/google/protobuf/io/coded_stream.h \

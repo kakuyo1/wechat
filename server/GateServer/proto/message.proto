@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package message;
+package chat_message;
 
 service VerifyService {
     rpc GetVerifyCode (GetVerifyRequest) returns (GetVerifyResponse) {}

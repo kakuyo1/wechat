@@ -75,7 +75,8 @@ GetChatServerResponse StatusGrpcClient::GetChatServer(int uid)
     Status status = stub->GetChatServer(&context, request, &response);
 
     if (!status.ok()) {
-        spdlog::error("gRPC call failed: {}", status.error_message());
+        spdlog::error("gRPC call failed: code = {}, message = {}, details = {}",
+                    status.error_code(), status.error_message(), status.error_details());
         response.set_error(static_cast<int>(ErrorCodes::ERROR_RPC));
         return response; // Return empty response on failure
     }
@@ -107,7 +108,8 @@ LoginResponse StatusGrpcClient::Login(int uid, const std::string &token)
     Status status = stub->Login(&context, request, &response);
     if (!status.ok())
     {
-        spdlog::error("gRPC call failed: {}", status.error_message());
+        spdlog::error("gRPC call failed: code = {}, message = {}, details = {}",
+                    status.error_code(), status.error_message(), status.error_details());
         return response; // Return empty response on failure(invalid token or uid)
     }
     return response; // Return the response on success

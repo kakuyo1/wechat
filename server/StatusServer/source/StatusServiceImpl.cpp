@@ -1,6 +1,6 @@
-#include "StatusServiceImpl.h"
+#include "../include/StatusServiceImpl.h"
 #include <spdlog/spdlog.h>
-#include "RedisManager.h"
+#include "../include/RedisManager.h"
 StatusServiceImpl::StatusServiceImpl()
 {
     try
@@ -54,9 +54,11 @@ Status StatusServiceImpl::GetChatServer(ServerContext *context, const GetChatSer
 
 
 /* 其实这里的Login可以直接在ChatServer中实现，不需要RPC*/
-Status StatusServiceImpl::Login(ServerContext *context, const message::LoginRequest *request, message::LoginResponse *response)
+Status StatusServiceImpl::Login(ServerContext *context, const chat_message::LoginRequest *request, chat_message::LoginResponse *response)
 {
     try {
+        spdlog::debug("Enter Login method with request: UID: {}, Token: {}",
+                        request->uid(), request->token());
         auto uid = request->uid();
         auto origin_token = request->token();
         if (uid <= 0 || origin_token.empty()) {
@@ -101,6 +103,7 @@ ChatServer &StatusServiceImpl::getChatServer()
     // Find the chat server with the minimum connection_count by get LOGIN_COUNT from Redis
     ChatServer &min_chat_server = chat_servers_.begin()->second;
     std::string login_count_str = RedisManager::GetInstance()->HGet(SERVER_LOGIN_COUNT, min_chat_server.name);
+    spdlog::debug("Login count for minserver {}: {}", min_chat_server.name, login_count_str); // !ChatServer2 has not been added to Redis yet, thus this place causes a warning
     if (!login_count_str.empty()) {
         min_chat_server.connection_count = std::stoi(login_count_str);
     } else {
@@ -115,6 +118,7 @@ ChatServer &StatusServiceImpl::getChatServer()
         }
         // get the login count from Redis
         std::string login_count_str = RedisManager::GetInstance()->HGet(SERVER_LOGIN_COUNT, iter->second.name);
+        spdlog::debug("Login count for iter server {}: {}", iter->second.name, login_count_str);
         if (!login_count_str.empty()) {
             iter->second.connection_count = std::stoi(login_count_str);
         } else {
