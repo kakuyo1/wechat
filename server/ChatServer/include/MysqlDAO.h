@@ -67,6 +67,9 @@ public:
     std::shared_ptr<FullUserInfo> getFullUserInfoByUid(int uid);
     std::shared_ptr<FullUserInfo> getFullUserInfoByName(const std::string& name);
     bool CheckEmailExists(const std::string& email);
+    bool AddItemToFriendRequestList(int from_uid, int to_uid);
+    bool AccpetAndUpdateFriendRequestListItemStatus(int from_uid, int to_uid);
+    bool AddBidirectionalFriendRelationship(int uid1, int uid2, const std::string& backup_name_1_to_2, const std::string& backup_name_2_to_1);
 private:
     std::unique_ptr<MysqlConnectionPool> _pool;
 };

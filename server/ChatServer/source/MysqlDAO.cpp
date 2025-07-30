@@ -1,6 +1,7 @@
 #include "../include/MysqlDAO.h"
 #include "../include/MysqlManager.h"
 #include <spdlog/spdlog.h>
+#include "../include/MysqlDAO.h"
 MysqlConnection::MysqlConnection(sql::Connection *con, int64_t last_used_time) :
     con_(std::unique_ptr<sql::Connection>(con)), last_used_time_(last_used_time)
 {
@@ -444,5 +445,91 @@ std::shared_ptr<FullUserInfo> MysqlDAO::getFullUserInfoByName(const std::string&
         spdlog::error("SQLException: {}", e.what());
         spdlog::error("(MYSQL error code: {}, SQLState: {})", e.getErrorCode(), e.getSQLState());
         return nullptr; // Return nullptr on error
+    }
+}
+bool MysqlDAO::AddItemToFriendRequestList(int from_uid, int to_uid)
+{
+    /* do not handle the situation that uid pair already exists, for upper logic to decide how to handle repeated same friend request*/
+    auto con = _pool->GetConnection();
+    try {
+        if (con == nullptr) {
+            return false; // Connection failed
+        }
+        std::unique_ptr<sql::PreparedStatement> stmt(con->con_->prepareStatement("INSERT INTO friendrequestlist (from_uid, to_uid) VALUES (?, ?)"
+            " on duplicate key update from_uid = from_uid, to_uid = to_uid")); // if new pair insert, else update the pair(stay the same, aviod duplicate key error)
+        stmt->setInt(1, from_uid);
+        stmt->setInt(2, to_uid);
+        int result = stmt->executeUpdate();
+        _pool->ReturnConnection(std::move(con));
+        return result > 0; // Return true if the insert was successful
+    } catch (sql::SQLException& e) {
+        _pool->ReturnConnection(std::move(con));
+        spdlog::error("SQLException: {}", e.what());
+        spdlog::error("(MYSQL error code: {}, SQLState: {})", e.getErrorCode(), e.getSQLState());
+        return false; // Error occurred while adding item to friend request list
+    }
+}
+
+bool MysqlDAO::AccpetAndUpdateFriendRequestListItemStatus(int from_uid, int to_uid)
+{
+    /* update the status from 0 to 1 meaning request handle finished and the receiver agree with it*/
+    auto con = _pool->GetConnection();
+    try {
+        if (con == nullptr) {
+            return false; // Connection failed
+        }
+        std::unique_ptr<sql::PreparedStatement> stmt(con->con_->prepareStatement("UPDATE friendrequestlist SET status = 1 WHERE from_uid = ? AND to_uid = ?"));
+        stmt->setInt(1, from_uid);
+        stmt->setInt(2, to_uid);
+        int result = stmt->executeUpdate();
+        _pool->ReturnConnection(std::move(con));
+        return result > 0; // Return true if the update was successful
+    } catch (sql::SQLException& e) {
+        _pool->ReturnConnection(std::move(con));
+        spdlog::error("SQLException: {}", e.what());
+        spdlog::error("(MYSQL error code: {}, SQLState: {})", e.getErrorCode(), e.getSQLState());
+        return false; // Error occurred while updating friend request list item status
+    }
+}
+
+bool MysqlDAO::AddBidirectionalFriendRelationship(int uid1, int uid2, const std::string& backup_name_1_to_2, const std::string& backup_name_2_to_1)
+{
+    /* after the reciver agree with the friend request, then add bidirectional friend relationship to the friend_relationship table*/
+    /* same: do not handle the situation that uid pair already exists, for upper logic to decide how to handle repeated same FriendRelationship addition*/
+    auto con = _pool->GetConnection();
+    try {
+        if (con == nullptr) {
+            return false; // Connection failed
+        }
+        // prepare transaction
+        con->con_->setAutoCommit(false);
+        // first sql, meaning uid1 add uid2 as friend, backup_name_1_to_2 is the backup name for uid1 to uid2
+        std::unique_ptr<sql::PreparedStatement> stmt1(con->con_->prepareStatement("INSERT IGNORE INTO friend_relationship (self_id, friend_id, backup_name) VALUES (?, ?, ?)"));
+        stmt1->setInt(1, uid1);
+        stmt1->setInt(2, uid2);
+        stmt1->setString(3, backup_name_1_to_2);
+        int result1 = stmt1->executeUpdate();
+
+        // second sql, meaning uid2 add uid1 as friend, backup_name_2_to_1 is the backup name for uid2 to uid1
+        std::unique_ptr<sql::PreparedStatement> stmt2(con->con_->prepareStatement("INSERT IGNORE INTO friend_relationship (self_id, friend_id, backup_name) VALUES (?, ?, ?)"));
+        stmt2->setInt(1, uid2);
+        stmt2->setInt(2, uid1);
+        stmt2->setString(3, backup_name_2_to_1);
+        int result2 = stmt2->executeUpdate();
+
+        if (result1 > 0 && result2 > 0) {
+            con->con_->commit();
+            _pool->ReturnConnection(std::move(con));
+            return true;
+        } else {
+            con->con_->rollback();
+            _pool->ReturnConnection(std::move(con));
+            return false;
+        }
+    } catch (sql::SQLException& e) {
+        _pool->ReturnConnection(std::move(con));
+        spdlog::error("SQLException: {}", e.what());
+        spdlog::error("(MYSQL error code: {}, SQLState: {})", e.getErrorCode(), e.getSQLState());
+        return false; // Error occurred while adding bidirectional friend relationship
     }
 }

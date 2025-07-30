@@ -5,6 +5,7 @@
 #include "../include/UserManager.h"
 #include "../include/LogicSystem.h"
 #include "../include/LogicSystem.h"
+#include "../include/LogicSystem.h"
 
 void LogicSystem::RegisterHandler(short message_type, std::function<void(std::shared_ptr<CSession>, std::shared_ptr<RecieveMessageNode>)> handler)
 {
@@ -337,8 +338,10 @@ void LogicSystem::HandleClientSearchUser(std::shared_ptr<CSession> session, std:
         response["desc"] = fulluserinfo->desc;
         response["email"] = fulluserinfo->email;
         response["icon"] = fulluserinfo->icon;
+        spdlog::debug("Client Icon Path: {}", fulluserinfo->icon);
         response["nickname"] = fulluserinfo->nickname;
         session->Send(response.toStyledString(), static_cast<short>(MessageType::MESSAGE_CHATSERVER_SEARCH_USER_RESPONSE));
+        spdlog::info("[LogicSystem]User search by uid successful: {}", fulluserinfo->uid);
     } else if (source.isMember("name") && source["name"].isString()) { // By name
         if(!userManager->getFullUserInfoByName(source["name"].asString(), fulluserinfo))
         {
@@ -359,15 +362,24 @@ void LogicSystem::HandleClientSearchUser(std::shared_ptr<CSession> session, std:
         response["icon"] = fulluserinfo->icon;
         response["nickname"] = fulluserinfo->nickname;
         session->Send(response.toStyledString(), static_cast<short>(MessageType::MESSAGE_CHATSERVER_SEARCH_USER_RESPONSE));
+        spdlog::info("[LogicSystem]User search by name successful: {}", fulluserinfo->name);
     }
 }
 
+void LogicSystem::HandleAddFriend(std::shared_ptr<CSession> session, std::shared_ptr<RecieveMessageNode> message_node)
+{
+
+}
+void LogicSystem::HandleAuthFriend(std::shared_ptr<CSession> session, std::shared_ptr<RecieveMessageNode> message_node)
+{
+
+}
 LogicSystem::LogicSystem() : _stopped(false),
-                            _worker_thread(&LogicSystem::ProcessMessageQueue, this), // LogicSystem一构造就不断处理消息队列(客户端的信息转发,好友申请,登陆验证等)
-                            _message_queue{},
-                            _handlers{},
-                            _mutex{},
-                            _consumers{}
+                             _worker_thread(&LogicSystem::ProcessMessageQueue, this), // LogicSystem一构造就不断处理消息队列(客户端的信息转发,好友申请,登陆验证等)
+                             _message_queue{},
+                             _handlers{},
+                             _mutex{},
+                             _consumers{}
 {
     InitializeHandlers();
 }

@@ -41,3 +41,13 @@ std::shared_ptr<FullUserInfo> MysqlManager::getFullUserInfoByName(const std::str
 {
     return _dao->getFullUserInfoByName(name);
 }
+
+bool MysqlManager::AddItemToFriendRequestList(int from_uid, int to_uid) {
+    return _dao->AddItemToFriendRequestList(from_uid, to_uid);
+}
+bool MysqlManager::AccpetAndUpdateFriendRequestListItemStatus(int from_uid, int to_uid) {
+    return _dao->AccpetAndUpdateFriendRequestListItemStatus(from_uid, to_uid);
+}
+bool MysqlManager::AddBidirectionalFriendRelationship(int uid1, int uid2, const std::string& backup_name_1_to_2, const std::string& backup_name_2_to_1) {
+    return _dao->AddBidirectionalFriendRelationship(uid1, uid2, backup_name_1_to_2, backup_name_2_to_1);
+}
