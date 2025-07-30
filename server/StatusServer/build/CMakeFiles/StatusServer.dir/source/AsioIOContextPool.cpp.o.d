@@ -1,7 +1,7 @@
 CMakeFiles/StatusServer.dir/source/AsioIOContextPool.cpp.o: \
  /home/kakuyo/wechat/server/StatusServer/source/AsioIOContextPool.cpp \
  /usr/include/stdc-predef.h \
- /home/kakuyo/wechat/server/StatusServer/include/AsioIOContextPool.h \
+ /home/kakuyo/wechat/server/StatusServer/source/../include/AsioIOContextPool.h \
  /usr/local/include/boost/asio.hpp \
  /usr/local/include/boost/asio/any_completion_executor.hpp \
  /usr/local/include/boost/asio/detail/config.hpp \
@@ -1072,7 +1072,7 @@ CMakeFiles/StatusServer.dir/source/AsioIOContextPool.cpp.o: \
  /usr/local/include/boost/asio/impl/write_at.hpp \
  /usr/include/c++/13/iostream /usr/include/c++/13/thread \
  /usr/include/c++/13/bits/this_thread_sleep.h \
- /home/kakuyo/wechat/server/StatusServer/include/Singleton.h \
+ /home/kakuyo/wechat/server/StatusServer/source/../include/Singleton.h \
  /usr/include/spdlog/spdlog.h /usr/include/spdlog/common.h \
  /usr/include/spdlog/tweakme.h /usr/include/spdlog/details/null_mutex.h \
  /usr/include/spdlog/fmt/fmt.h /usr/include/fmt/core.h \

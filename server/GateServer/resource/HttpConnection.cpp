@@ -1,5 +1,5 @@
-#include "HttpConnection.h"
-#include "LogicSystem.h"
+#include "../include/HttpConnection.h"
+#include "../include/LogicSystem.h"
 HttpConnection::HttpConnection(net::io_context& ioc) :
     _socket(ioc),
     _deadline(_socket.get_executor(), std::chrono::seconds(60))

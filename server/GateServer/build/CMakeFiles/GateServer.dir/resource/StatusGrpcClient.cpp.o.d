@@ -1,8 +1,8 @@
 CMakeFiles/GateServer.dir/resource/StatusGrpcClient.cpp.o: \
  /home/kakuyo/wechat/server/GateServer/resource/StatusGrpcClient.cpp \
  /usr/include/stdc-predef.h \
- /home/kakuyo/wechat/server/GateServer/include/StatusGrpcClient.h \
- /home/kakuyo/wechat/server/GateServer/include/config.h \
+ /home/kakuyo/wechat/server/GateServer/resource/../include/StatusGrpcClient.h \
+ /home/kakuyo/wechat/server/GateServer/resource/../include/config.h \
  /usr/include/c++/13/string /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -135,7 +135,7 @@ CMakeFiles/GateServer.dir/resource/StatusGrpcClient.cpp.o: \
  /usr/include/c++/13/bits/stl_heap.h \
  /usr/include/c++/13/bits/uniform_int_dist.h \
  /usr/include/c++/13/bits/stl_tempbuf.h \
- /home/kakuyo/wechat/server/GateServer/include/Singleton.h \
+ /home/kakuyo/wechat/server/GateServer/resource/../include/Singleton.h \
  /usr/include/c++/13/memory \
  /usr/include/c++/13/bits/stl_raw_storage_iter.h \
  /usr/include/c++/13/bits/align.h \
@@ -172,7 +172,7 @@ CMakeFiles/GateServer.dir/resource/StatusGrpcClient.cpp.o: \
  /usr/include/c++/13/backward/auto_ptr.h \
  /usr/include/c++/13/pstl/glue_memory_defs.h \
  /usr/include/c++/13/pstl/execution_defs.h \
- /home/kakuyo/wechat/server/GateServer/include/ConfigIniManager.h \
+ /home/kakuyo/wechat/server/GateServer/resource/../include/ConfigIniManager.h \
  /usr/local/include/boost/property_tree/ptree.hpp \
  /usr/local/include/boost/property_tree/ptree_fwd.hpp \
  /usr/local/include/boost/config.hpp \
@@ -989,8 +989,8 @@ CMakeFiles/GateServer.dir/resource/StatusGrpcClient.cpp.o: \
  /usr/local/include/grpcpp/security/authorization_policy_provider.h \
  /usr/local/include/grpcpp/server_context.h \
  /usr/local/include/grpcpp/server_posix.h \
- /home/kakuyo/wechat/server/GateServer/include/../proto/message.grpc.pb.h \
- /home/kakuyo/wechat/server/GateServer/include/../proto/message.pb.h \
+ /home/kakuyo/wechat/server/GateServer/resource/../include/../proto/message.grpc.pb.h \
+ /home/kakuyo/wechat/server/GateServer/resource/../include/../proto/message.pb.h \
  /usr/local/include/google/protobuf/port_def.inc \
  /usr/local/include/google/protobuf/port_undef.inc \
  /usr/local/include/google/protobuf/io/coded_stream.h \

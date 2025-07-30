@@ -1,6 +1,6 @@
-#include "CServer.h"
-#include "HttpConnection.h"
-#include "AsioIOContextPool.h"
+#include "../include/CServer.h"
+#include "../include/HttpConnection.h"
+#include "../include/AsioIOContextPool.h"
 CServer::CServer(net::io_context& ioc, unsigned short port) :
     _ioc(ioc),
     _acceptor(ioc, tcp::endpoint(tcp::v4(), port)),

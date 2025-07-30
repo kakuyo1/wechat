@@ -1,8 +1,8 @@
 CMakeFiles/GateServer.dir/resource/LogicSystem.cpp.o: \
  /home/kakuyo/wechat/server/GateServer/resource/LogicSystem.cpp \
  /usr/include/stdc-predef.h \
- /home/kakuyo/wechat/server/GateServer/include/LogicSystem.h \
- /home/kakuyo/wechat/server/GateServer/include/Singleton.h \
+ /home/kakuyo/wechat/server/GateServer/resource/../include/LogicSystem.h \
+ /home/kakuyo/wechat/server/GateServer/resource/../include/Singleton.h \
  /usr/include/c++/13/memory /usr/include/c++/13/bits/memoryfwd.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -117,7 +117,7 @@ CMakeFiles/GateServer.dir/resource/LogicSystem.cpp.o: \
  /usr/include/c++/13/backward/auto_ptr.h \
  /usr/include/c++/13/pstl/glue_memory_defs.h \
  /usr/include/c++/13/pstl/execution_defs.h \
- /home/kakuyo/wechat/server/GateServer/include/config.h \
+ /home/kakuyo/wechat/server/GateServer/resource/../include/config.h \
  /usr/include/c++/13/string /usr/include/c++/13/bits/char_traits.h \
  /usr/include/c++/13/bits/localefwd.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h \
@@ -246,7 +246,7 @@ CMakeFiles/GateServer.dir/resource/LogicSystem.cpp.o: \
  /usr/include/spdlog/details/circular_q.h /usr/include/c++/13/cassert \
  /usr/include/assert.h /usr/include/spdlog/version.h \
  /usr/include/spdlog/details/synchronous_factory.h \
- /home/kakuyo/wechat/server/GateServer/include/HttpConnection.h \
+ /home/kakuyo/wechat/server/GateServer/resource/../include/HttpConnection.h \
  /usr/local/include/boost/beast/http.hpp \
  /usr/local/include/boost/beast/core/detail/config.hpp \
  /usr/local/include/boost/config.hpp \
@@ -1785,7 +1785,7 @@ CMakeFiles/GateServer.dir/resource/LogicSystem.cpp.o: \
  /usr/local/include/boost/url/rfc/reserved_chars.hpp \
  /usr/local/include/boost/url/rfc/uri_rule.hpp \
  /usr/local/include/boost/url/rfc/uri_reference_rule.hpp \
- /home/kakuyo/wechat/server/GateServer/include/VerifygRPCClient.h \
+ /home/kakuyo/wechat/server/GateServer/resource/../include/VerifygRPCClient.h \
  /usr/local/include/grpcpp/grpcpp.h /usr/local/include/grpc/grpc.h \
  /usr/local/include/grpc/support/port_platform.h \
  /usr/local/include/grpc/impl/codegen/port_platform.h \
@@ -1917,8 +1917,8 @@ CMakeFiles/GateServer.dir/resource/LogicSystem.cpp.o: \
  /usr/local/include/grpcpp/security/authorization_policy_provider.h \
  /usr/local/include/grpcpp/server_context.h \
  /usr/local/include/grpcpp/server_posix.h \
- /home/kakuyo/wechat/server/GateServer/include/../proto/message.grpc.pb.h \
- /home/kakuyo/wechat/server/GateServer/include/../proto/message.pb.h \
+ /home/kakuyo/wechat/server/GateServer/resource/../include/../proto/message.grpc.pb.h \
+ /home/kakuyo/wechat/server/GateServer/resource/../include/../proto/message.pb.h \
  /usr/local/include/google/protobuf/port_def.inc \
  /usr/local/include/google/protobuf/port_undef.inc \
  /usr/local/include/google/protobuf/io/coded_stream.h \
@@ -1994,7 +1994,7 @@ CMakeFiles/GateServer.dir/resource/LogicSystem.cpp.o: \
  /usr/local/include/grpcpp/impl/codegen/proto_buffer_writer.h \
  /usr/local/include/grpcpp/impl/codegen/stub_options.h \
  /usr/include/c++/13/queue /usr/include/c++/13/bits/stl_queue.h \
- /home/kakuyo/wechat/server/GateServer/include/ConfigIniManager.h \
+ /home/kakuyo/wechat/server/GateServer/resource/../include/ConfigIniManager.h \
  /usr/local/include/boost/property_tree/ptree.hpp \
  /usr/local/include/boost/property_tree/ptree_fwd.hpp \
  /usr/local/include/boost/property_tree/string_path.hpp \
@@ -2319,11 +2319,11 @@ CMakeFiles/GateServer.dir/resource/LogicSystem.cpp.o: \
  /usr/include/c++/13/iomanip /usr/include/c++/13/bits/quoted_string.h \
  /usr/include/c++/13/codecvt /usr/include/c++/13/bits/fs_dir.h \
  /usr/include/c++/13/bits/fs_ops.h \
- /home/kakuyo/wechat/server/GateServer/include/RedisManager.h \
+ /home/kakuyo/wechat/server/GateServer/resource/../include/RedisManager.h \
  /usr/include/hiredis/hiredis.h /usr/include/hiredis/read.h \
  /usr/include/hiredis/sds.h /usr/include/hiredis/alloc.h \
- /home/kakuyo/wechat/server/GateServer/include/MysqlManager.h \
- /home/kakuyo/wechat/server/GateServer/include/MysqlDAO.h \
+ /home/kakuyo/wechat/server/GateServer/resource/../include/MysqlManager.h \
+ /home/kakuyo/wechat/server/GateServer/resource/../include/MysqlDAO.h \
  /usr/include/mysql_connection.h /usr/include/cppconn/connection.h \
  /usr/include/cppconn/build_config.h /usr/include/cppconn/warning.h \
  /usr/include/cppconn/sqlstring.h /usr/include/cppconn/variant.h \
@@ -2337,4 +2337,4 @@ CMakeFiles/GateServer.dir/resource/LogicSystem.cpp.o: \
  /usr/include/cppconn/prepared_statement.h \
  /usr/include/cppconn/statement.h /usr/include/cppconn/resultset.h \
  /usr/include/cppconn/exception.h \
- /home/kakuyo/wechat/server/GateServer/include/StatusGrpcClient.h
+ /home/kakuyo/wechat/server/GateServer/resource/../include/StatusGrpcClient.h

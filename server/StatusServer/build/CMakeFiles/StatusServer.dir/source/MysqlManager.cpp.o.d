@@ -1,8 +1,8 @@
 CMakeFiles/StatusServer.dir/source/MysqlManager.cpp.o: \
  /home/kakuyo/wechat/server/StatusServer/source/MysqlManager.cpp \
  /usr/include/stdc-predef.h \
- /home/kakuyo/wechat/server/StatusServer/include/MysqlManager.h \
- /home/kakuyo/wechat/server/StatusServer/include/MysqlDAO.h \
+ /home/kakuyo/wechat/server/StatusServer/source/../include/MysqlManager.h \
+ /home/kakuyo/wechat/server/StatusServer/source/../include/MysqlDAO.h \
  /usr/include/c++/13/thread /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -271,8 +271,8 @@ CMakeFiles/StatusServer.dir/source/MysqlManager.cpp.o: \
  /usr/include/c++/13/bits/unique_lock.h \
  /usr/include/c++/13/condition_variable /usr/include/c++/13/atomic \
  /usr/include/c++/13/chrono \
- /home/kakuyo/wechat/server/StatusServer/include/config.h \
- /home/kakuyo/wechat/server/StatusServer/include/ConfigIniManager.h \
+ /home/kakuyo/wechat/server/StatusServer/source/../include/config.h \
+ /home/kakuyo/wechat/server/StatusServer/source/../include/ConfigIniManager.h \
  /usr/local/include/boost/property_tree/ptree.hpp \
  /usr/local/include/boost/property_tree/ptree_fwd.hpp \
  /usr/local/include/boost/optional/optional_fwd.hpp \
@@ -858,4 +858,4 @@ CMakeFiles/StatusServer.dir/source/MysqlManager.cpp.o: \
  /usr/include/c++/13/codecvt /usr/include/c++/13/bits/fs_dir.h \
  /usr/include/c++/13/bits/fs_ops.h \
  /home/kakuyo/libbcrypt/include/bcrypt/bcrypt.h \
- /home/kakuyo/wechat/server/StatusServer/include/Singleton.h
+ /home/kakuyo/wechat/server/StatusServer/source/../include/Singleton.h

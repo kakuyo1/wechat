@@ -1,13 +1,13 @@
 #include <iostream>
 #include <boost/asio.hpp>
-#include "CServer.h"
-#include "ConfigIniManager.h"
+#include "../include/CServer.h"
+#include "../include/ConfigIniManager.h"
 #include <hiredis/hiredis.h>
 #include <string>
 #include <cstring>
 #include <cstdio>
 #include <cassert>
-#include "RedisManager.h"
+#include "../include/RedisManager.h"
 #include <spdlog/spdlog.h>
 
 // void TestRedis() {

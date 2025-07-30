@@ -1,7 +1,7 @@
 CMakeFiles/GateServer.dir/resource/RedisManager.cpp.o: \
  /home/kakuyo/wechat/server/GateServer/resource/RedisManager.cpp \
  /usr/include/stdc-predef.h \
- /home/kakuyo/wechat/server/GateServer/include/RedisManager.h \
+ /home/kakuyo/wechat/server/GateServer/resource/../include/RedisManager.h \
  /usr/include/hiredis/hiredis.h /usr/include/hiredis/read.h \
  /usr/include/stdio.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
@@ -159,7 +159,7 @@ CMakeFiles/GateServer.dir/resource/RedisManager.cpp.o: \
  /usr/include/c++/13/bits/basic_ios.tcc \
  /usr/include/c++/13/bits/ostream.tcc /usr/include/c++/13/istream \
  /usr/include/c++/13/bits/istream.tcc \
- /home/kakuyo/wechat/server/GateServer/include/Singleton.h \
+ /home/kakuyo/wechat/server/GateServer/resource/../include/Singleton.h \
  /usr/include/c++/13/memory /usr/include/c++/13/bits/stl_tempbuf.h \
  /usr/include/c++/13/bits/stl_uninitialized.h \
  /usr/include/c++/13/bits/stl_raw_storage_iter.h \
@@ -188,7 +188,7 @@ CMakeFiles/GateServer.dir/resource/RedisManager.cpp.o: \
  /usr/include/c++/13/bits/stl_bvector.h \
  /usr/include/c++/13/bits/vector.tcc /usr/include/c++/13/bits/stl_heap.h \
  /usr/include/c++/13/bits/stl_queue.h /usr/include/c++/13/atomic \
- /home/kakuyo/wechat/server/GateServer/include/ConfigIniManager.h \
+ /home/kakuyo/wechat/server/GateServer/resource/../include/ConfigIniManager.h \
  /usr/local/include/boost/property_tree/ptree.hpp \
  /usr/local/include/boost/property_tree/ptree_fwd.hpp \
  /usr/local/include/boost/config.hpp \

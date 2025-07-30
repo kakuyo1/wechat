@@ -1,7 +1,7 @@
 CMakeFiles/GateServer.dir/resource/HttpConnection.cpp.o: \
  /home/kakuyo/wechat/server/GateServer/resource/HttpConnection.cpp \
  /usr/include/stdc-predef.h \
- /home/kakuyo/wechat/server/GateServer/include/HttpConnection.h \
+ /home/kakuyo/wechat/server/GateServer/resource/../include/HttpConnection.h \
  /usr/local/include/boost/beast/http.hpp \
  /usr/local/include/boost/beast/core/detail/config.hpp \
  /usr/local/include/boost/config.hpp \
@@ -1774,9 +1774,9 @@ CMakeFiles/GateServer.dir/resource/HttpConnection.cpp.o: \
  /usr/include/spdlog/details/log_msg_buffer.h \
  /usr/include/spdlog/details/circular_q.h /usr/include/spdlog/version.h \
  /usr/include/spdlog/details/synchronous_factory.h \
- /home/kakuyo/wechat/server/GateServer/include/LogicSystem.h \
- /home/kakuyo/wechat/server/GateServer/include/Singleton.h \
- /home/kakuyo/wechat/server/GateServer/include/config.h \
+ /home/kakuyo/wechat/server/GateServer/resource/../include/LogicSystem.h \
+ /home/kakuyo/wechat/server/GateServer/resource/../include/Singleton.h \
+ /home/kakuyo/wechat/server/GateServer/resource/../include/config.h \
  /usr/include/c++/13/map /usr/include/c++/13/bits/stl_tree.h \
  /usr/include/c++/13/bits/stl_map.h \
  /usr/include/c++/13/bits/stl_multimap.h /usr/include/jsoncpp/json/json.h \

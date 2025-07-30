@@ -1,7 +1,7 @@
 CMakeFiles/GateServer.dir/resource/MysqlDAO.cpp.o: \
  /home/kakuyo/wechat/server/GateServer/resource/MysqlDAO.cpp \
  /usr/include/stdc-predef.h \
- /home/kakuyo/wechat/server/GateServer/include/MysqlDAO.h \
+ /home/kakuyo/wechat/server/GateServer/resource/../include/MysqlDAO.h \
  /usr/include/c++/13/thread /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -270,8 +270,8 @@ CMakeFiles/GateServer.dir/resource/MysqlDAO.cpp.o: \
  /usr/include/c++/13/bits/unique_lock.h \
  /usr/include/c++/13/condition_variable /usr/include/c++/13/atomic \
  /usr/include/c++/13/chrono \
- /home/kakuyo/wechat/server/GateServer/include/config.h \
- /home/kakuyo/wechat/server/GateServer/include/ConfigIniManager.h \
+ /home/kakuyo/wechat/server/GateServer/resource/../include/config.h \
+ /home/kakuyo/wechat/server/GateServer/resource/../include/ConfigIniManager.h \
  /usr/local/include/boost/property_tree/ptree.hpp \
  /usr/local/include/boost/property_tree/ptree_fwd.hpp \
  /usr/local/include/boost/optional/optional_fwd.hpp \
@@ -890,5 +890,5 @@ CMakeFiles/GateServer.dir/resource/MysqlDAO.cpp.o: \
  /usr/include/spdlog/version.h \
  /usr/include/spdlog/details/synchronous_factory.h \
  /home/kakuyo/libbcrypt/include/bcrypt/bcrypt.h \
- /home/kakuyo/wechat/server/GateServer/include/MysqlManager.h \
- /home/kakuyo/wechat/server/GateServer/include/Singleton.h
+ /home/kakuyo/wechat/server/GateServer/resource/../include/MysqlManager.h \
+ /home/kakuyo/wechat/server/GateServer/resource/../include/Singleton.h

@@ -1,4 +1,4 @@
-#include "ConfigIniManager.h"
+#include "../include/ConfigIniManager.h"
 #include <spdlog/spdlog.h>
 SectionPairs::SectionPairs(const SectionPairs &other)
 {

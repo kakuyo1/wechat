@@ -1,9 +1,9 @@
-#include "LogicSystem.h"
-#include "HttpConnection.h"
-#include "VerifygRPCClient.h"
-#include "RedisManager.h"
-#include "MysqlManager.h"
-#include "StatusGrpcClient.h"
+#include "../include/LogicSystem.h"
+#include "../include/HttpConnection.h"
+#include "../include/VerifygRPCClient.h"
+#include "../include/RedisManager.h"
+#include "../include/MysqlManager.h"
+#include "../include/StatusGrpcClient.h"
 
 LogicSystem::LogicSystem()
 {

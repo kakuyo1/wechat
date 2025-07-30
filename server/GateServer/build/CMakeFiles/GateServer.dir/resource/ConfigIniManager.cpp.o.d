@@ -1,7 +1,7 @@
 CMakeFiles/GateServer.dir/resource/ConfigIniManager.cpp.o: \
  /home/kakuyo/wechat/server/GateServer/resource/ConfigIniManager.cpp \
  /usr/include/stdc-predef.h \
- /home/kakuyo/wechat/server/GateServer/include/ConfigIniManager.h \
+ /home/kakuyo/wechat/server/GateServer/resource/../include/ConfigIniManager.h \
  /usr/local/include/boost/property_tree/ptree.hpp \
  /usr/local/include/boost/property_tree/ptree_fwd.hpp \
  /usr/local/include/boost/config.hpp \

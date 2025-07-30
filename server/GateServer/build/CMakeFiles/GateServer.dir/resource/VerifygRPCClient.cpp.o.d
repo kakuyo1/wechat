@@ -1,8 +1,8 @@
 CMakeFiles/GateServer.dir/resource/VerifygRPCClient.cpp.o: \
  /home/kakuyo/wechat/server/GateServer/resource/VerifygRPCClient.cpp \
  /usr/include/stdc-predef.h \
- /home/kakuyo/wechat/server/GateServer/include/VerifygRPCClient.h \
- /home/kakuyo/wechat/server/GateServer/include/config.h \
+ /home/kakuyo/wechat/server/GateServer/resource/../include/VerifygRPCClient.h \
+ /home/kakuyo/wechat/server/GateServer/resource/../include/config.h \
  /usr/include/c++/13/string /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -371,8 +371,8 @@ CMakeFiles/GateServer.dir/resource/VerifygRPCClient.cpp.o: \
  /usr/local/include/grpcpp/security/authorization_policy_provider.h \
  /usr/local/include/grpcpp/server_context.h \
  /usr/local/include/grpcpp/server_posix.h \
- /home/kakuyo/wechat/server/GateServer/include/../proto/message.grpc.pb.h \
- /home/kakuyo/wechat/server/GateServer/include/../proto/message.pb.h \
+ /home/kakuyo/wechat/server/GateServer/resource/../include/../proto/message.grpc.pb.h \
+ /home/kakuyo/wechat/server/GateServer/resource/../include/../proto/message.pb.h \
  /usr/local/include/google/protobuf/port_def.inc \
  /usr/local/include/google/protobuf/port_undef.inc \
  /usr/local/include/google/protobuf/io/coded_stream.h \
@@ -447,12 +447,12 @@ CMakeFiles/GateServer.dir/resource/VerifygRPCClient.cpp.o: \
  /usr/local/include/grpcpp/impl/codegen/proto_buffer_reader.h \
  /usr/local/include/grpcpp/impl/codegen/proto_buffer_writer.h \
  /usr/local/include/grpcpp/impl/codegen/stub_options.h \
- /home/kakuyo/wechat/server/GateServer/include/Singleton.h \
+ /home/kakuyo/wechat/server/GateServer/resource/../include/Singleton.h \
  /usr/include/c++/13/queue /usr/include/c++/13/deque \
  /usr/include/c++/13/bits/stl_deque.h /usr/include/c++/13/bits/deque.tcc \
  /usr/include/c++/13/bits/stl_queue.h \
  /usr/include/c++/13/condition_variable \
- /home/kakuyo/wechat/server/GateServer/include/ConfigIniManager.h \
+ /home/kakuyo/wechat/server/GateServer/resource/../include/ConfigIniManager.h \
  /usr/local/include/boost/property_tree/ptree.hpp \
  /usr/local/include/boost/property_tree/ptree_fwd.hpp \
  /usr/local/include/boost/config.hpp \
@@ -1069,6 +1069,6 @@ CMakeFiles/GateServer.dir/resource/VerifygRPCClient.cpp.o: \
  /usr/include/spdlog/details/log_msg_buffer.h \
  /usr/include/spdlog/details/circular_q.h /usr/include/spdlog/version.h \
  /usr/include/spdlog/details/synchronous_factory.h \
- /home/kakuyo/wechat/server/GateServer/include/RedisManager.h \
+ /home/kakuyo/wechat/server/GateServer/resource/../include/RedisManager.h \
  /usr/include/hiredis/hiredis.h /usr/include/hiredis/read.h \
  /usr/include/hiredis/sds.h /usr/include/hiredis/alloc.h

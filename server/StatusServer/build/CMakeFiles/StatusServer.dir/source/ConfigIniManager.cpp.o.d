@@ -1,7 +1,7 @@
 CMakeFiles/StatusServer.dir/source/ConfigIniManager.cpp.o: \
  /home/kakuyo/wechat/server/StatusServer/source/ConfigIniManager.cpp \
  /usr/include/stdc-predef.h \
- /home/kakuyo/wechat/server/StatusServer/include/ConfigIniManager.h \
+ /home/kakuyo/wechat/server/StatusServer/source/../include/ConfigIniManager.h \
  /usr/local/include/boost/property_tree/ptree.hpp \
  /usr/local/include/boost/property_tree/ptree_fwd.hpp \
  /usr/local/include/boost/config.hpp \

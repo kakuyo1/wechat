@@ -1063,7 +1063,7 @@ CMakeFiles/GateServer.dir/resource/GateServer.cpp.o: \
  /usr/local/include/boost/asio/writable_pipe.hpp \
  /usr/local/include/boost/asio/write_at.hpp \
  /usr/local/include/boost/asio/impl/write_at.hpp \
- /home/kakuyo/wechat/server/GateServer/include/CServer.h \
+ /home/kakuyo/wechat/server/GateServer/resource/../include/CServer.h \
  /usr/local/include/boost/beast/http.hpp \
  /usr/local/include/boost/beast/core/detail/config.hpp \
  /usr/local/include/boost/core/ignore_unused.hpp \
@@ -1631,7 +1631,7 @@ CMakeFiles/GateServer.dir/resource/GateServer.cpp.o: \
  /usr/include/spdlog/details/log_msg_buffer.h \
  /usr/include/spdlog/details/circular_q.h /usr/include/spdlog/version.h \
  /usr/include/spdlog/details/synchronous_factory.h \
- /home/kakuyo/wechat/server/GateServer/include/ConfigIniManager.h \
+ /home/kakuyo/wechat/server/GateServer/resource/../include/ConfigIniManager.h \
  /usr/local/include/boost/property_tree/ptree.hpp \
  /usr/local/include/boost/property_tree/ptree_fwd.hpp \
  /usr/local/include/boost/property_tree/string_path.hpp \
@@ -1960,8 +1960,8 @@ CMakeFiles/GateServer.dir/resource/GateServer.cpp.o: \
  /usr/include/c++/13/bits/fs_ops.h /usr/include/hiredis/hiredis.h \
  /usr/include/hiredis/read.h /usr/include/hiredis/sds.h \
  /usr/include/hiredis/alloc.h \
- /home/kakuyo/wechat/server/GateServer/include/RedisManager.h \
- /home/kakuyo/wechat/server/GateServer/include/Singleton.h \
+ /home/kakuyo/wechat/server/GateServer/resource/../include/RedisManager.h \
+ /home/kakuyo/wechat/server/GateServer/resource/../include/Singleton.h \
  /usr/include/c++/13/queue /usr/include/c++/13/deque \
  /usr/include/c++/13/bits/stl_deque.h /usr/include/c++/13/bits/deque.tcc \
  /usr/include/c++/13/bits/stl_queue.h
