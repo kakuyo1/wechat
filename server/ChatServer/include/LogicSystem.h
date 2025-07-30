@@ -26,6 +26,7 @@ public:
     void PostLogicNode(std::shared_ptr<CSession> session, std::shared_ptr<RecieveMessageNode> message_node);
     void RegisterHandler(short message_type, std::function<void(std::shared_ptr<CSession>, std::shared_ptr<RecieveMessageNode>)> handler);
     void InitializeHandlers();
+    void HandleLoginOut(std::shared_ptr<CSession> session);
 private:
     LogicSystem();
     void ProcessMessageQueue();

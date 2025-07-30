@@ -4,6 +4,7 @@
 #include "../include/RedisManager.h"
 #include "../include/UserManager.h"
 #include "../include/LogicSystem.h"
+#include "../include/LogicSystem.h"
 
 void LogicSystem::RegisterHandler(short message_type, std::function<void(std::shared_ptr<CSession>, std::shared_ptr<RecieveMessageNode>)> handler)
 {
@@ -248,6 +249,54 @@ void LogicSystem::HandleLoginAuth(std::shared_ptr<CSession> session, std::shared
     // send the final response to the client
     spdlog::debug("Step final");
     session->Send(response.toStyledString(), static_cast<short>(MessageType::MESSAGE_CHATSERVER_LOGIN_AUTH_RESPONSE));
+}
+
+void LogicSystem::HandleLoginOut(std::shared_ptr<CSession> session)
+{
+    // 1. Extract user ID from session
+    int uid = session->getSessionUid();
+    if (uid == -1)
+    {
+        spdlog::error("Failed to get UID from session.");
+        return;
+    }
+
+    // 2. Remove user session from UserManager and _users map
+    UserManager::GetInstance()->removeUidToSession(uid);
+    auto it = _users.find(uid);
+    if (it != _users.end())
+    {
+        _users.erase(it);
+        spdlog::info("[LogicSystem]User with UID {} logged out successfully.", uid);
+    }
+    else
+    {
+        spdlog::warn("[LogicSystem]User with UID {} not found in _users map.", uid);
+    }
+
+    // 3. Decrement the online user count in ChatServer by redis(maintain loginCount synchronization between all the ChatServers)
+    auto server_name = ConfigIniManager::Instance()["SelfServer"]["Name"];
+    auto current_login_count = RedisManager::GetInstance()->HGet(SERVER_LOGIN_COUNT, server_name);
+    if (current_login_count.empty())
+    {
+        spdlog::warn("No login count found for server: {}.", server_name);
+        return;
+    }
+    int new_login_count = std::stoi(current_login_count) - 1; // decrement
+    if (!RedisManager::GetInstance()->HSet(SERVER_LOGIN_COUNT, server_name, std::to_string(new_login_count)))
+    {
+        spdlog::error("Failed to decrement login count for server: {}.", server_name);
+        return;
+    }
+    spdlog::info("[LogicSystem]server {} login count decremented to {}", server_name, new_login_count);
+
+    // 4. Remove the server IP for the user/session from Redis
+    std::string server_ip_key = SERVER_IP_PREFIX + std::to_string(uid);
+    if (!RedisManager::GetInstance()->Delete(server_ip_key))
+    {
+        spdlog::error("Failed to delete server IP for UID {} in Redis.", uid);
+        return;
+    }
 }
 
 void LogicSystem::HandleClientSearchUser(std::shared_ptr<CSession> session, std::shared_ptr<RecieveMessageNode> message_node)

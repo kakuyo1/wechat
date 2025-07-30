@@ -1,6 +1,7 @@
 #include "../include/CSession.h"
 #include "../include/CServer.h"
 #include "../include/MessageNode.h"
+#include "../include/CSession.h"
 
 CSession::CSession(boost::asio::io_context& ioc, std::shared_ptr<CServer> server) :
     _socket(ioc),
@@ -9,14 +10,16 @@ CSession::CSession(boost::asio::io_context& ioc, std::shared_ptr<CServer> server
     _send_queue{},
     _send_mutex{},
     _is_sending(false),
-    _is_stopped(false)
+    _is_stopped(false),
+    _uid(-1),
+    _is_closed(false)
 {
 
 }
 
 CSession::~CSession() {
     Close();
-    spdlog::info("Session with UUID {} has been destroyed.", _session_id);
+    spdlog::info("Session with session_id {} has been destroyed, client closed completely", _session_id);
 }
 
 void CSession::Start() {
@@ -49,11 +52,19 @@ void CSession::ReadHead(short head_length)
         auto self = shared_from_this();
         net::async_read(_socket, net::buffer(_header, head_length), [self, head_length](const boost::system::error_code &ec, std::size_t bytes_transferred)
                         {
-        if (ec) {
-            spdlog::error("Failed to read head: {}", ec.message());
-            self->Close();
-            return;
-        }
+                if (ec)
+                {
+                    if (ec == boost::asio::error::eof || ec == boost::asio::error::connection_reset)
+                    {
+                        spdlog::info("Client disconnected ({}), session_id = {}", ec.message(), self->_session_id);
+                    }
+                    else
+                    {
+                        spdlog::error("Failed to read head: {}", ec.message());
+                    }
+                    self->Close();
+                    return;
+                }
         if (bytes_transferred < head_length) {
             spdlog::warn("Incomplete head read, expected {}, got {}", head_length, bytes_transferred);
             self->Close();
@@ -70,8 +81,7 @@ void CSession::ReadHead(short head_length)
             self->Close();
             return;
         }
-        self->ReadBody(message_length, message_type);
-        });
+        self->ReadBody(message_length, message_type); });
     }
     catch (const std::exception &e)
     {
@@ -162,6 +172,9 @@ void CSession::Close()
 {
     try
     {
+        if (_is_closed) return;
+        _is_closed = true;
+        OnClientClose();
         if (_socket.is_open())
         {
             boost::system::error_code ec;
@@ -216,7 +229,7 @@ void CSession::HandleWrite(const boost::system::error_code &ec, std::size_t byte
         std::lock_guard<std::mutex> lock(self->_send_mutex);
         self->_send_queue.pop(); // Remove the message from the queue
         spdlog::info("[CSession]Message sent successfully, bytes transferred: {}", bytes_transferred);
-        if (_is_sending || self->_send_queue.empty())
+        if (self->_send_queue.empty()) // Check if the queue is empty
         {
             self->_is_sending = false; // No more messages to send, reset sending flag
             spdlog::info("[CSession]All messages sent, send queue is now empty.");
@@ -234,5 +247,14 @@ void CSession::HandleWrite(const boost::system::error_code &ec, std::size_t byte
     catch (const std::exception &e)
     {
         spdlog::error("Exception in HandleWrite: {}", e.what());
+    }
+}
+
+void CSession::OnClientClose()
+{
+    spdlog::info("Client with session_id {} is closing the connection.", _session_id);
+    int uid = getSessionUid();
+    if (uid != -1) {
+        LogicSystem::GetInstance()->HandleLoginOut(shared_from_this());
     }
 }

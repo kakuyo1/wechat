@@ -51,12 +51,14 @@ private:
     void ReadBody(short message_length, short message_type);
     void Close();
     void HandleWrite(const boost::system::error_code& ec, std::size_t bytes_transferred, std::shared_ptr<SendMessageNode> send_message, std::shared_ptr<CSession> self);
+    void OnClientClose();
 private:
     tcp::socket _socket;
     std::shared_ptr<CServer> _server;
     std::string _session_id;
     int _uid;
     std::queue<std::shared_ptr<SendMessageNode>> _send_queue;
+    bool _is_closed;
     // std::shared_ptr<RecieveMessageNode> _receive_message_body;
     // std::shared_ptr<MessageNode> _receive_message_head;
     std::mutex _send_mutex;
