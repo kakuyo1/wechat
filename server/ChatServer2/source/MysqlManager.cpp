@@ -57,3 +57,8 @@ bool MysqlManager::AccpetAndUpdateFriendRequestListItemStatus(int from_uid, int 
 bool MysqlManager::AddBidirectionalFriendRelationship(int uid1, int uid2, const std::string& backup_name_1_to_2, const std::string& backup_name_2_to_1) {
     return _dao->AddBidirectionalFriendRelationship(uid1, uid2, backup_name_1_to_2, backup_name_2_to_1);
 }
+
+int MysqlManager::GetFriendRequestList(int self_uid, std::vector<FriendRequestItem> &friend_request_list)
+{
+    return _dao->GetFriendRequestList(self_uid, friend_request_list);
+}

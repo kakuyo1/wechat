@@ -212,6 +212,31 @@ void LogicSystem::HandleLoginAuth(std::shared_ptr<CSession> session, std::shared
     // TODO 6.prepare the friend/contact list for the client
 
     // TODO 7.prepare the friend request list for the client
+    std::vector<FriendRequestItem> friend_request_list{};
+    int result = MysqlManager::GetInstance()->GetFriendRequestList(uid, friend_request_list);
+    if (result == static_cast<int>(ErrorCodes::ERROR_NO_FRIENDREQUEST_RECORD))
+    {
+        spdlog::info("No friend request records found for UID {}, sending empty list.", uid);
+        response["error"] = static_cast<short>(ErrorCodes::SUCCESS);
+        response["message"] = "No friend requests";
+        response["friend_request_list"] = Json::Value(Json::arrayValue); // Empty array
+    } else if (result != static_cast<int>(ErrorCodes::SUCCESS)){
+        spdlog::error("Failed to get friend request list for UID {}, sending error response.", uid);
+        response["error"] = static_cast<short>(ErrorCodes::ERROR_MYSQL);
+        response["message"] = "Failed to retrieve friend request list";
+        session->Send(response.toStyledString(), static_cast<short>(MessageType::MESSAGE_CHATSERVER_LOGIN_AUTH_RESPONSE));
+        return;
+    } else if (result == static_cast<int>(ErrorCodes::SUCCESS)) {
+        for (const auto& item : friend_request_list) {
+            Json::Value request_item;
+            request_item["from_uid"] = item.from_uid;
+            request_item["status"] = item.status;
+            request_item["from_name"] = item.from_name;
+            request_item["from_icon"] = item.from_icon;
+            request_item["from_desc"] = item.from_desc;
+            response["friend_request_list"].append(request_item);
+        }
+    }
 
     // 8.increment the online user count in ChatServer by redis(maintain loginCount synchronization between all the ChatServers)
     spdlog::debug("Step 8");
@@ -397,7 +422,7 @@ void LogicSystem::HandleAddFriend(std::shared_ptr<CSession> session, std::shared
 
     // 2.update the friend request list in Mysql
     if (!MysqlManager::GetInstance()->AddItemToFriendRequestList(from_uid, to_uid)) {
-        spdlog::error("Failed to add item to friend request list from UID {} to UID {}.", from_uid, to_uid);
+        spdlog::warn("Failed to add item to friend request list from UID {} to UID {}.", from_uid, to_uid);
         ack_response["error"] = static_cast<short>(ErrorCodes::ERROR_MYSQL);
         ack_response["message"] = "Failed to add friend request";
         session->Send(ack_response.toStyledString(), static_cast<short>(MessageType::MESSAGE_CHATSERVER_ADDFRIEND_ACK));

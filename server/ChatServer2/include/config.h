@@ -21,7 +21,8 @@ enum class ErrorCodes {
     ERROR_EMAIL_DOES_NOT_EXIST = 16,
     ERROR_USER_OFFLINE = 17,
     ERROR_SEARCH_FAILED_BY_UID = 18,
-    ERROR_SEARCH_FAILED_BY_NAME = 19
+    ERROR_SEARCH_FAILED_BY_NAME = 19,
+    ERROR_NO_FRIENDREQUEST_RECORD = 20
 };
 
 const std::string code_prefix = "code_"; // Prefix for verify code keys in Redis
@@ -58,6 +59,15 @@ struct FullUserInfo {
     std::string password;
     std::string icon; // User's icon URL or path
     std::string desc;
+};
+
+struct FriendRequestItem {
+    int from_uid; // UID of the user who sent the request
+    // no need for to_uid, as it can be inferred from the context
+    int status; // Status of the request (e.g., pending, accepted, rejected: 0, 1, 2)
+    std::string from_name; // Name of the user who sent the request
+    std::string from_icon; // Icon of the user who sent the request
+    std::string from_desc; // Description of the user who sent the request
 };
 
 #define MAX_MESSAGE_LENGTH 1024 // Maximum message length

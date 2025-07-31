@@ -71,6 +71,7 @@ public:
     bool RemoveItemFromFriendRequestList(int from_uid, int to_uid);
     bool AccpetAndUpdateFriendRequestListItemStatus(int from_uid, int to_uid);
     bool AddBidirectionalFriendRelationship(int uid1, int uid2, const std::string& backup_name_1_to_2, const std::string& backup_name_2_to_1);
+    int GetFriendRequestList(int self_uid, std::vector<FriendRequestItem>& friend_request_list);
 private:
     std::unique_ptr<MysqlConnectionPool> _pool;
 };

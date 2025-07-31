@@ -553,3 +553,48 @@ bool MysqlDAO::AddBidirectionalFriendRelationship(int uid1, int uid2, const std:
         return false; // Error occurred while adding bidirectional friend relationship
     }
 }
+
+int MysqlDAO::GetFriendRequestList(int self_uid, std::vector<FriendRequestItem>& friend_request_list) {
+    /* multi table query: join the table of friendrequestlist and user where user.uid = friendrequestlist.to_uid(get all the friend request to self_uid)
+        , select the name, desc,icon from user by self_uid
+        ,meanwhile select the status from friendrequestlist*/
+    auto con = _pool->GetConnection();
+    try {
+        if (con == nullptr) {
+            return static_cast<int>(ErrorCodes::ERROR_MYSQL); // Connection failed
+        }
+        std::unique_ptr<sql::PreparedStatement> stmt(con->con_->prepareStatement(
+            "SELECT user.name, user.desc, user.icon, friendrequestlist.status, friendrequestlist.from_uid "
+            "FROM user "
+            "JOIN friendrequestlist ON user.uid = friendrequestlist.from_uid "
+            "WHERE friendrequestlist.to_uid = ?"
+        ));
+        stmt->setInt(1, self_uid);
+        std::unique_ptr<sql::ResultSet> res(stmt->executeQuery());
+        if (!res->next()) { // will skip the first row if no result, thus we need do while later
+            _pool->ReturnConnection(std::move(con));
+            return static_cast<int>(ErrorCodes::ERROR_NO_FRIENDREQUEST_RECORD); // No friend requests found
+        }
+        // Clear the list before adding new items
+        friend_request_list.clear();
+        // Iterate through the result set and populate the friend_request_list
+        // 先处理第一行
+        do {
+            FriendRequestItem item;
+            item.from_name = res->getString("name");
+            item.from_desc = res->getString("desc");
+            item.from_icon = res->getString("icon");
+            item.status = res->getInt("status");
+            item.from_uid = res->getInt("from_uid");
+            friend_request_list.push_back(item);
+            spdlog::debug("Get Friend request from: {}, Status: {}", item.from_name, item.status);
+        } while (res->next());
+        _pool->ReturnConnection(std::move(con));
+        return static_cast<int>(ErrorCodes::SUCCESS);
+    } catch (sql::SQLException& e) {
+        _pool->ReturnConnection(std::move(con));
+        spdlog::error("SQLException: {}", e.what());
+        spdlog::error("(MYSQL error code: {}, SQLState: {})", e.getErrorCode(), e.getSQLState());
+        return static_cast<int>(ErrorCodes::ERROR_MYSQL);
+    }
+}
