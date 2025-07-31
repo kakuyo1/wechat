@@ -1,5 +1,7 @@
 #include "statewidget.h"
 #include "global.h"
+#include <QTimer>
+#include <QMouseEvent>
 
 StateWidget::StateWidget(QWidget *parent) :
     QWidget(parent),
@@ -80,6 +82,8 @@ void StateWidget::mousePressEvent(QMouseEvent *event)
     if (_pressedState.isEmpty()) {
         return;
     }
+
+    _mousePressed = true;
     setProperty("state", _pressedState);
     repolish(this);
     update();
@@ -93,7 +97,17 @@ void StateWidget::mouseReleaseEvent(QMouseEvent *event)
     if (_normalState.isEmpty()) {
         return;
     }
-    setProperty("state", _normalState);
+    _mousePressed = false;
+    if (rect().contains(event->pos())) {
+        setProperty("state", _pressedState);
+        QTimer::singleShot(100, this, [this]() {
+            setProperty("state", _normalState);
+            repolish(this);
+            update();
+        });
+    } else {
+        setProperty("state", _normalState);
+    }
     repolish(this);
     update();
     qDebug() << "StateWidget mouseReleaseEvent";
@@ -102,7 +116,7 @@ void StateWidget::mouseReleaseEvent(QMouseEvent *event)
 
 void StateWidget::enterEvent(QEnterEvent *event)
 {
-    if (_hoverState.isEmpty()) {
+    if (_hoverState.isEmpty() || _mousePressed) { // 只有没按下才 hover
         return;
     }
     setProperty("state", _hoverState);
@@ -114,7 +128,7 @@ void StateWidget::enterEvent(QEnterEvent *event)
 
 void StateWidget::leaveEvent(QEvent *event)
 {
-    if (_normalState.isEmpty()) {
+    if (_normalState.isEmpty() || _mousePressed) { // 只有没按下才 normal
         return;
     }
     setProperty("state", _normalState);

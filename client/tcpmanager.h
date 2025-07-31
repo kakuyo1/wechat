@@ -65,6 +65,7 @@ signals:
     void signal_search_user_failed(QString errorMessage);
     void signal_add_newFriendListItem(std::shared_ptr<FriendListItemInfo> itemInfo); // 加入到usermanager管理的好友申请列表中
     void signal_add_contact_request_success(std::shared_ptr<AddContactResponse> response); // 交给FriendRequestPage处理，显示新的FriendRequestListItem
+    void signal_addcontactlistitem_showRedPoint(); // 添加联系人列表项红点显示信号
 };
 
 #endif // TCPMANAGER_H

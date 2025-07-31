@@ -39,6 +39,7 @@ private:
     QString _pressedState;
     QLabel* _redPointLabel;
     StateType _currentState;
+    bool _mousePressed = false;  // 新增：标记鼠标是否按下
 signals:
     void clicked();
 };

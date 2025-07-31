@@ -16,6 +16,7 @@ debug/customized_editline.o
 debug/customized_label.o
 debug/customized_textedit.o
 debug/forgetlabel.o
+debug/friendauthdialog.o
 debug/friendrequestdialog.o
 debug/friendrequestlist.o
 debug/friendrequestlistitem.o
@@ -58,6 +59,7 @@ debug/moc_customized_editline.o
 debug/moc_customized_label.o
 debug/moc_customized_textedit.o
 debug/moc_forgetlabel.o
+debug/moc_friendauthdialog.o
 debug/moc_friendrequestdialog.o
 debug/moc_friendrequestlist.o
 debug/moc_friendrequestlistitem.o

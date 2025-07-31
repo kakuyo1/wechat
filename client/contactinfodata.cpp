@@ -91,8 +91,9 @@ AddContactResponse::AddContactResponse(int Uid, QString Name, QString Nickname, 
 
 }
 
-FriendListItemInfo::FriendListItemInfo(int self_uid, int request_uid) :
-    _selfUid(self_uid), _requestUid(request_uid)
+FriendListItemInfo::FriendListItemInfo(int self_uid, int request_uid, QString name,
+                                       QString desc, QString avatarPath, int status) :
+    _selfUid(self_uid), _requestUid(request_uid), _name(name), _desc(desc), _avatarPath(avatarPath), _status(status)
 {
 
 }

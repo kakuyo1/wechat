@@ -27,11 +27,16 @@ private:
 
 class FriendListItemInfo {
 public:
-    FriendListItemInfo(int self_uid, int request_uid);
+    FriendListItemInfo(int self_uid, int request_uid, QString name = "",
+                       QString desc = "", QString avatarPath = "", int status = 0);
     ~FriendListItemInfo() = default;
 public:
     int _selfUid; // 自己的用户ID
     int _requestUid; // 请求的用户ID
+    QString _name; // 请求的用户名
+    QString _desc; // 请求的用户描述
+    QString _avatarPath; // 请求的用户头像路径
+    int _status; // 请求状态(0: 未处理, 1: 已同意, 2: 已拒绝)
 };
 
 class AddContactRequest {

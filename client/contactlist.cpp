@@ -1,4 +1,5 @@
 #include "contactlist.h"
+#include "tcpmanager.h"
 
 ContactList::ContactList(QWidget *parent) :
     QListWidget(parent),
@@ -14,6 +15,7 @@ ContactList::ContactList(QWidget *parent) :
     // 设置组"新的朋友"项
     auto * newFriendGroupItem = new ContactGroupTipItem(this);
     newFriendGroupItem->setObjectName("new_friend_group_item");
+    newFriendGroupItem->setGroupTipText("添加联系人");
     QListWidgetItem* groupListItem = new QListWidgetItem(this);
     groupListItem->setSizeHint(newFriendGroupItem->sizeHint());
     groupListItem->setFlags(groupListItem->flags() & ~Qt::ItemIsSelectable); // 设置不可选中
@@ -32,6 +34,7 @@ ContactList::ContactList(QWidget *parent) :
     // 设置组"联系人"项
     auto * contactGroupItem = new ContactGroupTipItem(this);
     contactGroupItem->setObjectName("contact_group_item");
+    contactGroupItem->setGroupTipText("联系人");
     QListWidgetItem* contactGroupListItem = new QListWidgetItem(this);
     contactGroupListItem->setSizeHint(contactGroupItem->sizeHint());
     contactGroupListItem->setFlags(contactGroupListItem->flags() & ~Qt::ItemIsSelectable); // 设置不可选中
@@ -40,6 +43,11 @@ ContactList::ContactList(QWidget *parent) :
 
     // 连接信号槽
     connect(this, &QListWidget::itemClicked, this, &ContactList::slot_contactItem_clicked);
+
+    // 添加联系人项红点亮起
+    connect(TcpManager::GetInstance().get(), &TcpManager::signal_addcontactlistitem_showRedPoint, this, [this]() {
+        _addContactItem->showRedPoint(true); // 显示红点
+    });
 
     // 初始化测试添加联系人
     Test_AddContacts();
@@ -110,6 +118,10 @@ void ContactList::slot_contactItem_clicked(QListWidgetItem* item)
     // 根据不同的ListItemType处理点击事件
     if (itemType == ListItemType::AddContactItem) {
         qDebug() << "点击了添加联系人项";
+        // widget 转换为 ContactListItem 类型
+        ContactListItem* contactItem = qobject_cast<ContactListItem*>(widget);
+        // 取消红点
+        contactItem->showRedPoint(false);
         emit signal_switchTo_friendRequestPage(); // 切换到好友申请页面
         return;
     } else if (itemType == ListItemType::ContactItem) {

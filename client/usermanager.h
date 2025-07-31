@@ -35,7 +35,8 @@ public:
     std::shared_ptr<SearchInfo> getContactInfo(int uid) const; // 根据uid获取联系人信息
     std::vector<std::shared_ptr<SearchInfo>> getContactList() const { return _contactList; } // 获取联系人列表
 
-    void addFriendRequest(std::shared_ptr<FriendListItemInfo> requestInfo); // 在好友申请页面点击发送成功后调用
+    void intialFriendRequestListAfterLogin(std::vector<std::shared_ptr<FriendListItemInfo>> requestInfoList); // 在登录成功后初始化好友申请列表
+    void addFriendRequest(std::shared_ptr<FriendListItemInfo> requestInfo); // 收到服务端ACK成功后增加好友申请
     std::vector<std::shared_ptr<FriendListItemInfo>> getFriendRequestList() const { return _friendRequestList; } // 获取好友申请列表
 private:
     UserManager();

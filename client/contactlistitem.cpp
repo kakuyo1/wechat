@@ -38,6 +38,9 @@ void ContactListItem::setInfo(int uid, QString name, QString avatarUrl)
 
 void ContactListItem::showRedPoint(bool show)
 {
+    if (listItemType != ListItemType::AddContactItem) {
+        return; // 仅在添加联系人项上显示红点
+    }
     if (show) {
         ui->contact_redpoint_label->setVisible(true); // 显示红点
     } else {

@@ -1,9 +1,11 @@
 #include "friendrequestpage.h"
 #include "ui_friendrequestpage.h"
+#include "usermanager.h"
 
 FriendRequestPage::FriendRequestPage(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::FriendRequestPage)
+    , authDialog(std::make_shared<FriendAuthDialog>(parentWidget()))
 {
     ui->setupUi(this);
 
@@ -14,7 +16,10 @@ FriendRequestPage::FriendRequestPage(QWidget *parent)
     connect(TcpManager::GetInstance().get(), &TcpManager::signal_add_contact_request_success, this, &FriendRequestPage::slot_add_new_contact_request);
 
     // 测试
-    Test_LoadFakeRequestData();
+    // Test_LoadFakeRequestData();
+
+    // 初始化好友请求列表
+    intializeRequestList();
 }
 
 void FriendRequestPage::paintEvent(QPaintEvent *event)
@@ -51,9 +56,40 @@ void FriendRequestPage::Test_LoadFakeRequestData()
         ui->FR_list->addItem(listItem);
         ui->FR_list->setItemWidget(listItem, item);
         // 监听"添加好友"按钮点击事件
-        connect(item, &FriendRequestListItem::signal_addFriendClicked, this, [this](){
-            qDebug() << "添加好友按钮被点击";
-        });
+        connect(item, &FriendRequestListItem::signal_addFriendClicked, this, &FriendRequestPage::slot_addBtn_clicked);
+    }
+}
+
+void FriendRequestPage::intializeRequestList()
+{
+    auto friendRequestList = UserManager::GetInstance()->getFriendRequestList();
+    for (auto it = friendRequestList.rbegin(); it != friendRequestList.rend(); ++it) { // 反向迭代，好友申请从最新到最旧，由上到下排列
+        const auto& requestInfo = *it;
+        if (_requestItems.find(requestInfo->_requestUid) != _requestItems.end()) {
+            qDebug() << "好友请求已存在，忽略重复请求";
+            continue; // 忽略重复的好友请求
+        }
+        int status = requestInfo->_status;
+        QString from_name = requestInfo->_name;
+        QString from_description = requestInfo->_desc;
+        QString from_avatarPath = requestInfo->_avatarPath;
+        FriendRequestListItem* item = new FriendRequestListItem(this);
+        item->setInfoByServerIntialData(from_avatarPath, from_name, from_description);
+
+        if (0 == status) {
+            item->showAddButton(true); // 显示添加按钮
+            // 监听"添加好友"按钮点击事件
+            connect(item, &FriendRequestListItem::signal_addFriendClicked, this, &FriendRequestPage::slot_addBtn_clicked);
+        } else if (1 == status) {
+            item->showAddButton(false); // 隐藏添加按钮
+        }
+
+        QListWidgetItem* listItem = new QListWidgetItem();
+        listItem->setSizeHint(item->sizeHint());
+        listItem->setFlags(listItem->flags() & ~Qt::ItemIsEnabled & ~Qt::ItemIsSelectable); // 禁用选择和启用
+        ui->FR_list->addItem(listItem);
+        ui->FR_list->setItemWidget(listItem, item);
+        _requestItems[requestInfo->_requestUid] = item; // 存储好友请求项
     }
 }
 
@@ -84,14 +120,23 @@ void FriendRequestPage::slot_add_new_contact_request(std::shared_ptr<AddContactR
     QListWidgetItem* listItem = new QListWidgetItem();
     listItem->setSizeHint(item->sizeHint());
     listItem->setFlags(listItem->flags() & ~Qt::ItemIsEnabled & ~Qt::ItemIsSelectable); // 禁用选择和启用
-    ui->FR_list->addItem(listItem);
+    ui->FR_list->insertItem(0, listItem); // 将新请求添加到列表顶部
     ui->FR_list->setItemWidget(listItem, item);
 
     // side_contact_label红点亮起
     emit signal_sideContact_showRedPoint();
+
+    // 添加到请求项映射中
+    _requestItems[uid] = item;
     // 监听"添加好友"按钮点击事件
-    connect(item, &FriendRequestListItem::signal_addFriendClicked, this, [this](){
-        qDebug() << "添加好友按钮被点击";
-        // TODO 验证页面弹出
-    });
+    connect(item, &FriendRequestListItem::signal_addFriendClicked, this, &FriendRequestPage::slot_addBtn_clicked);
+}
+
+void FriendRequestPage::slot_addBtn_clicked()
+{
+    qDebug() << "'添加好友'按钮被点击";
+    authDialog->setModal(true); // 设置为模态对话框
+    authDialog->setWindowTitle("添加好友验证");
+    authDialog->show(); // 显示验证对话框
+    qDebug() << "弹出添加好友验证对话框";
 }

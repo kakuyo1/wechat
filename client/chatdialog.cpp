@@ -1,6 +1,7 @@
 #include "chatdialog.h"
 #include "ui_chatdialog.h"
 #include "sessionlistitem.h"
+#include "usermanager.h"
 
 ChatDialog::ChatDialog(QWidget *parent)
     : QDialog(parent)
@@ -21,8 +22,11 @@ ChatDialog::ChatDialog(QWidget *parent)
     ui->search_list->hide();
     ui->contact_list->hide();
 
-    // TODO加载头像
-    QPixmap avatarPixmap(":/images/head_1.jpg");
+    // 从static文件夹中获取要添加的头像(Icon path: "B:\\qt learing\\llfc_client\\build\\Desktop_Qt_6_9_0_MinGW_64_bit-Debug\\debug\\static\\head_1.jpg")
+    QString appPath = QCoreApplication::applicationDirPath();
+    QString avatarPath = UserManager::GetInstance()->getIconPath(); // 获取用户头像路径
+    QString iconPath = QDir::toNativeSeparators(appPath + QDir::separator() + "static" + QDir::separator() + avatarPath);
+    QPixmap avatarPixmap(iconPath);
     avatarPixmap = avatarPixmap.scaled(ui->side_icon_label->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
     ui->side_icon_label->setPixmap(avatarPixmap);
     ui->side_icon_label->setScaledContents(true); // 确保图标适应标签大小

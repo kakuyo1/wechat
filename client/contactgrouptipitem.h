@@ -16,8 +16,9 @@ public:
     explicit ContactGroupTipItem(QWidget *parent = nullptr);
     ~ContactGroupTipItem()= default;
     virtual QSize sizeHint() const override;
-private:
     void setGroupTipText(const QString& text);
+private:
+
 private:
     QString _groupTipText; // 组提示文本
     Ui::ContactGroupTipItem *ui;

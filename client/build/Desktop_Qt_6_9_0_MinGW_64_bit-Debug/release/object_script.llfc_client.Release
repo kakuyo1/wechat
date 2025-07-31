@@ -16,6 +16,7 @@ release/customized_editline.o
 release/customized_label.o
 release/customized_textedit.o
 release/forgetlabel.o
+release/friendauthdialog.o
 release/friendrequestdialog.o
 release/friendrequestlist.o
 release/friendrequestlistitem.o
@@ -58,6 +59,7 @@ release/moc_customized_editline.o
 release/moc_customized_label.o
 release/moc_customized_textedit.o
 release/moc_forgetlabel.o
+release/moc_friendauthdialog.o
 release/moc_friendrequestdialog.o
 release/moc_friendrequestlist.o
 release/moc_friendrequestlistitem.o

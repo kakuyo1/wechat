@@ -20,6 +20,7 @@ public:
     virtual QSize sizeHint() const override;
     void showAddButton(bool show = false);
     void setInfo(std::shared_ptr<RequestInfo> requestInfo);// (Test)
+    void setInfoByServerIntialData(const QString & from_avatarPath, const QString & from_name, const QString & from_description); // from server
     void setInfoByAddContactResponse(std::shared_ptr<AddContactResponse> addContactResponse); // from server
 private:
     Ui::FriendRequestListItem *ui;

@@ -27,6 +27,7 @@ SOURCES += \
     customized_label.cpp \
     customized_textedit.cpp \
     forgetlabel.cpp \
+    friendauthdialog.cpp \
     friendrequestdialog.cpp \
     friendrequestlist.cpp \
     friendrequestlistitem.cpp \
@@ -71,6 +72,7 @@ HEADERS += \
     customized_label.h \
     customized_textedit.h \
     forgetlabel.h \
+    friendauthdialog.h \
     friendrequestdialog.h \
     friendrequestlist.h \
     friendrequestlistitem.h \
@@ -104,6 +106,7 @@ FORMS += \
     chosentag.ui \
     contactgrouptipitem.ui \
     contactlistitem.ui \
+    friendauthdialog.ui \
     friendrequestdialog.ui \
     friendrequestlistitem.ui \
     friendrequestpage.ui \

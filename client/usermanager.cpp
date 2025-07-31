@@ -39,6 +39,12 @@ std::shared_ptr<SearchInfo> UserManager::getContactInfo(int uid) const
     return nullptr; // 未找到对应的联系人信息
 }
 
+void UserManager::intialFriendRequestListAfterLogin(std::vector<std::shared_ptr<FriendListItemInfo>> requestInfoList)
+{
+    _friendRequestList.clear(); // 清空之前的好友申请列表
+    _friendRequestList = requestInfoList; // 初始化好友申请列表
+}
+
 void UserManager::addFriendRequest(std::shared_ptr<FriendListItemInfo> requestInfo)
 {
     if (requestInfo) {

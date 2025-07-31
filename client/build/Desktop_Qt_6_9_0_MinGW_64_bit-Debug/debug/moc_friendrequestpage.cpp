@@ -7,6 +7,7 @@
 *****************************************************************************/
 
 #include "../../../friendrequestpage.h"
+#include <QtGui/qtextcursor.h>
 #include <QtCore/qmetatype.h>
 
 #include <QtCore/qtmochelpers.h>
@@ -39,23 +40,29 @@ template <> constexpr inline auto FriendRequestPage::qt_create_metaobjectdata<qt
     namespace QMC = QtMocConstants;
     QtMocHelpers::StringRefStorage qt_stringData {
         "FriendRequestPage",
-        "slot_get_authResponse",
+        "signal_sideContact_showRedPoint",
         "",
+        "slot_get_authResponse",
         "std::shared_ptr<AuthResponse>",
         "response",
         "slot_add_new_contact_request",
-        "std::shared_ptr<AddContactResponse>"
+        "std::shared_ptr<AddContactResponse>",
+        "slot_addBtn_clicked"
     };
 
     QtMocHelpers::UintData qt_methods {
+        // Signal 'signal_sideContact_showRedPoint'
+        QtMocHelpers::SignalData<void()>(1, 2, QMC::AccessPublic, QMetaType::Void),
         // Slot 'slot_get_authResponse'
-        QtMocHelpers::SlotData<void(std::shared_ptr<AuthResponse>)>(1, 2, QMC::AccessPrivate, QMetaType::Void, {{
-            { 0x80000000 | 3, 4 },
+        QtMocHelpers::SlotData<void(std::shared_ptr<AuthResponse>)>(3, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { 0x80000000 | 4, 5 },
         }}),
         // Slot 'slot_add_new_contact_request'
-        QtMocHelpers::SlotData<void(std::shared_ptr<AddContactResponse>)>(5, 2, QMC::AccessPrivate, QMetaType::Void, {{
-            { 0x80000000 | 6, 4 },
+        QtMocHelpers::SlotData<void(std::shared_ptr<AddContactResponse>)>(6, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { 0x80000000 | 7, 5 },
         }}),
+        // Slot 'slot_addBtn_clicked'
+        QtMocHelpers::SlotData<void()>(8, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -79,10 +86,16 @@ void FriendRequestPage::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
     auto *_t = static_cast<FriendRequestPage *>(_o);
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: _t->slot_get_authResponse((*reinterpret_cast< std::add_pointer_t<std::shared_ptr<AuthResponse>>>(_a[1]))); break;
-        case 1: _t->slot_add_new_contact_request((*reinterpret_cast< std::add_pointer_t<std::shared_ptr<AddContactResponse>>>(_a[1]))); break;
+        case 0: _t->signal_sideContact_showRedPoint(); break;
+        case 1: _t->slot_get_authResponse((*reinterpret_cast< std::add_pointer_t<std::shared_ptr<AuthResponse>>>(_a[1]))); break;
+        case 2: _t->slot_add_new_contact_request((*reinterpret_cast< std::add_pointer_t<std::shared_ptr<AddContactResponse>>>(_a[1]))); break;
+        case 3: _t->slot_addBtn_clicked(); break;
         default: ;
         }
+    }
+    if (_c == QMetaObject::IndexOfMethod) {
+        if (QtMocHelpers::indexOfMethod<void (FriendRequestPage::*)()>(_a, &FriendRequestPage::signal_sideContact_showRedPoint, 0))
+            return;
     }
 }
 
@@ -105,15 +118,21 @@ int FriendRequestPage::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 2)
+        if (_id < 4)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 4;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 2)
+        if (_id < 4)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 2;
+        _id -= 4;
     }
     return _id;
+}
+
+// SIGNAL 0
+void FriendRequestPage::signal_sideContact_showRedPoint()
+{
+    QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
 }
 QT_WARNING_POP

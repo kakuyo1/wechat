@@ -1,5 +1,6 @@
 #include "tcpmanager.h"
 #include "usermanager.h"
+#include <QJsonArray>
 
 TcpManager::TcpManager() :
     _socket(new QTcpSocket(this)),
@@ -149,8 +150,45 @@ void TcpManager::initHandlers()
         UserManager::GetInstance()->setDescription(jsonObj.value("desc").toString());
         UserManager::GetInstance()->setEmail(jsonObj.value("email").toString());
         UserManager::GetInstance()->setGender(jsonObj.value("gender").toInt());
-        // friendlist contactlist
+        //  friendlistRequest
+        if (!jsonObj.contains("friend_request_list") || !jsonObj["friend_request_list"].isArray()) {
+            qDebug() << "Response does not contain 'friend_request_list' or it is not an array";
+            emit signal_login_failed();
+            return;
+        }
 
+        if (jsonObj["friend_request_list"].toArray().isEmpty()) {
+            qDebug() << "No friend requests found in the response";
+        } else {
+            QJsonArray friendRequestArray = jsonObj["friend_request_list"].toArray();
+            std::vector<std::shared_ptr<FriendListItemInfo>> friendRequestList;
+
+            for (const QJsonValue &value : friendRequestArray) {
+                if (!value.isObject()) {
+                    qDebug() << "Friend request item is not an object";
+                    continue;
+                }
+                QJsonObject itemObj = value.toObject();
+                if (!itemObj.contains("from_uid") || !itemObj.contains("status") || !itemObj.contains("from_desc")
+                    || !itemObj.contains("from_icon") || !itemObj.contains("from_name")) {
+                    qDebug() << "Missing field from friend request item";
+                    continue;
+                }
+                int from_uid = itemObj["from_uid"].toInt();
+                int status = itemObj["status"].toInt();
+                QString from_name = itemObj.value("from_name").toString();
+                QString from_desc = itemObj.value("from_desc").toString();
+                QString from_avatarPath = itemObj.value("from_icon").toString();
+                int self_uid = UserManager::GetInstance()->getUid();
+                qDebug() << "Friend request from_uid:" << from_uid;
+                FriendListItemInfo requestInfo(self_uid, from_uid, from_name, from_desc, from_avatarPath, status);
+                auto requestInfoptr = std::make_shared<FriendListItemInfo>(requestInfo);
+                friendRequestList.push_back(requestInfoptr);
+            }
+            UserManager::GetInstance()->intialFriendRequestListAfterLogin(friendRequestList); // 初始化好友申请列表
+        }
+
+        // contactlist
         emit signal_switchto_chatdialog();
     };
 
@@ -226,18 +264,21 @@ void TcpManager::initHandlers()
         int errorCode = jsonObj.value("error").toInt();
         if (errorCode != static_cast<int>(ErrorCode::SUCCESS)) {
             qDebug() << "Add friend failed with error code:" << errorCode;
+            qDebug() << "Response message: " << jsonObj.value("message").toString();
             return;
         }
         // Add friend successful
         int from_uid = jsonObj.value("from_uid").toInt();
         int to_uid = jsonObj.value("to_uid").toInt();
-        std::shared_ptr<FriendListItemInfo> newFriendInfo = std::make_shared<FriendListItemInfo>(from_uid, to_uid);
-        emit signal_add_newFriendListItem(newFriendInfo);
-        qDebug() << "Add friend successful";
+        qDebug() << "Add friend success with error code:" << errorCode;
+        qDebug() << "Response message: " << jsonObj.value("message").toString();
+        qDebug() << "Response from_uid: " << from_uid;
+        qDebug() << "Response to_uid: " << to_uid;
     };
 
     // handle for MESSAGE_CHATSERVER_ADDFRIEND_PUSH = 1009, // 服务端 → 接收方客户端：转发好友申请通知(你作为接受方, 目的是通知你有新的好友申请)
     _handlers[RequestType::MESSAGE_CHATSERVER_ADDFRIEND_PUSH] = [this](RequestType type, int len, QByteArray data) {
+        /* 你会收到服务器返回给你的申请人的信息*/
         Q_UNUSED(len);
         Q_UNUSED(type);
         QJsonDocument doc = QJsonDocument::fromJson(data);
@@ -257,6 +298,7 @@ void TcpManager::initHandlers()
         int errorCode = jsonObj.value("error").toInt();
         if (errorCode != static_cast<int>(ErrorCode::SUCCESS)) {
             qDebug() << "Receive friend request failed with error code:" << errorCode;
+            qDebug() << "Response message: " << jsonObj.value("message").toString();
             return;
         }
         // Receive friend request successful
@@ -268,9 +310,27 @@ void TcpManager::initHandlers()
         QString from_email = jsonObj.value("email").toString();
         QString from_description = jsonObj.value("desc").toString(); // TODO
 
+        // 将好友申请信息添加到UserManager的好友申请列表中
+        int self_uid = UserManager::GetInstance()->getUid();
+        FriendListItemInfo requestInfo(self_uid, from_uid, from_name, from_description, from_icon, 0); // 0: (刚收到)未处理状态
+        std::shared_ptr<FriendListItemInfo> newFriendInfoptr = std::make_shared<FriendListItemInfo>(requestInfo);
+        emit signal_add_newFriendListItem(newFriendInfoptr);
+
         AddContactResponse addContactResponse(from_uid, from_name, from_nickname, from_icon, from_description, from_gender, from_email);
         auto addContactResponsePtr = std::make_shared<AddContactResponse>(addContactResponse);
         emit signal_add_contact_request_success(addContactResponsePtr); // 由FriendRequestPage接收
+
+        // 联系人列表的添加联系人项红点亮起
+        emit signal_addcontactlistitem_showRedPoint();
+        qDebug() << "Receive friend request success with error code:" << errorCode;
+        qDebug() << "Response message: " << jsonObj.value("message").toString();
+        qDebug() << "Response from_uid: " << from_uid;
+        qDebug() << "Response from_gender: " << from_gender;
+        qDebug() << "Response from_name: " << from_name;
+        qDebug() << "Response from_nickname: " << from_nickname;
+        qDebug() << "Response from_icon: " << from_icon;
+        qDebug() << "Response from_email: " << from_email;
+        qDebug() << "Response from_description: " << from_description;
     };
 }
 

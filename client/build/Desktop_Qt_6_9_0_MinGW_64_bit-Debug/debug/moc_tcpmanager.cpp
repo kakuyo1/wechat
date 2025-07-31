@@ -62,6 +62,7 @@ template <> constexpr inline auto TcpManager::qt_create_metaobjectdata<qt_meta_t
         "itemInfo",
         "signal_add_contact_request_success",
         "std::shared_ptr<AddContactResponse>",
+        "signal_addcontactlistitem_showRedPoint",
         "slot_connect_to_chatserver",
         "serverInfo",
         "info",
@@ -103,12 +104,14 @@ template <> constexpr inline auto TcpManager::qt_create_metaobjectdata<qt_meta_t
         QtMocHelpers::SignalData<void(std::shared_ptr<AddContactResponse>)>(22, 2, QMC::AccessPublic, QMetaType::Void, {{
             { 0x80000000 | 23, 13 },
         }}),
+        // Signal 'signal_addcontactlistitem_showRedPoint'
+        QtMocHelpers::SignalData<void()>(24, 2, QMC::AccessPublic, QMetaType::Void),
         // Slot 'slot_connect_to_chatserver'
-        QtMocHelpers::SlotData<void(serverInfo)>(24, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { 0x80000000 | 25, 26 },
+        QtMocHelpers::SlotData<void(serverInfo)>(25, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 26, 27 },
         }}),
         // Slot 'slot_send_data'
-        QtMocHelpers::SlotData<void(RequestType, const QString &)>(27, 2, QMC::AccessPublic, QMetaType::Void, {{
+        QtMocHelpers::SlotData<void(RequestType, const QString &)>(28, 2, QMC::AccessPublic, QMetaType::Void, {{
             { 0x80000000 | 7, 8 }, { QMetaType::QString, 9 },
         }}),
     };
@@ -144,8 +147,9 @@ void TcpManager::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 7: _t->signal_search_user_failed((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
         case 8: _t->signal_add_newFriendListItem((*reinterpret_cast< std::add_pointer_t<std::shared_ptr<FriendListItemInfo>>>(_a[1]))); break;
         case 9: _t->signal_add_contact_request_success((*reinterpret_cast< std::add_pointer_t<std::shared_ptr<AddContactResponse>>>(_a[1]))); break;
-        case 10: _t->slot_connect_to_chatserver((*reinterpret_cast< std::add_pointer_t<serverInfo>>(_a[1]))); break;
-        case 11: _t->slot_send_data((*reinterpret_cast< std::add_pointer_t<RequestType>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2]))); break;
+        case 10: _t->signal_addcontactlistitem_showRedPoint(); break;
+        case 11: _t->slot_connect_to_chatserver((*reinterpret_cast< std::add_pointer_t<serverInfo>>(_a[1]))); break;
+        case 12: _t->slot_send_data((*reinterpret_cast< std::add_pointer_t<RequestType>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2]))); break;
         default: ;
         }
     }
@@ -169,6 +173,8 @@ void TcpManager::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         if (QtMocHelpers::indexOfMethod<void (TcpManager::*)(std::shared_ptr<FriendListItemInfo> )>(_a, &TcpManager::signal_add_newFriendListItem, 8))
             return;
         if (QtMocHelpers::indexOfMethod<void (TcpManager::*)(std::shared_ptr<AddContactResponse> )>(_a, &TcpManager::signal_add_contact_request_success, 9))
+            return;
+        if (QtMocHelpers::indexOfMethod<void (TcpManager::*)()>(_a, &TcpManager::signal_addcontactlistitem_showRedPoint, 10))
             return;
     }
 }
@@ -196,14 +202,14 @@ int TcpManager::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 12)
+        if (_id < 13)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 12;
+        _id -= 13;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 12)
+        if (_id < 13)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 12;
+        _id -= 13;
     }
     return _id;
 }
@@ -266,5 +272,11 @@ void TcpManager::signal_add_newFriendListItem(std::shared_ptr<FriendListItemInfo
 void TcpManager::signal_add_contact_request_success(std::shared_ptr<AddContactResponse> _t1)
 {
     QMetaObject::activate<void>(this, &staticMetaObject, 9, nullptr, _t1);
+}
+
+// SIGNAL 10
+void TcpManager::signal_addcontactlistitem_showRedPoint()
+{
+    QMetaObject::activate(this, &staticMetaObject, 10, nullptr);
 }
 QT_WARNING_POP
