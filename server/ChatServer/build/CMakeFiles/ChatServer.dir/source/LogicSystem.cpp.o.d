@@ -1783,4 +1783,6 @@ CMakeFiles/ChatServer.dir/source/LogicSystem.cpp.o: \
  /home/kakuyo/wechat/server/ChatServer/source/../include/RedisManager.h \
  /usr/include/hiredis/hiredis.h /usr/include/hiredis/read.h \
  /usr/include/hiredis/sds.h /usr/include/hiredis/alloc.h \
- /home/kakuyo/wechat/server/ChatServer/source/../include/UserManager.h
+ /home/kakuyo/wechat/server/ChatServer/source/../include/UserManager.h \
+ /home/kakuyo/wechat/server/ChatServer/source/../include/ChatGrpcClient.h \
+ /home/kakuyo/wechat/server/ChatServer/source/../include/../proto/message.pb.h

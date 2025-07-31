@@ -1,0 +1,41 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/ChatServer2.dir/proto/message.grpc.pb.cc.o"
+  "CMakeFiles/ChatServer2.dir/proto/message.grpc.pb.cc.o.d"
+  "CMakeFiles/ChatServer2.dir/proto/message.pb.cc.o"
+  "CMakeFiles/ChatServer2.dir/proto/message.pb.cc.o.d"
+  "CMakeFiles/ChatServer2.dir/source/AsioIOContextPool.cpp.o"
+  "CMakeFiles/ChatServer2.dir/source/AsioIOContextPool.cpp.o.d"
+  "CMakeFiles/ChatServer2.dir/source/CServer.cpp.o"
+  "CMakeFiles/ChatServer2.dir/source/CServer.cpp.o.d"
+  "CMakeFiles/ChatServer2.dir/source/CSession.cpp.o"
+  "CMakeFiles/ChatServer2.dir/source/CSession.cpp.o.d"
+  "CMakeFiles/ChatServer2.dir/source/ChatGrpcClient.cpp.o"
+  "CMakeFiles/ChatServer2.dir/source/ChatGrpcClient.cpp.o.d"
+  "CMakeFiles/ChatServer2.dir/source/ChatServer.cpp.o"
+  "CMakeFiles/ChatServer2.dir/source/ChatServer.cpp.o.d"
+  "CMakeFiles/ChatServer2.dir/source/ChatServiceImpl.cpp.o"
+  "CMakeFiles/ChatServer2.dir/source/ChatServiceImpl.cpp.o.d"
+  "CMakeFiles/ChatServer2.dir/source/ConfigIniManager.cpp.o"
+  "CMakeFiles/ChatServer2.dir/source/ConfigIniManager.cpp.o.d"
+  "CMakeFiles/ChatServer2.dir/source/LogicSystem.cpp.o"
+  "CMakeFiles/ChatServer2.dir/source/LogicSystem.cpp.o.d"
+  "CMakeFiles/ChatServer2.dir/source/MessageNode.cpp.o"
+  "CMakeFiles/ChatServer2.dir/source/MessageNode.cpp.o.d"
+  "CMakeFiles/ChatServer2.dir/source/MysqlDAO.cpp.o"
+  "CMakeFiles/ChatServer2.dir/source/MysqlDAO.cpp.o.d"
+  "CMakeFiles/ChatServer2.dir/source/MysqlManager.cpp.o"
+  "CMakeFiles/ChatServer2.dir/source/MysqlManager.cpp.o.d"
+  "CMakeFiles/ChatServer2.dir/source/RedisManager.cpp.o"
+  "CMakeFiles/ChatServer2.dir/source/RedisManager.cpp.o.d"
+  "CMakeFiles/ChatServer2.dir/source/StatusGrpcClient.cpp.o"
+  "CMakeFiles/ChatServer2.dir/source/StatusGrpcClient.cpp.o.d"
+  "CMakeFiles/ChatServer2.dir/source/UserManager.cpp.o"
+  "CMakeFiles/ChatServer2.dir/source/UserManager.cpp.o.d"
+  "ChatServer2"
+  "ChatServer2.pdb"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/ChatServer2.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()
