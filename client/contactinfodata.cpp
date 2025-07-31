@@ -1,11 +1,13 @@
 #include "contactinfodata.h"
 
-SearchInfo::SearchInfo(int uid, QString name, QString nickname, QString description, int gender) :
+SearchInfo::SearchInfo(int uid, QString name, QString nickname, QString description, int gender, QString avatarPath, QString emial) :
     _uid(uid),
     _name(name),
     _nickname(nickname),
     _description(description),
-    _gender(gender)
+    _gender(gender),
+    _avatarPath(avatarPath),
+    _emial(emial)
 {
 
 }
@@ -44,9 +46,9 @@ UserInfo::UserInfo(int uid, QString name, QString avatarPath) :
 }
 
 AddContactRequest::AddContactRequest(int fromUid, QString fromName, QString fromNickname,
-                                     QString fromAvatarPath, QString fromDescription, int fromGender) :
-    _fromUid(fromUid), _fromName(fromName), _fromNickname(fromNickname), _fromAvatarPath(fromAvatarPath),
-    _fromDescription(fromDescription), _fromGender(fromGender)
+                                     QString fromAvatarPath, QString fromDescription, int fromGender, QString fromEmail) :
+    _fromUid(fromUid), _fromGender(fromGender), _fromName(fromName), _fromNickname(fromNickname), _fromAvatarPath(fromAvatarPath)
+    , _fromDescription(fromDescription),  _fromEmail(fromEmail)
 {
 
 }
@@ -78,6 +80,19 @@ AuthRequest::AuthRequest(int uid, QString name, QString nickname, QString avatar
 
 AuthResponse::AuthResponse(int peeruid, QString peername, QString peernickname, QString peericon, int peergender) :
     _peeruid(peeruid), _peername(peername), _peernickname(peernickname), _peericon(peericon), _peergender(peergender)
+{
+
+}
+
+AddContactResponse::AddContactResponse(int Uid, QString Name, QString Nickname, QString AvatarPath, QString Description, int Gender, QString Email) :
+    _uid(Uid), _gender(Gender), _name(Name), _nickname(Nickname), _description(Description),  _avatarPath(AvatarPath),
+    _email(Email)
+{
+
+}
+
+FriendListItemInfo::FriendListItemInfo(int self_uid, int request_uid) :
+    _selfUid(self_uid), _requestUid(request_uid)
 {
 
 }

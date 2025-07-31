@@ -17,7 +17,18 @@ enum class RequestType {
     TYPE_RESETPASSWORD = 1003,
     TYPE_LOGIN = 1004,
     TYPE_LOGIN_CHAT = 1005,
-    TYPE_LOGIN_CHAT_SERVER_RESPONSE = 1006
+    TYPE_LOGIN_CHAT_SERVER_RESPONSE = 1006,
+    MESSAGE_CLIENT_ADDFRIEND_REQUEST = 1007, // 客户端 → 服务端：发起好友申请
+    MESSAGE_CHATSERVER_ADDFRIEND_ACK = 1008, // 服务端 → 发起方客户端：处理结果的反馈
+    MESSAGE_CHATSERVER_ADDFRIEND_PUSH = 1009, // 服务端 → 接收方客户端：转发好友申请通知
+    MESSAGE_CLIENT_AUTHFRIEND_REQUEST = 1010, // 客户端 → 服务端：处理好友验证
+    MESSAGE_CHATSERVER_AUTHFRIEND_ACK = 1011, // 服务端 → 发起方客户端：处理验证结果的反馈
+    MESSAGE_CHATSERVER_AUTHFRIEND_PUSH = 1012, // 服务端 → 接收方客户端：转发好友验证处理结果通知
+    MESSAGE_CLIENT_CHATTEXT_REQUEST = 1013, // 客户端 → 服务端：发送聊天文本消息
+    MESSAGE_CHATSERVER_CHATTEXT_ACK = 1014, // 服务端 → 发起方客户端：处理聊天文本消息的反馈
+    MESSAGE_CHATSERVER_CHATTEXT_PUSH = 1015, // 服务端 → 接收方客户端：转发聊天文本消息
+    MESSAGE_CLIENT_SEARCH_USER_REQUEST = 1016, // 客户端 → 服务端：搜索用户
+    MESSAGE_CHATSERVER_SEARCH_USER_RESPONSE = 1017 // 服务端 → 客户端：搜索用户结果
 };
 
 // Error Codes

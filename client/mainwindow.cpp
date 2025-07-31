@@ -23,8 +23,8 @@ MainWindow::MainWindow(QWidget *parent)
     // set windows flags
     loginDialog->setWindowFlags(Qt::CustomizeWindowHint|Qt::FramelessWindowHint);
 
-    // !Test: emit the signal_switchto_chatdialog
-    emit TcpManager::GetInstance()->signal_switchto_chatdialog();
+    // // !Test: emit the signal_switchto_chatdialog
+    // emit TcpManager::GetInstance()->signal_switchto_chatdialog();
 }
 
 MainWindow::~MainWindow()

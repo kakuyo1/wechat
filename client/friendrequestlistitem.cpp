@@ -35,7 +35,7 @@ void FriendRequestListItem::showAddButton(bool show)
     }
 }
 
-void FriendRequestListItem::setInfo(std::shared_ptr<RequestInfo> requestInfo)
+void FriendRequestListItem::setInfo(std::shared_ptr<RequestInfo> requestInfo) // Test
 {
     // 传入的 requestInfo 是由网络Response或其他地方转换的好友请求信息
     _requestInfo = requestInfo;
@@ -50,5 +50,22 @@ void FriendRequestListItem::setInfo(std::shared_ptr<RequestInfo> requestInfo)
         }
         ui->friend_name_label->setText(_requestInfo->_name);
         ui->friend_message_label->setText(_requestInfo->_description);
+    }
+}
+
+void FriendRequestListItem::setInfoByAddContactResponse(std::shared_ptr<AddContactResponse> addContactResponse)
+{
+    _addContactItemInfo = addContactResponse;
+    if (_addContactItemInfo) {
+        QPixmap avatarPixmap(_addContactItemInfo->_avatarPath);
+        if (!avatarPixmap.isNull()) {
+            avatarPixmap = avatarPixmap.scaled(ui->FR_icon_label->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+            ui->FR_icon_label->setScaledContents(true); // 确保图标适应标签大小
+            ui->FR_icon_label->setPixmap(avatarPixmap);
+        } else {
+            ui->FR_icon_label->setText("头像加载失败");
+        }
+        ui->friend_name_label->setText(_addContactItemInfo->_name);
+        ui->friend_message_label->setText(_addContactItemInfo->_description);
     }
 }

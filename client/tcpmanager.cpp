@@ -1,4 +1,5 @@
 #include "tcpmanager.h"
+#include "usermanager.h"
 
 TcpManager::TcpManager() :
     _socket(new QTcpSocket(this)),
@@ -109,6 +110,7 @@ void TcpManager::initHandlers()
         }
         int errorCode = jsonObj.value("error").toInt();
         if (errorCode != static_cast<int>(ErrorCode::SUCCESS)) {
+            qDebug() << "Login authentication failed with error code:" << errorCode;
             if (errorCode == static_cast<int>(ErrorCode::ERROR_INVALID_AUTH_PARAMETERS)) {
                 qDebug() << "Invalid authentication parameters";
                 emit signal_login_failed();
@@ -132,7 +134,143 @@ void TcpManager::initHandlers()
         qDebug() << "Response error: " << errorCode;
         qDebug() << "Response uid: " << jsonObj.value("uid").toInt();
         qDebug() << "Response token: " << jsonObj.value("token").toString();
+        qDebug() << "Response gender:" << jsonObj.value("gender").toInt();
+        qDebug() << "Response name:" << jsonObj.value("name").toString();
+        qDebug() << "Response nickname:" << jsonObj.value("nickname").toString();
+        qDebug() << "Response email:" << jsonObj.value("email").toString();
+        qDebug() << "Response icon:" << jsonObj.value("icon").toString();
+        qDebug() << "Response desc:" << jsonObj.value("desc").toString();
+        qDebug() << "Response password:" << jsonObj.value("password").toString();
+
+        // 将信息录入UserManager
+        UserManager::GetInstance()->setUid(jsonObj.value("uid").toInt());
+        UserManager::GetInstance()->setName(jsonObj.value("name").toString());
+        UserManager::GetInstance()->setIconPath(jsonObj.value("icon").toString());
+        UserManager::GetInstance()->setDescription(jsonObj.value("desc").toString());
+        UserManager::GetInstance()->setEmail(jsonObj.value("email").toString());
+        UserManager::GetInstance()->setGender(jsonObj.value("gender").toInt());
+        // friendlist contactlist
+
         emit signal_switchto_chatdialog();
+    };
+
+    // handle for search user response
+    _handlers[RequestType::MESSAGE_CHATSERVER_SEARCH_USER_RESPONSE] = [this](RequestType type, int len, QByteArray data) {
+        Q_UNUSED(len);
+        Q_UNUSED(type);
+        QJsonDocument doc = QJsonDocument::fromJson(data);
+        if (doc.isNull() || doc.isEmpty()) {
+            qDebug() << "Invalid JSON response from chat server";
+            emit signal_search_user_failed("Invalid JSON response from chat server");
+            return;
+        }
+        if (!doc.isObject()) {
+            qDebug() << "Response is not a JSON object";
+            emit signal_search_user_failed("Response is not a JSON object");
+            return;
+        }
+        QJsonObject jsonObj = doc.object();
+        if (!jsonObj.contains("error") && !jsonObj.contains("message")) {
+            qDebug() << "Response does not contain 'error/message' field";
+            emit signal_search_user_failed("Response does not contain 'error/message' field");
+            return;
+        }
+        int errorCode = jsonObj.value("error").toInt();
+        if (errorCode != static_cast<int>(ErrorCode::SUCCESS)) {
+            qDebug() << "Search user failed with error code:" << errorCode;
+            emit signal_search_user_failed(jsonObj.value("message").toString());
+            return;
+        }
+        // Create a SearchInfo object from the response when Search user successful
+        auto uid = jsonObj.value("uid").toInt();
+        auto name = jsonObj.value("name").toString();
+        auto nickname = jsonObj.value("nickname").toString();
+        auto desc = jsonObj.value("desc").toString();
+        auto gender = jsonObj.value("gender").toInt();
+        auto icon = jsonObj.value("icon").toString();
+        auto email = jsonObj.value("email").toString();
+
+        qDebug() << "TCP return uid: " << uid;
+        qDebug() << "TCP return name: " << name;
+        qDebug() << "TCP return nickname: " << nickname;
+        qDebug() << "TCP return desc: " << desc;
+        qDebug() << "TCP return gender: " << gender;
+        qDebug() << "TCP return icon: " << icon;
+        qDebug() << "TCP return email: " << email;
+
+        SearchInfo searchinfo(uid, name, nickname, desc, gender, icon, email);
+        auto searchInfoptr = std::make_shared<SearchInfo>(searchinfo);
+        emit signal_search_user_success(searchInfoptr);
+        qDebug() << "Search user successful";
+    };
+
+    // handle for MESSAGE_CHATSERVER_ADDFRIEND_ACK = 1008, // 服务端 → 发起方客户端：处理结果的反馈(你作为发起方, 目的是通知你好友申请是否成功)
+    _handlers[RequestType::MESSAGE_CHATSERVER_ADDFRIEND_ACK] = [this](RequestType type, int len, QByteArray data) {
+        /* ack作用是将经过服务器处理的from_uid : to_uid 加入到Usermanager 管理的 FriendRequstList*/
+        Q_UNUSED(len);
+        Q_UNUSED(type);
+        QJsonDocument doc = QJsonDocument::fromJson(data);
+        if (doc.isNull() || doc.isEmpty()) {
+            qDebug() << "Invalid JSON response from chat server";
+            return;
+        }
+        if (!doc.isObject()) {
+            qDebug() << "Response is not a JSON object";
+            return;
+        }
+        QJsonObject jsonObj = doc.object();
+        if (!jsonObj.contains("error") && !jsonObj.contains("message")) {
+            qDebug() << "Response does not contain 'error/message' field";
+            return;
+        }
+        int errorCode = jsonObj.value("error").toInt();
+        if (errorCode != static_cast<int>(ErrorCode::SUCCESS)) {
+            qDebug() << "Add friend failed with error code:" << errorCode;
+            return;
+        }
+        // Add friend successful
+        int from_uid = jsonObj.value("from_uid").toInt();
+        int to_uid = jsonObj.value("to_uid").toInt();
+        std::shared_ptr<FriendListItemInfo> newFriendInfo = std::make_shared<FriendListItemInfo>(from_uid, to_uid);
+        emit signal_add_newFriendListItem(newFriendInfo);
+        qDebug() << "Add friend successful";
+    };
+
+    // handle for MESSAGE_CHATSERVER_ADDFRIEND_PUSH = 1009, // 服务端 → 接收方客户端：转发好友申请通知(你作为接受方, 目的是通知你有新的好友申请)
+    _handlers[RequestType::MESSAGE_CHATSERVER_ADDFRIEND_PUSH] = [this](RequestType type, int len, QByteArray data) {
+        Q_UNUSED(len);
+        Q_UNUSED(type);
+        QJsonDocument doc = QJsonDocument::fromJson(data);
+        if (doc.isNull() || doc.isEmpty()) {
+            qDebug() << "Invalid JSON response from chat server";
+            return;
+        }
+        if (!doc.isObject()) {
+            qDebug() << "Response is not a JSON object";
+            return;
+        }
+        QJsonObject jsonObj = doc.object();
+        if (!jsonObj.contains("error") && !jsonObj.contains("message")) {
+            qDebug() << "Response does not contain 'error/message' field";
+            return;
+        }
+        int errorCode = jsonObj.value("error").toInt();
+        if (errorCode != static_cast<int>(ErrorCode::SUCCESS)) {
+            qDebug() << "Receive friend request failed with error code:" << errorCode;
+            return;
+        }
+        // Receive friend request successful
+        int from_uid = jsonObj.value("uid").toInt();
+        int from_gender = jsonObj.value("gender").toInt();
+        QString from_name = jsonObj.value("name").toString();
+        QString from_nickname = jsonObj.value("nickname").toString();
+        QString from_icon = jsonObj.value("icon").toString();
+        QString from_email = jsonObj.value("email").toString();
+        QString from_description = jsonObj.value("desc").toString(); // TODO
+
+        AddContactResponse addContactResponse(from_uid, from_name, from_nickname, from_icon, from_description, from_gender, from_email);
+        auto addContactResponsePtr = std::make_shared<AddContactResponse>(addContactResponse);
+        emit signal_add_contact_request_success(addContactResponsePtr); // 由FriendRequestPage接收
     };
 }
 

@@ -68,6 +68,9 @@ ChatDialog::ChatDialog(QWidget *parent)
         chatUIMode = ChatUIMode::ContactMode; // 切换到联系人模式
     });
 
+    // 为searchList 设置lineEdit
+    ui->search_list->setLineEdit(ui->search_lineEdit);
+
     // 设置会话列表的加载更多事件
     connect(ui->chat_list, &SessionList::signal_loading_sessionItems, this, &ChatDialog::slot_load_more_sessionitems);
 
@@ -79,11 +82,21 @@ ChatDialog::ChatDialog(QWidget *parent)
         ui->stackedWidget->setCurrentWidget(ui->friend_request_page); // 切换到好友申请页面
     });
 
+    // side_contact_label的红点状态
+    connect(ui->friend_request_page, &FriendRequestPage::signal_sideContact_showRedPoint, this, [this]() {
+        ui->side_contact_label->showRedPoint(true); // 显示红点
+    });
+
     // 安装事件过滤器
     this->installEventFilter(this);
 
     // Test 添加会话列表项
     Test_addSessionItem();
+}
+
+QString ChatDialog::getSearchLineEditText() const
+{
+    return ui->search_lineEdit->text(); // 获取搜索输入框的文本内容
 }
 
 ChatDialog::~ChatDialog()

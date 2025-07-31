@@ -22,12 +22,14 @@ debug/friendrequestlistitem.o
 debug/friendrequestpage.o
 debug/global.o
 debug/httpmanager.o
+debug/loadingdialog.o
 debug/logindialog.o
 debug/main.o
 debug/mainwindow.o
 debug/pictureframe.o
 debug/registerdialog.o
 debug/resetpassworddialog.o
+debug/searchcontactfaileddialog.o
 debug/searchcontactsuccesseddialog.o
 debug/searchlist.o
 debug/sessionlist.o
@@ -66,6 +68,7 @@ debug/moc_mainwindow.o
 debug/moc_pictureframe.o
 debug/moc_registerdialog.o
 debug/moc_resetpassworddialog.o
+debug/moc_searchcontactfaileddialog.o
 debug/moc_searchcontactsuccesseddialog.o
 debug/moc_searchlist.o
 debug/moc_sessionlist.o

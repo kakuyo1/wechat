@@ -42,13 +42,26 @@ template <> constexpr inline auto SearchList::qt_create_metaobjectdata<qt_meta_t
         "slot_itemClicked",
         "",
         "QListWidgetItem*",
-        "item"
+        "item",
+        "slot_search_user_success",
+        "std::shared_ptr<SearchInfo>",
+        "searchInfoPtr",
+        "slot_search_user_failed",
+        "errorMessage"
     };
 
     QtMocHelpers::UintData qt_methods {
         // Slot 'slot_itemClicked'
         QtMocHelpers::SlotData<void(QListWidgetItem *)>(1, 2, QMC::AccessPrivate, QMetaType::Void, {{
             { 0x80000000 | 3, 4 },
+        }}),
+        // Slot 'slot_search_user_success'
+        QtMocHelpers::SlotData<void(std::shared_ptr<SearchInfo>)>(5, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { 0x80000000 | 6, 7 },
+        }}),
+        // Slot 'slot_search_user_failed'
+        QtMocHelpers::SlotData<void(QString)>(8, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { QMetaType::QString, 9 },
         }}),
     };
     QtMocHelpers::UintData qt_properties {
@@ -74,6 +87,8 @@ void SearchList::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
         case 0: _t->slot_itemClicked((*reinterpret_cast< std::add_pointer_t<QListWidgetItem*>>(_a[1]))); break;
+        case 1: _t->slot_search_user_success((*reinterpret_cast< std::add_pointer_t<std::shared_ptr<SearchInfo>>>(_a[1]))); break;
+        case 2: _t->slot_search_user_failed((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
         default: ;
         }
     }
@@ -98,14 +113,14 @@ int SearchList::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 1)
+        if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
+        _id -= 3;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 1)
+        if (_id < 3)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 1;
+        _id -= 3;
     }
     return _id;
 }

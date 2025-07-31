@@ -13,6 +13,8 @@
 #include <QEvent>
 #include <QScrollBar>
 #include <QScrollArea>
+#include <QJsonObject>
+#include <QJsonDocument>
 
 namespace Ui {
 class FriendRequestDialog;
@@ -43,7 +45,7 @@ private:
     QMap<QString, ChosenTag*> _chosenTags; // 存储已选择的标签
     std::vector<QString> _chosenTags_keys; // 存储已选择标签的键值
     QPoint _current_ChosenTag_point; // 当前已选择标签的位置
-    std::shared_ptr<SearchInfo> _contactInfo; // 存储联系人信息
+    std::shared_ptr<SearchInfo> _contactInfo; // 存储联系人信息()
     std::vector<QString> _default_tag_texts; // 默认的一些标签文本,用于测试
     bool _isShowingAllTags = false; // 默认只显示两行
 private:

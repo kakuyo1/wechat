@@ -42,13 +42,19 @@ template <> constexpr inline auto FriendRequestPage::qt_create_metaobjectdata<qt
         "slot_get_authResponse",
         "",
         "std::shared_ptr<AuthResponse>",
-        "response"
+        "response",
+        "slot_add_new_contact_request",
+        "std::shared_ptr<AddContactResponse>"
     };
 
     QtMocHelpers::UintData qt_methods {
         // Slot 'slot_get_authResponse'
         QtMocHelpers::SlotData<void(std::shared_ptr<AuthResponse>)>(1, 2, QMC::AccessPrivate, QMetaType::Void, {{
             { 0x80000000 | 3, 4 },
+        }}),
+        // Slot 'slot_add_new_contact_request'
+        QtMocHelpers::SlotData<void(std::shared_ptr<AddContactResponse>)>(5, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { 0x80000000 | 6, 4 },
         }}),
     };
     QtMocHelpers::UintData qt_properties {
@@ -74,6 +80,7 @@ void FriendRequestPage::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
         case 0: _t->slot_get_authResponse((*reinterpret_cast< std::add_pointer_t<std::shared_ptr<AuthResponse>>>(_a[1]))); break;
+        case 1: _t->slot_add_new_contact_request((*reinterpret_cast< std::add_pointer_t<std::shared_ptr<AddContactResponse>>>(_a[1]))); break;
         default: ;
         }
     }
@@ -98,14 +105,14 @@ int FriendRequestPage::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 1)
+        if (_id < 2)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
+        _id -= 2;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 1)
+        if (_id < 2)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 1;
+        _id -= 2;
     }
     return _id;
 }

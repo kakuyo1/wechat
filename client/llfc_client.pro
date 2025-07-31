@@ -33,12 +33,14 @@ SOURCES += \
     friendrequestpage.cpp \
     global.cpp \
     httpmanager.cpp \
+    loadingdialog.cpp \
     logindialog.cpp \
     main.cpp \
     mainwindow.cpp \
     pictureframe.cpp \
     registerdialog.cpp \
     resetpassworddialog.cpp \
+    searchcontactfaileddialog.cpp \
     searchcontactsuccesseddialog.cpp \
     searchlist.cpp \
     sessionlist.cpp \
@@ -75,11 +77,13 @@ HEADERS += \
     friendrequestpage.h \
     global.h \
     httpmanager.h \
+    loadingdialog.h \
     logindialog.h \
     mainwindow.h \
     pictureframe.h \
     registerdialog.h \
     resetpassworddialog.h \
+    searchcontactfaileddialog.h \
     searchcontactsuccesseddialog.h \
     searchlist.h \
     sessionlist.h \
@@ -107,6 +111,7 @@ FORMS += \
     mainwindow.ui \
     registerdialog.ui \
     resetpassworddialog.ui \
+    searchcontactfaileddialog.ui \
     searchcontactsuccesseddialog.ui \
     sessionlistitem.ui
 

@@ -68,6 +68,10 @@ LoginDialog::LoginDialog(QWidget *parent)
     ui->forget_label->setStyleSheet("QLabel { color: black;}" "QLabel:hover { color: rgb(42, 112, 241); }");
 
     initHttpHandlers();
+
+    // Test intial email/password lineEdit with example data
+    ui->email_lineEdit->setText("1919340260@qq.com");
+    ui->password_lineEdit->setText("17379922448Ab");
 }
 
 LoginDialog::~LoginDialog()

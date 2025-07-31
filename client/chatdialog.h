@@ -22,6 +22,7 @@ class ChatDialog : public QDialog
 
 public:
     explicit ChatDialog(QWidget *parent = nullptr);
+    QString getSearchLineEditText() const;
     ~ChatDialog();
 private:
     void showSearchList(bool show);

@@ -1,6 +1,9 @@
 #include "friendrequestdialog.h"
 #include "ui_friendrequestdialog.h"
 #include "customized_button.h"
+#include "usermanager.h"
+#include <QMessageBox>
+#include "tcpmanager.h"
 
 FriendRequestDialog::FriendRequestDialog(QWidget *parent)
     : QDialog(parent)
@@ -17,6 +20,10 @@ FriendRequestDialog::FriendRequestDialog(QWidget *parent)
     ui->request_lineEdit->setPlaceholderText("添加好友名称");
     ui->backup_lineEdit->setPlaceholderText("添加好友备注");
     ui->tags_lineEdit->setPlaceholderText("搜索、添加标签");
+
+    // 设置好友名称lineEdit不可修改
+    ui->request_lineEdit->setReadOnly(true);
+
     // 隐藏搜索图标
     ui->request_lineEdit->removeAction(ui->request_lineEdit->getSearchAction());
     ui->backup_lineEdit->removeAction(ui->backup_lineEdit->getSearchAction());
@@ -62,13 +69,11 @@ FriendRequestDialog::~FriendRequestDialog()
 
 void FriendRequestDialog::setContactInfo(std::shared_ptr<SearchInfo> contactInfo) // TODO
 {
-    //后期搜索用户功能用户数据会从服务器传回来
-    _contactInfo = contactInfo; // 设置联系人信息
+    //搜索用户功能用户数据会从服务器传回来
+    _contactInfo = contactInfo; // 设置联系人信息(就是你要加谁为好友)
     if (_contactInfo) {
-        // TODE网络部分待补充
-        // 临时
         ui->request_lineEdit->setText(_contactInfo->getName()); // 这是你搜索到的好友名称
-        ui->backup_lineEdit->setText(_contactInfo->getNickname()); // 这是你给好友设置的备注
+        ui->backup_lineEdit->setText(_contactInfo->getNickname()); // 这是你给好友设置的备注(直接用昵称占位)
     }
 }
 
@@ -446,8 +451,27 @@ void FriendRequestDialog::slot_tipLabel_clicked()
 
 void FriendRequestDialog::slot_confirmBtn_clicked()
 {
-    // TODO 网络部分待补充
     qDebug() <<"confirmBtn clicked";
+    int to_uid = _contactInfo->getUid(); // 添加好友的UID
+    int from_uid = UserManager::GetInstance()->getUid(); // 当前用户的UID
+    QString nickname = ui->backup_lineEdit->text().trimmed(); // 你给好友的备注
+
+    if (nickname.isEmpty()) {
+        QMessageBox::warning(this, "提示", "请输入好友备注");
+    }
+
+    QJsonObject requestData;
+    requestData["to_uid"] = to_uid;
+    requestData["from_uid"] = from_uid;
+    requestData["nickname"] = nickname;
+
+    QJsonDocument jsonDoc(requestData);
+    QString jsonString = jsonDoc.toJson(QJsonDocument::Compact);
+
+    emit TcpManager::GetInstance()->signal_send_data(RequestType::MESSAGE_CLIENT_ADDFRIEND_REQUEST, jsonString);
+
+    this->close(); // 关闭对话框
+    deleteLater(); // 删除对话框对象
 }
 
 void FriendRequestDialog::slot_cancelBtn_clicked()
