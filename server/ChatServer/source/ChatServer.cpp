@@ -5,7 +5,28 @@
 #include <thread>
 #include "../include/RedisManager.h"
 
+/*
+    工具函数：杀死占用端口的进程（仅限 Linux）
+    当你运行程序时，如果目标端口（如 8090）已被占用，bind() 调用就会失败。
+    所以你必须在调用服务器初始化绑定端口之前清除掉占用端口的旧进程。
+*/
+void KillPortOccupier(int port) {
+    std::string cmd = "fuser -k " + std::to_string(port) + "/tcp";
+    int result = std::system(cmd.c_str());
+    if (result == 0) {
+        spdlog::warn("Killed process using port {}", port);
+    } else {
+        spdlog::info("No process was using port {}", port);
+    }
+}
+
 int main() {
+    // 0.Initialize the configuration manager
+    auto& config = ConfigIniManager::Instance();
+    // 0. Kill the port occupier
+    KillPortOccupier(std::stoi(config["SelfServer"]["RPCPort"]));
+    KillPortOccupier(std::stoi(config["SelfServer"]["Port"]));
+
     try {
         // 0. Set the terminate handler to log unhandled exceptions
         // This will ensure that if an unhandled exception occurs, it will be logged before the program terminates.
@@ -16,8 +37,6 @@ int main() {
         });
         // 0.设置日志等级，显示 debug 及以上
         spdlog::set_level(spdlog::level::debug);
-        // 0.Initialize the configuration manager
-        auto& config = ConfigIniManager::Instance();
         std::string server_name = config["SelfServer"]["Name"];
         // 0.set the SERVER_LOGIN_COUNT to zero in redis
         auto redis = RedisManager::GetInstance();

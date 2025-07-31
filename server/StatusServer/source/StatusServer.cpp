@@ -4,11 +4,26 @@
 #include <thread>
 #include <memory>
 #include <spdlog/spdlog.h>
+#include <cstdlib>
+#include <cstdio>
+
+void KillPortOccupier(int port) {
+    std::string cmd = "fuser -k " + std::to_string(port) + "/tcp";
+    int result = std::system(cmd.c_str());
+    if (result == 0) {
+        spdlog::warn("Killed process using port {}", port);
+    } else {
+        spdlog::info("No process was using port {}", port);
+    }
+}
 
 void RunServer() {
+    // 0.Initialize the configuration manager
+    auto& config = ConfigIniManager::Instance();
+    // 0. Kill the port occupier
+    KillPortOccupier(std::stoi(config["StatusServer"]["Port"]));
     // 设置日志等级debug
     spdlog::set_level(spdlog::level::debug); // Set log level to debug
-    auto& config = ConfigIniManager::Instance();
     auto section = config["StatusServer"];
     auto host = section["Host"];
     auto port = section["Port"];

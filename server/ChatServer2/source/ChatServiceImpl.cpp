@@ -3,6 +3,7 @@
 
 Status ChatServiceImpl::NotifyAddFriend(::grpc::ServerContext* context, /* if you sent a addFriend request, now we are in a diffent chatServer*/
     const AddFriendRequest* request, AddFriendResponse* response) {
+        spdlog::debug("[ChatServiceImpl] Enter NotifyAddFriend");
         // check if the user(friendRequest receiver) online(temporary by check if uid:csession exists)
         int to_uid = request->to_uid();
         std::shared_ptr<CSession> session = UserManager::GetInstance()->getSessionByUid(to_uid);

@@ -9,7 +9,7 @@
 #include <cassert>
 #include "../include/RedisManager.h"
 #include <spdlog/spdlog.h>
-
+#include <cstdlib>
 // void TestRedis() {
 // 	//连接redis 需要启动才可以进行连接
 // //redis默认监听端口为6379 可以再配置文件中修改
@@ -133,10 +133,23 @@
 //     RedisManager::GetInstance()->Close();
 // }
 
+void KillPortOccupier(int port) {
+    std::string cmd = "fuser -k " + std::to_string(port) + "/tcp";
+    int result = std::system(cmd.c_str());
+    if (result == 0) {
+        spdlog::warn("Killed process using port {}", port);
+    } else {
+        spdlog::info("No process was using port {}", port);
+    }
+}
+
 int main() {
+    // 0.Initialize the configuration manager
+    auto& config_manager = ConfigIniManager::Instance();
+    // 0. Kill the port occupier
+    KillPortOccupier(std::stoi(config_manager["GateServer"]["Port"]));
     try{
         // Load configuration
-        auto& config_manager = ConfigIniManager::Instance();
         std::string port_str = config_manager["GateServer"]["Port"]; //调用的是const std::string& operator[](const std::string& key) const;
         unsigned short port = static_cast<unsigned short>(std::atoi(port_str.c_str()));
 

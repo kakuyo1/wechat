@@ -6,6 +6,7 @@ ChatStubPool::ChatStubPool(size_t pool_size, const std::string& RPCserver_addres
     _pool_size(pool_size)
 {
     // Initialize the gRPC stubs
+    spdlog::debug("[ChatGrpcClient2] Creating stubs for chatserver2 at {}:{}", RPCserver_address, RPCserver_port);
     for (size_t i = 0; i < pool_size; ++i) {
         auto channel = grpc::CreateChannel(RPCserver_address + ':' + RPCserver_port, grpc::InsecureChannelCredentials());
         _stubs.push(ChatService::NewStub(channel));
@@ -84,6 +85,7 @@ AddFriendResponse ChatGrpcClient::NotifyAddFriend(const std::string &peer_server
 
     grpc::ClientContext context;
     Status status = stub->NotifyAddFriend(&context, request, &response);
+    spdlog::debug("[ChatGrpcClient] after NotifyAddFriend");
     if (!status.ok()) {
         spdlog::error("gRPC call failed: {}", status.error_message());
         return response;
@@ -148,6 +150,8 @@ ChatGrpcClient::ChatGrpcClient()
             continue;
         }
         _stubPools[single_server] = std::make_unique<ChatStubPool>(5,
-            config[single_server]["Host"], config[single_server]["Port"]);
+            config[single_server]["Host"], config[single_server]["RPCPort"]);
+        spdlog::info("[ChatGrpcClient2] Created stub pool for chatserver2: {} at {}:{}",
+        single_server, config[single_server]["Host"], config[single_server]["RPCPort"]);
     }
 }

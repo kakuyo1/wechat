@@ -21,7 +21,7 @@ StatusServiceImpl::StatusServiceImpl()
                 spdlog::error("Chat server {} is missing host or port configuration", name);
                 continue;
             }
-            ChatServer chat_server{host, port, name, 0};
+            ChatServer chat_server{host, port, name};
             chat_servers_[name] = chat_server;
             spdlog::info("Chat server {} initialized with host: {}, port: {}", name, host, port);
         }
@@ -42,8 +42,6 @@ Status StatusServiceImpl::GetChatServer(ServerContext *context, const GetChatSer
         response->set_port(chatserver.port);
         response->set_error(static_cast<int>(ErrorCodes::SUCCESS));
         insertToken(request->uid(), response->token());
-        spdlog::info("GetChatServer for user: uid: {}",
-                        request->uid());
         return Status::OK;
     } catch (const std::exception& ex) {
         spdlog::error("GetChatServer failed: {}", ex.what());
@@ -57,8 +55,6 @@ Status StatusServiceImpl::GetChatServer(ServerContext *context, const GetChatSer
 Status StatusServiceImpl::Login(ServerContext *context, const chat_message::LoginRequest *request, chat_message::LoginResponse *response)
 {
     try {
-        spdlog::debug("Enter Login method with request: UID: {}, Token: {}",
-                        request->uid(), request->token());
         auto uid = request->uid();
         auto origin_token = request->token();
         if (uid <= 0 || origin_token.empty()) {
@@ -100,38 +96,36 @@ ChatServer &StatusServiceImpl::getChatServer()
         throw std::runtime_error("No available chat servers");
     }
 
-    // Find the chat server with the minimum connection_count by get LOGIN_COUNT from Redis
-    ChatServer &min_chat_server = chat_servers_.begin()->second;
-    std::string login_count_str = RedisManager::GetInstance()->HGet(SERVER_LOGIN_COUNT, min_chat_server.name);
-    spdlog::debug("Login count for minserver {}: {}", min_chat_server.name, login_count_str); // !ChatServer2 has not been added to Redis yet, thus this place causes a warning
-    if (!login_count_str.empty()) {
-        min_chat_server.connection_count = std::stoi(login_count_str);
-    } else {
-        min_chat_server.connection_count = INT_MAX; // Default to INT_MAX if not found in Redis
+    // 使用指针来跟踪最小负载服务器
+    ChatServer* min_chat_server = nullptr;
+    int min_count = INT_MAX;
+
+    for (auto &pair : chat_servers_) {
+        auto &server = pair.second;
+        std::string login_count_str = RedisManager::GetInstance()->HGet(SERVER_LOGIN_COUNT, server.name);
+        int login_count = 0;
+        try {
+            login_count = login_count_str.empty() ? 0 : std::stoi(login_count_str);
+        } catch (const std::exception& ex) {
+            spdlog::warn("Invalid login count for server {}: {}", server.name, ex.what());
+            login_count = INT_MAX;  // 不考虑这个服务器
+        }
+        spdlog::debug("Checking server {} with count {}", server.name, login_count);
+
+        if (login_count < min_count) {
+            min_count = login_count;
+            min_chat_server = &server;
+        }
     }
 
-    // iterate the chatserver map to find the chatserver which has the minimum connection_count
-    for (auto iter = chat_servers_.begin(); iter != chat_servers_.end(); ++iter) {
-        // if self skip
-        if (iter->second.name == min_chat_server.name) {
-            continue;
-        }
-        // get the login count from Redis
-        std::string login_count_str = RedisManager::GetInstance()->HGet(SERVER_LOGIN_COUNT, iter->second.name);
-        spdlog::debug("Login count for iter server {}: {}", iter->second.name, login_count_str);
-        if (!login_count_str.empty()) {
-            iter->second.connection_count = std::stoi(login_count_str);
-        } else {
-            iter->second.connection_count = INT_MAX; // Default to INT_MAX if not found in Redis
-        }
-
-        if (iter->second.connection_count < min_chat_server.connection_count) {
-            min_chat_server = iter->second;
-        }
+    if (!min_chat_server) {
+        throw std::runtime_error("No available chat servers");
     }
-    spdlog::info("Selected chat server: {} with host: {}, port: {}, connection count: {}",
-                    min_chat_server.name, min_chat_server.host, min_chat_server.port, min_chat_server.connection_count);
-    return min_chat_server;
+    spdlog::info("Selected chat server: {} with host: {}, port: {}",
+                min_chat_server->name, min_chat_server->host,
+                min_chat_server->port);
+
+    return *min_chat_server;
 }
 
 std::string StatusServiceImpl::generateTokenByUUID()

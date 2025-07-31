@@ -3,10 +3,15 @@
 #include "../include/AsioIOContextPool.h"
 CServer::CServer(net::io_context& ioc, unsigned short port) :
     _ioc(ioc),
-    _acceptor(ioc, tcp::endpoint(tcp::v4(), port)),
+    _acceptor(ioc),
+    // _acceptor(ioc, tcp::endpoint(tcp::v4(), port)),
     _socket(ioc)
 {
-
+    boost::asio::ip::tcp::endpoint endpoint(tcp::v4(), port);
+    _acceptor.open(endpoint.protocol());  // 显式打开
+    _acceptor.set_option(boost::asio::ip::tcp::acceptor::reuse_address(true));  // 设置端口复用
+    _acceptor.bind(endpoint);  // 手动绑定
+    _acceptor.listen();  // 开始监听
 }
 
 void CServer::Start() {

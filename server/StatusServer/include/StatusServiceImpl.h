@@ -21,7 +21,6 @@ struct ChatServer {
     std::string host;
     std::string port;
     std::string name;
-    int connection_count; // 连接数
 };
 
 using grpc::Status;
@@ -42,7 +41,6 @@ private:
     void insertToken(int uid, const std::string& token);
 private:
     std::unordered_map<std::string, ChatServer> chat_servers_;
-    // std::unordered_map<int, std::string> _tokens;
     std::mutex _server_mtx;
     std::mutex _token_mtx;
 };
