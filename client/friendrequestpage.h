@@ -33,9 +33,9 @@ private:
     std::unordered_map<int, FriendRequestListItem*> _requestItems;
     std::shared_ptr<FriendAuthDialog> authDialog;
 private slots:
-    void slot_get_authResponse(std::shared_ptr<AuthResponse> response);
     void slot_add_new_contact_request(std::shared_ptr<AddContactResponse> response);
     void slot_addBtn_clicked(); // 同意添加好友，弹出验证页面
+    void slot_afterACK_handleTheRequestItem(std::shared_ptr<AuthResponse> response); // 处理好友认证请求的ACK响应
 signals:
     void signal_sideContact_showRedPoint();
 };

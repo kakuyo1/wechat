@@ -60,12 +60,14 @@ signals:
     void signal_switchto_chatdialog();
     void signal_send_data(RequestType type, const QString& jsondata);
     void signal_login_failed_online_already();
-    void signal_get_authResponse(std::shared_ptr<AuthResponse> response);
     void signal_search_user_success(std::shared_ptr<SearchInfo> contactInfo);
     void signal_search_user_failed(QString errorMessage);
     void signal_add_newFriendListItem(std::shared_ptr<FriendListItemInfo> itemInfo); // 加入到usermanager管理的好友申请列表中
     void signal_add_contact_request_success(std::shared_ptr<AddContactResponse> response); // 交给FriendRequestPage处理，显示新的FriendRequestListItem
     void signal_addcontactlistitem_showRedPoint(); // 添加联系人列表项红点显示信号
+    void signal_getACK_auth_friend_request_success_handlerequestItem(std::shared_ptr<AuthResponse> response); // 收到ACK好友认证请求成功
+    void signal_getACK_auth_friend_request_success_addNewItem(std::shared_ptr<AuthResponse> response); // 收到ACK好友认证请求成功
+    void signal_getPush_auth_friend_request_success(std::shared_ptr<AuthResponse> response); // 收到PUSH好友认证请求成功
 };
 
 #endif // TCPMANAGER_H

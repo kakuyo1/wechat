@@ -16,7 +16,13 @@ int UserManager::getUid() const
     return _uid;
 }
 
-void UserManager::addItemToContactList(std::shared_ptr<SearchInfo> contactInfo)
+void UserManager::intialContactListAfterLogin(std::vector<std::shared_ptr<AuthResponse> > contactInfoList)
+{
+    _contactList.clear(); // 清空之前的联系人列表
+    _contactList = contactInfoList; // 初始化联系人列表
+}
+
+void UserManager::addItemToContactList(std::shared_ptr<AuthResponse> contactInfo)
 {
     if (contactInfo) {
         // 检查是否已经存在该联系人
@@ -29,7 +35,7 @@ void UserManager::addItemToContactList(std::shared_ptr<SearchInfo> contactInfo)
     }
 }
 
-std::shared_ptr<SearchInfo> UserManager::getContactInfo(int uid) const
+std::shared_ptr<AuthResponse> UserManager::getContactInfo(int uid) const
 {
     for (const auto& contact : _contactList) {
         if (contact->getUid() == uid) {

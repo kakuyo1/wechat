@@ -9,14 +9,14 @@ FriendRequestPage::FriendRequestPage(QWidget *parent)
 {
     ui->setupUi(this);
 
-    // 连接tcpmanager信号
-    connect(TcpManager::GetInstance().get(), &TcpManager::signal_get_authResponse, this, &FriendRequestPage::slot_get_authResponse);
-
     // 往申请列表内添加新的好友申请信号
     connect(TcpManager::GetInstance().get(), &TcpManager::signal_add_contact_request_success, this, &FriendRequestPage::slot_add_new_contact_request);
 
     // 测试
     // Test_LoadFakeRequestData();
+
+    // 认证好友成功后，处理listlitem，如隐藏"添加好友"按钮等
+    connect(TcpManager::GetInstance().get(), &TcpManager::signal_getACK_auth_friend_request_success_handlerequestItem, this, &FriendRequestPage::slot_afterACK_handleTheRequestItem);
 
     // 初始化好友请求列表
     intializeRequestList();
@@ -93,19 +93,6 @@ void FriendRequestPage::intializeRequestList()
     }
 }
 
-void FriendRequestPage::slot_get_authResponse(std::shared_ptr<AuthResponse> response)
-{
-    qDebug() << "收到服务器好友认证响应 ";
-    int uid = response->_peeruid;
-    auto it = _requestItems.find(uid);
-    if (it == _requestItems.end()) {
-        qDebug() << "未找到对应的好友请求项";
-        return;
-    }
-    FriendRequestListItem* item = it->second;
-    item->showAddButton(false); // 隐藏添加按钮
-}
-
 void FriendRequestPage::slot_add_new_contact_request(std::shared_ptr<AddContactResponse> response)
 {
     qDebug() << "收到新的好友请求: " << response->_name;
@@ -135,8 +122,24 @@ void FriendRequestPage::slot_add_new_contact_request(std::shared_ptr<AddContactR
 void FriendRequestPage::slot_addBtn_clicked()
 {
     qDebug() << "'添加好友'按钮被点击";
+    FriendRequestListItem* item = qobject_cast<FriendRequestListItem*>(sender());
+    authDialog->setToUid(item->getRequestUid()); // 设置验证对象 UID
     authDialog->setModal(true); // 设置为模态对话框
     authDialog->setWindowTitle("添加好友验证");
     authDialog->show(); // 显示验证对话框
     qDebug() << "弹出添加好友验证对话框";
+}
+
+void FriendRequestPage::slot_afterACK_handleTheRequestItem(std::shared_ptr<AuthResponse> response)
+{
+    // 找到对应的请求项并处理(隐藏添加按钮等)
+    int requestUid = response->getUid();
+    auto it = _requestItems.find(requestUid);
+    if (it != _requestItems.end()) {
+        FriendRequestListItem* item = it->second;
+        item->showAddButton(false); // 隐藏添加按钮
+        qDebug() << "处理好友认证请求的ACK响应，隐藏添加按钮";
+    } else {
+        qDebug() << "未找到对应的好友请求项，无法处理ACK响应";
+    }
 }

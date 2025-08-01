@@ -19,30 +19,34 @@ ContactList::ContactList(QWidget *parent) :
     QListWidgetItem* groupListItem = new QListWidgetItem(this);
     groupListItem->setSizeHint(newFriendGroupItem->sizeHint());
     groupListItem->setFlags(groupListItem->flags() & ~Qt::ItemIsSelectable); // 设置不可选中
-    this->addItem(groupListItem);
+    this->insertItem(0, groupListItem);
     this->setItemWidget(groupListItem, newFriendGroupItem);
 
     // 设置添加联系人项
     _addContactItem->setObjectName("add_contact_item");
-    _addContactItem->setInfo(0, "新的朋友", ":/images/add_friend_pressed.png");
+    _addContactItem->setAddContactItemInfoByLocal("新的朋友", ":/images/add_friend_pressed.png");
     _addContactItem->setListItem(ListItemType::AddContactItem);
     QListWidgetItem* addContactListItem = new QListWidgetItem(this);
     addContactListItem->setSizeHint(_addContactItem->sizeHint());
-    this->addItem(addContactListItem);
+    this->insertItem(1, addContactListItem);
     this->setItemWidget(addContactListItem, _addContactItem);
 
     // 设置组"联系人"项
-    auto * contactGroupItem = new ContactGroupTipItem(this);
+    auto contactGroupItem = new ContactGroupTipItem(this);
     contactGroupItem->setObjectName("contact_group_item");
     contactGroupItem->setGroupTipText("联系人");
-    QListWidgetItem* contactGroupListItem = new QListWidgetItem(this);
+    contactGroupListItem = new QListWidgetItem(this);
     contactGroupListItem->setSizeHint(contactGroupItem->sizeHint());
     contactGroupListItem->setFlags(contactGroupListItem->flags() & ~Qt::ItemIsSelectable); // 设置不可选中
-    this->addItem(contactGroupListItem);
+    this->insertItem(2, contactGroupListItem);
     this->setItemWidget(contactGroupListItem, contactGroupItem);
 
     // 连接信号槽
     connect(this, &QListWidget::itemClicked, this, &ContactList::slot_contactItem_clicked);
+
+    // 处理添加新联系人项的ACK响应
+    connect(TcpManager::GetInstance().get(), &TcpManager::signal_getACK_auth_friend_request_success_addNewItem, this, &ContactList::slot_AfterACK_addNewContactItem);
+    connect(TcpManager::GetInstance().get(), &TcpManager::signal_getPush_auth_friend_request_success, this, &ContactList::slot_AfterACK_addNewContactItem);
 
     // 添加联系人项红点亮起
     connect(TcpManager::GetInstance().get(), &TcpManager::signal_addcontactlistitem_showRedPoint, this, [this]() {
@@ -50,7 +54,7 @@ ContactList::ContactList(QWidget *parent) :
     });
 
     // 初始化测试添加联系人
-    Test_AddContacts();
+    // Test_AddContacts();
 }
 
 void ContactList::showAddContactRedPoint(bool show)
@@ -132,4 +136,33 @@ void ContactList::slot_contactItem_clicked(QListWidgetItem* item)
         qDebug() << "点击了分组提示项";
         return;
     }
+}
+
+void ContactList::slot_AfterACK_addNewContactItem(std::shared_ptr<AuthResponse> response)
+{
+    // 添加新的联系人项，位置为 "新的朋友" contactGroupItem分组下方，
+    // 也就是临时放在所有联系人的第一位，下次登陆重新加载则会到最下方
+    qDebug() << "处理添加新联系人项的ACK响应";
+    if (!response) {
+        qDebug() << "响应为空，无法添加新联系人项";
+        return;
+    }
+    int uid = response->getUid(); // 新联系人UID
+    QString name = response->getName(); // 新联系人姓名
+    QString avatarUrl = response->getIcon(); // 新联系人头像URL
+    // 创建新的联系人项
+    ContactListItem* newContactItem = new ContactListItem(this);
+    newContactItem->setInfo(uid, name, avatarUrl);
+    newContactItem->setListItem(ListItemType::ContactItem); // 设置为联系人项类型
+    // 创建新的列表项
+    QListWidgetItem* newListItem = new QListWidgetItem(); // ❌不要传 this！因为立刻就把 newListItem 添加到了QListWidget 的末尾，相当于执行了 addItem()。
+    //你后续再调用 insertItem(groupIndex + 1, newListItem) 是无效的 —— Qt 不会把已存在的 item 从末尾“搬到中间”。
+    newListItem->setSizeHint(newContactItem->sizeHint()); // 设置列表项的大小提示
+    // 获取contactGroupItem的索引
+    int groupIndex = this->row(contactGroupListItem);
+
+    // 在contactGroupItem后插入新联系人
+    this->insertItem(groupIndex + 1, newListItem);
+    this->setItemWidget(newListItem, newContactItem);
+    qDebug() << "添加新的联系人项成功，插入位置:" << groupIndex + 1 << ", 姓名:" << name;
 }

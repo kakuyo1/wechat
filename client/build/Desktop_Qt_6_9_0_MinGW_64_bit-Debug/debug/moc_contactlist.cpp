@@ -45,7 +45,9 @@ template <> constexpr inline auto ContactList::qt_create_metaobjectdata<qt_meta_
         "signal_switchTo_friendRequestPage",
         "slot_contactItem_clicked",
         "QListWidgetItem*",
-        "item"
+        "item",
+        "slot_AfterACK_addNewContactItem",
+        "std::shared_ptr<AuthResponse>"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -58,6 +60,10 @@ template <> constexpr inline auto ContactList::qt_create_metaobjectdata<qt_meta_
         // Slot 'slot_contactItem_clicked'
         QtMocHelpers::SlotData<void(QListWidgetItem *)>(5, 2, QMC::AccessPrivate, QMetaType::Void, {{
             { 0x80000000 | 6, 7 },
+        }}),
+        // Slot 'slot_AfterACK_addNewContactItem'
+        QtMocHelpers::SlotData<void(std::shared_ptr<AuthResponse>)>(8, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { 0x80000000 | 9, 2 },
         }}),
     };
     QtMocHelpers::UintData qt_properties {
@@ -86,6 +92,7 @@ void ContactList::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 1: _t->signal_switchTo_contactInfoPage(); break;
         case 2: _t->signal_switchTo_friendRequestPage(); break;
         case 3: _t->slot_contactItem_clicked((*reinterpret_cast< std::add_pointer_t<QListWidgetItem*>>(_a[1]))); break;
+        case 4: _t->slot_AfterACK_addNewContactItem((*reinterpret_cast< std::add_pointer_t<std::shared_ptr<AuthResponse>>>(_a[1]))); break;
         default: ;
         }
     }
@@ -118,14 +125,14 @@ int ContactList::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 5;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 5)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 4;
+        _id -= 5;
     }
     return _id;
 }

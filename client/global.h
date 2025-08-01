@@ -53,7 +53,10 @@ enum class ErrorCode {
     ERROR_USER_OFFLINE = 17,
     ERROR_SEARCH_FAILED_BY_UID = 18,
     ERROR_SEARCH_FAILED_BY_NAME = 19,
-    ERROR_NO_FRIENDREQUEST_RECORD = 20
+    ERROR_NO_FRIENDREQUEST_RECORD = 20,
+    ERROR_NO_FRIEND_RECORD = 21,
+    ERROR_FRIEND_REQUEST_EXISTS = 22, // New error code for existing friend request
+    ERROR_ALREADY_FRIENDS = 23 // New error code for already friends
 };
 
 // Modules

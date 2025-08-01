@@ -100,15 +100,24 @@ public:
 
 class AuthResponse {
 public:
-    AuthResponse(int peeruid, QString peername, QString peernickname,
-                 QString peericon, int peergender);
+    AuthResponse(int peeruid, int peergender, QString peername, QString peernickname,
+                 QString peericon, QString peeremail, QString peerdescription);
     ~AuthResponse() = default;
+    int getUid() const { return _peeruid; } // 获取对方的用户ID
+    QString getName() const { return _peername; } // 获取对方的用户名
+    QString getNickname() const { return _peernickname; } // 获取对方的昵称
+    QString getIcon() const { return _peericon; } // 获取对方的头像路径
+    int getGender() const { return _peergender; } // 获取对方的性别
+    QString getEmail() const { return _peeremail; } // 获取对方的邮箱地址
+    QString getDescription() const { return _peerdescription; } // 获取对方的描述信息
 public:
     int _peeruid;
+    int _peergender;
     QString _peername;
     QString _peernickname;
     QString _peericon;
-    int _peergender;
+    QString _peeremail; // 邮箱地址
+    QString _peerdescription; // 描述
 };
 
 

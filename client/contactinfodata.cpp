@@ -54,19 +54,19 @@ AddContactRequest::AddContactRequest(int fromUid, QString fromName, QString from
 }
 
 RequestInfo::RequestInfo(int uid, QString name, QString nickname, QString avatarPath, QString description, int gender, int status) :
-    _uid(uid), _name(name), _nickname(nickname), _description(description), _avatarPath(avatarPath),
-     _gender(gender), _status(status)
+    _uid(uid), _gender(gender), _name(name), _nickname(nickname), _description(description), _avatarPath(avatarPath)
+     , _status(status)
 {
 
 }
 
 RequestInfo::RequestInfo(std::shared_ptr<AddContactRequest> addContactRequest) :
     _uid(addContactRequest->_fromUid),
+    _gender(addContactRequest->_fromGender),
     _name(addContactRequest->_fromName),
     _nickname(addContactRequest->_fromNickname),
     _description(addContactRequest->_fromDescription),
     _avatarPath(addContactRequest->_fromAvatarPath),
-    _gender(addContactRequest->_fromGender),
     _status(0) // 默认状态为0，表示未处理)
 {
 
@@ -78,8 +78,9 @@ AuthRequest::AuthRequest(int uid, QString name, QString nickname, QString avatar
 
 }
 
-AuthResponse::AuthResponse(int peeruid, QString peername, QString peernickname, QString peericon, int peergender) :
-    _peeruid(peeruid), _peername(peername), _peernickname(peernickname), _peericon(peericon), _peergender(peergender)
+AuthResponse::AuthResponse(int peeruid, int peergender, QString peername, QString peernickname,
+                           QString peericon, QString peeremail, QString peerdescription) :
+    _peeruid(peeruid), _peergender(peergender),  _peername(peername), _peernickname(peernickname), _peericon(peericon), _peeremail(peeremail), _peerdescription(peerdescription)
 {
 
 }

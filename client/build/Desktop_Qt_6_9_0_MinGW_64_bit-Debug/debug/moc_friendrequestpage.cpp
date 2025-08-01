@@ -42,27 +42,27 @@ template <> constexpr inline auto FriendRequestPage::qt_create_metaobjectdata<qt
         "FriendRequestPage",
         "signal_sideContact_showRedPoint",
         "",
-        "slot_get_authResponse",
-        "std::shared_ptr<AuthResponse>",
-        "response",
         "slot_add_new_contact_request",
         "std::shared_ptr<AddContactResponse>",
-        "slot_addBtn_clicked"
+        "response",
+        "slot_addBtn_clicked",
+        "slot_afterACK_handleTheRequestItem",
+        "std::shared_ptr<AuthResponse>"
     };
 
     QtMocHelpers::UintData qt_methods {
         // Signal 'signal_sideContact_showRedPoint'
         QtMocHelpers::SignalData<void()>(1, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'slot_get_authResponse'
-        QtMocHelpers::SlotData<void(std::shared_ptr<AuthResponse>)>(3, 2, QMC::AccessPrivate, QMetaType::Void, {{
+        // Slot 'slot_add_new_contact_request'
+        QtMocHelpers::SlotData<void(std::shared_ptr<AddContactResponse>)>(3, 2, QMC::AccessPrivate, QMetaType::Void, {{
             { 0x80000000 | 4, 5 },
         }}),
-        // Slot 'slot_add_new_contact_request'
-        QtMocHelpers::SlotData<void(std::shared_ptr<AddContactResponse>)>(6, 2, QMC::AccessPrivate, QMetaType::Void, {{
-            { 0x80000000 | 7, 5 },
-        }}),
         // Slot 'slot_addBtn_clicked'
-        QtMocHelpers::SlotData<void()>(8, 2, QMC::AccessPrivate, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(6, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'slot_afterACK_handleTheRequestItem'
+        QtMocHelpers::SlotData<void(std::shared_ptr<AuthResponse>)>(7, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { 0x80000000 | 8, 5 },
+        }}),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -87,9 +87,9 @@ void FriendRequestPage::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
         case 0: _t->signal_sideContact_showRedPoint(); break;
-        case 1: _t->slot_get_authResponse((*reinterpret_cast< std::add_pointer_t<std::shared_ptr<AuthResponse>>>(_a[1]))); break;
-        case 2: _t->slot_add_new_contact_request((*reinterpret_cast< std::add_pointer_t<std::shared_ptr<AddContactResponse>>>(_a[1]))); break;
-        case 3: _t->slot_addBtn_clicked(); break;
+        case 1: _t->slot_add_new_contact_request((*reinterpret_cast< std::add_pointer_t<std::shared_ptr<AddContactResponse>>>(_a[1]))); break;
+        case 2: _t->slot_addBtn_clicked(); break;
+        case 3: _t->slot_afterACK_handleTheRequestItem((*reinterpret_cast< std::add_pointer_t<std::shared_ptr<AuthResponse>>>(_a[1]))); break;
         default: ;
         }
     }

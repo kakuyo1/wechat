@@ -75,6 +75,7 @@ void FriendRequestListItem::setInfoByAddContactResponse(std::shared_ptr<AddConta
 {
     _addContactItemInfo = addContactResponse;
     if (_addContactItemInfo) {
+        _requestUid = _addContactItemInfo->_uid; // 保存请求的UID
         // 从static文件夹中获取要添加的头像(Icon path: "B:\\qt learing\\llfc_client\\build\\Desktop_Qt_6_9_0_MinGW_64_bit-Debug\\debug\\static\\head_1.jpg")
         QString appPath = QCoreApplication::applicationDirPath();
         QString avatarPath = _addContactItemInfo->_avatarPath;

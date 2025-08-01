@@ -88,7 +88,7 @@ void StateWidget::mousePressEvent(QMouseEvent *event)
     repolish(this);
     update();
     emit clicked(); // 发出点击信号
-    qDebug() << "StateWidget clicked";
+    // qDebug() << "StateWidget clicked";
     QWidget::mousePressEvent(event);
 }
 
@@ -110,7 +110,7 @@ void StateWidget::mouseReleaseEvent(QMouseEvent *event)
     }
     repolish(this);
     update();
-    qDebug() << "StateWidget mouseReleaseEvent";
+    // qDebug() << "StateWidget mouseReleaseEvent";
     QWidget::mouseReleaseEvent(event);
 }
 
@@ -122,7 +122,7 @@ void StateWidget::enterEvent(QEnterEvent *event)
     setProperty("state", _hoverState);
     repolish(this);
     update();
-    qDebug() << "StateWidget enterEvent";
+    // qDebug() << "StateWidget enterEvent";
     QWidget::enterEvent(event);
 }
 
@@ -134,7 +134,7 @@ void StateWidget::leaveEvent(QEvent *event)
     setProperty("state", _normalState);
     repolish(this);
     update();
-    qDebug() << "StateWidget leaveEvent";
+    // qDebug() << "StateWidget leaveEvent";
     QWidget::leaveEvent(event);
 }
 

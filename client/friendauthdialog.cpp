@@ -1,11 +1,15 @@
 #include "friendauthdialog.h"
 #include "ui_friendauthdialog.h"
+#include "tcpmanager.h"
+#include "usermanager.h"
+#include <QMessageBox>
 
 FriendAuthDialog::FriendAuthDialog(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::FriendAuthDialog)
     , _current_Tag_point(2, 6)
     , _current_ChosenTag_point(5, 5)
+    , to_uid(0) // 初始化验证对象 UID
 {
     ui->setupUi(this);
     setWindowTitle("同意添加好友");
@@ -171,7 +175,6 @@ void FriendAuthDialog::addToChosenTags(const QString &tagText)
 
 void FriendAuthDialog::removeFromChosenTags(const QString &tagText)
 {
-    qDebug() << "尝试删除标签: " << tagText;
     auto it = _chosenTags.find(tagText);
     if (it == _chosenTags.end()) {
         qDebug() << "标签不存在, 无法删除: " << tagText;
@@ -327,7 +330,6 @@ void FriendAuthDialog::relayoutAllTags()
         // 否则正常布局显示
         label->move(point);
         label->show();
-        qDebug() << "标签位置: " << point << ", 文本: " << label->text();
 
         point.setX(point.x() + textWidth + tags_spacing);
     }
@@ -364,7 +366,6 @@ void FriendAuthDialog::slot_checkIfTagShallAdd()
         qDebug() << "标签指针转换失败，无法处理点击事件";
         return;
     }
-    qDebug() << "检查选择标签是否添加/删除: " << label->text();
     // 查询这个标签是否已经在已选区
     if (_chosenTags.contains(label->text())) {
         // 在已选区 -> 删除
@@ -432,18 +433,37 @@ void FriendAuthDialog::slot_tipLabel_clicked()
 
 void FriendAuthDialog::slot_confirmBtn_clicked()
 {
-    qDebug() <<"confirmBtn clicked";
+    qDebug() <<"好友认证确认按钮被点击";
+    int _from_uid = UserManager::GetInstance()->getUid(); // 你自己的 UID
+    QString nickname = ui->backup_lineEdit->text().trimmed(); // 你给想添加你为好友的人的备注
+
+    if (nickname.isEmpty()) {
+        QMessageBox::warning(this, "提示", "请输入好友备注");
+        return; // 必须加这行
+    }
+
+    QJsonObject requestData;
+    requestData["to_uid"] = to_uid; // 想添加你为好友的人 UID
+    requestData["from_uid"] = _from_uid; // 你自己的 UID
+    requestData["nickname"] = nickname;
+
+    QJsonDocument jsonDoc(requestData);
+    QString jsonString = jsonDoc.toJson(QJsonDocument::Compact);
+
+    emit TcpManager::GetInstance()->signal_send_data(RequestType::MESSAGE_CLIENT_AUTHFRIEND_REQUEST, jsonString);
+
+    this->accept();
 }
 
 void FriendAuthDialog::slot_cancelBtn_clicked()
 {
     this->close(); // 关闭对话框
-    for (auto* tag : _chosenTags) tag->deleteLater();
-    for (auto* tag : _allTagLabels) tag->deleteLater();
+    for (auto* tag : _chosenTags) tag->deleteLater(); // 只删除已选择的标签
+    // for (auto* tag : _allTagLabels) tag->deleteLater(); // 不要清除 _allTagLabels，保留默认标签
     _chosenTags.clear();
     _chosenTags_keys.clear();
-    _allTagLabels.clear();
-    _allTagLabels_keys.clear();
-    _current_Tag_point = QPoint(2, 6);
+    // _allTagLabels.clear();
+    // _allTagLabels_keys.clear();
+    // _current_Tag_point = QPoint(2, 6);
     _current_ChosenTag_point = QPoint(5, 5);
 }

@@ -96,6 +96,8 @@ ChatDialog::ChatDialog(QWidget *parent)
 
     // Test 添加会话列表项
     Test_addSessionItem();
+
+    initializeContactList(); // 初始化联系人列表
 }
 
 QString ChatDialog::getSearchLineEditText() const
@@ -166,6 +168,41 @@ void ChatDialog::addSideBarButtons(StateWidget *button)
     sideBarButtons.append(button);
 }
 
+void ChatDialog::initializeContactList()
+{
+    fullContactList = UserManager::GetInstance()->getContactList();
+    if (fullContactList.empty()) {
+        qDebug() << "No contacts available to initialize.";
+        return; // 如果没有联系人，直接返回
+    }
+    currentContactIndex = 0; // 重置当前联系人索引
+    loadMoreContacts(); // 加载第一页
+}
+
+void ChatDialog::loadMoreContacts()
+{
+    if (static_cast<size_t>(currentContactIndex) >= fullContactList.size()) {
+        qDebug() << "No more contacts to load.";
+        return; // 如果已经加载完所有联系人，直接返回
+    }
+
+    // 计算当前页的联系人范围, 如果只有少于 MAX_CONTACTS_PER_PAGE 个联系人，则加载全部，否则每次10个
+    int endIndex = std::min(currentContactIndex + MAX_CONTACTS_PER_PAGE, static_cast<int>(fullContactList.size()));
+
+    // 加载当前页的联系人
+    for (int i = currentContactIndex; i < endIndex; ++i) {
+        auto contactInfo = fullContactList[i];
+        if (!contactInfo) continue; // 如果联系人信息为空，跳过
+        auto *item = new ContactListItem(this);
+        item->setInfo(contactInfo->getUid(), contactInfo->getName(), contactInfo->getIcon());
+        QListWidgetItem *listItem = new QListWidgetItem();
+        listItem->setSizeHint(item->sizeHint()); // 设置列表项的大小提示
+        ui->contact_list->addItem(listItem); // 添加列表项
+        ui->contact_list->setItemWidget(listItem, item); // 设置列表项的widget
+    }
+    currentContactIndex = endIndex; // 更新当前联系人索引
+}
+
 bool ChatDialog::eventFilter(QObject *watched, QEvent *event)
 {
      // 点击TextEdit不会触发该情况，因为点击TextEdit只是导致失去焦点，而不是点击事件
@@ -227,7 +264,7 @@ void ChatDialog::slot_load_more_contactitems()
 {
     /*进入槽函数后，首先往sessionlist增加加载gif动画效果
      * ，设置模态窗口，然后加载sessionitems*/
-    if (isLoading) return;
+    if (isLoading || static_cast<size_t>(currentContactIndex) >= fullContactList.size()) return; // 如果正在加载或没有更多联系人，直接返回
     isLoading = true;
     // 动画效果
     QLabel *loadingLabel = new QLabel(this);
@@ -243,8 +280,9 @@ void ChatDialog::slot_load_more_contactitems()
     loadingMovie->start();
     // 模拟加载数据
     QTimer::singleShot(100, this, [this, loadingItem, loadingLabel]() {
-        Test_AddMoreContacts(); // 测试添加更多联系人项
-        // 模拟加载完成后移除加载动画
+        // 真正加载联系人
+        loadMoreContacts();
+        // 加载完成后移除加载动画
         ui->chat_list->removeItemWidget(loadingItem);
         delete loadingLabel; // 删除加载标签
         delete loadingItem; // 删除加载项

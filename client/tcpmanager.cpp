@@ -1,6 +1,7 @@
 #include "tcpmanager.h"
 #include "usermanager.h"
 #include <QJsonArray>
+#include <QMessageBox>
 
 TcpManager::TcpManager() :
     _socket(new QTcpSocket(this)),
@@ -88,7 +89,7 @@ TcpManager::TcpManager() :
 
 void TcpManager::initHandlers()
 {
-    // handler for login authentication
+    // 1.handler for login authentication
     _handlers[RequestType::TYPE_LOGIN_CHAT_SERVER_RESPONSE] = [this](RequestType type, int len, QByteArray data) {
         Q_UNUSED(len);
         Q_UNUSED(type);
@@ -188,11 +189,46 @@ void TcpManager::initHandlers()
             UserManager::GetInstance()->intialFriendRequestListAfterLogin(friendRequestList); // 初始化好友申请列表
         }
 
-        // contactlist
+        //  contactlist
+        if (!jsonObj.contains("contact_list") || !jsonObj["contact_list"].isArray()) {
+            qDebug() << "Response does not contain 'contact_list' or it is not an array";
+            emit signal_login_failed();
+            return;
+        }
+        if (jsonObj["contact_list"].toArray().isEmpty()) {
+            qDebug() << "No contacts found in the response";
+        } else {
+            QJsonArray contactArray = jsonObj["contact_list"].toArray();
+            std::vector<std::shared_ptr<AuthResponse>> contactList;
+
+            for (const QJsonValue &value : contactArray) {
+                if (!value.isObject()) {
+                    qDebug() << "Contact item is not an object";
+                    continue;
+                }
+                QJsonObject itemObj = value.toObject();
+                if (!itemObj.contains("uid") || !itemObj.contains("name") || !itemObj.contains("icon")
+                    || !itemObj.contains("nickname") || !itemObj.contains("desc") || !itemObj.contains("email") || !itemObj.contains("gender")) {
+                    qDebug() << "Missing field from friend Contact item";
+                    continue;
+                }
+                int uid = itemObj["uid"].toInt();
+                QString name = itemObj["name"].toString();
+                QString icon = itemObj["icon"].toString();
+                QString nickname = itemObj["nickname"].toString();
+                QString desc = itemObj["desc"].toString();
+                QString email = itemObj["email"].toString();
+                int gender = itemObj["gender"].toInt();
+                AuthResponse contactInfo(uid, gender, name, nickname, icon, email, desc);
+                auto contactInfoptr = std::make_shared<AuthResponse>(contactInfo);
+                contactList.push_back(contactInfoptr);
+            }
+            UserManager::GetInstance()->intialContactListAfterLogin(contactList); // 初始化联系人列表
+        }
         emit signal_switchto_chatdialog();
     };
 
-    // handle for search user response
+    // 2.handle for search user response
     _handlers[RequestType::MESSAGE_CHATSERVER_SEARCH_USER_RESPONSE] = [this](RequestType type, int len, QByteArray data) {
         Q_UNUSED(len);
         Q_UNUSED(type);
@@ -242,9 +278,10 @@ void TcpManager::initHandlers()
         qDebug() << "Search user successful";
     };
 
-    // handle for MESSAGE_CHATSERVER_ADDFRIEND_ACK = 1008, // 服务端 → 发起方客户端：处理结果的反馈(你作为发起方, 目的是通知你好友申请是否成功)
+    // 3.handle for MESSAGE_CHATSERVER_ADDFRIEND_ACK = 1008, // 服务端 → 发起方客户端：处理结果的反馈(你作为发起方, 目的是通知你好友申请是否成功)
     _handlers[RequestType::MESSAGE_CHATSERVER_ADDFRIEND_ACK] = [this](RequestType type, int len, QByteArray data) {
-        /* ack作用是将经过服务器处理的from_uid : to_uid 加入到Usermanager 管理的 FriendRequstList*/
+        /* 在ACK中，我们不需要把好友认证记录加入自己UserManager管理的friendRequestList，因为你是发起方(我们不显示发起方的好友申请记录(TEMP))，
+            只有接收方可以看到好友申请记录，对方才需要把你发起的好友认证记录加入自己UserManager管理的friendRequestList*/
         Q_UNUSED(len);
         Q_UNUSED(type);
         QJsonDocument doc = QJsonDocument::fromJson(data);
@@ -256,17 +293,36 @@ void TcpManager::initHandlers()
             qDebug() << "Response is not a JSON object";
             return;
         }
+
         QJsonObject jsonObj = doc.object();
         if (!jsonObj.contains("error") && !jsonObj.contains("message")) {
             qDebug() << "Response does not contain 'error/message' field";
             return;
         }
+
         int errorCode = jsonObj.value("error").toInt();
+
+        // 已经是好友
+        if (errorCode == static_cast<int>(ErrorCode::ERROR_ALREADY_FRIENDS)) {
+            qDebug() << "Already friends with this user.";
+            QMessageBox::warning(nullptr, "提示", "你们已经是好友了。");
+            return;
+        }
+
+        // 不是好友，但是好友申请已发送
+        if (errorCode == static_cast<int>(ErrorCode::ERROR_FRIEND_REQUEST_EXISTS)) {
+            qDebug() << "friendRequest already sent.";
+            QMessageBox::warning(nullptr, "提示", "好友申请已发送，请等待对方验证。");
+            return;
+        }
+
+        // 其它错误
         if (errorCode != static_cast<int>(ErrorCode::SUCCESS)) {
             qDebug() << "Add friend failed with error code:" << errorCode;
             qDebug() << "Response message: " << jsonObj.value("message").toString();
             return;
         }
+
         // Add friend successful
         int from_uid = jsonObj.value("from_uid").toInt();
         int to_uid = jsonObj.value("to_uid").toInt();
@@ -276,9 +332,9 @@ void TcpManager::initHandlers()
         qDebug() << "Response to_uid: " << to_uid;
     };
 
-    // handle for MESSAGE_CHATSERVER_ADDFRIEND_PUSH = 1009, // 服务端 → 接收方客户端：转发好友申请通知(你作为接受方, 目的是通知你有新的好友申请)
+    // 4.handle for MESSAGE_CHATSERVER_ADDFRIEND_PUSH = 1009, // 服务端 → 接收方客户端：转发好友申请通知(你作为接受方, 目的是通知你有新的好友申请)
     _handlers[RequestType::MESSAGE_CHATSERVER_ADDFRIEND_PUSH] = [this](RequestType type, int len, QByteArray data) {
-        /* 你会收到服务器返回给你的申请人的信息*/
+        /* 你会收到服务器返回给你的申请人的信息, FriendRequestList上方插入新的好友申请记录，UserManager管理，红点显示*/
         Q_UNUSED(len);
         Q_UNUSED(type);
         QJsonDocument doc = QJsonDocument::fromJson(data);
@@ -331,6 +387,111 @@ void TcpManager::initHandlers()
         qDebug() << "Response from_icon: " << from_icon;
         qDebug() << "Response from_email: " << from_email;
         qDebug() << "Response from_description: " << from_description;
+    };
+
+    // 5.handle for MESSAGE_CHATSERVER_AUTHFRIEND_ACK = 1010, // 服务端 → 接收方客户端：处理结果的反馈(你作为发起方, 目的是通知你好友验证是否成功)
+    _handlers[RequestType::MESSAGE_CHATSERVER_AUTHFRIEND_ACK] = [this](RequestType type, int len, QByteArray data) {
+        /* 你在收到验证成功的消息后，表明你的Add对象申请同意了你的好友申请，服务器会返还对方的基本信息，
+            1.contactList头部插入新的联系人，
+            2.friendrequestlist的添加好友按钮隐藏，已添加标签显示
+            3.UserManager管理*/
+        Q_UNUSED(len);
+        Q_UNUSED(type);
+        QJsonDocument doc = QJsonDocument::fromJson(data);
+        if (doc.isNull() || doc.isEmpty()) {
+            qDebug() << "Invalid JSON response from chat server";
+            return;
+        }
+        if (!doc.isObject()) {
+            qDebug() << "Response is not a JSON object";
+            return;
+        }
+        QJsonObject jsonObj = doc.object();
+        if (!jsonObj.contains("error") && !jsonObj.contains("message")) {
+            qDebug() << "Response does not contain 'error/message' field";
+            return;
+        }
+        int errorCode = jsonObj.value("error").toInt();
+        if (errorCode != static_cast<int>(ErrorCode::SUCCESS)) {
+            qDebug() << "Auth friend failed with error code:" << errorCode;
+            qDebug() << "Response message: " << jsonObj.value("message").toString();
+            return;
+        }
+        // Auth friend successful
+        int from_uid = jsonObj.value("from_uid").toInt();
+        int from_gender = jsonObj.value("from_gender").toInt();
+        QString from_name = jsonObj.value("from_name").toString();
+        QString from_nickname = jsonObj.value("from_nickname").toString();
+        QString from_icon = jsonObj.value("from_icon").toString();
+        QString from_email = jsonObj.value("from_email").toString();
+        QString from_description = jsonObj.value("from_desc").toString();
+        AuthResponse authResponse(from_uid, from_gender, from_name, from_nickname, from_icon, from_description, from_email);
+        std::shared_ptr<AuthResponse> authResponsePtr = std::make_shared<AuthResponse>(authResponse);
+        emit signal_getACK_auth_friend_request_success_addNewItem(authResponsePtr); // 由ContactList接收, 完成1步
+        emit signal_getACK_auth_friend_request_success_handlerequestItem(authResponsePtr); // 由friendrequestlist接收, 完成2步
+        // 将好友认证信息添加到UserManager的联系人列表中
+        UserManager::GetInstance()->addItemToContactList(authResponsePtr);
+        qDebug() << "Auth friend success with error code:" << errorCode;
+        qDebug() << "Response message: " << jsonObj.value("message").toString();
+        qDebug() << "Response from_uid: " << from_uid;
+        qDebug() << "Response from_name: " << from_name;
+        qDebug() << "Response from_nickname: " << from_nickname;
+        qDebug() << "Response from_icon: " << from_icon;
+        qDebug() << "Response from_email: " << from_email;
+        qDebug() << "Response from_description: " << from_description;
+        qDebug() << "Response from_gender: " << from_gender;
+    };
+
+    // 6. handle for MESSAGE_CHATSERVER_AUTHFRIEND_PUSH = 1011, // 服务端 → 发起方客户端：转发好友认证通知(你作为接受方, 目的是通知你好友认证验证是否成功)
+    _handlers[RequestType::MESSAGE_CHATSERVER_AUTHFRIEND_PUSH] = [this](RequestType type, int len, QByteArray data) {
+        /* 你会收到服务器返回给你的认证人的信息,
+         * 1.contactList头部插入新的联系人，
+         * 2.UserManager管理，
+         * 3.注意：这里就没有步骤(friendrequestlist的添加好友按钮隐藏，已添加标签显示), 因为你是好友申请发起方，我们暂时没有好友发起方的friendrequestlistItem显示*/
+        Q_UNUSED(len);
+        Q_UNUSED(type);
+        QJsonDocument doc = QJsonDocument::fromJson(data);
+        if (doc.isNull() || doc.isEmpty()) {
+            qDebug() << "Invalid JSON response from chat server";
+            return;
+        }
+        if (!doc.isObject()) {
+            qDebug() << "Response is not a JSON object";
+            return;
+        }
+        QJsonObject jsonObj = doc.object();
+        if (!jsonObj.contains("error") && !jsonObj.contains("message")) {
+            qDebug() << "Response does not contain 'error/message' field";
+            return;
+        }
+        int errorCode = jsonObj.value("error").toInt();
+        if (errorCode != static_cast<int>(ErrorCode::SUCCESS)) {
+            qDebug() << "Receive auth friend request failed with error code:" << errorCode;
+            qDebug() << "Response message: " << jsonObj.value("message").toString();
+            return;
+        }
+        // Receive auth friend request successful
+        int from_uid = jsonObj.value("from_uid").toInt();
+        int from_gender = jsonObj.value("from_gender").toInt();
+        QString from_name = jsonObj.value("from_name").toString();
+        QString from_nickname = jsonObj.value("from_nickname").toString();
+        QString from_icon = jsonObj.value("from_icon").toString();
+        QString from_email = jsonObj.value("from_email").toString();
+        QString from_description = jsonObj.value("from_desc").toString();
+        AuthResponse authResponse(from_uid, from_gender, from_name, from_nickname, from_icon, from_description, from_email);
+        std::shared_ptr<AuthResponse> authResponsePtr = std::make_shared<AuthResponse>(authResponse);
+        emit signal_getPush_auth_friend_request_success(authResponsePtr); // 由ContactList接收, 完成1
+        // 将好友认证信息添加到UserManager的联系人列表中
+        UserManager::GetInstance()->addItemToContactList(authResponsePtr);
+        qDebug() << "Auth friend success with error code:" << errorCode;
+        qDebug() << "Response message: " << jsonObj.value("message").toString();
+        qDebug() << "Response from_uid: " << from_uid;
+        qDebug() << "Response from_name: " << from_name;
+        qDebug() << "Response from_nickname: " << from_nickname;
+        qDebug() << "Response from_icon: " << from_icon;
+        qDebug() << "Response from_email: " << from_email;
+        qDebug() << "Response from_description: " << from_description;
+        qDebug() << "Response from_gender: " << from_gender;
     };
 }
 

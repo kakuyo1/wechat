@@ -1,9 +1,13 @@
 #include "contactlistitem.h"
 #include "ui_contactlistitem.h"
+#include <QDir>
 
 ContactListItem::ContactListItem(QWidget *parent)
     : BaseListItem(parent)
     , ui(new Ui::ContactListItem)
+    , _avatarUrl("")
+    , _name("")
+    , _uid(0)
 {
     ui->setupUi(this);
     setListItem(ListItemType::ContactItem);
@@ -24,7 +28,24 @@ QSize ContactListItem::sizeHint() const
 
 void ContactListItem::setInfo(int uid, QString name, QString avatarUrl)
 {
-    _userInfo = std::make_shared<UserInfo>(uid, name, avatarUrl);
+    _uid = uid;
+    _name = name;
+    _avatarUrl = avatarUrl;
+    QString appPath = QCoreApplication::applicationDirPath();
+    QString iconPath = QDir::toNativeSeparators(appPath + QDir::separator() + "static" + QDir::separator() + _avatarUrl);
+    QPixmap avatarPixmap(iconPath);
+    if (!avatarPixmap.isNull()) {
+        avatarPixmap = avatarPixmap.scaled(ui->contact_icon_label->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        ui->contact_icon_label->setScaledContents(true); // 确保图标适应标签大小
+        ui->contact_icon_label->setPixmap(avatarPixmap);
+    } else {
+        ui->contact_icon_label->setText("头像加载失败");
+    }
+    ui->contact_name_label->setText(name);
+}
+
+void ContactListItem::setAddContactItemInfoByLocal(QString name, QString avatarUrl)
+{
     QPixmap avatarPixmap(avatarUrl);
     if (!avatarPixmap.isNull()) {
         avatarPixmap = avatarPixmap.scaled(ui->contact_icon_label->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);

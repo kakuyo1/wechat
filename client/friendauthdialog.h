@@ -36,6 +36,7 @@ public:
     ~FriendAuthDialog();
     virtual bool eventFilter(QObject *watched, QEvent *event) override; // 事件过滤器，用于处理标签点击事件
     void initTagLabels(); // 初始化标签
+    void setToUid(int uid) { to_uid = uid; } // 设置验证对象 UID
 private:
     Ui::FriendAuthDialog *ui;
     QMap<QString, Customized_Label*> _allTagLabels; // 存储所有的标签
@@ -46,6 +47,7 @@ private:
     QPoint _current_ChosenTag_point; // 当前已选择标签的位置
     std::vector<QString> _default_tag_texts; // 默认的一些标签文本,用于测试
     bool _isShowingAllTags = false; // 默认只显示两行
+    int to_uid; // 验证对象 UID
 private:
     void addTagToWidget(Customized_Label* tagLabel, QPoint currentPoint, QPoint & nextPoint, int textWidth, int textHeight);
     void addToChosenTags(const QString &tagText); // 添加到已选择标签

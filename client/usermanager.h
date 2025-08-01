@@ -31,9 +31,10 @@ public:
     QString getIconPath() const { return _iconPath; }
     int getGender() const { return _gender;};
 
-    void addItemToContactList(std::shared_ptr<SearchInfo> contactInfo); // 当receiver 同意请求成功后才调用
-    std::shared_ptr<SearchInfo> getContactInfo(int uid) const; // 根据uid获取联系人信息
-    std::vector<std::shared_ptr<SearchInfo>> getContactList() const { return _contactList; } // 获取联系人列表
+    void addItemToContactList(std::shared_ptr<AuthResponse> contactInfo); // 当receiver 同意请求成功后才调用
+    std::shared_ptr<AuthResponse> getContactInfo(int uid) const; // 根据uid获取联系人信息
+    std::vector<std::shared_ptr<AuthResponse>> getContactList() const { return _contactList; } // 获取联系人列表
+    void intialContactListAfterLogin(std::vector<std::shared_ptr<AuthResponse>> contactInfoList); // 在登录成功后初始化联系人列表
 
     void intialFriendRequestListAfterLogin(std::vector<std::shared_ptr<FriendListItemInfo>> requestInfoList); // 在登录成功后初始化好友申请列表
     void addFriendRequest(std::shared_ptr<FriendListItemInfo> requestInfo); // 收到服务端ACK成功后增加好友申请
@@ -48,7 +49,7 @@ private:
     int _uid;
 
     std::vector<std::shared_ptr<FriendListItemInfo>> _friendRequestList; // 好友申请列表(self_uid : request_uid)
-    std::vector<std::shared_ptr<SearchInfo>> _contactList; // 联系人列表(直接将搜索后拿到的服务器返回的FullUserInfo存入这里)
+    std::vector<std::shared_ptr<AuthResponse>> _contactList; // 联系人列表(将服务器返回的FullUserInfo去除password后存储在这里)
 };
 
 #endif // USERMANAGER_H

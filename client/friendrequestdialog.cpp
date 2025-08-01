@@ -190,7 +190,6 @@ void FriendRequestDialog::addToChosenTags(const QString &tagText)
 
 void FriendRequestDialog::removeFromChosenTags(const QString &tagText)
 {
-    qDebug() << "尝试删除标签: " << tagText;
     auto it = _chosenTags.find(tagText);
     if (it == _chosenTags.end()) {
         qDebug() << "标签不存在, 无法删除: " << tagText;
@@ -346,7 +345,6 @@ void FriendRequestDialog::relayoutAllTags()
         // 否则正常布局显示
         label->move(point);
         label->show();
-        qDebug() << "标签位置: " << point << ", 文本: " << label->text();
 
         point.setX(point.x() + textWidth + tags_spacing);
     }
@@ -383,7 +381,6 @@ void FriendRequestDialog::slot_checkIfTagShallAdd()
         qDebug() << "标签指针转换失败，无法处理点击事件";
         return;
     }
-    qDebug() << "检查选择标签是否添加/删除: " << label->text();
     // 查询这个标签是否已经在已选区
     if (_chosenTags.contains(label->text())) {
         // 在已选区 -> 删除

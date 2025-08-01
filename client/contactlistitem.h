@@ -20,10 +20,14 @@ public:
     ~ContactListItem() = default;
     virtual QSize sizeHint() const override;
     void setInfo(int uid, QString name, QString avatarUrl);
+    void setAddContactItemInfoByLocal(QString name, QString avatarUrl);
     void showRedPoint(bool show = false);
 private:
     Ui::ContactListItem *ui;
-    std::shared_ptr<UserInfo> _userInfo;
+    // std::shared_ptr<UserInfo> _userInfo;
+    QString _avatarUrl; // 头像路径
+    QString _name; // 用户名
+    int _uid;
 };
 
 #endif // CONTACTLISTITEM_H
