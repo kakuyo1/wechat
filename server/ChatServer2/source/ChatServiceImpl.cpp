@@ -46,10 +46,27 @@ Status ChatServiceImpl::NotifyAuthFriend(::grpc::ServerContext* context,
             response->set_error(static_cast<int>(ErrorCodes::ERROR_USER_OFFLINE));
             return Status::CANCELLED; // Return error status
         }
+
+        // get the userInfo of the 验证sender(from_uid) to prepare the Push response to the 验证reciver(to_uid)
+        std::shared_ptr<FullUserInfo> sender_fulluserinfo = std::make_shared<FullUserInfo>();
+        if (!UserManager::GetInstance()->getFullUserInfoByUid(request->from_uid(), sender_fulluserinfo)) {
+            spdlog::error("Failed to get full user info for UID {}", request->from_uid());
+            response->set_error(static_cast<int>(ErrorCodes::ERROR_UID_NOT_FOUND));
+            return Status::CANCELLED; // Return error status
+        }
+
         // prepare for json string to send
         Json::Value root;
-        root["from_uid"] = request->from_uid();
-        root["to_uid"] = request->to_uid();
+        root["error"] = static_cast<int>(ErrorCodes::SUCCESS);
+        root["message"] = "Friend request authentication received";
+        root["from_uid"] = sender_fulluserinfo->uid;
+        root["from_name"] = sender_fulluserinfo->name;
+        root["from_nickname"] = sender_fulluserinfo->nickname;
+        root["from_icon"] = sender_fulluserinfo->icon;
+        root["from_desc"] = sender_fulluserinfo->desc;
+        root["from_email"] = sender_fulluserinfo->email;
+        root["from_gender"] = sender_fulluserinfo->gender;
+
         std::string jsonString = root.toStyledString();
         // send the json string to the user
         session->Send(jsonString, static_cast<int>(MessageType::MESSAGE_CHATSERVER_AUTHFRIEND_PUSH));

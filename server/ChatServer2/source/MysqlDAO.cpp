@@ -490,7 +490,7 @@ bool MysqlDAO::RemoveItemFromFriendRequestList(int from_uid, int to_uid)
         return false; // Error occurred while removing item from friend request list
     }
 }
-bool MysqlDAO::AccpetAndUpdateFriendRequestListItemStatus(int from_uid, int to_uid)
+bool MysqlDAO::AcceptAndUpdateFriendRequestListItemStatus(int from_uid, int to_uid, int status)
 {
     /* update the status from 0 to 1 meaning request handle finished and the receiver agree with it*/
     auto con = _pool->GetConnection();
@@ -498,9 +498,10 @@ bool MysqlDAO::AccpetAndUpdateFriendRequestListItemStatus(int from_uid, int to_u
         if (con == nullptr) {
             return false; // Connection failed
         }
-        std::unique_ptr<sql::PreparedStatement> stmt(con->con_->prepareStatement("UPDATE friendrequestlist SET status = 1 WHERE from_uid = ? AND to_uid = ?"));
-        stmt->setInt(1, from_uid);
-        stmt->setInt(2, to_uid);
+        std::unique_ptr<sql::PreparedStatement> stmt(con->con_->prepareStatement("UPDATE friendrequestlist SET status = ? WHERE from_uid = ? AND to_uid = ?"));
+        stmt->setInt(1, status);
+        stmt->setInt(2, from_uid);
+        stmt->setInt(3, to_uid);
         int result = stmt->executeUpdate();
         _pool->ReturnConnection(std::move(con));
         return result > 0; // Return true if the update was successful
@@ -597,4 +598,149 @@ int MysqlDAO::GetFriendRequestList(int self_uid, std::vector<FriendRequestItem>&
         spdlog::error("(MYSQL error code: {}, SQLState: {})", e.getErrorCode(), e.getSQLState());
         return static_cast<int>(ErrorCodes::ERROR_MYSQL);
     }
+}
+
+int MysqlDAO::GetFriendList(int self_uid, std::vector<FriendInfo>& friend_list) {
+    // 找出在friend_relationship表中friend_id为传入的self_uid的记录(找到了self_uid的所有好友)
+    // 再到user表中根据刚刚得到的所有friend_relationship表中friend_id查询对应user表中所有的信息(uid,gender,name,nickname,email,icon,desc)
+    // 这样就拿到了self_uid的所有好友信息
+    // 最后将查询到的所有好友信息存入friend_list中
+    auto con = _pool->GetConnection();
+    try {
+        if (con == nullptr) {
+            return static_cast<int>(ErrorCodes::ERROR_MYSQL); // Connection failed
+        }
+        std::unique_ptr<sql::PreparedStatement> stmt(con->con_->prepareStatement(
+            "SELECT user.uid, user.gender, user.name, user.nickname, user.email, user.icon, user.desc "
+            "FROM friend_relationship "
+            "JOIN user ON user.uid = friend_relationship.self_id "
+            "WHERE friend_relationship.friend_id = ?"
+        ));
+        stmt->setInt(1, self_uid);
+        std::unique_ptr<sql::ResultSet> res(stmt->executeQuery());
+        if (!res->next()) {
+            _pool->ReturnConnection(std::move(con));
+            return static_cast<int>(ErrorCodes::ERROR_NO_FRIEND_RECORD); // No friends found
+        }
+        // Clear the list before adding new items
+        friend_list.clear();
+        // Iterate through the result set and populate the friend_list
+        do {
+            FriendInfo info;
+            info.uid = res->getInt("uid");
+            info.gender = res->getInt("gender");
+            info.name = res->getString("name");
+            info.nickname = res->getString("nickname");
+            info.email = res->getString("email");
+            info.icon = res->getString("icon");
+            info.desc = res->getString("desc");
+            friend_list.push_back(info);
+        } while (res->next());
+        _pool->ReturnConnection(std::move(con));
+        return static_cast<int>(ErrorCodes::SUCCESS);
+    } catch (sql::SQLException& e) {
+        _pool->ReturnConnection(std::move(con));
+        spdlog::error("SQLException: {}", e.what());
+        spdlog::error("(MYSQL error code: {}, SQLState: {})", e.getErrorCode(), e.getSQLState());
+        return static_cast<int>(ErrorCodes::ERROR_MYSQL);
+    }
+}
+
+bool MysqlDAO::AddOneWayFriendRelationship(int uid1, int uid2, const std::string& backup_name_1_to_2) {
+    /* add one way friend relationship, meaning uid1 add uid2 as friend, backup_name_1_to_2 is the backup name for uid1 to uid2*/
+    auto con = _pool->GetConnection();
+    try {
+        if (con == nullptr) {
+            return false; // Connection failed
+        }
+        std::unique_ptr<sql::PreparedStatement> stmt(con->con_->prepareStatement("INSERT IGNORE INTO friend_relationship (self_id, friend_id, backup_name) VALUES (?, ?, ?)"));
+        stmt->setInt(1, uid1);
+        stmt->setInt(2, uid2);
+        stmt->setString(3, backup_name_1_to_2);
+        int result = stmt->executeUpdate();
+        _pool->ReturnConnection(std::move(con));
+        return result > 0; // Return true if the insert was successful
+    } catch (sql::SQLException& e) {
+        _pool->ReturnConnection(std::move(con));
+        spdlog::error("SQLException: {}", e.what());
+        spdlog::error("(MYSQL error code: {}, SQLState: {})", e.getErrorCode(), e.getSQLState());
+        return false; // Error occurred while adding one way friend relationship
+    }
+}
+
+bool MysqlDAO::RemoveOneWayFriendRelationship(int uid1, int uid2) {
+    /* remove the one way friend relationship, if not exists, do nothing*/
+    auto con = _pool->GetConnection();
+    try {
+        if (con == nullptr) {
+            return false; // Connection failed
+        }
+        std::unique_ptr<sql::PreparedStatement> stmt(con->con_->prepareStatement("DELETE FROM friend_relationship WHERE self_id = ? AND friend_id = ?"));
+        stmt->setInt(1, uid1);
+        stmt->setInt(2, uid2);
+        int result = stmt->executeUpdate();
+        _pool->ReturnConnection(std::move(con));
+        return result > 0; // Return true if the delete was successful
+    } catch (sql::SQLException& e) {
+        _pool->ReturnConnection(std::move(con));
+        spdlog::error("SQLException: {}", e.what());
+        spdlog::error("(MYSQL error code: {}, SQLState: {})", e.getErrorCode(), e.getSQLState());
+        return false; // Error occurred while removing one way friend relationship
+    }
+}
+
+bool MysqlDAO::IsFriendRequestExistsByCheckOneWay(int from_uid, int to_uid) {
+    /* check if the friend request exists by checking the from_uid and to_uid in the friendrequestlist table*/
+    auto con = _pool->GetConnection();
+    try {
+        if (con == nullptr) {
+            return false; // Connection failed
+        }
+        std::unique_ptr<sql::PreparedStatement> stmt(con->con_->prepareStatement("SELECT COUNT(*) FROM friendrequestlist WHERE from_uid = ? AND to_uid = ?"));
+        stmt->setInt(1, from_uid);
+        stmt->setInt(2, to_uid);
+        std::unique_ptr<sql::ResultSet> result(stmt->executeQuery());
+        if (result->next()) {
+            int count = result->getInt(1);
+            _pool->ReturnConnection(std::move(con));
+            return count > 0; // Return true if the friend request exists, false otherwise
+        }
+        _pool->ReturnConnection(std::move(con));
+        return false; // Friend request does not exist
+    } catch (sql::SQLException& e) {
+        _pool->ReturnConnection(std::move(con));
+        spdlog::error("SQLException: {}", e.what());
+        spdlog::error("(MYSQL error code: {}, SQLState: {})", e.getErrorCode(), e.getSQLState());
+        return false; // Error occurred while checking friend request existence
+    }
+}
+
+bool MysqlDAO::IsFriendAlreadyByCheckOneWay(int uid1, int uid2) {
+    /* check if the friend relationship exists by checking the self_id and friend_id in the friend_relationship table*/
+    auto con = _pool->GetConnection();
+    try {
+        if (con == nullptr) {
+            return false; // Connection failed
+        }
+        std::unique_ptr<sql::PreparedStatement> stmt(con->con_->prepareStatement("SELECT COUNT(*) FROM friend_relationship WHERE self_id = ? AND friend_id = ?"));
+        stmt->setInt(1, uid1);
+        stmt->setInt(2, uid2);
+        std::unique_ptr<sql::ResultSet> result(stmt->executeQuery());
+        if (result->next()) {
+            int count = result->getInt(1);
+            _pool->ReturnConnection(std::move(con));
+            return count > 0; // Return true if the friend relationship exists, false otherwise
+        }
+        _pool->ReturnConnection(std::move(con));
+        return false; // Friend relationship does not exist
+    } catch (sql::SQLException& e) {
+        _pool->ReturnConnection(std::move(con));
+        spdlog::error("SQLException: {}", e.what());
+        spdlog::error("(MYSQL error code: {}, SQLState: {})", e.getErrorCode(), e.getSQLState());
+        return false; // Error occurred while checking friend relationship existence
+    }
+}
+
+bool MysqlDAO::IsFriendAlreadyByCheckTwoWay(int uid1, int uid2) {
+    return IsFriendAlreadyByCheckOneWay(uid1, uid2) && IsFriendAlreadyByCheckOneWay(uid2, uid1);
 }

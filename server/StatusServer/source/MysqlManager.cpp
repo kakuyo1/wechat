@@ -1,4 +1,5 @@
 #include "../include/MysqlManager.h"
+#include "../include/MysqlDAO.h"
 
 MysqlManager::MysqlManager() :
     _dao(std::make_unique<MysqlDAO>())

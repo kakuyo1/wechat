@@ -92,6 +92,7 @@ AddFriendResponse ChatGrpcClient::NotifyAddFriend(const std::string &peer_server
     }
     // Successfully sent the add friend request
     spdlog::info("[ChatGrpcClient]Add friend request sent successfully from UID {} to UID {}", request.from_uid(), request.to_uid());
+    response.set_error(static_cast<int>(ErrorCodes::SUCCESS));
     return response;
 }
 
@@ -130,6 +131,7 @@ AuthFriendResponse ChatGrpcClient::NotifyAuthFriend(const std::string &peer_serv
         spdlog::error("gRPC call failed: {}", status.error_message());
         return response;
     }
+    response.set_error(static_cast<int>(ErrorCodes::SUCCESS));
     return response;
 }
 

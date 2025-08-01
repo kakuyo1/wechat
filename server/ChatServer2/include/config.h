@@ -22,7 +22,10 @@ enum class ErrorCodes {
     ERROR_USER_OFFLINE = 17,
     ERROR_SEARCH_FAILED_BY_UID = 18,
     ERROR_SEARCH_FAILED_BY_NAME = 19,
-    ERROR_NO_FRIENDREQUEST_RECORD = 20
+    ERROR_NO_FRIENDREQUEST_RECORD = 20,
+    ERROR_NO_FRIEND_RECORD = 21,
+    ERROR_FRIEND_REQUEST_EXISTS = 22, // New error code for existing friend request
+    ERROR_ALREADY_FRIENDS = 23 // New error code for already friends
 };
 
 const std::string code_prefix = "code_"; // Prefix for verify code keys in Redis
@@ -43,20 +46,31 @@ enum class MessageType {
     MESSAGE_CHATSERVER_SEARCH_USER_RESPONSE = 1017 // 服务端 → 客户端：搜索用户结果
 };
 
-struct UserInfo {
+struct UserInfo { // using as login user info
     int uid;
     std::string name;
     std::string email;
     std::string password;
 };
 
-struct FullUserInfo {
+struct FullUserInfo { // using as self user info
     int uid;
     int gender;
     std::string name;
     std::string nickname;
     std::string email;
     std::string password;
+    std::string icon; // User's icon URL or path
+    std::string desc;
+};
+
+struct FriendInfo { // using as self user info
+    int uid;
+    int gender;
+    std::string name;
+    std::string nickname;
+    std::string email;
+    // std::string password;
     std::string icon; // User's icon URL or path
     std::string desc;
 };

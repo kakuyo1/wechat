@@ -209,24 +209,51 @@ void LogicSystem::HandleLoginAuth(std::shared_ptr<CSession> session, std::shared
     response["password"] = userinfoptr->password;
     response["token"] = client_token;
     response["message"] = "Login successful";
-    // TODO 6.prepare the friend/contact list for the client
-
-    // TODO 7.prepare the friend request list for the client
+    // 6.prepare the friend/contact list for the client
+    std::vector<FriendInfo> friend_list{};
+    int result_friend_list = MysqlManager::GetInstance()->GetFriendList(uid, friend_list);
+    if (result_friend_list == static_cast<int>(ErrorCodes::ERROR_NO_FRIEND_RECORD))
+    {
+        spdlog::info("No friend records found for UID {}, sending empty list.", uid);
+        // message 在 "Login successful" 后加上 "No friend records found"
+        response["message"] = "Login successful, but no friends found";
+        response["contact_list"] = Json::Value(Json::arrayValue); // Empty array
+    } else if (result_friend_list != static_cast<int>(ErrorCodes::SUCCESS)){
+        spdlog::error("Failed to get friend list for UID {}, sending error response.", uid);
+        response["error"] = static_cast<short>(ErrorCodes::ERROR_MYSQL);
+        response["message"] = "Failed to retrieve friend list";
+        session->Send(response.toStyledString(), static_cast<short>(MessageType::MESSAGE_CHATSERVER_LOGIN_AUTH_RESPONSE));
+        return;
+    } else if (result_friend_list == static_cast<int>(ErrorCodes::SUCCESS)) {
+        for (const auto& friend_info : friend_list) {
+            Json::Value contact_item;
+            contact_item["uid"] = friend_info.uid;
+            contact_item["gender"] = friend_info.gender;
+            contact_item["nickname"] = friend_info.nickname;
+            contact_item["email"] = friend_info.email;
+            contact_item["name"] = friend_info.name;
+            contact_item["icon"] = friend_info.icon;
+            contact_item["desc"] = friend_info.desc;
+            response["contact_list"].append(contact_item);
+        }
+    }
+    spdlog::info("[LogicSystem]Prepared contact list for UID {} with {} friends.", uid, response["contact_list"].size());
+    // 7.prepare the friend request list for the client
     std::vector<FriendRequestItem> friend_request_list{};
-    int result = MysqlManager::GetInstance()->GetFriendRequestList(uid, friend_request_list);
-    if (result == static_cast<int>(ErrorCodes::ERROR_NO_FRIENDREQUEST_RECORD))
+    int result_friend_request_list = MysqlManager::GetInstance()->GetFriendRequestList(uid, friend_request_list);
+    if (result_friend_request_list == static_cast<int>(ErrorCodes::ERROR_NO_FRIENDREQUEST_RECORD))
     {
         spdlog::info("No friend request records found for UID {}, sending empty list.", uid);
-        response["error"] = static_cast<short>(ErrorCodes::SUCCESS);
-        response["message"] = "No friend requests";
+        // message 在 "Login successful" 后加上 "No friend request records found"
+        response["message"] = "Login successful, but no friend requests found";
         response["friend_request_list"] = Json::Value(Json::arrayValue); // Empty array
-    } else if (result != static_cast<int>(ErrorCodes::SUCCESS)){
+    } else if (result_friend_request_list != static_cast<int>(ErrorCodes::SUCCESS)){
         spdlog::error("Failed to get friend request list for UID {}, sending error response.", uid);
         response["error"] = static_cast<short>(ErrorCodes::ERROR_MYSQL);
         response["message"] = "Failed to retrieve friend request list";
         session->Send(response.toStyledString(), static_cast<short>(MessageType::MESSAGE_CHATSERVER_LOGIN_AUTH_RESPONSE));
         return;
-    } else if (result == static_cast<int>(ErrorCodes::SUCCESS)) {
+    } else if (result_friend_request_list == static_cast<int>(ErrorCodes::SUCCESS)) {
         for (const auto& item : friend_request_list) {
             Json::Value request_item;
             request_item["from_uid"] = item.from_uid;
@@ -237,7 +264,7 @@ void LogicSystem::HandleLoginAuth(std::shared_ptr<CSession> session, std::shared
             response["friend_request_list"].append(request_item);
         }
     }
-
+    spdlog::info("[LogicSystem]Prepared friend request list for UID {} with {} requests.", uid, response["friend_request_list"].size());
     // 8.increment the online user count in ChatServer by redis(maintain loginCount synchronization between all the ChatServers)
     spdlog::debug("Step 8");
     auto server_name = ConfigIniManager::Instance()["SelfServer"]["Name"];
@@ -420,6 +447,39 @@ void LogicSystem::HandleAddFriend(std::shared_ptr<CSession> session, std::shared
     std::string nickname = source["nickname"].asString(); // The nickname of the sender to the receiver
     spdlog::debug("Step 1: Received add friend request from UID {} to UID {}, nickname: {}", from_uid, to_uid, nickname);
 
+
+    // 将nickname存储到数据库中，将AddBidirectionalFriendRelationship拆成两部分，sender->receiver：在申请Add阶段(先HasFriend检查是否已存在此记录，防止重复申请)
+    // 就插入from_uid,to_uid, nickname1(来自发起者客户端)的单向记录
+    // receiver->sender：在验证Auth阶段插入to_uid, from_uid, nickname2(来自接受者客户端)的单向记录,Auth阶段的出错都要删除Add阶段的记录,
+    // 回滚保证一致性，只有存在两边的记录才算作添加好友成功
+
+    // 1.1 check if the from_uid and to_uid are already friends(已经是好友)
+    if (MysqlManager::GetInstance()->IsFriendAlreadyByCheckTwoWay(from_uid, to_uid)) {
+        spdlog::warn("Friendship already exists between UID {} and UID {}.", from_uid, to_uid);
+        ack_response["error"] = static_cast<short>(ErrorCodes::ERROR_ALREADY_FRIENDS);
+        ack_response["message"] = "Already friends";
+        session->Send(ack_response.toStyledString(), static_cast<short>(MessageType::MESSAGE_CHATSERVER_ADDFRIEND_ACK));
+        return;
+    }
+
+    // 1.2 check if the from_uid and to_uid addFriendRequest already exists in mysql(我们假定好友申请记录会被删除)
+    if (MysqlManager::GetInstance()->IsFriendRequestExistsByCheckOneWay(from_uid, to_uid)) {
+        spdlog::warn("Friend request from UID {} to UID {} already exists.", from_uid, to_uid);
+        ack_response["error"] = static_cast<short>(ErrorCodes::ERROR_FRIEND_REQUEST_EXISTS);
+        ack_response["message"] = "Friend request already exists";
+        session->Send(ack_response.toStyledString(), static_cast<short>(MessageType::MESSAGE_CHATSERVER_ADDFRIEND_ACK));
+        return;
+    }
+
+    // 1.3 insert the friend relationship into the database(插入单向关系，from_uid -> to_uid，只有存在两边的记录才算作添加好友成功，目前还未Auth)
+    if (!MysqlManager::GetInstance()->AddOneWayFriendRelationship(from_uid, to_uid, nickname)) {
+        spdlog::error("Failed to add one-way friend relationship from UID {} to UID {}.", from_uid, to_uid);
+        ack_response["error"] = static_cast<short>(ErrorCodes::ERROR_MYSQL);
+        ack_response["message"] = "Failed to add friend relationship";
+        session->Send(ack_response.toStyledString(), static_cast<short>(MessageType::MESSAGE_CHATSERVER_ADDFRIEND_ACK));
+        return;
+    }
+
     // 2.update the friend request list in Mysql
     if (!MysqlManager::GetInstance()->AddItemToFriendRequestList(from_uid, to_uid)) {
         spdlog::warn("Failed to add item to friend request list from UID {} to UID {}.", from_uid, to_uid);
@@ -524,7 +584,159 @@ void LogicSystem::HandleAddFriend(std::shared_ptr<CSession> session, std::shared
 }
 void LogicSystem::HandleAuthFriend(std::shared_ptr<CSession> session, std::shared_ptr<RecieveMessageNode> message_node)
 {
+    /* 注意：现在的from_uid是收到好友申请的人(发送验证的人)，to_uid是发送好友申请的人(收到验证的人)*/
+    // 1.Extract message data by json parsing
+    std::string message_data(message_node->GetData(), message_node->GetCurrentLength());
+    std::istringstream message_stream(message_data);
+    Json::Value source;
+    Json::Value response;
+    Json::CharReaderBuilder reader_builder;
+    std::string errors;
+    if (!Json::parseFromStream(reader_builder, message_stream, &source, &errors))
+    {
+        spdlog::error("Failed to parse JSON from message: {}", errors);
+        response["error"] = static_cast<short>(ErrorCodes::ERROR_JSON_PARSE);
+        response["message"] = "Invalid JSON format";
+        // 开启警告，json解析失败，该请求无效，后台定期清理失效请求
+        spdlog::critical("JSON parsing failed in HandleAuthFriend: {}", errors);
+        session->Send(response.toStyledString(), static_cast<short>(MessageType::MESSAGE_CHATSERVER_AUTHFRIEND_ACK));
+        return;
+    }
+    int from_uid = source["from_uid"].asInt();
+    int to_uid = source["to_uid"].asInt();
+    std::string nickname = source["nickname"].asString(); // The nickname of the sender to the receiver
+    spdlog::debug("Step 1: Received auth friend request from UID {} to UID {}, nickname: {}", from_uid, to_uid, nickname);
+    // Add 阶段已经检测过是否为好友，是否存在申请记录, 这里不再检测
 
+    // 2.check out which server the receiver(to_uid) is on
+    auto current_server_name = ConfigIniManager::Instance()["SelfServer"]["Name"];
+    std::string server_ip_key = SERVER_IP_PREFIX + std::to_string(to_uid);
+    std::string peer_server_name = "";
+    if (!RedisManager::GetInstance()->Get(server_ip_key, peer_server_name)) {
+        spdlog::error("Failed to get server IP for UID {} from Redis.", to_uid);
+        response["error"] = static_cast<short>(ErrorCodes::ERROR_REDIS);
+        response["message"] = "Failed to retrieve server IP for friend request";
+        // 删除之前的Add阶段记录
+        MysqlManager::GetInstance()->RemoveOneWayFriendRelationship(to_uid, from_uid);
+        session->Send(response.toStyledString(), static_cast<short>(MessageType::MESSAGE_CHATSERVER_AUTHFRIEND_ACK));
+        return;
+    }
+    if (peer_server_name.empty()) {
+        spdlog::warn("No server IP found for UID {}, sending error response.", to_uid);
+        response["error"] = static_cast<short>(ErrorCodes::ERROR_USER_OFFLINE);
+        response["message"] = "User is offline or not found";
+        // 删除之前的Add阶段记录
+        MysqlManager::GetInstance()->RemoveOneWayFriendRelationship(to_uid, from_uid);
+        session->Send(response.toStyledString(), static_cast<short>(MessageType::MESSAGE_CHATSERVER_AUTHFRIEND_ACK));
+        return;
+    }
+    spdlog::debug("Step 2: Found peer server {} for UID {}.", peer_server_name, to_uid);
+
+    // 更新相应friendRequest的status为1(已通过)
+    if (!MysqlManager::GetInstance()->AcceptAndUpdateFriendRequestListItemStatus(to_uid, from_uid, 1)) {
+        spdlog::error("Failed to update friend request status from UID {} to UID {}.", to_uid, from_uid);
+        response["error"] = static_cast<short>(ErrorCodes::ERROR_MYSQL);
+        response["message"] = "Failed to update friend request status";
+        // 删除之前的Add阶段记录
+        MysqlManager::GetInstance()->RemoveOneWayFriendRelationship(to_uid, from_uid);
+        session->Send(response.toStyledString(), static_cast<short>(MessageType::MESSAGE_CHATSERVER_AUTHFRIEND_ACK));
+        return;
+    }
+    spdlog::debug("Step 2: Successfully updated friend request status from UID {} to UID {}.", to_uid, from_uid);
+
+    // insert the auth friend relationship into the database
+    if (!MysqlManager::GetInstance()->AddOneWayFriendRelationship(from_uid, to_uid, nickname)) {
+        spdlog::error("Failed to add one-way friend relationship from UID {} to UID {}.", from_uid, to_uid);
+        response["error"] = static_cast<short>(ErrorCodes::ERROR_MYSQL);
+        response["message"] = "Failed to add friend relationship";
+        // 删除之前的Add阶段记录
+        MysqlManager::GetInstance()->AcceptAndUpdateFriendRequestListItemStatus(to_uid, from_uid, 0); // 将状态改回未通过
+        MysqlManager::GetInstance()->RemoveOneWayFriendRelationship(to_uid, from_uid);
+        session->Send(response.toStyledString(), static_cast<short>(MessageType::MESSAGE_CHATSERVER_AUTHFRIEND_ACK));
+        return;
+    }
+    spdlog::debug("Step 2: Successfully added one-way friend relationship from UID {} to UID {}.", from_uid, to_uid);
+
+    /* 3. compare the current server name with the peer server name to decide how to handle the request
+        (1) If they are the same, send the response through this ChatServer)
+        (2) If they are different, forward the request to the peer server by using gRPC)*/
+    if (current_server_name == peer_server_name) { // (1)
+        spdlog::debug("entering the same server branch");
+        // 3.1 get the userInfo of the 验证sender(from_uid) to prepare the Push response to the 验证receiver(to_uid)
+        std::shared_ptr<FullUserInfo> sender_fulluserinfo = std::make_shared<FullUserInfo>();
+        if (!UserManager::GetInstance()->getFullUserInfoByUid(from_uid, sender_fulluserinfo)) {
+            spdlog::error("Failed to get full user info for UID {}.", from_uid);
+            response["error"] = static_cast<short>(ErrorCodes::ERROR_UID_NOT_FOUND);
+            response["message"] = "User not found";
+            // 删除之前的Add阶段记录
+            MysqlManager::GetInstance()->AcceptAndUpdateFriendRequestListItemStatus(to_uid, from_uid, 0); // 将状态改回未通过
+            MysqlManager::GetInstance()->RemoveOneWayFriendRelationship(to_uid, from_uid);
+            MysqlManager::GetInstance()->RemoveOneWayFriendRelationship(from_uid, to_uid);
+            MysqlManager::GetInstance()->RemoveItemFromFriendRequestList(to_uid, from_uid);
+            session->Send(response.toStyledString(), static_cast<short>(MessageType::MESSAGE_CHATSERVER_AUTHFRIEND_ACK));
+            return;
+        }
+        // 3.2 prepare the Push response to the receiver(to_uid)
+        response["error"] = static_cast<short>(ErrorCodes::SUCCESS);
+        response["message"] = "Friend request authentication received";
+        response["from_uid"] = sender_fulluserinfo->uid;
+        response["from_name"] = sender_fulluserinfo->name;
+        response["from_nickname"] = sender_fulluserinfo->nickname;
+        response["from_icon"] = sender_fulluserinfo->icon;
+        response["from_desc"] = sender_fulluserinfo->desc;
+        response["from_email"] = sender_fulluserinfo->email;
+        response["from_gender"] = sender_fulluserinfo->gender;
+        // 3.3 send the response to the receiver(to_uid)
+        session->Send(response.toStyledString(), static_cast<short>(MessageType::MESSAGE_CHATSERVER_AUTHFRIEND_PUSH));
+        spdlog::debug("Step 3: Current server is the same as peer server, sending response directly.");
+    } else { //(2)
+        // Implement gRPC request forwarding
+        spdlog::debug("entering the different server branch");
+        AuthFriendRequest request;
+        request.set_from_uid(from_uid);
+        request.set_to_uid(to_uid);
+        AuthFriendResponse grpc_response = ChatGrpcClient::GetInstance()->NotifyAuthFriend(peer_server_name, request);
+        if (grpc_response.error() != static_cast<int>(ErrorCodes::SUCCESS)) {
+            spdlog::error("Failed to forward auth friend request to peer server {}, error code {}.", peer_server_name, grpc_response.error());
+            response["error"] = static_cast<short>(ErrorCodes::ERROR_RPC);
+            response["message"] = "Failed to forward auth friend request";
+            // 删除之前的Add阶段记录
+            MysqlManager::GetInstance()->AcceptAndUpdateFriendRequestListItemStatus(to_uid, from_uid, 0); // 将状态改回未通过
+            MysqlManager::GetInstance()->RemoveOneWayFriendRelationship(to_uid, from_uid);
+            MysqlManager::GetInstance()->RemoveOneWayFriendRelationship(from_uid, to_uid);
+            MysqlManager::GetInstance()->RemoveItemFromFriendRequestList(to_uid, from_uid);
+            session->Send(response.toStyledString(), static_cast<short>(MessageType::MESSAGE_CHATSERVER_AUTHFRIEND_ACK));
+            return;
+        }
+        spdlog::debug("Step 3: Forwarded auth friend request to peer server {} successfully.", peer_server_name);
+    }
+
+    // 4.get the userInfo of the 验证reciver(to_uid) to prepare the ACK response to the 验证sender(from_uid)
+    std::shared_ptr<FullUserInfo> receiver_fulluserinfo = std::make_shared<FullUserInfo>();
+    if (!UserManager::GetInstance()->getFullUserInfoByUid(to_uid, receiver_fulluserinfo)) {
+        spdlog::error("Failed to get full user info for UID {}.", to_uid);
+        response["error"] = static_cast<short>(ErrorCodes::ERROR_UID_NOT_FOUND);
+        response["message"] = "User not found";
+        // 删除之前的Add阶段记录
+        MysqlManager::GetInstance()->AcceptAndUpdateFriendRequestListItemStatus(to_uid, from_uid, 0); // 将状态改回未通过
+        MysqlManager::GetInstance()->RemoveOneWayFriendRelationship(to_uid, from_uid);
+        MysqlManager::GetInstance()->RemoveOneWayFriendRelationship(from_uid, to_uid);
+        MysqlManager::GetInstance()->RemoveItemFromFriendRequestList(to_uid, from_uid);
+        session->Send(response.toStyledString(), static_cast<short>(MessageType::MESSAGE_CHATSERVER_AUTHFRIEND_ACK));
+        return;
+    }
+    // prepare the ACK response to the sender(from_uid)
+    response["error"] = static_cast<short>(ErrorCodes::SUCCESS);
+    response["message"] = "Friend request authenticated successfully";
+    response["from_uid"] = receiver_fulluserinfo->uid;
+    response["from_name"] = receiver_fulluserinfo->name;
+    response["from_nickname"] = receiver_fulluserinfo->nickname;
+    response["from_icon"] = receiver_fulluserinfo->icon;
+    response["from_desc"] = receiver_fulluserinfo->desc;
+    response["from_email"] = receiver_fulluserinfo->email;
+    response["from_gender"] = receiver_fulluserinfo->gender;
+    session->Send(response.toStyledString(), static_cast<short>(MessageType::MESSAGE_CHATSERVER_AUTHFRIEND_ACK));
+    spdlog::debug("Step 4: Sent ACK response to the sender {} successfully.", from_uid);
 }
 LogicSystem::LogicSystem() : _stopped(false),
                              _worker_thread(&LogicSystem::ProcessMessageQueue, this), // LogicSystem一构造就不断处理消息队列(客户端的信息转发,好友申请,登陆验证等)
