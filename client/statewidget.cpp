@@ -67,6 +67,19 @@ StateType StateWidget::currentState() const
     return StateType::Normal; // 默认返回Normal状态
 }
 
+void StateWidget::setSelected(bool selected)
+{
+    if (selected) {
+        _currentState = StateType::Pressed;
+        setProperty("state", _pressedState);
+    } else {
+        _currentState = StateType::Normal;
+        setProperty("state", _normalState);
+    }
+    repolish(this);
+    update();
+}
+
 void StateWidget::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event);
@@ -91,7 +104,7 @@ void StateWidget::mousePressEvent(QMouseEvent *event)
     // qDebug() << "StateWidget clicked";
     QWidget::mousePressEvent(event);
 }
-
+// 如果控件已经被 setSelected(true)，就不要再覆盖状态。
 void StateWidget::mouseReleaseEvent(QMouseEvent *event)
 {
     if (_normalState.isEmpty()) {
@@ -99,25 +112,30 @@ void StateWidget::mouseReleaseEvent(QMouseEvent *event)
     }
     _mousePressed = false;
     if (rect().contains(event->pos())) {
-        setProperty("state", _pressedState);
-        QTimer::singleShot(100, this, [this]() {
-            setProperty("state", _normalState);
-            repolish(this);
-            update();
-        });
+        if (_currentState != StateType::Pressed) { // 只有没被选中时才闪烁
+            setProperty("state", _pressedState);
+            QTimer::singleShot(100, this, [this]() {
+                if (_currentState != StateType::Pressed) { // 再次确认不是选中
+                    setProperty("state", _normalState);
+                    repolish(this);
+                    update();
+                }
+            });
+        }
     } else {
-        setProperty("state", _normalState);
+        if (_currentState != StateType::Pressed) { // 只有非选中时才退回
+            setProperty("state", _normalState);
+        }
     }
     repolish(this);
     update();
-    // qDebug() << "StateWidget mouseReleaseEvent";
     QWidget::mouseReleaseEvent(event);
 }
-
+//如果控件已经被 setSelected(true)，就不要再覆盖状态。
 void StateWidget::enterEvent(QEnterEvent *event)
 {
-    if (_hoverState.isEmpty() || _mousePressed) { // 只有没按下才 hover
-        return;
+    if (_hoverState.isEmpty() || _mousePressed || _currentState == StateType::Pressed) { // 只有没按下才 hover
+        return; // 已经是选中态，不改
     }
     setProperty("state", _hoverState);
     repolish(this);
@@ -125,11 +143,11 @@ void StateWidget::enterEvent(QEnterEvent *event)
     // qDebug() << "StateWidget enterEvent";
     QWidget::enterEvent(event);
 }
-
+//如果控件已经被 setSelected(true)，就不要再覆盖状态。
 void StateWidget::leaveEvent(QEvent *event)
 {
-    if (_normalState.isEmpty() || _mousePressed) { // 只有没按下才 normal
-        return;
+    if (_normalState.isEmpty() || _mousePressed || _currentState == StateType::Pressed) { // 只有没按下才 normal
+        return; // 已经是选中态，不改
     }
     setProperty("state", _normalState);
     repolish(this);

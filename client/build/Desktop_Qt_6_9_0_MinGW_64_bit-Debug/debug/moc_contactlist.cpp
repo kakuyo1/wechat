@@ -43,11 +43,11 @@ template <> constexpr inline auto ContactList::qt_create_metaobjectdata<qt_meta_
         "",
         "signal_switchTo_contactInfoPage",
         "signal_switchTo_friendRequestPage",
+        "slot_AfterACK_addNewContactItem",
+        "std::shared_ptr<AuthResponse>",
         "slot_contactItem_clicked",
         "QListWidgetItem*",
-        "item",
-        "slot_AfterACK_addNewContactItem",
-        "std::shared_ptr<AuthResponse>"
+        "item"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -57,13 +57,13 @@ template <> constexpr inline auto ContactList::qt_create_metaobjectdata<qt_meta_
         QtMocHelpers::SignalData<void()>(3, 2, QMC::AccessPublic, QMetaType::Void),
         // Signal 'signal_switchTo_friendRequestPage'
         QtMocHelpers::SignalData<void()>(4, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'slot_contactItem_clicked'
-        QtMocHelpers::SlotData<void(QListWidgetItem *)>(5, 2, QMC::AccessPrivate, QMetaType::Void, {{
-            { 0x80000000 | 6, 7 },
-        }}),
         // Slot 'slot_AfterACK_addNewContactItem'
-        QtMocHelpers::SlotData<void(std::shared_ptr<AuthResponse>)>(8, 2, QMC::AccessPrivate, QMetaType::Void, {{
-            { 0x80000000 | 9, 2 },
+        QtMocHelpers::SlotData<void(std::shared_ptr<AuthResponse>)>(5, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { 0x80000000 | 6, 2 },
+        }}),
+        // Slot 'slot_contactItem_clicked'
+        QtMocHelpers::SlotData<void(QListWidgetItem *)>(7, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 8, 9 },
         }}),
     };
     QtMocHelpers::UintData qt_properties {
@@ -91,8 +91,8 @@ void ContactList::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 0: _t->signal_load_contacts(); break;
         case 1: _t->signal_switchTo_contactInfoPage(); break;
         case 2: _t->signal_switchTo_friendRequestPage(); break;
-        case 3: _t->slot_contactItem_clicked((*reinterpret_cast< std::add_pointer_t<QListWidgetItem*>>(_a[1]))); break;
-        case 4: _t->slot_AfterACK_addNewContactItem((*reinterpret_cast< std::add_pointer_t<std::shared_ptr<AuthResponse>>>(_a[1]))); break;
+        case 3: _t->slot_AfterACK_addNewContactItem((*reinterpret_cast< std::add_pointer_t<std::shared_ptr<AuthResponse>>>(_a[1]))); break;
+        case 4: _t->slot_contactItem_clicked((*reinterpret_cast< std::add_pointer_t<QListWidgetItem*>>(_a[1]))); break;
         default: ;
         }
     }

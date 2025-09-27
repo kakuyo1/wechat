@@ -42,7 +42,20 @@ template <> constexpr inline auto ChatDialog::qt_create_metaobjectdata<qt_meta_t
         "ChatDialog",
         "slot_load_more_sessionitems",
         "",
-        "slot_load_more_contactitems"
+        "slot_load_more_contactitems",
+        "slot_switchTo_contactInfoPage",
+        "slot_append_chat_message",
+        "std::shared_ptr<TextChatData>",
+        "message",
+        "slot_get_new_text_chat_batch",
+        "std::shared_ptr<TextChatBatch>",
+        "batch",
+        "slot_sessionItem_clicked",
+        "QListWidgetItem*",
+        "item",
+        "slot_switchTo_sessionItem_from_contactInfo",
+        "std::shared_ptr<AuthResponse>",
+        "contactInfo"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -50,6 +63,24 @@ template <> constexpr inline auto ChatDialog::qt_create_metaobjectdata<qt_meta_t
         QtMocHelpers::SlotData<void()>(1, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'slot_load_more_contactitems'
         QtMocHelpers::SlotData<void()>(3, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'slot_switchTo_contactInfoPage'
+        QtMocHelpers::SlotData<void()>(4, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'slot_append_chat_message'
+        QtMocHelpers::SlotData<void(std::shared_ptr<TextChatData>)>(5, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { 0x80000000 | 6, 7 },
+        }}),
+        // Slot 'slot_get_new_text_chat_batch'
+        QtMocHelpers::SlotData<void(std::shared_ptr<TextChatBatch>)>(8, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { 0x80000000 | 9, 10 },
+        }}),
+        // Slot 'slot_sessionItem_clicked'
+        QtMocHelpers::SlotData<void(QListWidgetItem *)>(11, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { 0x80000000 | 12, 13 },
+        }}),
+        // Slot 'slot_switchTo_sessionItem_from_contactInfo'
+        QtMocHelpers::SlotData<void(std::shared_ptr<AuthResponse>)>(14, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { 0x80000000 | 15, 16 },
+        }}),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -75,10 +106,14 @@ void ChatDialog::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         switch (_id) {
         case 0: _t->slot_load_more_sessionitems(); break;
         case 1: _t->slot_load_more_contactitems(); break;
+        case 2: _t->slot_switchTo_contactInfoPage(); break;
+        case 3: _t->slot_append_chat_message((*reinterpret_cast< std::add_pointer_t<std::shared_ptr<TextChatData>>>(_a[1]))); break;
+        case 4: _t->slot_get_new_text_chat_batch((*reinterpret_cast< std::add_pointer_t<std::shared_ptr<TextChatBatch>>>(_a[1]))); break;
+        case 5: _t->slot_sessionItem_clicked((*reinterpret_cast< std::add_pointer_t<QListWidgetItem*>>(_a[1]))); break;
+        case 6: _t->slot_switchTo_sessionItem_from_contactInfo((*reinterpret_cast< std::add_pointer_t<std::shared_ptr<AuthResponse>>>(_a[1]))); break;
         default: ;
         }
     }
-    (void)_a;
 }
 
 const QMetaObject *ChatDialog::metaObject() const
@@ -100,14 +135,14 @@ int ChatDialog::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 2)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 7;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 2)
+        if (_id < 7)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 2;
+        _id -= 7;
     }
     return _id;
 }

@@ -718,3 +718,50 @@ FriendRequestListItem #FR_add_btn[state='press'] {
     font-weight: normal;
     font-family: "Microsoft YaHei";
 }
+
+ContactInfoPage #nameTip_label,
+ContactInfoPage #name_label,
+ContactInfoPage #backupName_label,
+ContactInfoPage #backupTip_label,
+ContactInfoPage #genderTip_label,
+ContactInfoPage #gender_label {
+    color: #161616;
+    font-size: 18px; /* 设置字体大小 */
+    font-family: "Microsoft YaHei"; /* 设置字体 */
+}
+
+ContactInfoPage #chat_btn[state='normal'] {
+ border-image: url(:/images/msg_chat_normal.png);
+}
+
+ContactInfoPage #chat_btn[state='hover'] {
+ border-image: url(:/images/msg_chat_hover.png);
+}
+
+ContactInfoPage #chat_btn[state='pressed'] {
+ border-image: url(:/images/msg_chat_press.png);
+}
+
+ContactInfoPage #video_btn[state='normal'] {
+ border-image: url(:/images/video_chat_normal.png);
+}
+
+ContactInfoPage #video_btn[state='hover'] {
+ border-image: url(:/images/video_chat_hover.png);
+}
+
+ContactInfoPage #video_btn[state='pressed'] {
+ border-image: url(:/images/video_chat_press.png);
+}
+
+ContactInfoPage #audio_btn[state='normal'] {
+ border-image: url(:/images/voice_chat_normal.png);
+}
+
+ContactInfoPage #audio_btn[state='hover'] {
+ border-image: url(:/images/voice_chat_hover.png);
+}
+
+ContactInfoPage #audio_btn[state='pressed'] {
+ border-image: url(:/images/voice_chat_press.png);
+}

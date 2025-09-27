@@ -19,6 +19,7 @@
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 #include <chatpage.h>
+#include <contactinfopage.h>
 #include <contactlist.h>
 #include <customized_button.h>
 #include <customized_editline.h>
@@ -52,7 +53,7 @@ public:
     QStackedWidget *stackedWidget;
     ChatPage *chat_page;
     FriendRequestPage *friend_request_page;
-    QWidget *contact_info_page;
+    ContactInfoPage *contact_info_page;
 
     void setupUi(QDialog *ChatDialog)
     {
@@ -171,7 +172,7 @@ public:
         friend_request_page = new FriendRequestPage();
         friend_request_page->setObjectName("friend_request_page");
         stackedWidget->addWidget(friend_request_page);
-        contact_info_page = new QWidget();
+        contact_info_page = new ContactInfoPage();
         contact_info_page->setObjectName("contact_info_page");
         stackedWidget->addWidget(contact_info_page);
 
@@ -179,6 +180,9 @@ public:
 
 
         retranslateUi(ChatDialog);
+
+        stackedWidget->setCurrentIndex(2);
+
 
         QMetaObject::connectSlotsByName(ChatDialog);
     } // setupUi

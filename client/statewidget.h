@@ -27,6 +27,7 @@ public:
     void addRedPoint();
     void showRedPoint(bool show = true);
     StateType currentState() const;
+    void setSelected(bool selected);
 protected:
     void paintEvent(QPaintEvent* event) override; // 重写绘制事件
     virtual void mousePressEvent(QMouseEvent *event) override;

@@ -1,5 +1,6 @@
 #include "contactlist.h"
 #include "tcpmanager.h"
+#include <QTimer>
 
 ContactList::ContactList(QWidget *parent) :
     QListWidget(parent),
@@ -53,6 +54,14 @@ ContactList::ContactList(QWidget *parent) :
         _addContactItem->showRedPoint(true); // 显示红点
     });
 
+    // QTimer::singleShot(0, this, [this]() {
+    //     if (this->count() > 3) {
+    //         QListWidgetItem* item = this->item(3);
+    //         this->setCurrentItem(item);
+    //         this->slot_contactItem_clicked(item);
+    //     }
+    // });
+
     // 初始化测试添加联系人
     // Test_AddContacts();
 }
@@ -89,20 +98,20 @@ bool ContactList::eventFilter(QObject *watched, QEvent *event)
     return QListWidget::eventFilter(watched, event); // 让基类处理其他事件
 }
 
-void ContactList::Test_AddContacts()
-{
-    for (int i = 0; i < 13; ++i) {
-        int randomValue = QRandomGenerator::global()->bounded(100); // 生成0到99之间的随机整数
-        int head_i = randomValue%heads.size();
-        int name_i = randomValue%names.size();
-        auto *item = new ContactListItem(this);
-        item->setInfo(0, names[name_i], heads[head_i]);
-        QListWidgetItem *listItem = new QListWidgetItem(this);
-        listItem->setSizeHint(item->sizeHint()); // 设置列表项的大小提示
-        this->addItem(listItem); // 添加列表项
-        this->setItemWidget(listItem, item); // 设置列表项的widget
-    }
-}
+// void ContactList::Test_AddContacts()
+// {
+//     for (int i = 0; i < 13; ++i) {
+//         int randomValue = QRandomGenerator::global()->bounded(100); // 生成0到99之间的随机整数
+//         int head_i = randomValue%heads.size();
+//         int name_i = randomValue%names.size();
+//         auto *item = new ContactListItem(this);
+//         item->setInfo(0, names[name_i], heads[head_i]);
+//         QListWidgetItem *listItem = new QListWidgetItem(this);
+//         listItem->setSizeHint(item->sizeHint()); // 设置列表项的大小提示
+//         this->addItem(listItem); // 添加列表项
+//         this->setItemWidget(listItem, item); // 设置列表项的widget
+//     }
+// }
 
 void ContactList::slot_contactItem_clicked(QListWidgetItem* item)
 {
@@ -147,12 +156,9 @@ void ContactList::slot_AfterACK_addNewContactItem(std::shared_ptr<AuthResponse> 
         qDebug() << "响应为空，无法添加新联系人项";
         return;
     }
-    int uid = response->getUid(); // 新联系人UID
-    QString name = response->getName(); // 新联系人姓名
-    QString avatarUrl = response->getIcon(); // 新联系人头像URL
     // 创建新的联系人项
     ContactListItem* newContactItem = new ContactListItem(this);
-    newContactItem->setInfo(uid, name, avatarUrl);
+    newContactItem->setInfo(response); // 设置联系人信息
     newContactItem->setListItem(ListItemType::ContactItem); // 设置为联系人项类型
     // 创建新的列表项
     QListWidgetItem* newListItem = new QListWidgetItem(); // ❌不要传 this！因为立刻就把 newListItem 添加到了QListWidget 的末尾，相当于执行了 addItem()。
@@ -164,5 +170,5 @@ void ContactList::slot_AfterACK_addNewContactItem(std::shared_ptr<AuthResponse> 
     // 在contactGroupItem后插入新联系人
     this->insertItem(groupIndex + 1, newListItem);
     this->setItemWidget(newListItem, newContactItem);
-    qDebug() << "添加新的联系人项成功，插入位置:" << groupIndex + 1 << ", 姓名:" << name;
+    qDebug() << "添加新的联系人项成功";
 }

@@ -39,6 +39,11 @@ public:
     void intialFriendRequestListAfterLogin(std::vector<std::shared_ptr<FriendListItemInfo>> requestInfoList); // 在登录成功后初始化好友申请列表
     void addFriendRequest(std::shared_ptr<FriendListItemInfo> requestInfo); // 收到服务端ACK成功后增加好友申请
     std::vector<std::shared_ptr<FriendListItemInfo>> getFriendRequestList() const { return _friendRequestList; } // 获取好友申请列表
+
+    std::shared_ptr<SessionInfo> getFriendSessionInfoByUid(int uid);
+    void appendNewChatMsgToFriendSession(int friend_uid, std::shared_ptr<TextChatData> chatMsg); // 添加新的聊天消息到好友会话
+
+    void initializeSessionList(std::vector<std::shared_ptr<SessionInfo>> sessionList); // 初始化会话列表(其实就是复用联系人列表)
 private:
     UserManager();
     QString _name;
@@ -50,6 +55,9 @@ private:
 
     std::vector<std::shared_ptr<FriendListItemInfo>> _friendRequestList; // 好友申请列表(self_uid : request_uid)
     std::vector<std::shared_ptr<AuthResponse>> _contactList; // 联系人列表(将服务器返回的FullUserInfo去除password后存储在这里)
+
+    std::vector<std::shared_ptr<SessionInfo>> _sessionList; // 会话列表(将服务器返回的SessionInfo存储在这里TODO)(其实就是复用联系人列表)
+    QMap<int, std::shared_ptr<SessionInfo>> _friendSessionInfo_map; // 好友uid和会话信息的映射TODO(其实就是复用联系人列表)
 };
 
 #endif // USERMANAGER_H

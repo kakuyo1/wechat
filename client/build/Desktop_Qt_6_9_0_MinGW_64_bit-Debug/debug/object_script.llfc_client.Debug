@@ -9,6 +9,7 @@ debug/chosentag.o
 debug/clickablelabel.o
 debug/contactgrouptipitem.o
 debug/contactinfodata.o
+debug/contactinfopage.o
 debug/contactlist.o
 debug/contactlistitem.o
 debug/customized_button.o
@@ -52,6 +53,7 @@ debug/moc_chatviewarea.o
 debug/moc_chosentag.o
 debug/moc_clickablelabel.o
 debug/moc_contactgrouptipitem.o
+debug/moc_contactinfopage.o
 debug/moc_contactlist.o
 debug/moc_contactlistitem.o
 debug/moc_customized_button.o

@@ -453,6 +453,7 @@ void FriendAuthDialog::slot_confirmBtn_clicked()
     emit TcpManager::GetInstance()->signal_send_data(RequestType::MESSAGE_CLIENT_AUTHFRIEND_REQUEST, jsonString);
 
     this->accept();
+    //如果你使用 exec() 模态方式打开 QDialog，应使用 accept() / reject() 来关闭它并告知调用者结果。
 }
 
 void FriendAuthDialog::slot_cancelBtn_clicked()

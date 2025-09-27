@@ -1,5 +1,7 @@
 #include "basemessageitem.h"
 
+#include <QDir>
+
 BaseMessageItem::BaseMessageItem(MessageRole role, QWidget *parent) :
     QWidget(parent),
     _messageRole(role),
@@ -59,7 +61,11 @@ void BaseMessageItem::setUserAvatar(const QString &avatarPath)
     if (!_avatarLabel) {
         _avatarLabel = new QLabel(this);
     }
-    QPixmap avatarPixmap(avatarPath);
+    // 从static文件夹中获取要添加的头像(Icon path: "B:\\qt learing\\llfc_client\\build\\Desktop_Qt_6_9_0_MinGW_64_bit-Debug\\debug\\static\\head_1.jpg")
+    QString appPath = QCoreApplication::applicationDirPath();
+    QString final_iconPath = QDir::toNativeSeparators(appPath + QDir::separator() + "static" + QDir::separator() + avatarPath);
+
+    QPixmap avatarPixmap(final_iconPath);
     if (!avatarPixmap.isNull()) {
         _avatarLabel->setPixmap(avatarPixmap.scaled(_avatarLabel->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
         _avatarLabel->setScaledContents(true); // 确保头像适应标签大小

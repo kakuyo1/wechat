@@ -64,6 +64,37 @@ void UserManager::addFriendRequest(std::shared_ptr<FriendListItemInfo> requestIn
     }
 }
 
+std::shared_ptr<SessionInfo> UserManager::getFriendSessionInfoByUid(int uid)
+{
+    auto it = _friendSessionInfo_map.find(uid);
+    if (it != _friendSessionInfo_map.end()) {
+        return it.value(); // 返回找到的会话信息
+    }
+    return nullptr; // 如果没有找到对应的会话信息，返回nullptr
+}
+
+void UserManager::appendNewChatMsgToFriendSession(int friend_uid, std::shared_ptr<TextChatData> chatMsg)
+{
+    auto it = _friendSessionInfo_map.find(friend_uid);
+    if (it == _friendSessionInfo_map.end()) {
+        qDebug() << "Friend session info not found for uid:" << friend_uid;
+        return; // 如果没有找到对应的会话信息，直接返回
+    }
+    it.value()->_chatHistory.push_back(chatMsg); // 添加新的聊天消息到对应的会话历史
+}
+
+void UserManager::initializeSessionList(std::vector<std::shared_ptr<SessionInfo> > sessionList)
+{
+    _sessionList.clear(); // 清空之前的会话列表
+    _sessionList = sessionList; // 初始化会话列表
+    _friendSessionInfo_map.clear(); // 清空之前的映射
+    for (const auto& session : _sessionList) {
+        if (session) {
+            _friendSessionInfo_map[session->_peeruid] = session; // 构建好友uid和会话信息的映射
+        }
+    }
+}
+
 QString UserManager::getName() const
 {
     return _name;

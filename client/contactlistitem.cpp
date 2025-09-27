@@ -5,9 +5,6 @@
 ContactListItem::ContactListItem(QWidget *parent)
     : BaseListItem(parent)
     , ui(new Ui::ContactListItem)
-    , _avatarUrl("")
-    , _name("")
-    , _uid(0)
 {
     ui->setupUi(this);
     setListItem(ListItemType::ContactItem);
@@ -26,13 +23,13 @@ QSize ContactListItem::sizeHint() const
     return QSize(250, 70);
 }
 
-void ContactListItem::setInfo(int uid, QString name, QString avatarUrl)
+void ContactListItem::setInfo(std::shared_ptr<AuthResponse> response)
 {
-    _uid = uid;
-    _name = name;
-    _avatarUrl = avatarUrl;
+    _contactInfo = response; // 保存联系人信息
+    auto name = response->getName();
+    auto avatarUrl = response->getIcon();
     QString appPath = QCoreApplication::applicationDirPath();
-    QString iconPath = QDir::toNativeSeparators(appPath + QDir::separator() + "static" + QDir::separator() + _avatarUrl);
+    QString iconPath = QDir::toNativeSeparators(appPath + QDir::separator() + "static" + QDir::separator() + avatarUrl);
     QPixmap avatarPixmap(iconPath);
     if (!avatarPixmap.isNull()) {
         avatarPixmap = avatarPixmap.scaled(ui->contact_icon_label->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);

@@ -1,7 +1,8 @@
 #ifndef CONTACTINFODATA_H
 #define CONTACTINFODATA_H
 #include <QString>
-
+#include <QJsonObject>
+#include <QJsonArray>
 
 /*SearchInfo用于用户通过uid/name在搜索栏搜索用户时使用*/
 class SearchInfo {
@@ -25,6 +26,7 @@ private:
     QString _emial; // 邮箱地址
 };
 
+// 好友申请列表项信息
 class FriendListItemInfo {
 public:
     FriendListItemInfo(int self_uid, int request_uid, QString name = "",
@@ -38,7 +40,7 @@ public:
     QString _avatarPath; // 请求的用户头像路径
     int _status; // 请求状态(0: 未处理, 1: 已同意, 2: 已拒绝)
 };
-
+// 同意添加好友请求
 class AddContactRequest {
 public:
     AddContactRequest(int fromUid, QString fromName, QString fromNickname,
@@ -53,7 +55,7 @@ public:
     QString _fromDescription; // 发送请求的用户描述
     QString _fromEmail; // 发送请求的用户邮箱地址
 };
-
+// 服务器同意添加好友请求后返回的用户信息
 class AddContactResponse {
 public:
     AddContactResponse(int Uid, QString Name, QString Nickname,
@@ -85,6 +87,7 @@ public:
     int _status; // 请求状态
 };
 
+/*未使用该类*/
 class AuthRequest {
 public:
     AuthRequest(int uid, QString name, QString nickname, QString avatarPath,
@@ -120,18 +123,58 @@ public:
     QString _peerdescription; // 描述
 };
 
+struct TextChatData { // 一条消息
+    TextChatData(QString message_uuid, QString message_content, int from_uid, int to_uid)
+        : _message_uuid(message_uuid), _message_content(message_content), _from_uid(from_uid), _to_uid(to_uid) {}
+    QString _message_uuid;
+    QString _message_content; // 消息内容
+    int _from_uid;
+    int _to_uid;
+};
 
-class UserInfo {
+struct TextChatBatch { // 一批消息
+    TextChatBatch(int from_uid, int to_uid, QJsonArray array) : _from_uid(from_uid), _to_uid(to_uid) {
+        for (const auto& value : array) {
+            if (value.isObject()) {
+                QJsonObject obj = value.toObject();
+                QString message_uuid = obj.value("message_uuid").toString();
+                QString message_content = obj.value("message_content").toString();
+                auto message = std::make_shared<TextChatData>(message_uuid, message_content, from_uid, to_uid);
+                _messages.push_back(message);
+            }
+        }
+    }
+    int _from_uid; // 发送者用户ID
+    int _to_uid; // 接收者用户ID
+    std::vector<std::shared_ptr<TextChatData>> _messages; // 消息列表
+};
+// 会话信息，也就是好友信息+聊天历史记录，FriendInfo（这是up主的命名）
+class SessionInfo {
 public:
-    UserInfo(int uid, QString name, QString avatarPath);
-    ~UserInfo() = default;
-private:
-    int _uid;
-    QString _name;
-    QString _nickname;
-    QString _description;
-    QString _avatarPath; // 头像路径
-    int _gender;
+    SessionInfo(std::shared_ptr<AuthResponse> peerInfo, std::vector<std::shared_ptr<TextChatData>> chatHistory)
+        : _peeruid(0), _peergender(0), _peername(""), _peernickname(""), _peericon(""), _peeremail(""), _peerdescription(""),
+          _chatHistory(chatHistory) {
+        if (nullptr != peerInfo) {
+            _peeruid = peerInfo->getUid();
+            _peergender = peerInfo->getGender();
+            _peername = peerInfo->getName();
+            _peernickname = peerInfo->getNickname();
+            _peericon = peerInfo->getIcon();
+            _peeremail = peerInfo->getEmail();
+            _peerdescription = peerInfo->getDescription();
+            _last_message_to_show = chatHistory.empty() ? "" : chatHistory.back()->_message_content;
+        }
+    }
+public:
+    int _peeruid;
+    int _peergender;
+    QString _peername;
+    QString _peernickname;
+    QString _peericon;
+    QString _peeremail; // 邮箱地址
+    QString _peerdescription; // 描述
+    QString _last_message_to_show; // 最后一条消息内容展现在会话项名称下方
+    std::vector<std::shared_ptr<TextChatData>> _chatHistory; // 聊天历史记录
 };
 
 #endif // CONTACTINFODATA_H

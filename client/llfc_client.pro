@@ -20,6 +20,7 @@ SOURCES += \
     clickablelabel.cpp \
     contactgrouptipitem.cpp \
     contactinfodata.cpp \
+    contactinfopage.cpp \
     contactlist.cpp \
     contactlistitem.cpp \
     customized_button.cpp \
@@ -65,6 +66,7 @@ HEADERS += \
     clickablelabel.h \
     contactgrouptipitem.h \
     contactinfodata.h \
+    contactinfopage.h \
     contactlist.h \
     contactlistitem.h \
     customized_button.h \
@@ -105,6 +107,7 @@ FORMS += \
     chatviewarea.ui \
     chosentag.ui \
     contactgrouptipitem.ui \
+    contactinfopage.ui \
     contactlistitem.ui \
     friendauthdialog.ui \
     friendrequestdialog.ui \

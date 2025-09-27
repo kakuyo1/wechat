@@ -37,13 +37,6 @@ int SearchInfo::getGender() const
     return _gender;
 }
 
-UserInfo::UserInfo(int uid, QString name, QString avatarPath) :
-    _uid(uid),
-    _name(name),
-    _avatarPath(avatarPath)
-{
-
-}
 
 AddContactRequest::AddContactRequest(int fromUid, QString fromName, QString fromNickname,
                                      QString fromAvatarPath, QString fromDescription, int fromGender, QString fromEmail) :

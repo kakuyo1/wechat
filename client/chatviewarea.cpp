@@ -31,11 +31,11 @@ ChatViewArea::~ChatViewArea()
 {
     delete ui;
 }
-
+// 添加消息控件到布局中
 void ChatViewArea::appendMessageWidget(QWidget *item)
 {
     if (_messageLayout) { // 新消息插入到伸缩项前面，确保消息顺序从上到下。
-        _messageLayout->insertWidget(_messageLayout->count() - 1, item); // 消息从顶部开始添加
+        _messageLayout->insertWidget(_messageLayout->count() - 1, item); // 消息从伸缩项上侧开始添加
     }
 }
 
@@ -56,6 +56,34 @@ void ChatViewArea::testAddMessages()
         }
 
         appendMessageWidget(msg);
+    }
+}
+
+void ChatViewArea::removeAllitem()
+{
+    qDebug() << "removeAllitem called";
+    QVBoxLayout* layout = qobject_cast<QVBoxLayout*>(ui->scrollArea->widget()->layout());
+    if (!layout) {
+        qDebug() << "No layout found in scrollArea widget";
+        return;
+    }
+
+    // 不删除最后一个伸缩项
+    /*
+    QLayoutItem* item = layout->itemAt(0);
+    这里只是拿到一个指针，layout 还是认为它“在里面”
+    所以你不能随便 delete，否则 layout 内部的指针会悬空
+    要用 layout->takeAt() 取出它，才算是从 layout 里“移除”了
+    */
+    while (layout->count() > 1) {
+        QLayoutItem* item = layout->takeAt(0); // 取出第一个布局项
+        if (!item) continue; // 如果为空，继续
+
+        if (QWidget* widget = item->widget()) {
+            widget->deleteLater(); // 更安全，避免立即释放崩溃
+        }
+
+        delete item; // 这里只删除 layoutItem，Qt 不会自动 delete widget
     }
 }
 

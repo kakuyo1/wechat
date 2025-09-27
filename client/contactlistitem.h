@@ -19,15 +19,13 @@ public:
     explicit ContactListItem(QWidget *parent = nullptr);
     ~ContactListItem() = default;
     virtual QSize sizeHint() const override;
-    void setInfo(int uid, QString name, QString avatarUrl);
+    void setInfo(std::shared_ptr<AuthResponse> response);
     void setAddContactItemInfoByLocal(QString name, QString avatarUrl);
     void showRedPoint(bool show = false);
+    std::shared_ptr<AuthResponse> getContactInfo() { return _contactInfo; }
 private:
     Ui::ContactListItem *ui;
-    // std::shared_ptr<UserInfo> _userInfo;
-    QString _avatarUrl; // 头像路径
-    QString _name; // 用户名
-    int _uid;
+    std::shared_ptr<AuthResponse> _contactInfo; // 联系人信息
 };
 
 #endif // CONTACTLISTITEM_H

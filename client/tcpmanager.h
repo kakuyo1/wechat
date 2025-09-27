@@ -68,6 +68,7 @@ signals:
     void signal_getACK_auth_friend_request_success_handlerequestItem(std::shared_ptr<AuthResponse> response); // 收到ACK好友认证请求成功
     void signal_getACK_auth_friend_request_success_addNewItem(std::shared_ptr<AuthResponse> response); // 收到ACK好友认证请求成功
     void signal_getPush_auth_friend_request_success(std::shared_ptr<AuthResponse> response); // 收到PUSH好友认证请求成功
+    void signal_receive_chat_text_message(std::shared_ptr<TextChatBatch> messageBatch); // 接收聊天文本消息
 };
 
 #endif // TCPMANAGER_H

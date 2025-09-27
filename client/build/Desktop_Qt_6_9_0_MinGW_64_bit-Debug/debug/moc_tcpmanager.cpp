@@ -65,6 +65,9 @@ template <> constexpr inline auto TcpManager::qt_create_metaobjectdata<qt_meta_t
         "std::shared_ptr<AuthResponse>",
         "signal_getACK_auth_friend_request_success_addNewItem",
         "signal_getPush_auth_friend_request_success",
+        "signal_receive_chat_text_message",
+        "std::shared_ptr<TextChatBatch>",
+        "messageBatch",
         "slot_connect_to_chatserver",
         "serverInfo",
         "info",
@@ -116,12 +119,16 @@ template <> constexpr inline auto TcpManager::qt_create_metaobjectdata<qt_meta_t
         QtMocHelpers::SignalData<void(std::shared_ptr<AuthResponse>)>(26, 2, QMC::AccessPublic, QMetaType::Void, {{
             { 0x80000000 | 24, 21 },
         }}),
-        // Slot 'slot_connect_to_chatserver'
-        QtMocHelpers::SlotData<void(serverInfo)>(27, 2, QMC::AccessPublic, QMetaType::Void, {{
+        // Signal 'signal_receive_chat_text_message'
+        QtMocHelpers::SignalData<void(std::shared_ptr<TextChatBatch>)>(27, 2, QMC::AccessPublic, QMetaType::Void, {{
             { 0x80000000 | 28, 29 },
         }}),
+        // Slot 'slot_connect_to_chatserver'
+        QtMocHelpers::SlotData<void(serverInfo)>(30, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 31, 32 },
+        }}),
         // Slot 'slot_send_data'
-        QtMocHelpers::SlotData<void(RequestType, const QString &)>(30, 2, QMC::AccessPublic, QMetaType::Void, {{
+        QtMocHelpers::SlotData<void(RequestType, const QString &)>(33, 2, QMC::AccessPublic, QMetaType::Void, {{
             { 0x80000000 | 7, 8 }, { QMetaType::QString, 9 },
         }}),
     };
@@ -160,8 +167,9 @@ void TcpManager::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 10: _t->signal_getACK_auth_friend_request_success_handlerequestItem((*reinterpret_cast< std::add_pointer_t<std::shared_ptr<AuthResponse>>>(_a[1]))); break;
         case 11: _t->signal_getACK_auth_friend_request_success_addNewItem((*reinterpret_cast< std::add_pointer_t<std::shared_ptr<AuthResponse>>>(_a[1]))); break;
         case 12: _t->signal_getPush_auth_friend_request_success((*reinterpret_cast< std::add_pointer_t<std::shared_ptr<AuthResponse>>>(_a[1]))); break;
-        case 13: _t->slot_connect_to_chatserver((*reinterpret_cast< std::add_pointer_t<serverInfo>>(_a[1]))); break;
-        case 14: _t->slot_send_data((*reinterpret_cast< std::add_pointer_t<RequestType>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2]))); break;
+        case 13: _t->signal_receive_chat_text_message((*reinterpret_cast< std::add_pointer_t<std::shared_ptr<TextChatBatch>>>(_a[1]))); break;
+        case 14: _t->slot_connect_to_chatserver((*reinterpret_cast< std::add_pointer_t<serverInfo>>(_a[1]))); break;
+        case 15: _t->slot_send_data((*reinterpret_cast< std::add_pointer_t<RequestType>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2]))); break;
         default: ;
         }
     }
@@ -192,6 +200,8 @@ void TcpManager::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
             return;
         if (QtMocHelpers::indexOfMethod<void (TcpManager::*)(std::shared_ptr<AuthResponse> )>(_a, &TcpManager::signal_getPush_auth_friend_request_success, 12))
             return;
+        if (QtMocHelpers::indexOfMethod<void (TcpManager::*)(std::shared_ptr<TextChatBatch> )>(_a, &TcpManager::signal_receive_chat_text_message, 13))
+            return;
     }
 }
 
@@ -218,14 +228,14 @@ int TcpManager::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 15)
+        if (_id < 16)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 15;
+        _id -= 16;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 15)
+        if (_id < 16)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 15;
+        _id -= 16;
     }
     return _id;
 }
@@ -306,5 +316,11 @@ void TcpManager::signal_getACK_auth_friend_request_success_addNewItem(std::share
 void TcpManager::signal_getPush_auth_friend_request_success(std::shared_ptr<AuthResponse> _t1)
 {
     QMetaObject::activate<void>(this, &staticMetaObject, 12, nullptr, _t1);
+}
+
+// SIGNAL 13
+void TcpManager::signal_receive_chat_text_message(std::shared_ptr<TextChatBatch> _t1)
+{
+    QMetaObject::activate<void>(this, &staticMetaObject, 13, nullptr, _t1);
 }
 QT_WARNING_POP

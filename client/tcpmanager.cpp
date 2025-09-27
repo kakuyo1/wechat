@@ -151,7 +151,7 @@ void TcpManager::initHandlers()
         UserManager::GetInstance()->setDescription(jsonObj.value("desc").toString());
         UserManager::GetInstance()->setEmail(jsonObj.value("email").toString());
         UserManager::GetInstance()->setGender(jsonObj.value("gender").toInt());
-        //  friendlistRequest
+        //  好友申请列表 friendlistRequest
         if (!jsonObj.contains("friend_request_list") || !jsonObj["friend_request_list"].isArray()) {
             qDebug() << "Response does not contain 'friend_request_list' or it is not an array";
             emit signal_login_failed();
@@ -189,7 +189,7 @@ void TcpManager::initHandlers()
             UserManager::GetInstance()->intialFriendRequestListAfterLogin(friendRequestList); // 初始化好友申请列表
         }
 
-        //  contactlist
+        //  联系人列表contactlist
         if (!jsonObj.contains("contact_list") || !jsonObj["contact_list"].isArray()) {
             qDebug() << "Response does not contain 'contact_list' or it is not an array";
             emit signal_login_failed();
@@ -212,6 +212,7 @@ void TcpManager::initHandlers()
                     qDebug() << "Missing field from friend Contact item";
                     continue;
                 }
+
                 int uid = itemObj["uid"].toInt();
                 QString name = itemObj["name"].toString();
                 QString icon = itemObj["icon"].toString();
@@ -223,7 +224,16 @@ void TcpManager::initHandlers()
                 auto contactInfoptr = std::make_shared<AuthResponse>(contactInfo);
                 contactList.push_back(contactInfoptr);
             }
-            UserManager::GetInstance()->intialContactListAfterLogin(contactList); // 初始化联系人列表
+            // 初始化联系人列表
+            UserManager::GetInstance()->intialContactListAfterLogin(contactList);
+            // 初始化会话列表(其实就是复用联系人列表)
+            std::vector<std::shared_ptr<SessionInfo>> sessionList;
+            for (auto contact : contactList) {
+                if (!contact) continue;
+                std::shared_ptr<SessionInfo> sessionInfo = std::make_shared<SessionInfo>(contact, std::vector<std::shared_ptr<TextChatData>>{}); // TODO 聊天记录暂时为空
+                sessionList.push_back(sessionInfo);
+            }
+            UserManager::GetInstance()->initializeSessionList(sessionList);
         }
         emit signal_switchto_chatdialog();
     };
@@ -493,6 +503,71 @@ void TcpManager::initHandlers()
         qDebug() << "Response from_description: " << from_description;
         qDebug() << "Response from_gender: " << from_gender;
     };
+
+    // 7.handle for MESSAGE_CHATSERVER_CHATTEXT_ACK = 1014, // 服务端 → 发起方客户端：处理聊天文本消息的反馈
+    _handlers.insert(RequestType::MESSAGE_CHATSERVER_CHATTEXT_ACK, [this](RequestType type, int len, QByteArray data) {
+        Q_UNUSED(len);
+        Q_UNUSED(type);
+        QJsonDocument doc = QJsonDocument::fromJson(data);
+        if (doc.isNull() || doc.isEmpty()) {
+            qDebug() << "Invalid JSON response from chat server";
+            return;
+        }
+        if (!doc.isObject()) {
+            qDebug() << "Response is not a JSON object";
+            return;
+        }
+        QJsonObject jsonObj = doc.object();
+        if (!jsonObj.contains("error") && !jsonObj.contains("message")) {
+            qDebug() << "Response does not contain 'error/message' field";
+            return;
+        }
+        int errorCode = jsonObj.value("error").toInt();
+        if (errorCode != static_cast<int>(ErrorCode::SUCCESS)) {
+            qDebug() << "Chat text ACK failed with error code:" << errorCode;
+            qDebug() << "Response message: " << jsonObj.value("message").toString();
+            return;
+        }
+        // Chat text ACK successful
+        qDebug() << "Chat text ACK successful with error code:" << errorCode;
+        qDebug() << "Response message: " << jsonObj.value("message").toString();
+        // TODO, ui设置送达等标记
+    });
+    // 8.handle for MESSAGE_CHATSERVER_CHATTEXT_PUSH = 1015, // 服务端 → 接收方客户端：转发聊天文本消息
+    _handlers.insert(RequestType::MESSAGE_CHATSERVER_CHATTEXT_PUSH, [this](RequestType type, int len, QByteArray data) {
+        Q_UNUSED(len);
+        Q_UNUSED(type);
+        QJsonDocument doc = QJsonDocument::fromJson(data);
+        if (doc.isNull() || doc.isEmpty()) {
+            qDebug() << "Invalid JSON response from chat server";
+            return;
+        }
+        if (!doc.isObject()) {
+            qDebug() << "Response is not a JSON object";
+            return;
+        }
+        QJsonObject jsonObj = doc.object();
+        if (!jsonObj.contains("error") && !jsonObj.contains("message")) {
+            qDebug() << "Response does not contain 'error/message' field";
+            return;
+        }
+        int errorCode = jsonObj.value("error").toInt();
+        if (errorCode != static_cast<int>(ErrorCode::SUCCESS)) {
+            qDebug() << "Chat text PUSH failed with error code:" << errorCode;
+            qDebug() << "Response message: " << jsonObj.value("message").toString();
+            return;
+        }
+        // Chat text PUSH successful
+        qDebug() << "Chat text PUSH successful with error code:" << errorCode;
+        qDebug() << "Response message: " << jsonObj.value("message").toString();
+        int from_uid = jsonObj.value("from_uid").toInt();
+        int to_uid = jsonObj.value("to_uid").toInt();
+        qDebug() << "Response from_uid: " << from_uid;
+        qDebug() << "Response to_uid: " << to_uid;
+        QJsonArray messagesArray = jsonObj.value("text_array").toArray();
+        auto messageBatchPtr = std::make_shared<TextChatBatch>(from_uid, to_uid, messagesArray);
+        emit signal_receive_chat_text_message(messageBatchPtr); // 由ChatDialog接收
+    });
 }
 
 void TcpManager::handleMessage(RequestType type, int len, QByteArray data)
@@ -525,7 +600,7 @@ void TcpManager::slot_send_data(RequestType type, const QString &jsondata)
     // stream << _messageType << _messageLength << jsonData; //❗ 不要通过 QDataStream 写入 jsonData,会多写内容！！
     /*实际上会把 jsonData 作为 QByteArray 整体对象写入，而不是按原始字节附加，它会多写**自己的长度信息（一个 int32）**进去。*/
     stream << _messageType << _messageLength;
-    message.append(jsonData); // ✅ 正确添加原始 JSON 字节流
+    message.append(jsonData); //  正确添加原始 JSON 字节流
     qDebug() << "Send message Type: " << _messageType;
     qDebug() << "Send message Length: " << _messageLength;
     qDebug() << "Send message Data: " << jsonData;

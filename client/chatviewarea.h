@@ -21,6 +21,7 @@ public:
     ~ChatViewArea();
     void appendMessageWidget(QWidget* item);
     void testAddMessages();
+    void removeAllitem();
 protected:
     virtual void paintEvent(QPaintEvent *event) override;
     virtual bool eventFilter(QObject *watched, QEvent *event) override;
