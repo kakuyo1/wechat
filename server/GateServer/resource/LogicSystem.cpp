@@ -4,6 +4,7 @@
 #include "../include/RedisManager.h"
 #include "../include/MysqlManager.h"
 #include "../include/StatusGrpcClient.h"
+#include "LogicSystem.h"
 
 LogicSystem::LogicSystem()
 {
@@ -371,5 +372,4 @@ void LogicSystem::RegisterPostHandler(const std::string &route, HttpHandler hand
 {
     _post_handlers[route] = std::move(handler);
 }
-
 

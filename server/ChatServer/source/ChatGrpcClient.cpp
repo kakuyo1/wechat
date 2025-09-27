@@ -135,6 +135,42 @@ AuthFriendResponse ChatGrpcClient::NotifyAuthFriend(const std::string &peer_serv
     return response;
 }
 
+TextChatTransResponse ChatGrpcClient::NotifyTextChatTrans(const std::string &peer_serverName, const TextChatTransRequest &request)
+{
+    TextChatTransResponse response;
+    Defer defer([&response, &request](){
+        response.set_from_uid(request.from_uid());
+        response.set_to_uid(request.to_uid());
+    });
+    auto it = _stubPools.find(peer_serverName); // 找到操控对端服务器(gRPC)的stub池
+    if (it == _stubPools.end()) {
+        spdlog::error("No stub pool found for peer server name: {}", peer_serverName);
+        response.set_error(static_cast<int>(ErrorCodes::ERROR_RPC));
+        return response; // Return empty response
+    }
+    auto& stubPool = it->second;
+    std::unique_ptr<ChatService::Stub> stub = stubPool->GetStub();
+    if (!stub) {
+        spdlog::error("Failed to get stub from pool for peer server name: {}", peer_serverName);
+        response.set_error(static_cast<int>(ErrorCodes::ERROR_RPC));
+        return response; // Return empty response
+    }
+    // Use Defer to ensure the stub is returned to the pool
+    Defer deferReturnStub([&stubPool, &stub]() {
+        if (stub) {
+            stubPool->ReturnStub(std::move(stub));
+        }
+    });
+    grpc::ClientContext context;
+    Status status = stub->NotifyTextChatTrans(&context, request, &response);
+    if (!status.ok()) {
+        spdlog::error("gRPC call failed: {}", status.error_message());
+        return response;
+    }
+    response.set_error(static_cast<int>(ErrorCodes::SUCCESS));
+    return response;
+}
+
 ChatGrpcClient::ChatGrpcClient()
 {
     auto& config = ConfigIniManager::Instance();
@@ -157,3 +193,5 @@ ChatGrpcClient::ChatGrpcClient()
                     single_server, config[single_server]["Host"], config[single_server]["RPCPort"]);
     }
 }
+
+

@@ -1,5 +1,6 @@
 #include "../include/ChatServiceImpl.h"
 #include "../include/CSession.h"
+#include "ChatServiceImpl.h"
 
 Status ChatServiceImpl::NotifyAddFriend(::grpc::ServerContext* context, /* if you sent a addFriend request, now we are in a diffent chatServer*/
     const AddFriendRequest* request, AddFriendResponse* response) {
@@ -71,4 +72,32 @@ Status ChatServiceImpl::NotifyAuthFriend(::grpc::ServerContext* context,
         // send the json string to the user
         session->Send(jsonString, static_cast<int>(MessageType::MESSAGE_CHATSERVER_AUTHFRIEND_PUSH));
         return Status::OK; // Return success status
+    }
+
+    Status ChatServiceImpl::NotifyTextChatTrans(::grpc::ServerContext *context, const chat_message::TextChatTransRequest *request, chat_message::TextChatTransResponse *response)
+    {
+    int to_uid = request->to_uid();
+    auto session = UserManager::GetInstance()->getSessionByUid(to_uid);
+    if (session == nullptr) { // the peer is offline, here we just return ok
+        spdlog::warn("User with UID {} is not online, cannot forward text chat message.", to_uid);
+        response->set_error(static_cast<int>(ErrorCodes::ERROR_USER_OFFLINE));
+        return Status::OK;
+    }
+    Json::Value returnJson;
+    returnJson["error"] = static_cast<int>(ErrorCodes::SUCCESS);
+    returnJson["message"] = "Text chat message transfer successful";
+    returnJson["from_uid"] = request->from_uid(); // ! 这里可能反了
+    returnJson["to_uid"] = request->to_uid(); // ! 这里可能反了
+    Json::Value textArrays(Json::arrayValue);
+    for (int i = 0; i < request->textchats_size(); ++i) {
+        Json::Value textItem;
+        textItem["message_content"] = request->textchats(i).textchatcontent();
+        textItem["message_uuid"] = request->textchats(i).textchatid();
+        textArrays.append(textItem);
+    }
+    returnJson["text_array"] = textArrays;
+    std::string jsonString = returnJson.toStyledString();
+    session->Send(jsonString, static_cast<int>(MessageType::MESSAGE_CHATSERVER_CHATTEXT_PUSH));
+    spdlog::debug("Forwarded text chat message from UID {} to UID {}.", request->from_uid(), to_uid);
+    return Status::OK;
     }

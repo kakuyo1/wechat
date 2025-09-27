@@ -22,6 +22,8 @@ using chat_message::AddFriendResponse;
 using chat_message::AuthFriendRequest;
 using chat_message::AuthFriendResponse;
 using chat_message::ChatService;
+using chat_message::TextChatTransRequest;
+using chat_message::TextChatTransResponse;
 
 class ChatServiceImpl final : public ChatService::Service {
 public:
@@ -29,4 +31,5 @@ public:
     ~ChatServiceImpl() override = default;
     Status NotifyAddFriend(::grpc::ServerContext* context, const AddFriendRequest* request, AddFriendResponse* response) override;
     Status NotifyAuthFriend(::grpc::ServerContext* context, const AuthFriendRequest* request, AuthFriendResponse* response) override;
+    Status NotifyTextChatTrans(::grpc::ServerContext* context, const chat_message::TextChatTransRequest* request, chat_message::TextChatTransResponse* response) override;
 };

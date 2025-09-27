@@ -28,6 +28,10 @@ using chat_message::AuthFriendRequest;
 using chat_message::AuthFriendResponse;
 using chat_message::ChatService;
 
+using chat_message::TextChatTransRequest;
+using chat_message::TextChatTransResponse;
+
+
 class ChatStubPool {
 public:
     ChatStubPool(size_t pool_size, const std::string& RPCserver_address, const std::string& RPCserver_port);
@@ -51,10 +55,12 @@ class ChatGrpcClient : public Singleton<ChatGrpcClient> {
 public:
     ~ChatGrpcClient() = default;
     /* addFriend request, send to peer*/
-    AddFriendResponse NotifyAddFriend(const std::string& peer_serverIP, const AddFriendRequest& request);
+    AddFriendResponse NotifyAddFriend(const std::string& peer_serverName, const AddFriendRequest& request);
     /* authFriend request, send to peer*/
-    AuthFriendResponse NotifyAuthFriend(const std::string& peer_serverIP, const AuthFriendRequest& request);
-private:
+    AuthFriendResponse NotifyAuthFriend(const std::string& peer_serverName, const AuthFriendRequest& request);
+    /* text chat transfer request, send to peer*/
+    TextChatTransResponse NotifyTextChatTrans(const std::string& peer_serverName, const TextChatTransRequest& request);
+    private:
     ChatGrpcClient();
     /* serverIP(chat1, chat2...) : stubPool*/
     std::unordered_map<std::string, std::unique_ptr<ChatStubPool>> _stubPools;

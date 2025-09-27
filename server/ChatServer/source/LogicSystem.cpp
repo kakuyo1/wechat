@@ -52,6 +52,10 @@ void LogicSystem::InitializeHandlers()
     // deal with auth friend messages
     RegisterHandler(static_cast<short>(MessageType::MESSAGE_CLIENT_AUTHFRIEND_REQUEST),
     std::bind(&LogicSystem::HandleAuthFriend, this, std::placeholders::_1, std::placeholders::_2));
+
+    // deal with the text message transfer between clients
+    RegisterHandler(static_cast<short>(MessageType::MESSAGE_CLIENT_CHATTEXT_REQUEST),
+    std::bind(&LogicSystem::HandleTextMessageTransfer, this, std::placeholders::_1, std::placeholders::_2));
 }
 
 void LogicSystem::ProcessMessageQueue()
@@ -738,6 +742,86 @@ void LogicSystem::HandleAuthFriend(std::shared_ptr<CSession> session, std::share
     session->Send(response.toStyledString(), static_cast<short>(MessageType::MESSAGE_CHATSERVER_AUTHFRIEND_ACK));
     spdlog::debug("Step 4: Sent ACK response to the sender {} successfully.", from_uid);
 }
+
+void LogicSystem::HandleTextMessageTransfer(std::shared_ptr<CSession> session, std::shared_ptr<RecieveMessageNode> message_node)
+{
+    // 1.Extract message data by json parsing
+    std::string message_data(message_node->GetData(), message_node->GetCurrentLength());
+    std::istringstream message_stream(message_data);
+    Json::Value source;
+    Json::Value response;
+    Json::CharReaderBuilder reader_builder;
+    std::string errors;
+    if (!Json::parseFromStream(reader_builder, message_stream, &source, &errors)) {
+        spdlog::error("Failed to parse JSON from message: {}", errors);
+        response["error"] = static_cast<short>(ErrorCodes::ERROR_JSON_PARSE);
+        response["message"] = "Invalid JSON format";
+        session->Send(response.toStyledString(), static_cast<short>(MessageType::MESSAGE_CHATSERVER_CHATTEXT_ACK));
+        return;
+    }
+    int from_uid = source["from_uid"].asInt();
+    int to_uid = source["to_uid"].asInt();
+    const Json::Value textArrays = source["text_array"];
+    spdlog::debug("Step 1: Received text message transfer request from UID {} to UID {}, text array size: {}", from_uid, to_uid, textArrays.size());
+    // 2.check out which server the receiver(to_uid) is on
+    auto current_server_name = ConfigIniManager::Instance()["SelfServer"]["Name"];
+    std::string server_ip_key = SERVER_IP_PREFIX + std::to_string(to_uid);
+    std::string peer_server_name = "";
+    if (!RedisManager::GetInstance()->Get(server_ip_key, peer_server_name)) { // redis error
+        spdlog::error("Failed to get server IP for UID {} from Redis.", to_uid);
+        response["error"] = static_cast<short>(ErrorCodes::ERROR_REDIS);
+        response["message"] = "Failed to retrieve server IP for text message transfer";
+        session->Send(response.toStyledString(), static_cast<short>(MessageType::MESSAGE_CHATSERVER_CHATTEXT_ACK));
+        return;
+    }
+    spdlog::debug("Step 2: Found peer server {} for UID {}.", peer_server_name, to_uid);
+    // even if the peer client is offline, we still try to send the message
+    // in the case, the message could be lost, we will not store it in mysql for now
+    // this logic will be designed in future versions
+
+    // 3. compare the current server name with the peer server name to decide how to handle the request
+    /*  (1) If they are the same, send the response through this ChatServer)
+        (2) If they are different, forward the request to the peer server by using gRPC)*/
+    if (peer_server_name == current_server_name) {
+        auto peer_session = UserManager::GetInstance()->getSessionByUid(to_uid);
+        // even if the peer client is offline, we still try to send the message, so we don't return error here if no session found
+        if (peer_session) {
+            // 1.send ack response to the sender
+            response["error"] = static_cast<short>(ErrorCodes::SUCCESS);
+            response["message"] = "Text message sent successfully";
+            session->Send(response.toStyledString(), static_cast<short>(MessageType::MESSAGE_CHATSERVER_CHATTEXT_ACK));
+            // 2.prepare the push response to the receiver
+            Json::Value push_response;
+            push_response["from_uid"] = from_uid;
+            push_response["to_uid"] = to_uid;
+            push_response["text_array"] = textArrays; // make the frontend(QT) to parse the array
+            peer_session->Send(push_response.toStyledString(), static_cast<short>(MessageType::MESSAGE_CHATSERVER_CHATTEXT_PUSH));
+        }
+    }
+    else {
+        // Implement gRPC request forwarding
+        TextChatTransRequest request;
+        request.set_from_uid(from_uid);
+        request.set_to_uid(to_uid);
+        for (const auto& textItem : textArrays) {
+            auto content = textItem["message_content"].asString();
+            auto uuid = textItem["message_uuid"].asString();
+            auto textChat = request.add_textchats();
+            textChat->set_textchatcontent(content);
+            textChat->set_textchatid(uuid);
+        }
+        spdlog::debug("Step 3: Forwarding text message transfer request to peer server {}.", peer_server_name);
+        TextChatTransResponse transResponse = ChatGrpcClient::GetInstance()->NotifyTextChatTrans(peer_server_name, request);
+        if (transResponse.error() != static_cast<int>(ErrorCodes::SUCCESS)) {
+            spdlog::error("Failed to forward text message transfer request to peer server {}, error code {}.", peer_server_name, transResponse.error());
+            response["error"] = static_cast<short>(ErrorCodes::ERROR_RPC);
+            response["message"] = "Failed to forward text message transfer request";
+            session->Send(response.toStyledString(), static_cast<short>(MessageType::MESSAGE_CHATSERVER_CHATTEXT_ACK));
+            return;
+        }
+    }
+}
+
 LogicSystem::LogicSystem() : _stopped(false),
                              _worker_thread(&LogicSystem::ProcessMessageQueue, this), // LogicSystem一构造就不断处理消息队列(客户端的信息转发,好友申请,登陆验证等)
                              _message_queue{},

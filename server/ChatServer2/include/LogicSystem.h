@@ -34,6 +34,7 @@ private:
     void HandleClientSearchUser(std::shared_ptr<CSession> session, std::shared_ptr<RecieveMessageNode> message_node);
     void HandleAddFriend(std::shared_ptr<CSession> session, std::shared_ptr<RecieveMessageNode> message_node);
     void HandleAuthFriend(std::shared_ptr<CSession> session, std::shared_ptr<RecieveMessageNode> message_node);
+    void HandleTextMessageTransfer(std::shared_ptr<CSession> session, std::shared_ptr<RecieveMessageNode> message_node);
 private:
     std::unordered_map<short, std::function<void(std::shared_ptr<CSession>, std::shared_ptr<RecieveMessageNode>)>> _handlers;
     std::queue<std::shared_ptr<LogicNode>> _message_queue;

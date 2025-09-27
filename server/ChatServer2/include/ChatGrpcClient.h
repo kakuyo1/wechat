@@ -28,6 +28,8 @@ using chat_message::AuthFriendRequest;
 using chat_message::AuthFriendResponse;
 using chat_message::ChatService;
 
+using chat_message::TextChatTransRequest;
+using chat_message::TextChatTransResponse;
 class ChatStubPool {
 public:
     ChatStubPool(size_t pool_size, const std::string& RPCserver_address, const std::string& RPCserver_port);
@@ -54,6 +56,8 @@ public:
     AddFriendResponse NotifyAddFriend(const std::string& peer_serverIP, const AddFriendRequest& request);
     /* authFriend request, send to peer*/
     AuthFriendResponse NotifyAuthFriend(const std::string& peer_serverIP, const AuthFriendRequest& request);
+    /* text chat transfer request, send to peer*/
+    TextChatTransResponse NotifyTextChatTrans(const std::string& peer_serverIP, const TextChatTransRequest& request);
 private:
     ChatGrpcClient();
     /* serverIP(chat1, chat2...) : stubPool*/
