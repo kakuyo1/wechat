@@ -52,6 +52,10 @@ void LogicSystem::InitializeHandlers()
     // deal with auth friend messages
     RegisterHandler(static_cast<short>(MessageType::MESSAGE_CLIENT_AUTHFRIEND_REQUEST),
     std::bind(&LogicSystem::HandleAuthFriend, this, std::placeholders::_1, std::placeholders::_2));
+
+    // deal with text chat transfer messages
+    RegisterHandler(static_cast<short>(MessageType::MESSAGE_CLIENT_CHATTEXT_REQUEST),
+    std::bind(&LogicSystem::HandleTextMessageTransfer, this, std::placeholders::_1, std::placeholders::_2));
 }
 
 void LogicSystem::ProcessMessageQueue()

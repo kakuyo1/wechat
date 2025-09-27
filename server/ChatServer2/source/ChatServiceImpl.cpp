@@ -86,8 +86,8 @@ Status ChatServiceImpl::NotifyAuthFriend(::grpc::ServerContext* context,
     Json::Value returnJson;
     returnJson["error"] = static_cast<int>(ErrorCodes::SUCCESS);
     returnJson["message"] = "Text chat message transfer successful";
-    returnJson["from_uid"] = request->from_uid(); // ! 这里可能反了
-    returnJson["to_uid"] = request->to_uid(); // ! 这里可能反了
+    returnJson["from_uid"] = request->from_uid();
+    returnJson["to_uid"] = request->to_uid();
     Json::Value textArrays(Json::arrayValue);
     for (int i = 0; i < request->textchats_size(); ++i) {
         Json::Value textItem;
