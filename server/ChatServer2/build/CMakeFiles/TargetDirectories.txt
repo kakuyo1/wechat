@@ -1,3 +1,0 @@
-/home/kakuyo/wechat/server/ChatServer2/build/CMakeFiles/ChatServer2.dir
-/home/kakuyo/wechat/server/ChatServer2/build/CMakeFiles/edit_cache.dir
-/home/kakuyo/wechat/server/ChatServer2/build/CMakeFiles/rebuild_cache.dir

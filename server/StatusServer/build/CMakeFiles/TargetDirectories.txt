@@ -1,3 +1,0 @@
-/home/kakuyo/wechat/server/StatusServer/build/CMakeFiles/StatusServer.dir
-/home/kakuyo/wechat/server/StatusServer/build/CMakeFiles/edit_cache.dir
-/home/kakuyo/wechat/server/StatusServer/build/CMakeFiles/rebuild_cache.dir

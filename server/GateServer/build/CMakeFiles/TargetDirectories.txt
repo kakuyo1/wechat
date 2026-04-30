@@ -1,3 +1,0 @@
-/home/kakuyo/wechat/server/GateServer/build/CMakeFiles/GateServer.dir
-/home/kakuyo/wechat/server/GateServer/build/CMakeFiles/edit_cache.dir
-/home/kakuyo/wechat/server/GateServer/build/CMakeFiles/rebuild_cache.dir
